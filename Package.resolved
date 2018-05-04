@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CGtk",
+        "repositoryURL": "https://github.com/GunGraveKoga/CGtk.git",
+        "state": {
+          "branch": null,
+          "revision": "6e78c2f30b45cdb43342dca064a24ad91b9abc42",
+          "version": "1.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
