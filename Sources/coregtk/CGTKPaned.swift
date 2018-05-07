@@ -34,7 +34,6 @@ public let GTK_TYPE_PANED: GType = gtk_paned_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_PANED)
 }
 
-/// 
 /// #GtkPaned has two panes, arranged either
 /// horizontally or vertically. The division between
 /// the two panes is adjustable by the user by dragging
@@ -88,12 +87,11 @@ public let GTK_TYPE_PANED: GType = gtk_paned_get_type()
 /// ]|
 
 
-open class CGTKPaned : CGTKContainer {
-	/// 
+open class CGTKPaned : CGTKContainer, CGTKOrientable {
 	/// Creates a new #GtkPaned widget.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation) {
 		self.init(withGObject: gtk_paned_new(orientation))!
 	}
@@ -104,98 +102,100 @@ open class CGTKPaned : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Adds a child to the top or left pane with default parameters. This is
 	/// equivalent to
 	/// `gtk_paned_pack1 (paned, child, FALSE, TRUE)`.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func add1(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func add1(child: CGTKWidget) -> Swift.Void {
 		gtk_paned_add1(GTK_PANED(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Adds a child to the bottom or right pane with default parameters. This
 	/// is equivalent to
 	/// `gtk_paned_pack2 (paned, child, TRUE, TRUE)`.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func add2(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func add2(child: CGTKWidget) -> Swift.Void {
 		gtk_paned_add2(GTK_PANED(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Obtains the first child of the paned widget.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getChild1<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_paned_get_child1(GTK_PANED(self.GOBJECT)))
 	}
 
-	/// 
 	/// Obtains the second child of the paned widget.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getChild2<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_paned_get_child2(GTK_PANED(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the #GdkWindow of the handle. This function is
 	/// useful when handling button or motion events because it
 	/// enables the callback to distinguish between the window
 	/// of the paned, a child and the handle.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkWindow*)
 	open func getHandleWindow() -> OpaquePointer {
 		return gtk_paned_get_handle_window(GTK_PANED(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the position of the divider between the two panes.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getPosition() -> gint {
 		return gtk_paned_get_position(GTK_PANED(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GtkPaned:wide-handle property.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getWideHandle() -> Bool {
 		return gtk_paned_get_wide_handle(GTK_PANED(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Adds a child to the top or left pane.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- resize: Bool
-	///	- shrink: Bool
-	open func pack1(child: CGTKWidget, resize: Bool, shrink: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- resize: Bool (gboolean)
+	///	- shrink: Bool (gboolean)
+	open func pack1(child: CGTKWidget, resize: Bool, shrink: Bool) -> Swift.Void {
 		gtk_paned_pack1(GTK_PANED(self.GOBJECT), child.WIDGET, resize ? 1 : 0, shrink ? 1 : 0)
 	}
 
-	/// 
 	/// Adds a child to the bottom or right pane.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- resize: Bool
-	///	- shrink: Bool
-	open func pack2(child: CGTKWidget, resize: Bool, shrink: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- resize: Bool (gboolean)
+	///	- shrink: Bool (gboolean)
+	open func pack2(child: CGTKWidget, resize: Bool, shrink: Bool) -> Swift.Void {
 		gtk_paned_pack2(GTK_PANED(self.GOBJECT), child.WIDGET, resize ? 1 : 0, shrink ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the position of the divider between the two panes.
-	/// Parameters:
-	///	- position: gint
-	open func setPosition(_ position: gint) {
+	/// - Parameters:
+	///	- position: gint (gint)
+	open func setPosition(_ position: gint) -> Swift.Void {
 		gtk_paned_set_position(GTK_PANED(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Sets the #GtkPaned:wide-handle property.
-	/// Parameters:
-	///	- wide: Bool
-	open func setWideHandle(wide: Bool) {
+	/// - Parameters:
+	///	- wide: Bool (gboolean)
+	open func setWideHandle(wide: Bool) -> Swift.Void {
 		gtk_paned_set_wide_handle(GTK_PANED(self.GOBJECT), wide ? 1 : 0)
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

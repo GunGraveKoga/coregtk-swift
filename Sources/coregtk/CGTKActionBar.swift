@@ -34,7 +34,6 @@ public let GTK_TYPE_ACTION_BAR: GType = gtk_action_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ACTION_BAR)
 }
 
-/// 
 /// GtkActionBar is designed to present contextual actions. It is
 /// expected to be displayed below the content and expand horizontally
 /// to fill the area.
@@ -47,9 +46,8 @@ public let GTK_TYPE_ACTION_BAR: GType = gtk_action_bar_get_type()
 
 
 open class CGTKActionBar : CGTKBin {
-	/// 
 	/// Creates a new #GtkActionBar widget.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_action_bar_new())!
 	}
@@ -60,36 +58,32 @@ open class CGTKActionBar : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Retrieves the center bar widget of the bar.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getCenterWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_action_bar_get_center_widget(GTK_ACTION_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Adds @child to @action_bar, packed with reference to the
 	/// end of the @action_bar.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func packEnd(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func packEnd(child: CGTKWidget) -> Swift.Void {
 		gtk_action_bar_pack_end(GTK_ACTION_BAR(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Adds @child to @action_bar, packed with reference to the
 	/// start of the @action_bar.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func packStart(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func packStart(child: CGTKWidget) -> Swift.Void {
 		gtk_action_bar_pack_start(GTK_ACTION_BAR(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Sets the center widget for the #GtkActionBar.
-	/// Parameters:
-	///	- centerWidget: CGTKWidget
-	open func setCenterWidget(_ centerWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- centerWidget: CGTKWidget (GtkWidget*)
+	open func setCenterWidget(_ centerWidget: CGTKWidget) -> Swift.Void {
 		gtk_action_bar_set_center_widget(GTK_ACTION_BAR(self.GOBJECT), centerWidget.WIDGET)
 	}
 

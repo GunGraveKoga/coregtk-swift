@@ -34,7 +34,6 @@ public let GTK_TYPE_SEPARATOR_TOOL_ITEM: GType = gtk_separator_tool_item_get_typ
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SEPARATOR_TOOL_ITEM)
 }
 
-/// 
 /// A #GtkSeparatorToolItem is a #GtkToolItem that separates groups of other
 /// #GtkToolItems. Depending on the theme, a #GtkSeparatorToolItem will
 /// often look like a vertical line on horizontally docked toolbars.
@@ -47,9 +46,8 @@ public let GTK_TYPE_SEPARATOR_TOOL_ITEM: GType = gtk_separator_tool_item_get_typ
 
 
 open class CGTKSeparatorToolItem : CGTKToolItem {
-	/// 
 	/// Create a new #GtkSeparatorToolItem
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init() {
 		self.init(withGObject: gtk_separator_tool_item_new())!
 	}
@@ -60,21 +58,19 @@ open class CGTKSeparatorToolItem : CGTKToolItem {
 		}
 	}
 
-	/// 
 	/// Returns whether @item is drawn as a line, or just blank.
 	/// See gtk_separator_tool_item_set_draw().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDraw() -> Bool {
 		return gtk_separator_tool_item_get_draw(GTK_SEPARATOR_TOOL_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Whether @item is drawn as a vertical line, or just blank.
 	/// Setting this to %FALSE along with gtk_tool_item_set_expand() is useful
 	/// to create an item that forces following items to the end of the toolbar.
-	/// Parameters:
-	///	- draw: Bool
-	open func setDraw(_ draw: Bool) {
+	/// - Parameters:
+	///	- draw: Bool (gboolean)
+	open func setDraw(_ draw: Bool) -> Swift.Void {
 		gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM(self.GOBJECT), draw ? 1 : 0)
 	}
 

@@ -35,9 +35,8 @@ public let GTK_TYPE_HBUTTON_BOX: GType = gtk_hbutton_box_get_type()
 }
 
 open class CGTKHButtonBox : CGTKButtonBox {
-	/// 
 	/// Creates a new horizontal button box.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_hbutton_box_new())!
 	}

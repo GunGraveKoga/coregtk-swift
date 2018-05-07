@@ -34,7 +34,6 @@ public let GTK_TYPE_ARROW: GType = gtk_arrow_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ARROW)
 }
 
-/// 
 /// GtkArrow should be used to draw simple arrows that need to point in
 /// one of the four cardinal directions (up, down, left, or right).  The
 /// style of the arrow can be one of shadow in, shadow out, etched in, or
@@ -55,12 +54,11 @@ public let GTK_TYPE_ARROW: GType = gtk_arrow_get_type()
 
 
 open class CGTKArrow : CGTKMisc {
-	/// 
 	/// Creates a new #GtkArrow widget.
-	/// Parameters:
-	///	- arrowType: GtkArrowType
-	///	- shadowType: GtkShadowType
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- arrowType: GtkArrowType (GtkArrowType)
+	///	- shadowType: GtkShadowType (GtkShadowType)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(arrowType: GtkArrowType, shadowType: GtkShadowType) {
 		self.init(withGObject: gtk_arrow_new(arrowType, shadowType))!
 	}
@@ -71,12 +69,11 @@ open class CGTKArrow : CGTKMisc {
 		}
 	}
 
-	/// 
 	/// Sets the direction and style of the #GtkArrow, @arrow.
-	/// Parameters:
-	///	- arrowType: GtkArrowType
-	///	- shadowType: GtkShadowType
-	open func set(arrowType: GtkArrowType, shadowType: GtkShadowType) {
+	/// - Parameters:
+	///	- arrowType: GtkArrowType (GtkArrowType)
+	///	- shadowType: GtkShadowType (GtkShadowType)
+	open func set(arrowType: GtkArrowType, shadowType: GtkShadowType) -> Swift.Void {
 		gtk_arrow_set(GTK_ARROW(self.GOBJECT), arrowType, shadowType)
 	}
 

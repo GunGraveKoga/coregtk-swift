@@ -34,7 +34,6 @@ public let GTK_TYPE_INVISIBLE: GType = gtk_invisible_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_INVISIBLE)
 }
 
-/// 
 /// The #GtkInvisible widget is used internally in GTK+, and is probably not
 /// very useful for application developers.
 /// It is used for reliable pointer grabs and selection handling in the code
@@ -42,18 +41,16 @@ public let GTK_TYPE_INVISIBLE: GType = gtk_invisible_get_type()
 
 
 open class CGTKInvisible : CGTKWidget {
-	/// 
 	/// Creates a new #GtkInvisible.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_invisible_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkInvisible object for a specified screen
-	/// Parameters:
-	///	- screen: OpaquePointer!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- screen: OpaquePointer! (GdkScreen*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(forScreen screen: OpaquePointer!) {
 		self.init(withGObject: gtk_invisible_new_for_screen(screen))!
 	}
@@ -64,18 +61,16 @@ open class CGTKInvisible : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Returns the #GdkScreen object associated with @invisible
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkScreen*)
 	override open func getScreen() -> OpaquePointer {
 		return gtk_invisible_get_screen(GTK_INVISIBLE(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the #GdkScreen where the #GtkInvisible object will be displayed.
-	/// Parameters:
-	///	- screen: OpaquePointer!
-	open func setScreen(_ screen: OpaquePointer!) {
+	/// - Parameters:
+	///	- screen: OpaquePointer! (GdkScreen*)
+	open func setScreen(_ screen: OpaquePointer!) -> Swift.Void {
 		gtk_invisible_set_screen(GTK_INVISIBLE(self.GOBJECT), screen)
 	}
 

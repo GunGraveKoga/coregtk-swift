@@ -34,7 +34,6 @@ public let GTK_TYPE_TEAROFF_MENU_ITEM: GType = gtk_tearoff_menu_item_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_TEAROFF_MENU_ITEM)
 }
 
-/// 
 /// A #GtkTearoffMenuItem is a special #GtkMenuItem which is used to
 /// tear off and reattach its menu.
 /// When its menu is shown normally, the #GtkTearoffMenuItem is drawn as a
@@ -50,9 +49,8 @@ public let GTK_TYPE_TEAROFF_MENU_ITEM: GType = gtk_tearoff_menu_item_get_type()
 
 
 open class CGTKTearoffMenuItem : CGTKMenuItem {
-	/// 
 	/// Creates a new #GtkTearoffMenuItem.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_tearoff_menu_item_new())!
 	}

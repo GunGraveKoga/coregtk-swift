@@ -28,7 +28,6 @@
 
 @_exported import CGtk
 
-/// 
 /// GtkWidget is the base class all widgets in GTK+ derive from. It manages the
 /// widget lifecycle, states and style.
 /// # Height-for-width Geometry Management # {#geometry-management}
@@ -357,29 +356,25 @@
 /// ]|
 
 
-open class CGTKWidget : CGTKBase {
-	/// 
+open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// Obtains the current default reading direction. See
 	/// gtk_widget_set_default_direction().
-	/// - Returns: GtkTextDirection
+	/// - Returns: GtkTextDirection (GtkTextDirection)
 	open class func getDefaultDirection() -> GtkTextDirection {
 		return gtk_widget_get_default_direction()
 	}
 
-	/// 
 	/// Returns the default style used by all widgets initially.
-	/// - Returns: UnsafeMutablePointer<GtkStyle>!
+	/// - Returns: UnsafeMutablePointer<GtkStyle>! (GtkStyle*)
 	open class func getDefaultStyle() -> UnsafeMutablePointer<GtkStyle>! {
 		return gtk_widget_get_default_style()
 	}
 
-	/// 
 	/// Cancels the effect of a previous call to gtk_widget_push_composite_child().
-	open class func popCompositeChild() {
+	open class func popCompositeChild() -> Swift.Void {
 		gtk_widget_pop_composite_child()
 	}
 
-	/// 
 	/// Makes all newly-created widgets as composite children until
 	/// the corresponding gtk_widget_pop_composite_child() call.
 	/// A composite child is a child that’s an implementation detail of the
@@ -387,30 +382,27 @@ open class CGTKWidget : CGTKBase {
 	/// container. Composite children aren’t treated differently by GTK+ (but
 	/// see gtk_container_foreach() vs. gtk_container_forall()), but e.g. GUI
 	/// builders might want to treat them in a different way.
-	open class func pushCompositeChild() {
+	open class func pushCompositeChild() -> Swift.Void {
 		gtk_widget_push_composite_child()
 	}
 
-	/// 
 	/// Sets the default reading direction for widgets where the
 	/// direction has not been explicitly set by gtk_widget_set_direction().
-	/// Parameters:
-	///	- dir: GtkTextDirection
-	open class func setDefaultDirection(dir: GtkTextDirection) {
+	/// - Parameters:
+	///	- dir: GtkTextDirection (GtkTextDirection)
+	open class func setDefaultDirection(dir: GtkTextDirection) -> Swift.Void {
 		gtk_widget_set_default_direction(dir)
 	}
 
-	/// 
 	/// For widgets that can be “activated” (buttons, menu items, etc.)
 	/// this function activates them. Activation is what happens when you
 	/// press Enter on a widget during key navigation. If @widget isn't
 	/// activatable, the function returns %FALSE.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func activate() -> Bool {
 		return gtk_widget_activate(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Installs an accelerator for this @widget in @accel_group that causes
 	/// @accel_signal to be emitted if the accelerator is activated.
 	/// The @accel_group needs to be added to the widget’s toplevel via
@@ -419,50 +411,46 @@ open class CGTKWidget : CGTKBase {
 	/// runtime. If you want to support accelerators that can be changed by the
 	/// user, use gtk_accel_map_add_entry() and gtk_widget_set_accel_path() or
 	/// gtk_menu_item_set_accel_path() instead.
-	/// Parameters:
-	///	- accelSignal: String
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>!
-	///	- accelKey: guint
-	///	- accelMods: GdkModifierType
-	///	- accelFlags: GtkAccelFlags
-	open func addAccelerator(accelSignal: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>!, accelKey: guint, accelMods: GdkModifierType, accelFlags: GtkAccelFlags) {
+	/// - Parameters:
+	///	- accelSignal: String (const gchar*)
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
+	///	- accelKey: guint (guint)
+	///	- accelMods: GdkModifierType (GdkModifierType)
+	///	- accelFlags: GtkAccelFlags (GtkAccelFlags)
+	open func addAccelerator(accelSignal: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>!, accelKey: guint, accelMods: GdkModifierType, accelFlags: GtkAccelFlags) -> Swift.Void {
 		gtk_widget_add_accelerator(GTK_WIDGET(self.GOBJECT), accelSignal, accelGroup, accelKey, accelMods, accelFlags)
 	}
 
-	/// 
 	/// Adds the device events in the bitfield @events to the event mask for
 	/// @widget. See gtk_widget_set_device_events() for details.
-	/// Parameters:
-	///	- device: OpaquePointer!
-	///	- events: GdkEventMask
-	open func addDeviceEvents(device: OpaquePointer!, events: GdkEventMask) {
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	///	- events: GdkEventMask (GdkEventMask)
+	open func addDeviceEvents(device: OpaquePointer!, events: GdkEventMask) -> Swift.Void {
 		gtk_widget_add_device_events(GTK_WIDGET(self.GOBJECT), device, events)
 	}
 
-	/// 
 	/// Adds the events in the bitfield @events to the event mask for
 	/// @widget. See gtk_widget_set_events() and the
 	/// [input handling overview][event-masks] for details.
-	/// Parameters:
-	///	- events: gint
-	open func addEvents(_ events: gint) {
+	/// - Parameters:
+	///	- events: gint (gint)
+	open func addEvents(_ events: gint) -> Swift.Void {
 		gtk_widget_add_events(GTK_WIDGET(self.GOBJECT), events)
 	}
 
-	/// 
 	/// Adds a widget to the list of mnemonic labels for
 	/// this widget. (See gtk_widget_list_mnemonic_labels()). Note the
 	/// list of mnemonic labels for the widget is cleared when the
 	/// widget is destroyed, so the caller must make sure to update
 	/// its internal state at this point as well, by using a connection
 	/// to the #GtkWidget::destroy signal or a weak notifier.
-	/// Parameters:
-	///	- label: CGTKWidget
-	open func addMnemonicLabel(_ label: CGTKWidget) {
+	/// - Parameters:
+	///	- label: CGTKWidget (GtkWidget*)
+	open func addMnemonicLabel(_ label: CGTKWidget) -> Swift.Void {
 		gtk_widget_add_mnemonic_label(GTK_WIDGET(self.GOBJECT), label.WIDGET)
 	}
 
-	/// 
 	/// Queues an animation frame update and adds a callback to be called
 	/// before each frame. Until the tick callback is removed, it will be
 	/// called frequently (usually at the frame rate of the output device
@@ -481,16 +469,15 @@ open class CGTKWidget : CGTKBase {
 	/// This is a more convenient alternative to connecting directly to the
 	/// #GdkFrameClock::update signal of #GdkFrameClock, since you don't
 	/// have to worry about when a #GdkFrameClock is assigned to a widget.
-	/// Parameters:
-	///	- callback: @escaping GtkTickCallback
-	///	- userData: gpointer
-	///	- notify: @escaping GDestroyNotify
-	/// - Returns: guint
+	/// - Parameters:
+	///	- callback: @escaping GtkTickCallback (GtkTickCallback)
+	///	- userData: gpointer (gpointer)
+	///	- notify: @escaping GDestroyNotify (GDestroyNotify)
+	/// - Returns: guint (guint)
 	open func addTickCallback(_ callback: @escaping GtkTickCallback, userData: gpointer, notify: @escaping GDestroyNotify) -> guint {
 		return gtk_widget_add_tick_callback(GTK_WIDGET(self.GOBJECT), callback, userData, notify)
 	}
 
-	/// 
 	/// Determines whether an accelerator that activates the signal
 	/// identified by @signal_id can currently be activated.
 	/// This is done by emitting the #GtkWidget::can-activate-accel
@@ -498,14 +485,13 @@ open class CGTKWidget : CGTKBase {
 	/// handler or in a derived widget, then the default check is
 	/// that the widget must be sensitive, and the widget and all
 	/// its ancestors mapped.
-	/// Parameters:
-	///	- signalId: guint
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- signalId: guint (guint)
+	/// - Returns: Bool (gboolean)
 	open func canActivateAccel(signalId: guint) -> Bool {
 		return gtk_widget_can_activate_accel(GTK_WIDGET(self.GOBJECT), signalId) != 0 ? true : false
 	}
 
-	/// 
 	/// This function is used by custom widget implementations; if you're
 	/// writing an app, you’d use gtk_widget_grab_focus() to move the focus
 	/// to a particular widget, and gtk_container_set_focus_chain() to
@@ -523,37 +509,34 @@ open class CGTKWidget : CGTKBase {
 	/// outside the widget. If returning %TRUE, widgets normally
 	/// call gtk_widget_grab_focus() to place the focus accordingly;
 	/// if returning %FALSE, they don’t modify the current focus location.
-	/// Parameters:
-	///	- direction: GtkDirectionType
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- direction: GtkDirectionType (GtkDirectionType)
+	/// - Returns: Bool (gboolean)
 	open func childFocus(direction: GtkDirectionType) -> Bool {
 		return gtk_widget_child_focus(GTK_WIDGET(self.GOBJECT), direction) != 0 ? true : false
 	}
 
-	/// 
 	/// Emits a #GtkWidget::child-notify signal for the
 	/// [child property][child-properties] @child_property
 	/// on @widget.
 	/// This is the analogue of g_object_notify() for child properties.
 	/// Also see gtk_container_child_notify().
-	/// Parameters:
-	///	- childProperty: String
-	open func childNotify(childProperty: String) {
+	/// - Parameters:
+	///	- childProperty: String (const gchar*)
+	open func childNotify(childProperty: String) -> Swift.Void {
 		gtk_widget_child_notify(GTK_WIDGET(self.GOBJECT), childProperty)
 	}
 
-	/// 
 	/// Same as gtk_widget_path(), but always uses the name of a widget’s type,
 	/// never uses a custom name set with gtk_widget_set_name().
-	/// Parameters:
-	///	- pathLength: UnsafeMutablePointer<UInt32>!
-	///	- path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	open func classPath(pathLength: UnsafeMutablePointer<UInt32>!, path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- pathLength: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	open func classPath(pathLength: UnsafeMutablePointer<UInt32>!, path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!) -> Swift.Void {
 		gtk_widget_class_path(GTK_WIDGET(self.GOBJECT), pathLength, path, pathReversed)
 	}
 
-	/// 
 	/// Computes whether a container should give this widget extra space
 	/// when possible. Containers should check this, rather than
 	/// looking at gtk_widget_get_hexpand() or gtk_widget_get_vexpand().
@@ -563,23 +546,21 @@ open class CGTKWidget : CGTKBase {
 	/// The computed expand value uses either the expand setting explicitly
 	/// set on the widget itself, or, if none has been explicitly set,
 	/// the widget may expand if some of its children do.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	/// - Returns: Bool (gboolean)
 	open func computeExpand(orientation: GtkOrientation) -> Bool {
 		return gtk_widget_compute_expand(GTK_WIDGET(self.GOBJECT), orientation) != 0 ? true : false
 	}
 
-	/// 
 	/// Creates a new #PangoContext with the appropriate font map,
 	/// font options, font description, and base direction for drawing
 	/// text for this widget. See also gtk_widget_get_pango_context().
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (PangoContext*)
 	open func createPangoContext() -> OpaquePointer {
 		return gtk_widget_create_pango_context(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Creates a new #PangoLayout with the appropriate font map,
 	/// font description, and base direction for drawing text for
 	/// this widget.
@@ -587,14 +568,13 @@ open class CGTKWidget : CGTKBase {
 	/// to re-create it when the widget #PangoContext is replaced.
 	/// This can be tracked by using the #GtkWidget::screen-changed signal
 	/// on the widget.
-	/// Parameters:
-	///	- text: String
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	/// - Returns: OpaquePointer (PangoLayout*)
 	open func createPangoLayout(text: String) -> OpaquePointer {
 		return gtk_widget_create_pango_layout(GTK_WIDGET(self.GOBJECT), text)
 	}
 
-	/// 
 	/// Destroys a widget.
 	/// When a widget is destroyed all references it holds on other objects
 	/// will be released:
@@ -620,11 +600,10 @@ open class CGTKWidget : CGTKBase {
 	/// You should typically call this function on top level widgets, and
 	/// rarely on child widgets.
 	/// See also: gtk_container_remove()
-	open func destroy() {
+	open func destroy() -> Swift.Void {
 		gtk_widget_destroy(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function sets *@widget_pointer to %NULL if @widget_pointer !=
 	/// %NULL.  It’s intended to be used as a callback connected to the
 	/// “destroy” signal of a widget. You connect gtk_widget_destroyed()
@@ -632,257 +611,244 @@ open class CGTKWidget : CGTKBase {
 	/// as user data. Then when the widget is destroyed, the variable will
 	/// be set to %NULL. Useful for example to avoid multiple copies
 	/// of the same dialog.
-	/// Parameters:
-	///	- widgetPointer: UnsafeMutablePointer<UnsafeMutablePointer<GtkWidget>?>!
-	open func destroyed(widgetPointer: UnsafeMutablePointer<UnsafeMutablePointer<GtkWidget>?>!) {
+	/// - Parameters:
+	///	- widgetPointer: UnsafeMutablePointer<UnsafeMutablePointer<GtkWidget>?>! (GtkWidget**)
+	open func destroyed(widgetPointer: UnsafeMutablePointer<UnsafeMutablePointer<GtkWidget>?>!) -> Swift.Void {
 		gtk_widget_destroyed(GTK_WIDGET(self.GOBJECT), widgetPointer)
 	}
 
-	/// 
 	/// Returns %TRUE if @device has been shadowed by a GTK+
 	/// device grab on another widget, so it would stop sending
 	/// events to @widget. This may be used in the
 	/// #GtkWidget::grab-notify signal to check for specific
 	/// devices. See gtk_device_grab_add().
-	/// Parameters:
-	///	- device: OpaquePointer!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	/// - Returns: Bool (gboolean)
 	open func deviceIsShadowed(device: OpaquePointer!) -> Bool {
 		return gtk_widget_device_is_shadowed(GTK_WIDGET(self.GOBJECT), device) != 0 ? true : false
 	}
 
 	/// func gtkDragBegin(targets: OpaquePointer!, actions: GdkDragAction, button: gint, event: UnsafeMutablePointer<GdkEvent>!) -> OpaquePointer -> OpaquePointer
-	/// Parameters:
-	///	- targets: OpaquePointer!
-	///	- actions: GdkDragAction
-	///	- button: gint
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- targets: OpaquePointer! (GtkTargetList*)
+	///	- actions: GdkDragAction (GdkDragAction)
+	///	- button: gint (gint)
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: OpaquePointer (GdkDragContext*)
 	open func gtkDragBegin(targets: OpaquePointer!, actions: GdkDragAction, button: gint, event: UnsafeMutablePointer<GdkEvent>!) -> OpaquePointer {
 		return gtk_drag_begin(GTK_WIDGET(self.GOBJECT), targets, actions, button, event)
 	}
 
 	/// func gtkDragBeginWithCoordinates(targets: OpaquePointer!, actions: GdkDragAction, button: gint, event: UnsafeMutablePointer<GdkEvent>!, x: gint, y: gint) -> OpaquePointer -> OpaquePointer
-	/// Parameters:
-	///	- targets: OpaquePointer!
-	///	- actions: GdkDragAction
-	///	- button: gint
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	///	- x: gint
-	///	- y: gint
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- targets: OpaquePointer! (GtkTargetList*)
+	///	- actions: GdkDragAction (GdkDragAction)
+	///	- button: gint (gint)
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	///	- x: gint (gint)
+	///	- y: gint (gint)
+	/// - Returns: OpaquePointer (GdkDragContext*)
 	open func gtkDragBeginWithCoordinates(targets: OpaquePointer!, actions: GdkDragAction, button: gint, event: UnsafeMutablePointer<GdkEvent>!, x: gint, y: gint) -> OpaquePointer {
 		return gtk_drag_begin_with_coordinates(GTK_WIDGET(self.GOBJECT), targets, actions, button, event, x, y)
 	}
 
 	/// func gtkDragCheckThreshold(startX: gint, startY: gint, currentX: gint, currentY: gint) -> Bool -> Bool
-	/// Parameters:
-	///	- startX: gint
-	///	- startY: gint
-	///	- currentX: gint
-	///	- currentY: gint
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- startX: gint (gint)
+	///	- startY: gint (gint)
+	///	- currentX: gint (gint)
+	///	- currentY: gint (gint)
+	/// - Returns: Bool (gboolean)
 	open func gtkDragCheckThreshold(startX: gint, startY: gint, currentX: gint, currentY: gint) -> Bool {
 		return gtk_drag_check_threshold(GTK_WIDGET(self.GOBJECT), startX, startY, currentX, currentY) != 0 ? true : false
 	}
 
-	/// func gtkDragDestAddImageTargets() -> void
-	open func gtkDragDestAddImageTargets() {
+	/// func gtkDragDestAddImageTargets() -> Swift.Void -> void
+	open func gtkDragDestAddImageTargets() -> Swift.Void {
 		gtk_drag_dest_add_image_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// func gtkDragDestAddTextTargets() -> void
-	open func gtkDragDestAddTextTargets() {
+	/// func gtkDragDestAddTextTargets() -> Swift.Void -> void
+	open func gtkDragDestAddTextTargets() -> Swift.Void {
 		gtk_drag_dest_add_text_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// func gtkDragDestAddUriTargets() -> void
-	open func gtkDragDestAddUriTargets() {
+	/// func gtkDragDestAddUriTargets() -> Swift.Void -> void
+	open func gtkDragDestAddUriTargets() -> Swift.Void {
 		gtk_drag_dest_add_uri_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
 	/// func gtkDragDestFindTarget(context: OpaquePointer!, targetList: OpaquePointer?) -> GdkAtom -> GdkAtom
-	/// Parameters:
-	///	- context: OpaquePointer!
-	///	- targetList: OpaquePointer?
-	/// - Returns: GdkAtom
+	/// - Parameters:
+	///	- context: OpaquePointer! (GdkDragContext*)
+	///	- targetList: OpaquePointer? (GtkTargetList*)
+	/// - Returns: GdkAtom (GdkAtom)
 	open func gtkDragDestFindTarget(context: OpaquePointer!, targetList: OpaquePointer?) -> GdkAtom {
 		return gtk_drag_dest_find_target(GTK_WIDGET(self.GOBJECT), context, targetList)
 	}
 
 	/// func gtkDragDestGetTargetList() -> OpaquePointer -> OpaquePointer
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GtkTargetList*)
 	open func gtkDragDestGetTargetList() -> OpaquePointer {
 		return gtk_drag_dest_get_target_list(GTK_WIDGET(self.GOBJECT))
 	}
 
 	/// func gtkDragDestGetTrackMotion() -> Bool -> Bool
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkDragDestGetTrackMotion() -> Bool {
 		return gtk_drag_dest_get_track_motion(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// func gtkDragDestSet(flags: GtkDestDefaults, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) -> void
-	/// Parameters:
-	///	- flags: GtkDestDefaults
-	///	- targets: UnsafeMutablePointer<GtkTargetEntry>?
-	///	- ntargets: gint
-	///	- actions: GdkDragAction
-	open func gtkDragDestSet(flags: GtkDestDefaults, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) {
+	/// func gtkDragDestSet(flags: GtkDestDefaults, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) -> Swift.Void -> void
+	/// - Parameters:
+	///	- flags: GtkDestDefaults (GtkDestDefaults)
+	///	- targets: UnsafeMutablePointer<GtkTargetEntry>? (GtkTargetEntry*)
+	///	- ntargets: gint (gint)
+	///	- actions: GdkDragAction (GdkDragAction)
+	open func gtkDragDestSet(flags: GtkDestDefaults, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) -> Swift.Void {
 		gtk_drag_dest_set(GTK_WIDGET(self.GOBJECT), flags, targets, ntargets, actions)
 	}
 
-	/// func gtkDragDestSetProxy(proxyWindow: OpaquePointer!, gtkProtocol: GdkDragProtocol, useCoordinates: Bool) -> void
-	/// Parameters:
-	///	- proxyWindow: OpaquePointer!
-	///	- gtkProtocol: GdkDragProtocol
-	///	- useCoordinates: Bool
-	open func gtkDragDestSetProxy(proxyWindow: OpaquePointer!, gtkProtocol: GdkDragProtocol, useCoordinates: Bool) {
+	/// func gtkDragDestSetProxy(proxyWindow: OpaquePointer!, gtkProtocol: GdkDragProtocol, useCoordinates: Bool) -> Swift.Void -> void
+	/// - Parameters:
+	///	- proxyWindow: OpaquePointer! (GdkWindow*)
+	///	- gtkProtocol: GdkDragProtocol (GdkDragProtocol)
+	///	- useCoordinates: Bool (gboolean)
+	open func gtkDragDestSetProxy(proxyWindow: OpaquePointer!, gtkProtocol: GdkDragProtocol, useCoordinates: Bool) -> Swift.Void {
 		gtk_drag_dest_set_proxy(GTK_WIDGET(self.GOBJECT), proxyWindow, gtkProtocol, useCoordinates ? 1 : 0)
 	}
 
-	/// func gtkDragDestSetTargetList(_ targetList: OpaquePointer?) -> void
-	/// Parameters:
-	///	- targetList: OpaquePointer?
-	open func gtkDragDestSetTargetList(_ targetList: OpaquePointer?) {
+	/// func gtkDragDestSetTargetList(_ targetList: OpaquePointer?) -> Swift.Void -> void
+	/// - Parameters:
+	///	- targetList: OpaquePointer? (GtkTargetList*)
+	open func gtkDragDestSetTargetList(_ targetList: OpaquePointer?) -> Swift.Void {
 		gtk_drag_dest_set_target_list(GTK_WIDGET(self.GOBJECT), targetList)
 	}
 
-	/// func gtkDragDestSetTrackMotion(_ trackMotion: Bool) -> void
-	/// Parameters:
-	///	- trackMotion: Bool
-	open func gtkDragDestSetTrackMotion(_ trackMotion: Bool) {
+	/// func gtkDragDestSetTrackMotion(_ trackMotion: Bool) -> Swift.Void -> void
+	/// - Parameters:
+	///	- trackMotion: Bool (gboolean)
+	open func gtkDragDestSetTrackMotion(_ trackMotion: Bool) -> Swift.Void {
 		gtk_drag_dest_set_track_motion(GTK_WIDGET(self.GOBJECT), trackMotion ? 1 : 0)
 	}
 
-	/// func gtkDragDestUnset() -> void
-	open func gtkDragDestUnset() {
+	/// func gtkDragDestUnset() -> Swift.Void -> void
+	open func gtkDragDestUnset() -> Swift.Void {
 		gtk_drag_dest_unset(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// func gtkDragGetData(context: OpaquePointer!, target: GdkAtom, time: guint32) -> void
-	/// Parameters:
-	///	- context: OpaquePointer!
-	///	- target: GdkAtom
-	///	- time: guint32
-	open func gtkDragGetData(context: OpaquePointer!, target: GdkAtom, time: guint32) {
+	/// func gtkDragGetData(context: OpaquePointer!, target: GdkAtom, time: guint32) -> Swift.Void -> void
+	/// - Parameters:
+	///	- context: OpaquePointer! (GdkDragContext*)
+	///	- target: GdkAtom (GdkAtom)
+	///	- time: guint32 (guint32)
+	open func gtkDragGetData(context: OpaquePointer!, target: GdkAtom, time: guint32) -> Swift.Void {
 		gtk_drag_get_data(GTK_WIDGET(self.GOBJECT), context, target, time)
 	}
 
-	/// func gtkDragHighlight() -> void
-	open func gtkDragHighlight() {
+	/// func gtkDragHighlight() -> Swift.Void -> void
+	open func gtkDragHighlight() -> Swift.Void {
 		gtk_drag_highlight(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Add the writable image targets supported by #GtkSelectionData to
 	/// the target list of the drag source. The targets
 	/// are added with @info = 0. If you need another value,
 	/// use gtk_target_list_add_image_targets() and
 	/// gtk_drag_source_set_target_list().
-	open func gtkDragSourceAddImageTargets() {
+	open func gtkDragSourceAddImageTargets() -> Swift.Void {
 		gtk_drag_source_add_image_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Add the text targets supported by #GtkSelectionData to
 	/// the target list of the drag source.  The targets
 	/// are added with @info = 0. If you need another value,
 	/// use gtk_target_list_add_text_targets() and
 	/// gtk_drag_source_set_target_list().
-	open func gtkDragSourceAddTextTargets() {
+	open func gtkDragSourceAddTextTargets() -> Swift.Void {
 		gtk_drag_source_add_text_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Add the URI targets supported by #GtkSelectionData to
 	/// the target list of the drag source.  The targets
 	/// are added with @info = 0. If you need another value,
 	/// use gtk_target_list_add_uri_targets() and
 	/// gtk_drag_source_set_target_list().
-	open func gtkDragSourceAddUriTargets() {
+	open func gtkDragSourceAddUriTargets() -> Swift.Void {
 		gtk_drag_source_add_uri_targets(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the list of targets this widget can provide for
 	/// drag-and-drop.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GtkTargetList*)
 	open func gtkDragSourceGetTargetList() -> OpaquePointer? {
 		return gtk_drag_source_get_target_list(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets up a widget so that GTK+ will start a drag operation when the user
 	/// clicks and drags on the widget. The widget must have a window.
-	/// Parameters:
-	///	- startButtonMask: GdkModifierType
-	///	- targets: UnsafeMutablePointer<GtkTargetEntry>?
-	///	- ntargets: gint
-	///	- actions: GdkDragAction
-	open func gtkDragSourceSet(startButtonMask: GdkModifierType, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) {
+	/// - Parameters:
+	///	- startButtonMask: GdkModifierType (GdkModifierType)
+	///	- targets: UnsafeMutablePointer<GtkTargetEntry>? (GtkTargetEntry*)
+	///	- ntargets: gint (gint)
+	///	- actions: GdkDragAction (GdkDragAction)
+	open func gtkDragSourceSet(startButtonMask: GdkModifierType, targets: UnsafeMutablePointer<GtkTargetEntry>?, ntargets: gint, actions: GdkDragAction) -> Swift.Void {
 		gtk_drag_source_set(GTK_WIDGET(self.GOBJECT), startButtonMask, targets, ntargets, actions)
 	}
 
-	/// 
 	/// Sets the icon that will be used for drags from a particular source
 	/// to @icon. See the docs for #GtkIconTheme for more details.
-	/// Parameters:
-	///	- icon: OpaquePointer!
-	open func gtkDragSourceSetIconGicon(icon: OpaquePointer!) {
+	/// - Parameters:
+	///	- icon: OpaquePointer! (GIcon*)
+	open func gtkDragSourceSetIconGicon(icon: OpaquePointer!) -> Swift.Void {
 		gtk_drag_source_set_icon_gicon(GTK_WIDGET(self.GOBJECT), icon)
 	}
 
-	/// 
 	/// Sets the icon that will be used for drags from a particular source
 	/// to a themed icon. See the docs for #GtkIconTheme for more details.
-	/// Parameters:
-	///	- iconName: String
-	open func gtkDragSourceSetIconName(_ iconName: String) {
+	/// - Parameters:
+	///	- iconName: String (const gchar*)
+	open func gtkDragSourceSetIconName(_ iconName: String) -> Swift.Void {
 		gtk_drag_source_set_icon_name(GTK_WIDGET(self.GOBJECT), iconName)
 	}
 
-	/// 
 	/// Sets the icon that will be used for drags from a particular widget
 	/// from a #GdkPixbuf. GTK+ retains a reference for @pixbuf and will
 	/// release it when it is no longer needed.
-	/// Parameters:
-	///	- pixbuf: OpaquePointer!
-	open func gtkDragSourceSetIconPixbuf(_ pixbuf: OpaquePointer!) {
+	/// - Parameters:
+	///	- pixbuf: OpaquePointer! (GdkPixbuf*)
+	open func gtkDragSourceSetIconPixbuf(_ pixbuf: OpaquePointer!) -> Swift.Void {
 		gtk_drag_source_set_icon_pixbuf(GTK_WIDGET(self.GOBJECT), pixbuf)
 	}
 
-	/// 
 	/// Sets the icon that will be used for drags from a particular source
 	/// to a stock icon.
-	/// Parameters:
-	///	- stockId: String
-	open func gtkDragSourceSetIconStock(stockId: String) {
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	open func gtkDragSourceSetIconStock(stockId: String) -> Swift.Void {
 		gtk_drag_source_set_icon_stock(GTK_WIDGET(self.GOBJECT), stockId)
 	}
 
-	/// 
 	/// Changes the target types that this widget offers for drag-and-drop.
 	/// The widget must first be made into a drag source with
 	/// gtk_drag_source_set().
-	/// Parameters:
-	///	- targetList: OpaquePointer?
-	open func gtkDragSourceSetTargetList(_ targetList: OpaquePointer?) {
+	/// - Parameters:
+	///	- targetList: OpaquePointer? (GtkTargetList*)
+	open func gtkDragSourceSetTargetList(_ targetList: OpaquePointer?) -> Swift.Void {
 		gtk_drag_source_set_target_list(GTK_WIDGET(self.GOBJECT), targetList)
 	}
 
-	/// 
 	/// Undoes the effects of gtk_drag_source_set().
-	open func gtkDragSourceUnset() {
+	open func gtkDragSourceUnset() -> Swift.Void {
 		gtk_drag_source_unset(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// func gtkDragUnhighlight() -> void
-	open func gtkDragUnhighlight() {
+	/// func gtkDragUnhighlight() -> Swift.Void -> void
+	open func gtkDragUnhighlight() -> Swift.Void {
 		gtk_drag_unhighlight(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Draws @widget to @cr. The top left corner of the widget will be
 	/// drawn to the currently set origin point of @cr.
 	/// You should pass a cairo context as @cr argument that is in an
@@ -898,33 +864,30 @@ open class CGTKWidget : CGTKBase {
 	/// Note that special-purpose widgets may contain special code for
 	/// rendering to the screen and might appear differently on screen
 	/// and when rendered using gtk_widget_draw().
-	/// Parameters:
-	///	- cr: OpaquePointer!
-	open func draw(cr: OpaquePointer!) {
+	/// - Parameters:
+	///	- cr: OpaquePointer! (cairo_t*)
+	open func draw(cr: OpaquePointer!) -> Swift.Void {
 		gtk_widget_draw(GTK_WIDGET(self.GOBJECT), cr)
 	}
 
-	/// 
 	/// Ensures that @widget has a style (@widget->style).
 	/// Not a very useful function; most of the time, if you
 	/// want the style, the widget is realized, and realized
 	/// widgets are guaranteed to have a style already.
-	open func ensureStyle() {
+	open func ensureStyle() -> Swift.Void {
 		gtk_widget_ensure_style(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Notifies the user about an input-related error on this widget.
 	/// If the #GtkSettings:gtk-error-bell setting is %TRUE, it calls
 	/// gdk_window_beep(), otherwise it does nothing.
 	/// Note that the effect of gdk_window_beep() can be configured in many
 	/// ways, depending on the windowing backend and the desktop environment
 	/// or window manager that is used.
-	open func errorBell() {
+	open func errorBell() -> Swift.Void {
 		gtk_widget_error_bell(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Rarely-used function. This function is used to emit
 	/// the event signals on a widget (those signals should never
 	/// be emitted without using this function to do so).
@@ -933,23 +896,21 @@ open class CGTKWidget : CGTKBase {
 	/// it were in the event queue. Don’t synthesize expose events; instead,
 	/// use gdk_window_invalidate_rect() to invalidate a region of the
 	/// window.
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: Bool (gboolean)
 	open func event(event: UnsafeMutablePointer<GdkEvent>!) -> Bool {
 		return gtk_widget_event(GTK_WIDGET(self.GOBJECT), event) != 0 ? true : false
 	}
 
-	/// 
 	/// Stops emission of #GtkWidget::child-notify signals on @widget. The
 	/// signals are queued until gtk_widget_thaw_child_notify() is called
 	/// on @widget.
 	/// This is the analogue of g_object_freeze_notify() for child properties.
-	open func freezeChildNotify() {
+	open func freezeChildNotify() -> Swift.Void {
 		gtk_widget_freeze_child_notify(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the accessible object that describes the widget to an
 	/// assistive technology.
 	/// If accessibility support is not available, this #AtkObject
@@ -960,43 +921,39 @@ open class CGTKWidget : CGTKBase {
 	/// The documentation of the
 	/// [ATK](http://developer.gnome.org/atk/stable/)
 	/// library contains more information about accessible objects and their uses.
-	/// - Returns: UnsafeMutablePointer<AtkObject>!
+	/// - Returns: UnsafeMutablePointer<AtkObject>! (AtkObject*)
 	open func getAccessible() -> UnsafeMutablePointer<AtkObject>! {
 		return gtk_widget_get_accessible(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the #GActionGroup that was registered using @prefix. The resulting
 	/// #GActionGroup may have been registered to @widget or any #GtkWidget in its
 	/// ancestry.
 	/// If no action group was found matching @prefix, then %NULL is returned.
-	/// Parameters:
-	///	- prefix: String
-	/// - Returns: OpaquePointer?
+	/// - Parameters:
+	///	- prefix: String (const gchar*)
+	/// - Returns: OpaquePointer? (GActionGroup*)
 	open func getActionGroup(prefix: String) -> OpaquePointer? {
 		return gtk_widget_get_action_group(GTK_WIDGET(self.GOBJECT), prefix)
 	}
 
-	/// 
 	/// Returns the baseline that has currently been allocated to @widget.
 	/// This function is intended to be used when implementing handlers
 	/// for the #GtkWidget::draw function, and when allocating child
 	/// widgets in #GtkWidget::size_allocate.
-	/// - Returns: Int32
+	/// - Returns: Int32 (int)
 	open func getAllocatedBaseline() -> Int32 {
 		return gtk_widget_get_allocated_baseline(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the height that has currently been allocated to @widget.
 	/// This function is intended to be used when implementing handlers
 	/// for the #GtkWidget::draw function.
-	/// - Returns: Int32
+	/// - Returns: Int32 (int)
 	open func getAllocatedHeight() -> Int32 {
 		return gtk_widget_get_allocated_height(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the widget’s allocated size.
 	/// This function returns the last values passed to
 	/// gtk_widget_size_allocate_with_baseline(). The value differs from
@@ -1004,23 +961,21 @@ open class CGTKWidget : CGTKBase {
 	/// like gtk_widget_set_halign() can adjust the allocation, but not
 	/// the value returned by this function.
 	/// If a widget is not visible, its allocated size is 0.
-	/// Parameters:
-	///	- allocation: UnsafeMutablePointer<GtkAllocation>!
-	///	- baseline: UnsafeMutablePointer<Int32>
-	open func getAllocatedSize(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: UnsafeMutablePointer<Int32>) {
+	/// - Parameters:
+	///	- allocation: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
+	///	- baseline: UnsafeMutablePointer<Int32> (int*)
+	open func getAllocatedSize(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: UnsafeMutablePointer<Int32>) -> Swift.Void {
 		gtk_widget_get_allocated_size(GTK_WIDGET(self.GOBJECT), allocation, baseline)
 	}
 
-	/// 
 	/// Returns the width that has currently been allocated to @widget.
 	/// This function is intended to be used when implementing handlers
 	/// for the #GtkWidget::draw function.
-	/// - Returns: Int32
+	/// - Returns: Int32 (int)
 	open func getAllocatedWidth() -> Int32 {
 		return gtk_widget_get_allocated_width(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the widget’s allocation.
 	/// Note, when implementing a #GtkContainer: a widget’s allocation will
 	/// be its “adjusted” allocation, that is, the widget’s parent
@@ -1036,13 +991,12 @@ open class CGTKWidget : CGTKBase {
 	/// There is no way to get the original allocation assigned by
 	/// gtk_widget_size_allocate(), since it isn’t stored; if a container
 	/// implementation needs that information it will have to track it itself.
-	/// Parameters:
-	///	- allocation: UnsafeMutablePointer<GtkAllocation>!
-	open func getAllocation(_ allocation: UnsafeMutablePointer<GtkAllocation>!) {
+	/// - Parameters:
+	///	- allocation: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
+	open func getAllocation(_ allocation: UnsafeMutablePointer<GtkAllocation>!) -> Swift.Void {
 		gtk_widget_get_allocation(GTK_WIDGET(self.GOBJECT), allocation)
 	}
 
-	/// 
 	/// Gets the first ancestor of @widget with type @widget_type. For example,
 	/// `gtk_widget_get_ancestor (widget, GTK_TYPE_BOX)` gets
 	/// the first #GtkBox that’s an ancestor of @widget. No reference will be
@@ -1051,39 +1005,35 @@ open class CGTKWidget : CGTKBase {
 	/// gtk_widget_get_toplevel().
 	/// Note that unlike gtk_widget_is_ancestor(), gtk_widget_get_ancestor()
 	/// considers @widget to be an ancestor of itself.
-	/// Parameters:
-	///	- widgetType: GType
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- widgetType: GType (GType)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getAncestor<T>(widgetType: GType) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_widget_get_ancestor(GTK_WIDGET(self.GOBJECT), widgetType))
 	}
 
-	/// 
 	/// Determines whether the application intends to draw on the widget in
 	/// an #GtkWidget::draw handler.
 	/// See gtk_widget_set_app_paintable()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getAppPaintable() -> Bool {
 		return gtk_widget_get_app_paintable(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget can be a default widget. See
 	/// gtk_widget_set_can_default().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getCanDefault() -> Bool {
 		return gtk_widget_get_can_default(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget can own the input focus. See
 	/// gtk_widget_set_can_focus().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getCanFocus() -> Bool {
 		return gtk_widget_get_can_focus(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// This function is only for use in widget implementations. Obtains
 	/// @widget->requisition, unless someone has forced a particular
 	/// geometry on the widget (e.g. with gtk_widget_set_size_request()),
@@ -1100,138 +1050,124 @@ open class CGTKWidget : CGTKBase {
 	/// since the last time a resize was queued. In general, only container
 	/// implementations have this information; applications should use
 	/// gtk_widget_size_request().
-	/// Parameters:
-	///	- requisition: UnsafeMutablePointer<GtkRequisition>!
-	open func getChildRequisition(_ requisition: UnsafeMutablePointer<GtkRequisition>!) {
+	/// - Parameters:
+	///	- requisition: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
+	open func getChildRequisition(_ requisition: UnsafeMutablePointer<GtkRequisition>!) -> Swift.Void {
 		gtk_widget_get_child_requisition(GTK_WIDGET(self.GOBJECT), requisition)
 	}
 
-	/// 
 	/// Gets the value set with gtk_widget_set_child_visible().
 	/// If you feel a need to use this function, your code probably
 	/// needs reorganization.
 	/// This function is only useful for container implementations and
 	/// never should be called by an application.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getChildVisible() -> Bool {
 		return gtk_widget_get_child_visible(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the widget’s clip area.
 	/// The clip area is the area in which all of @widget's drawing will
 	/// happen. Other toolkits call it the bounding box.
 	/// Historically, in GTK+ the clip area has been equal to the allocation
 	/// retrieved via gtk_widget_get_allocation().
-	/// Parameters:
-	///	- clip: UnsafeMutablePointer<GtkAllocation>!
-	open func getClip(_ clip: UnsafeMutablePointer<GtkAllocation>!) {
+	/// - Parameters:
+	///	- clip: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
+	open func getClip(_ clip: UnsafeMutablePointer<GtkAllocation>!) -> Swift.Void {
 		gtk_widget_get_clip(GTK_WIDGET(self.GOBJECT), clip)
 	}
 
-	/// 
 	/// Returns the clipboard object for the given selection to
 	/// be used with @widget. @widget must have a #GdkDisplay
 	/// associated with it, so must be attached to a toplevel
 	/// window.
-	/// Parameters:
-	///	- selection: GdkAtom
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- selection: GdkAtom (GdkAtom)
+	/// - Returns: OpaquePointer (GtkClipboard*)
 	open func getClipboard(selection: GdkAtom) -> OpaquePointer {
 		return gtk_widget_get_clipboard(GTK_WIDGET(self.GOBJECT), selection)
 	}
 
-	/// 
 	/// Obtains the composite name of a widget.
-	/// - Returns: String?
+	/// - Returns: String? (gchar*)
 	open func getCompositeName() -> String? {
 		return String(utf8String: gtk_widget_get_composite_name(GTK_WIDGET(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether @device can interact with @widget and its
 	/// children. See gtk_widget_set_device_enabled().
-	/// Parameters:
-	///	- device: OpaquePointer!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	/// - Returns: Bool (gboolean)
 	open func getDeviceEnabled(device: OpaquePointer!) -> Bool {
 		return gtk_widget_get_device_enabled(GTK_WIDGET(self.GOBJECT), device) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the events mask for the widget corresponding to an specific device. These
 	/// are the events that the widget will receive when @device operates on it.
-	/// Parameters:
-	///	- device: OpaquePointer!
-	/// - Returns: GdkEventMask
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	/// - Returns: GdkEventMask (GdkEventMask)
 	open func getDeviceEvents(device: OpaquePointer!) -> GdkEventMask {
 		return gtk_widget_get_device_events(GTK_WIDGET(self.GOBJECT), device)
 	}
 
-	/// 
 	/// Gets the reading direction for a particular widget. See
 	/// gtk_widget_set_direction().
-	/// - Returns: GtkTextDirection
+	/// - Returns: GtkTextDirection (GtkTextDirection)
 	open func getDirection() -> GtkTextDirection {
 		return gtk_widget_get_direction(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Get the #GdkDisplay for the toplevel window associated with
 	/// this widget. This function can only be called after the widget
 	/// has been added to a widget hierarchy with a #GtkWindow at the top.
 	/// In general, you should only create display specific
 	/// resources when a widget has been realized, and you should
 	/// free those resources when the widget is unrealized.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkDisplay*)
 	open func getDisplay() -> OpaquePointer {
 		return gtk_widget_get_display(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Determines whether the widget is double buffered.
 	/// See gtk_widget_set_double_buffered()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDoubleBuffered() -> Bool {
 		return gtk_widget_get_double_buffered(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the event mask (see #GdkEventMask) for the widget. These are the
 	/// events that the widget will receive.
 	/// Note: Internally, the widget event mask will be the logical OR of the event
 	/// mask set through gtk_widget_set_events() or gtk_widget_add_events(), and the
 	/// event mask necessary to cater for every #GtkEventController created for the
 	/// widget.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getEvents() -> gint {
 		return gtk_widget_get_events(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the widget should grab focus when it is clicked with the mouse.
 	/// See gtk_widget_set_focus_on_click().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getFocusOnClick() -> Bool {
 		return gtk_widget_get_focus_on_click(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the font map that has been set with gtk_widget_set_font_map().
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (PangoFontMap*)
 	open func getFontMap() -> OpaquePointer? {
 		return gtk_widget_get_font_map(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the #cairo_font_options_t used for Pango rendering. When not set,
 	/// the defaults font options for the #GdkScreen will be used.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (const cairo_font_options_t*)
 	open func getFontOptions() -> OpaquePointer? {
 		return gtk_widget_get_font_options(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the frame clock for a widget. The frame clock is a global
 	/// “ticker” that can be used to drive animations and repaints.  The
 	/// most common reason to get the frame clock is to call
@@ -1250,39 +1186,35 @@ open class CGTKWidget : CGTKBase {
 	/// mapped. Reparenting a widget (which implies a temporary unmap) can
 	/// change the widget’s frame clock.
 	/// Unrealized widgets do not have a frame clock.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkFrameClock*)
 	open func getFrameClock() -> OpaquePointer? {
 		return gtk_widget_get_frame_clock(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:halign property.
 	/// For backwards compatibility reasons this method will never return
 	/// %GTK_ALIGN_BASELINE, but instead it will convert it to
 	/// %GTK_ALIGN_FILL. Baselines are not supported for horizontal
 	/// alignment.
-	/// - Returns: GtkAlign
+	/// - Returns: GtkAlign (GtkAlign)
 	open func getHalign() -> GtkAlign {
 		return gtk_widget_get_halign(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the current value of the has-tooltip property.  See
 	/// #GtkWidget:has-tooltip for more information.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasTooltip() -> Bool {
 		return gtk_widget_get_has_tooltip(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget has a #GdkWindow of its own. See
 	/// gtk_widget_set_has_window().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasWindow() -> Bool {
 		return gtk_widget_get_has_window(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets whether the widget would like any available extra horizontal
 	/// space. When a user resizes a #GtkWindow, widgets with expand=TRUE
 	/// generally receive the extra space. For example, a list or
@@ -1295,12 +1227,11 @@ open class CGTKWidget : CGTKBase {
 	/// This function only looks at the widget’s own hexpand flag, rather
 	/// than computing whether the entire widget tree rooted at this widget
 	/// wants to expand.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHexpand() -> Bool {
 		return gtk_widget_get_hexpand(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets whether gtk_widget_set_hexpand() has been used to
 	/// explicitly set the expand flag on this widget.
 	/// If hexpand is set, then it overrides any computed
@@ -1309,72 +1240,63 @@ open class CGTKWidget : CGTKBase {
 	/// children of the widget would like to expand.
 	/// There are few reasons to use this function, but it’s here
 	/// for completeness and consistency.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHexpandSet() -> Bool {
 		return gtk_widget_get_hexpand_set(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Whether the widget is mapped.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getMapped() -> Bool {
 		return gtk_widget_get_mapped(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-bottom property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginBottom() -> gint {
 		return gtk_widget_get_margin_bottom(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-end property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginEnd() -> gint {
 		return gtk_widget_get_margin_end(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-left property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginLeft() -> gint {
 		return gtk_widget_get_margin_left(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-right property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginRight() -> gint {
 		return gtk_widget_get_margin_right(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-start property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginStart() -> gint {
 		return gtk_widget_get_margin_start(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:margin-top property.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMarginTop() -> gint {
 		return gtk_widget_get_margin_top(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the modifier mask the @widget’s windowing system backend
 	/// uses for a particular purpose.
 	/// See gdk_keymap_get_modifier_mask().
-	/// Parameters:
-	///	- intent: GdkModifierIntent
-	/// - Returns: GdkModifierType
+	/// - Parameters:
+	///	- intent: GdkModifierIntent (GdkModifierIntent)
+	/// - Returns: GdkModifierType (GdkModifierType)
 	open func getModifierMask(intent: GdkModifierIntent) -> GdkModifierType {
 		return gtk_widget_get_modifier_mask(GTK_WIDGET(self.GOBJECT), intent)
 	}
 
-	/// 
 	/// Returns the current modifier style for the widget. (As set by
 	/// gtk_widget_modify_style().) If no style has previously set, a new
 	/// #GtkRcStyle will be created with all values unset, and set as the
@@ -1386,37 +1308,33 @@ open class CGTKWidget : CGTKBase {
 	/// the passed-in style and sets the copy as the new modifier style,
 	/// thus dropping any reference to the old modifier style. Add a reference
 	/// to the modifier style if you want to keep it alive.
-	/// - Returns: UnsafeMutablePointer<GtkRcStyle>!
+	/// - Returns: UnsafeMutablePointer<GtkRcStyle>! (GtkRcStyle*)
 	open func getModifierStyle() -> UnsafeMutablePointer<GtkRcStyle>! {
 		return gtk_widget_get_modifier_style(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the name of a widget. See gtk_widget_set_name() for the
 	/// significance of widget names.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getName() -> String? {
 		return String(utf8String: gtk_widget_get_name(GTK_WIDGET(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the current value of the #GtkWidget:no-show-all property,
 	/// which determines whether calls to gtk_widget_show_all()
 	/// will affect this widget.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getNoShowAll() -> Bool {
 		return gtk_widget_get_no_show_all(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Fetches the requested opacity for this widget.
 	/// See gtk_widget_set_opacity().
-	/// - Returns: Double
+	/// - Returns: Double (double)
 	open func getOpacity() -> Double {
 		return gtk_widget_get_opacity(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets a #PangoContext with the appropriate font map, font description,
 	/// and base direction for this widget. Unlike the context returned
 	/// by gtk_widget_create_pango_context(), this context is owned by
@@ -1424,48 +1342,43 @@ open class CGTKWidget : CGTKBase {
 	/// or the widget is removed from its toplevel), and will be updated to
 	/// match any changes to the widget’s attributes. This can be tracked
 	/// by using the #GtkWidget::screen-changed signal on the widget.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (PangoContext*)
 	open func getPangoContext() -> OpaquePointer {
 		return gtk_widget_get_pango_context(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the parent container of @widget.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getParent<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_widget_get_parent(GTK_WIDGET(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets @widget’s parent window, or %NULL if it does not have one.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkWindow*)
 	open func getParentWindow() -> OpaquePointer? {
 		return gtk_widget_get_parent_window(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the #GtkWidgetPath representing @widget, if the widget
 	/// is not connected to a toplevel widget, a partial path will be
 	/// created.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GtkWidgetPath*)
 	open func getPath() -> OpaquePointer {
 		return gtk_widget_get_path(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the location of the mouse pointer in widget coordinates.
 	/// Widget coordinates are a bit odd; for historical reasons, they are
 	/// defined as @widget->window coordinates for widgets that return %TRUE for
 	/// gtk_widget_get_has_window(); and are relative to @widget->allocation.x,
 	/// @widget->allocation.y otherwise.
-	/// Parameters:
-	///	- x: UnsafeMutablePointer<Int32>!
-	///	- y: UnsafeMutablePointer<Int32>!
-	open func getPointer(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- x: UnsafeMutablePointer<Int32>! (gint*)
+	///	- y: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPointer(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_pointer(GTK_WIDGET(self.GOBJECT), x, y)
 	}
 
-	/// 
 	/// Retrieves a widget’s initial minimum and natural height.
 	/// This call is specific to width-for-height requests.
 	/// The returned request will be modified by the
@@ -1473,14 +1386,13 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkSizeGroups that have been applied. That is, the returned request
 	/// is the one that should be used for layout, not necessarily the one
 	/// returned by the widget itself.
-	/// Parameters:
-	///	- minimumHeight: UnsafeMutablePointer<Int32>!
-	///	- naturalHeight: UnsafeMutablePointer<Int32>!
-	open func getPreferredHeight(minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- minimumHeight: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalHeight: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPreferredHeight(minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_preferred_height(GTK_WIDGET(self.GOBJECT), minimumHeight, naturalHeight)
 	}
 
-	/// 
 	/// Retrieves a widget’s minimum and natural height and the corresponding baselines if it would be given
 	/// the specified @width, or the default height if @width is -1. The baselines may be -1 which means
 	/// that no baseline is requested for this widget.
@@ -1489,17 +1401,16 @@ open class CGTKWidget : CGTKBase {
 	/// and by any #GtkSizeGroups that have been applied. That is, the returned request
 	/// is the one that should be used for layout, not necessarily the one
 	/// returned by the widget itself.
-	/// Parameters:
-	///	- width: gint
-	///	- minimumHeight: UnsafeMutablePointer<Int32>!
-	///	- naturalHeight: UnsafeMutablePointer<Int32>!
-	///	- minimumBaseline: UnsafeMutablePointer<Int32>!
-	///	- naturalBaseline: UnsafeMutablePointer<Int32>!
-	open func getPreferredHeightAndBaselineForWidth(_ width: gint, minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!, minimumBaseline: UnsafeMutablePointer<Int32>!, naturalBaseline: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- minimumHeight: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalHeight: UnsafeMutablePointer<Int32>! (gint*)
+	///	- minimumBaseline: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalBaseline: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPreferredHeightAndBaselineForWidth(_ width: gint, minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!, minimumBaseline: UnsafeMutablePointer<Int32>!, naturalBaseline: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_preferred_height_and_baseline_for_width(GTK_WIDGET(self.GOBJECT), width, minimumHeight, naturalHeight, minimumBaseline, naturalBaseline)
 	}
 
-	/// 
 	/// Retrieves a widget’s minimum and natural height if it would be given
 	/// the specified @width.
 	/// The returned request will be modified by the
@@ -1507,15 +1418,14 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkSizeGroups that have been applied. That is, the returned request
 	/// is the one that should be used for layout, not necessarily the one
 	/// returned by the widget itself.
-	/// Parameters:
-	///	- width: gint
-	///	- minimumHeight: UnsafeMutablePointer<Int32>!
-	///	- naturalHeight: UnsafeMutablePointer<Int32>!
-	open func getPreferredHeightForWidth(_ width: gint, minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- minimumHeight: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalHeight: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPreferredHeightForWidth(_ width: gint, minimumHeight: UnsafeMutablePointer<Int32>!, naturalHeight: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_preferred_height_for_width(GTK_WIDGET(self.GOBJECT), width, minimumHeight, naturalHeight)
 	}
 
-	/// 
 	/// Retrieves the minimum and natural size of a widget, taking
 	/// into account the widget’s preference for height-for-width management.
 	/// This is used to retrieve a suitable size by container widgets which do
@@ -1528,14 +1438,13 @@ open class CGTKWidget : CGTKBase {
 	/// the minimum width.
 	/// Use gtk_widget_get_preferred_height_and_baseline_for_width() if you want to support
 	/// baseline alignment.
-	/// Parameters:
-	///	- minimumSize: UnsafeMutablePointer<GtkRequisition>!
-	///	- naturalSize: UnsafeMutablePointer<GtkRequisition>!
-	open func getPreferredSize(minimumSize: UnsafeMutablePointer<GtkRequisition>!, naturalSize: UnsafeMutablePointer<GtkRequisition>!) {
+	/// - Parameters:
+	///	- minimumSize: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
+	///	- naturalSize: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
+	open func getPreferredSize(minimumSize: UnsafeMutablePointer<GtkRequisition>!, naturalSize: UnsafeMutablePointer<GtkRequisition>!) -> Swift.Void {
 		gtk_widget_get_preferred_size(GTK_WIDGET(self.GOBJECT), minimumSize, naturalSize)
 	}
 
-	/// 
 	/// Retrieves a widget’s initial minimum and natural width.
 	/// This call is specific to height-for-width requests.
 	/// The returned request will be modified by the
@@ -1543,14 +1452,13 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkSizeGroups that have been applied. That is, the returned request
 	/// is the one that should be used for layout, not necessarily the one
 	/// returned by the widget itself.
-	/// Parameters:
-	///	- minimumWidth: UnsafeMutablePointer<Int32>!
-	///	- naturalWidth: UnsafeMutablePointer<Int32>!
-	open func getPreferredWidth(minimumWidth: UnsafeMutablePointer<Int32>!, naturalWidth: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- minimumWidth: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalWidth: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPreferredWidth(minimumWidth: UnsafeMutablePointer<Int32>!, naturalWidth: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_preferred_width(GTK_WIDGET(self.GOBJECT), minimumWidth, naturalWidth)
 	}
 
-	/// 
 	/// Retrieves a widget’s minimum and natural width if it would be given
 	/// the specified @height.
 	/// The returned request will be modified by the
@@ -1558,57 +1466,52 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkSizeGroups that have been applied. That is, the returned request
 	/// is the one that should be used for layout, not necessarily the one
 	/// returned by the widget itself.
-	/// Parameters:
-	///	- height: gint
-	///	- minimumWidth: UnsafeMutablePointer<Int32>!
-	///	- naturalWidth: UnsafeMutablePointer<Int32>!
-	open func getPreferredWidthForHeight(_ height: gint, minimumWidth: UnsafeMutablePointer<Int32>!, naturalWidth: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- height: gint (gint)
+	///	- minimumWidth: UnsafeMutablePointer<Int32>! (gint*)
+	///	- naturalWidth: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPreferredWidthForHeight(_ height: gint, minimumWidth: UnsafeMutablePointer<Int32>!, naturalWidth: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_preferred_width_for_height(GTK_WIDGET(self.GOBJECT), height, minimumWidth, naturalWidth)
 	}
 
-	/// 
 	/// Determines whether @widget is realized.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getRealized() -> Bool {
 		return gtk_widget_get_realized(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget is always treated as the default widget
 	/// within its toplevel when it has the focus, even if another widget
 	/// is the default.
 	/// See gtk_widget_set_receives_default().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getReceivesDefault() -> Bool {
 		return gtk_widget_get_receives_default(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets whether the widget prefers a height-for-width layout
 	/// or a width-for-height layout.
 	/// #GtkBin widgets generally propagate the preference of
 	/// their child, container widgets need to request something either in
 	/// context of their children or in context of their allocation
 	/// capabilities.
-	/// - Returns: GtkSizeRequestMode
+	/// - Returns: GtkSizeRequestMode (GtkSizeRequestMode)
 	open func getRequestMode() -> GtkSizeRequestMode {
 		return gtk_widget_get_request_mode(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the widget’s requisition.
 	/// This function should only be used by widget implementations in
 	/// order to figure whether the widget’s requisition has actually
 	/// changed after some internal state change (so that they can call
 	/// gtk_widget_queue_resize() instead of gtk_widget_queue_draw()).
 	/// Normally, gtk_widget_size_request() should be used.
-	/// Parameters:
-	///	- requisition: UnsafeMutablePointer<GtkRequisition>!
-	open func getRequisition(_ requisition: UnsafeMutablePointer<GtkRequisition>!) {
+	/// - Parameters:
+	///	- requisition: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
+	open func getRequisition(_ requisition: UnsafeMutablePointer<GtkRequisition>!) -> Swift.Void {
 		gtk_widget_get_requisition(GTK_WIDGET(self.GOBJECT), requisition)
 	}
 
-	/// 
 	/// Get the root window where this widget is located. This function can
 	/// only be called after the widget has been added to a widget
 	/// hierarchy with #GtkWindow at the top.
@@ -1616,22 +1519,20 @@ open class CGTKWidget : CGTKBase {
 	/// #GdkWindow associated with the window. In general, you should only
 	/// create display specific resources when a widget has been realized,
 	/// and you should free those resources when the widget is unrealized.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkWindow*)
 	open func getRootWindow() -> OpaquePointer {
 		return gtk_widget_get_root_window(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the internal scale factor that maps from window coordinates
 	/// to the actual device pixels. On traditional systems this is 1, on
 	/// high density outputs, it can be a higher value (typically 2).
 	/// See gdk_window_get_scale_factor().
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getScaleFactor() -> gint {
 		return gtk_widget_get_scale_factor(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Get the #GdkScreen from the toplevel window associated with
 	/// this widget. This function can only be called after the widget
 	/// has been added to a widget hierarchy with a #GtkWindow
@@ -1639,32 +1540,29 @@ open class CGTKWidget : CGTKBase {
 	/// In general, you should only create screen specific
 	/// resources when a widget has been realized, and you should
 	/// free those resources when the widget is unrealized.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkScreen*)
 	open func getScreen() -> OpaquePointer {
 		return gtk_widget_get_screen(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the widget’s sensitivity (in the sense of returning
 	/// the value that has been set using gtk_widget_set_sensitive()).
 	/// The effective sensitivity of a widget is however determined by both its
 	/// own and its parent widget’s sensitivity. See gtk_widget_is_sensitive().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSensitive() -> Bool {
 		return gtk_widget_get_sensitive(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the settings object holding the settings used for this widget.
 	/// Note that this function can only be called when the #GtkWidget
 	/// is attached to a toplevel, since the settings object is specific
 	/// to a particular #GdkScreen.
-	/// - Returns: UnsafeMutablePointer<GtkSettings>!
+	/// - Returns: UnsafeMutablePointer<GtkSettings>! (GtkSettings*)
 	open func getSettings() -> UnsafeMutablePointer<GtkSettings>! {
 		return gtk_widget_get_settings(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the size request that was explicitly set for the widget using
 	/// gtk_widget_set_size_request(). A value of -1 stored in @width or
 	/// @height indicates that that dimension has not been set explicitly
@@ -1672,21 +1570,19 @@ open class CGTKWidget : CGTKBase {
 	/// gtk_widget_set_size_request(). To get the size a widget will
 	/// actually request, call gtk_widget_get_preferred_size() instead of
 	/// this function.
-	/// Parameters:
-	///	- width: UnsafeMutablePointer<Int32>!
-	///	- height: UnsafeMutablePointer<Int32>!
-	open func getSizeRequest(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- width: UnsafeMutablePointer<Int32>! (gint*)
+	///	- height: UnsafeMutablePointer<Int32>! (gint*)
+	open func getSizeRequest(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_widget_get_size_request(GTK_WIDGET(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Returns the widget’s state. See gtk_widget_set_state().
-	/// - Returns: GtkStateType
+	/// - Returns: GtkStateType (GtkStateType)
 	open func getState() -> GtkStateType {
 		return gtk_widget_get_state(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the widget state as a flag set. It is worth mentioning
 	/// that the effective %GTK_STATE_FLAG_INSENSITIVE state will be
 	/// returned, that is, also based on parent insensitivity, even if
@@ -1694,35 +1590,31 @@ open class CGTKWidget : CGTKBase {
 	/// Also note that if you are looking for a way to obtain the
 	/// #GtkStateFlags to pass to a #GtkStyleContext method, you
 	/// should look at gtk_style_context_get_state().
-	/// - Returns: GtkStateFlags
+	/// - Returns: GtkStateFlags (GtkStateFlags)
 	open func getStateFlags() -> GtkStateFlags {
 		return gtk_widget_get_state_flags(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Simply an accessor function that returns @widget->style.
-	/// - Returns: UnsafeMutablePointer<GtkStyle>!
+	/// - Returns: UnsafeMutablePointer<GtkStyle>! (GtkStyle*)
 	open func getStyle() -> UnsafeMutablePointer<GtkStyle>! {
 		return gtk_widget_get_style(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the style context associated to @widget. The returned object is
 	/// guaranteed to be the same for the lifetime of @widget.
-	/// - Returns: UnsafeMutablePointer<GtkStyleContext>!
+	/// - Returns: UnsafeMutablePointer<GtkStyleContext>! (GtkStyleContext*)
 	open func getStyleContext() -> UnsafeMutablePointer<GtkStyleContext>! {
 		return gtk_widget_get_style_context(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns %TRUE if @widget is multiple pointer aware. See
 	/// gtk_widget_set_support_multidevice() for more information.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSupportMultidevice() -> Bool {
 		return gtk_widget_get_support_multidevice(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Fetch an object build from the template XML for @widget_type in this @widget instance.
 	/// This will only report children which were previously declared with
 	/// gtk_widget_class_bind_template_child_full() or one of its
@@ -1730,38 +1622,34 @@ open class CGTKWidget : CGTKBase {
 	/// This function is only meant to be called for code which is private to the @widget_type which
 	/// declared the child and is meant for language bindings which cannot easily make use
 	/// of the GObject structure offsets.
-	/// Parameters:
-	///	- widgetType: GType
-	///	- name: String
-	/// - Returns: UnsafeMutablePointer<GObject>!
+	/// - Parameters:
+	///	- widgetType: GType (GType)
+	///	- name: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GObject>! (GObject*)
 	open func getTemplateChild(widgetType: GType, name: String) -> UnsafeMutablePointer<GObject>! {
 		return gtk_widget_get_template_child(GTK_WIDGET(self.GOBJECT), widgetType, name)
 	}
 
-	/// 
 	/// Gets the contents of the tooltip for @widget.
-	/// - Returns: String?
+	/// - Returns: String? (gchar*)
 	open func getTooltipMarkup() -> String? {
 		return String(utf8String: gtk_widget_get_tooltip_markup(GTK_WIDGET(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the contents of the tooltip for @widget.
-	/// - Returns: String?
+	/// - Returns: String? (gchar*)
 	open func getTooltipText() -> String? {
 		return String(utf8String: gtk_widget_get_tooltip_text(GTK_WIDGET(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the #GtkWindow of the current tooltip. This can be the
 	/// GtkWindow created by default, or the custom tooltip window set
 	/// using gtk_widget_set_tooltip_window().
-	/// - Returns: CGTKWindow
+	/// - Returns: CGTKWindow (GtkWindow*)
 	open func getTooltipWindow<T>() -> T where T: CGTKWindow {
 		return T.init(withGObject: gtk_widget_get_tooltip_window(GTK_WIDGET(self.GOBJECT)))!
 	}
 
-	/// 
 	/// This function returns the topmost widget in the container hierarchy
 	/// @widget is a part of. If @widget has no parent widgets, it will be
 	/// returned as the topmost widget. No reference will be added to the
@@ -1790,12 +1678,11 @@ open class CGTKWidget : CGTKBase {
 	/// return NULL;
 	/// }
 	/// ]|
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getToplevel<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_widget_get_toplevel(GTK_WIDGET(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:valign property.
 	/// For backwards compatibility reasons this method will never return
 	/// %GTK_ALIGN_BASELINE, but instead it will convert it to
@@ -1803,74 +1690,66 @@ open class CGTKWidget : CGTKBase {
 	/// children it must use gtk_widget_get_valign_with_baseline(), or
 	/// `g_object_get (widget, "valign", &value, NULL)`, which will
 	/// also report the true value.
-	/// - Returns: GtkAlign
+	/// - Returns: GtkAlign (GtkAlign)
 	open func getValign() -> GtkAlign {
 		return gtk_widget_get_valign(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWidget:valign property, including
 	/// %GTK_ALIGN_BASELINE.
-	/// - Returns: GtkAlign
+	/// - Returns: GtkAlign (GtkAlign)
 	open func getValignWithBaseline() -> GtkAlign {
 		return gtk_widget_get_valign_with_baseline(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets whether the widget would like any available extra vertical
 	/// space.
 	/// See gtk_widget_get_hexpand() for more detail.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getVexpand() -> Bool {
 		return gtk_widget_get_vexpand(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets whether gtk_widget_set_vexpand() has been used to
 	/// explicitly set the expand flag on this widget.
 	/// See gtk_widget_get_hexpand_set() for more detail.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getVexpandSet() -> Bool {
 		return gtk_widget_get_vexpand_set(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether the widget is visible. If you want to
 	/// take into account whether the widget’s parent is also marked as
 	/// visible, use gtk_widget_is_visible() instead.
 	/// This function does not check if the widget is obscured in any way.
 	/// See gtk_widget_set_visible().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getVisible() -> Bool {
 		return gtk_widget_get_visible(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the visual that will be used to render @widget.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkVisual*)
 	open func getVisual() -> OpaquePointer {
 		return gtk_widget_get_visual(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the widget’s window if it is realized, %NULL otherwise
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkWindow*)
 	open func getWindow() -> OpaquePointer? {
 		return gtk_widget_get_window(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Makes @widget the current grabbed widget.
 	/// This means that interaction with other widgets in the same
 	/// application is blocked and mouse as well as keyboard events
 	/// are delivered to this widget.
 	/// If @widget is not sensitive, it is not set as the current
 	/// grabbed widget and this function does nothing.
-	open func gtkGrabAdd() {
+	open func gtkGrabAdd() -> Swift.Void {
 		gtk_grab_add(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Causes @widget to become the default widget. @widget must be able to be
 	/// a default widget; typically you would ensure this yourself
 	/// by calling gtk_widget_set_can_default() with a %TRUE value.
@@ -1880,11 +1759,10 @@ open class CGTKWidget : CGTKBase {
 	/// that #GtkEntry widgets require the “activates-default” property
 	/// set to %TRUE before they activate the default widget when Enter
 	/// is pressed and the #GtkEntry is focused.
-	open func grabDefault() {
+	open func grabDefault() -> Swift.Void {
 		gtk_widget_grab_default(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Causes @widget to have the keyboard focus for the #GtkWindow it's
 	/// inside. @widget must be a focusable widget, such as a #GtkEntry;
 	/// something like #GtkFrame won’t work.
@@ -1893,62 +1771,55 @@ open class CGTKWidget : CGTKBase {
 	/// The widget also needs to be realized and mapped. This is indicated by the
 	/// related signals. Grabbing the focus immediately after creating the widget
 	/// will likely fail and cause critical warnings.
-	open func grabFocus() {
+	open func grabFocus() -> Swift.Void {
 		gtk_widget_grab_focus(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Removes the grab from the given widget.
 	/// You have to pair calls to gtk_grab_add() and gtk_grab_remove().
 	/// If @widget does not have the grab, this function does nothing.
-	open func gtkGrabRemove() {
+	open func gtkGrabRemove() -> Swift.Void {
 		gtk_grab_remove(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Determines whether @widget is the current default widget within its
 	/// toplevel. See gtk_widget_set_can_default().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasDefault() -> Bool {
 		return gtk_widget_has_default(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines if the widget has the global input focus. See
 	/// gtk_widget_is_focus() for the difference between having the global
 	/// input focus, and only having the focus within a toplevel.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasFocus() -> Bool {
 		return gtk_widget_has_focus(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether the widget is currently grabbing events, so it
 	/// is the only widget receiving input events (keyboard and mouse).
 	/// See also gtk_grab_add().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasGrab() -> Bool {
 		return gtk_widget_has_grab(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines if the widget style has been looked up through the rc mechanism.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasRcStyle() -> Bool {
 		return gtk_widget_has_rc_style(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Checks whether there is a #GdkScreen is associated with
 	/// this widget. All toplevel widgets have an associated
 	/// screen, and all widgets added into a hierarchy with a toplevel
 	/// window at the top.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasScreen() -> Bool {
 		return gtk_widget_has_screen(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines if the widget should show a visible indication that
 	/// it has the global input focus. This is a convenience function for
 	/// use in ::draw handlers that takes into account whether focus
@@ -1957,19 +1828,17 @@ open class CGTKWidget : CGTKBase {
 	/// about focus indication.
 	/// To find out if the widget has the global input focus, use
 	/// gtk_widget_has_focus().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasVisibleFocus() -> Bool {
 		return gtk_widget_has_visible_focus(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Reverses the effects of gtk_widget_show(), causing the widget to be
 	/// hidden (invisible to the user).
-	open func hide() {
+	open func hide() -> Swift.Void {
 		gtk_widget_hide(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Utility function; intended to be connected to the #GtkWidget::delete-event
 	/// signal on a #GtkWindow. The function calls gtk_widget_hide() on its
 	/// argument, then returns %TRUE. If connected to ::delete-event, the
@@ -1977,21 +1846,19 @@ open class CGTKWidget : CGTKBase {
 	/// window frame, top right corner usually) will hide but not destroy
 	/// the window. By default, GTK+ destroys windows when ::delete-event
 	/// is received.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hideOnDelete() -> Bool {
 		return gtk_widget_hide_on_delete(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the widget is currently being destroyed.
 	/// This information can sometimes be used to avoid doing
 	/// unnecessary work.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func inDestruction() -> Bool {
 		return gtk_widget_in_destruction(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Creates and initializes child widgets defined in templates. This
 	/// function must be called in the instance initializer for any
 	/// class which assigned itself a template using gtk_widget_class_set_template()
@@ -2005,116 +1872,105 @@ open class CGTKWidget : CGTKBase {
 	/// composite templates, it’s important to build the composite widgets
 	/// before the construct properties are set. Properties passed to g_object_new()
 	/// should take precedence over properties set in the private template XML.
-	open func initTemplate() {
+	open func initTemplate() -> Swift.Void {
 		gtk_widget_init_template(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets an input shape for this widget’s GDK window. This allows for
 	/// windows which react to mouse click in a nonrectangular region, see
 	/// gdk_window_input_shape_combine_region() for more information.
-	/// Parameters:
-	///	- region: OpaquePointer?
-	open func inputShapeCombineRegion(_ region: OpaquePointer?) {
+	/// - Parameters:
+	///	- region: OpaquePointer? (cairo_region_t*)
+	open func inputShapeCombineRegion(_ region: OpaquePointer?) -> Swift.Void {
 		gtk_widget_input_shape_combine_region(GTK_WIDGET(self.GOBJECT), region)
 	}
 
-	/// 
 	/// Inserts @group into @widget. Children of @widget that implement
 	/// #GtkActionable can then be associated with actions in @group by
 	/// setting their “action-name” to
 	/// @prefix.`action-name`.
 	/// If @group is %NULL, a previously inserted group for @name is removed
 	/// from @widget.
-	/// Parameters:
-	///	- name: String
-	///	- group: OpaquePointer?
-	open func insertActionGroup(name: String, group: OpaquePointer?) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	///	- group: OpaquePointer? (GActionGroup*)
+	open func insertActionGroup(name: String, group: OpaquePointer?) -> Swift.Void {
 		gtk_widget_insert_action_group(GTK_WIDGET(self.GOBJECT), name, group)
 	}
 
-	/// 
 	/// Computes the intersection of a @widget’s area and @area, storing
 	/// the intersection in @intersection, and returns %TRUE if there was
 	/// an intersection.  @intersection may be %NULL if you’re only
 	/// interested in whether there was an intersection.
-	/// Parameters:
-	///	- area: UnsafePointer<GdkRectangle>!
-	///	- intersection: UnsafeMutablePointer<GdkRectangle>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- area: UnsafePointer<GdkRectangle>! (const GdkRectangle*)
+	///	- intersection: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
+	/// - Returns: Bool (gboolean)
 	open func intersect(area: UnsafePointer<GdkRectangle>!, intersection: UnsafeMutablePointer<GdkRectangle>!) -> Bool {
 		return gtk_widget_intersect(GTK_WIDGET(self.GOBJECT), area, intersection) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget is somewhere inside @ancestor, possibly with
 	/// intermediate containers.
-	/// Parameters:
-	///	- ancestor: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- ancestor: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func isAncestor(_ ancestor: CGTKWidget) -> Bool {
 		return gtk_widget_is_ancestor(GTK_WIDGET(self.GOBJECT), ancestor.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Whether @widget can rely on having its alpha channel
 	/// drawn correctly. On X11 this function returns whether a
 	/// compositing manager is running for @widget’s screen.
 	/// Please note that the semantics of this call will change
 	/// in the future if used on a widget that has a composited
 	/// window in its hierarchy (as set by gdk_window_set_composited()).
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isComposited() -> Bool {
 		return gtk_widget_is_composited(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget can be drawn to. A widget can be drawn
 	/// to if it is mapped and visible.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isDrawable() -> Bool {
 		return gtk_widget_is_drawable(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines if the widget is the focus widget within its
 	/// toplevel. (This does not mean that the #GtkWidget:has-focus property is
 	/// necessarily set; #GtkWidget:has-focus will only be set if the
 	/// toplevel widget additionally has the global input focus.)
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isFocus() -> Bool {
 		return gtk_widget_is_focus(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the widget’s effective sensitivity, which means
 	/// it is sensitive itself and also its parent widget is sensitive
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isSensitive() -> Bool {
 		return gtk_widget_is_sensitive(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether @widget is a toplevel widget.
 	/// Currently only #GtkWindow and #GtkInvisible (and out-of-process
 	/// #GtkPlugs) are toplevel widgets. Toplevel widgets have no parent
 	/// widget.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isToplevel() -> Bool {
 		return gtk_widget_is_toplevel(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether the widget and all its parents are marked as
 	/// visible.
 	/// This function does not check if the widget is obscured in any way.
 	/// See also gtk_widget_get_visible() and gtk_widget_set_visible()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isVisible() -> Bool {
 		return gtk_widget_is_visible(GTK_WIDGET(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// This function should be called whenever keyboard navigation within
 	/// a single widget hits a boundary. The function emits the
 	/// #GtkWidget::keynav-failed signal on the widget and its return
@@ -2137,34 +1993,31 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkEntry widgets where the user should be able to navigate the
 	/// entire row with the cursor keys, as e.g. known from user interfaces
 	/// that require entering license keys.
-	/// Parameters:
-	///	- direction: GtkDirectionType
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- direction: GtkDirectionType (GtkDirectionType)
+	/// - Returns: Bool (gboolean)
 	open func keynavFailed(direction: GtkDirectionType) -> Bool {
 		return gtk_widget_keynav_failed(GTK_WIDGET(self.GOBJECT), direction) != 0 ? true : false
 	}
 
-	/// 
 	/// Lists the closures used by @widget for accelerator group connections
 	/// with gtk_accel_group_connect_by_path() or gtk_accel_group_connect().
 	/// The closures can be used to monitor accelerator changes on @widget,
 	/// by connecting to the @GtkAccelGroup::accel-changed signal of the
 	/// #GtkAccelGroup of a closure which can be found out with
 	/// gtk_accel_group_from_accel_closure().
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open func listAccelClosures() -> UnsafeMutablePointer<GList>! {
 		return gtk_widget_list_accel_closures(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves a %NULL-terminated array of strings containing the prefixes of
 	/// #GActionGroup's available to @widget.
-	/// - Returns: UnsafeMutablePointer<UnsafePointer<gchar>?>!
+	/// - Returns: UnsafeMutablePointer<UnsafePointer<gchar>?>! (const gchar**)
 	open func listActionPrefixes() -> UnsafeMutablePointer<UnsafePointer<gchar>?>! {
 		return gtk_widget_list_action_prefixes(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns a newly allocated list of the widgets, normally labels, for
 	/// which this widget is the target of a mnemonic (see for example,
 	/// gtk_label_set_mnemonic_widget()).
@@ -2174,28 +2027,25 @@ open class CGTKWidget : CGTKBase {
 	/// must call `g_list_foreach (result,
 	/// (GFunc)g_object_ref, NULL)` first, and then unref all the
 	/// widgets afterwards.
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open func listMnemonicLabels() -> UnsafeMutablePointer<GList>! {
 		return gtk_widget_list_mnemonic_labels(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function is only for use in widget implementations. Causes
 	/// a widget to be mapped if it isn’t already.
-	open func map() {
+	open func map() -> Swift.Void {
 		gtk_widget_map(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Emits the #GtkWidget::mnemonic-activate signal.
-	/// Parameters:
-	///	- groupCycling: Bool
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- groupCycling: Bool (gboolean)
+	/// - Returns: Bool (gboolean)
 	open func mnemonicActivate(groupCycling: Bool) -> Bool {
 		return gtk_widget_mnemonic_activate(GTK_WIDGET(self.GOBJECT), groupCycling ? 1 : 0) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the base color for a widget in a particular state.
 	/// All other style values are left untouched. The base color
 	/// is the background color used along with the text color
@@ -2210,14 +2060,13 @@ open class CGTKWidget : CGTKBase {
 	/// > base color on their parent; if you want to set the background
 	/// > of a rectangular area around a label, try placing the label in
 	/// > a #GtkEventBox widget and setting the base color on that.
-	/// Parameters:
-	///	- state: GtkStateType
-	///	- color: UnsafePointer<GdkColor>?
-	open func modifyBase(state: GtkStateType, color: UnsafePointer<GdkColor>?) {
+	/// - Parameters:
+	///	- state: GtkStateType (GtkStateType)
+	///	- color: UnsafePointer<GdkColor>? (const GdkColor*)
+	open func modifyBase(state: GtkStateType, color: UnsafePointer<GdkColor>?) -> Swift.Void {
 		gtk_widget_modify_base(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the background color for a widget in a particular state.
 	/// All other style values are left untouched.
 	/// See also gtk_widget_modify_style().
@@ -2230,48 +2079,44 @@ open class CGTKWidget : CGTKBase {
 	/// > background color on their parent; if you want to set the background
 	/// > of a rectangular area around a label, try placing the label in
 	/// > a #GtkEventBox widget and setting the background color on that.
-	/// Parameters:
-	///	- state: GtkStateType
-	///	- color: UnsafePointer<GdkColor>?
-	open func modifyBg(state: GtkStateType, color: UnsafePointer<GdkColor>?) {
+	/// - Parameters:
+	///	- state: GtkStateType (GtkStateType)
+	///	- color: UnsafePointer<GdkColor>? (const GdkColor*)
+	open func modifyBg(state: GtkStateType, color: UnsafePointer<GdkColor>?) -> Swift.Void {
 		gtk_widget_modify_bg(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the cursor color to use in a widget, overriding the #GtkWidget
 	/// cursor-color and secondary-cursor-color
 	/// style properties.
 	/// All other style values are left untouched.
 	/// See also gtk_widget_modify_style().
-	/// Parameters:
-	///	- primary: UnsafePointer<GdkColor>?
-	///	- secondary: UnsafePointer<GdkColor>?
-	open func modifyCursor(primary: UnsafePointer<GdkColor>?, secondary: UnsafePointer<GdkColor>?) {
+	/// - Parameters:
+	///	- primary: UnsafePointer<GdkColor>? (const GdkColor*)
+	///	- secondary: UnsafePointer<GdkColor>? (const GdkColor*)
+	open func modifyCursor(primary: UnsafePointer<GdkColor>?, secondary: UnsafePointer<GdkColor>?) -> Swift.Void {
 		gtk_widget_modify_cursor(GTK_WIDGET(self.GOBJECT), primary, secondary)
 	}
 
-	/// 
 	/// Sets the foreground color for a widget in a particular state.
 	/// All other style values are left untouched.
 	/// See also gtk_widget_modify_style().
-	/// Parameters:
-	///	- state: GtkStateType
-	///	- color: UnsafePointer<GdkColor>?
-	open func modifyFg(state: GtkStateType, color: UnsafePointer<GdkColor>?) {
+	/// - Parameters:
+	///	- state: GtkStateType (GtkStateType)
+	///	- color: UnsafePointer<GdkColor>? (const GdkColor*)
+	open func modifyFg(state: GtkStateType, color: UnsafePointer<GdkColor>?) -> Swift.Void {
 		gtk_widget_modify_fg(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the font to use for a widget.
 	/// All other style values are left untouched.
 	/// See also gtk_widget_modify_style().
-	/// Parameters:
-	///	- fontDesc: OpaquePointer?
-	open func modifyFont(fontDesc: OpaquePointer?) {
+	/// - Parameters:
+	///	- fontDesc: OpaquePointer? (PangoFontDescription*)
+	open func modifyFont(fontDesc: OpaquePointer?) -> Swift.Void {
 		gtk_widget_modify_font(GTK_WIDGET(self.GOBJECT), fontDesc)
 	}
 
-	/// 
 	/// Modifies style values on the widget.
 	/// Modifications made using this technique take precedence over
 	/// style values set via an RC file, however, they will be overridden
@@ -2288,38 +2133,35 @@ open class CGTKWidget : CGTKBase {
 	/// if you first call gtk_widget_modify_style(), subsequent calls
 	/// to such functions gtk_widget_modify_fg() will have a cumulative
 	/// effect with the initial modifications.
-	/// Parameters:
-	///	- style: UnsafeMutablePointer<GtkRcStyle>!
-	open func modifyStyle(_ style: UnsafeMutablePointer<GtkRcStyle>!) {
+	/// - Parameters:
+	///	- style: UnsafeMutablePointer<GtkRcStyle>! (GtkRcStyle*)
+	open func modifyStyle(_ style: UnsafeMutablePointer<GtkRcStyle>!) -> Swift.Void {
 		gtk_widget_modify_style(GTK_WIDGET(self.GOBJECT), style)
 	}
 
-	/// 
 	/// Sets the text color for a widget in a particular state.
 	/// All other style values are left untouched.
 	/// The text color is the foreground color used along with the
 	/// base color (see gtk_widget_modify_base()) for widgets such
 	/// as #GtkEntry and #GtkTextView.
 	/// See also gtk_widget_modify_style().
-	/// Parameters:
-	///	- state: GtkStateType
-	///	- color: UnsafePointer<GdkColor>?
-	open func modifyText(state: GtkStateType, color: UnsafePointer<GdkColor>?) {
+	/// - Parameters:
+	///	- state: GtkStateType (GtkStateType)
+	///	- color: UnsafePointer<GdkColor>? (const GdkColor*)
+	open func modifyText(state: GtkStateType, color: UnsafePointer<GdkColor>?) -> Swift.Void {
 		gtk_widget_modify_text(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the background color to use for a widget.
 	/// All other style values are left untouched.
 	/// See gtk_widget_override_color().
-	/// Parameters:
-	///	- state: GtkStateFlags
-	///	- color: UnsafePointer<GdkRGBA>?
-	open func overrideBackgroundColor(state: GtkStateFlags, color: UnsafePointer<GdkRGBA>?) {
+	/// - Parameters:
+	///	- state: GtkStateFlags (GtkStateFlags)
+	///	- color: UnsafePointer<GdkRGBA>? (const GdkRGBA*)
+	open func overrideBackgroundColor(state: GtkStateFlags, color: UnsafePointer<GdkRGBA>?) -> Swift.Void {
 		gtk_widget_override_background_color(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the color to use for a widget.
 	/// All other style values are left untouched.
 	/// This function does not act recursively. Setting the color of a
@@ -2340,49 +2182,45 @@ open class CGTKWidget : CGTKBase {
 	/// these cases it is better to fully style such widgets through a
 	/// #GtkCssProvider with the %GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 	/// priority.
-	/// Parameters:
-	///	- state: GtkStateFlags
-	///	- color: UnsafePointer<GdkRGBA>?
-	open func overrideColor(state: GtkStateFlags, color: UnsafePointer<GdkRGBA>?) {
+	/// - Parameters:
+	///	- state: GtkStateFlags (GtkStateFlags)
+	///	- color: UnsafePointer<GdkRGBA>? (const GdkRGBA*)
+	open func overrideColor(state: GtkStateFlags, color: UnsafePointer<GdkRGBA>?) -> Swift.Void {
 		gtk_widget_override_color(GTK_WIDGET(self.GOBJECT), state, color)
 	}
 
-	/// 
 	/// Sets the cursor color to use in a widget, overriding the
 	/// cursor-color and secondary-cursor-color
 	/// style properties. All other style values are left untouched.
 	/// See also gtk_widget_modify_style().
 	/// Note that the underlying properties have the #GdkColor type,
 	/// so the alpha value in @primary and @secondary will be ignored.
-	/// Parameters:
-	///	- cursor: UnsafePointer<GdkRGBA>?
-	///	- secondaryCursor: UnsafePointer<GdkRGBA>?
-	open func overrideCursor(_ cursor: UnsafePointer<GdkRGBA>?, secondaryCursor: UnsafePointer<GdkRGBA>?) {
+	/// - Parameters:
+	///	- cursor: UnsafePointer<GdkRGBA>? (const GdkRGBA*)
+	///	- secondaryCursor: UnsafePointer<GdkRGBA>? (const GdkRGBA*)
+	open func overrideCursor(_ cursor: UnsafePointer<GdkRGBA>?, secondaryCursor: UnsafePointer<GdkRGBA>?) -> Swift.Void {
 		gtk_widget_override_cursor(GTK_WIDGET(self.GOBJECT), cursor, secondaryCursor)
 	}
 
-	/// 
 	/// Sets the font to use for a widget. All other style values are
 	/// left untouched. See gtk_widget_override_color().
-	/// Parameters:
-	///	- fontDesc: OpaquePointer?
-	open func overrideFont(fontDesc: OpaquePointer?) {
+	/// - Parameters:
+	///	- fontDesc: OpaquePointer? (const PangoFontDescription*)
+	open func overrideFont(fontDesc: OpaquePointer?) -> Swift.Void {
 		gtk_widget_override_font(GTK_WIDGET(self.GOBJECT), fontDesc)
 	}
 
-	/// 
 	/// Sets a symbolic color for a widget.
 	/// All other style values are left untouched.
 	/// See gtk_widget_override_color() for overriding the foreground
 	/// or background color.
-	/// Parameters:
-	///	- name: String
-	///	- color: UnsafePointer<GdkRGBA>?
-	open func overrideSymbolicColor(name: String, color: UnsafePointer<GdkRGBA>?) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	///	- color: UnsafePointer<GdkRGBA>? (const GdkRGBA*)
+	open func overrideSymbolicColor(name: String, color: UnsafePointer<GdkRGBA>?) -> Swift.Void {
 		gtk_widget_override_symbolic_color(GTK_WIDGET(self.GOBJECT), name, color)
 	}
 
-	/// 
 	/// Obtains the full path to @widget. The path is simply the name of a
 	/// widget and all its parents in the container hierarchy, separated by
 	/// periods. The name of a widget comes from
@@ -2395,42 +2233,38 @@ open class CGTKWidget : CGTKBase {
 	/// file. @path_reversed_p fills in the path in reverse order,
 	/// i.e. starting with @widget’s name instead of starting with the name
 	/// of @widget’s outermost ancestor.
-	/// Parameters:
-	///	- pathLength: UnsafeMutablePointer<UInt32>!
-	///	- path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	open func path(pathLength: UnsafeMutablePointer<UInt32>!, path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- pathLength: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	open func path(pathLength: UnsafeMutablePointer<UInt32>!, path: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, pathReversed: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!) -> Swift.Void {
 		gtk_widget_path(GTK_WIDGET(self.GOBJECT), pathLength, path, pathReversed)
 	}
 
-	/// 
 	/// This function is only for use in widget implementations.
 	/// Flags the widget for a rerun of the GtkWidgetClass::size_allocate
 	/// function. Use this function instead of gtk_widget_queue_resize()
 	/// when the @widget's size request didn't change but it wants to
 	/// reposition its contents.
 	/// An example user of this function is gtk_widget_set_halign().
-	open func queueAllocate() {
+	open func queueAllocate() -> Swift.Void {
 		gtk_widget_queue_allocate(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Mark @widget as needing to recompute its expand flags. Call
 	/// this function when setting legacy expand child properties
 	/// on the child of a container.
 	/// See gtk_widget_compute_expand().
-	open func queueComputeExpand() {
+	open func queueComputeExpand() -> Swift.Void {
 		gtk_widget_queue_compute_expand(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Equivalent to calling gtk_widget_queue_draw_area() for the
 	/// entire area of a widget.
-	open func queueDraw() {
+	open func queueDraw() -> Swift.Void {
 		gtk_widget_queue_draw(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Convenience function that calls gtk_widget_queue_draw_region() on
 	/// the region created from the given coordinates.
 	/// The region here is specified in widget coordinates.
@@ -2440,16 +2274,15 @@ open class CGTKWidget : CGTKBase {
 	/// @widget->allocation.y otherwise.
 	/// @width or @height may be 0, in this case this function does
 	/// nothing. Negative values for @width and @height are not allowed.
-	/// Parameters:
-	///	- x: gint
-	///	- y: gint
-	///	- width: gint
-	///	- height: gint
-	open func queueDrawArea(x: gint, y: gint, width: gint, height: gint) {
+	/// - Parameters:
+	///	- x: gint (gint)
+	///	- y: gint (gint)
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func queueDrawArea(x: gint, y: gint, width: gint, height: gint) -> Swift.Void {
 		gtk_widget_queue_draw_area(GTK_WIDGET(self.GOBJECT), x, y, width, height)
 	}
 
-	/// 
 	/// Invalidates the area of @widget defined by @region by calling
 	/// gdk_window_invalidate_region() on the widget’s window and all its
 	/// child windows. Once the main loop becomes idle (after the current
@@ -2459,13 +2292,12 @@ open class CGTKWidget : CGTKBase {
 	/// Normally you would only use this function in widget
 	/// implementations. You might also use it to schedule a redraw of a
 	/// #GtkDrawingArea or some portion thereof.
-	/// Parameters:
-	///	- region: OpaquePointer!
-	open func queueDrawRegion(_ region: OpaquePointer!) {
+	/// - Parameters:
+	///	- region: OpaquePointer! (const cairo_region_t*)
+	open func queueDrawRegion(_ region: OpaquePointer!) -> Swift.Void {
 		gtk_widget_queue_draw_region(GTK_WIDGET(self.GOBJECT), region)
 	}
 
-	/// 
 	/// This function is only for use in widget implementations.
 	/// Flags a widget to have its size renegotiated; should
 	/// be called when a widget for some reason has a new size request.
@@ -2475,18 +2307,16 @@ open class CGTKWidget : CGTKBase {
 	/// from inside its implementation of the GtkWidgetClass::size_allocate
 	/// virtual method. Calls to gtk_widget_queue_resize() from inside
 	/// GtkWidgetClass::size_allocate will be silently ignored.
-	open func queueResize() {
+	open func queueResize() -> Swift.Void {
 		gtk_widget_queue_resize(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function works like gtk_widget_queue_resize(),
 	/// except that the widget is not invalidated.
-	open func queueResizeNoRedraw() {
+	open func queueResizeNoRedraw() -> Swift.Void {
 		gtk_widget_queue_resize_no_redraw(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Creates the GDK (windowing system) resources associated with a
 	/// widget.  For example, @widget->window will be created when a widget
 	/// is realized.  Normally realization happens implicitly; if you show
@@ -2503,22 +2333,20 @@ open class CGTKWidget : CGTKBase {
 	/// called after the widget is realized automatically, such as
 	/// #GtkWidget::draw. Or simply g_signal_connect () to the
 	/// #GtkWidget::realize signal.
-	open func realize() {
+	open func realize() -> Swift.Void {
 		gtk_widget_realize(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Computes the intersection of a @widget’s area and @region, returning
 	/// the intersection. The result may be empty, use cairo_region_is_empty() to
 	/// check.
-	/// Parameters:
-	///	- region: OpaquePointer!
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- region: OpaquePointer! (const cairo_region_t*)
+	/// - Returns: OpaquePointer (cairo_region_t*)
 	open func regionIntersect(region: OpaquePointer!) -> OpaquePointer {
 		return gtk_widget_region_intersect(GTK_WIDGET(self.GOBJECT), region)
 	}
 
-	/// 
 	/// Registers a #GdkWindow with the widget and sets it up so that
 	/// the widget receives events for it. Call gtk_widget_unregister_window()
 	/// when destroying the window.
@@ -2526,45 +2354,41 @@ open class CGTKWidget : CGTKBase {
 	/// this up. This is now deprecated and you should use gtk_widget_register_window()
 	/// instead. Old code will keep working as is, although some new features like
 	/// transparency might not work perfectly.
-	/// Parameters:
-	///	- window: OpaquePointer!
-	open func registerWindow(_ window: OpaquePointer!) {
+	/// - Parameters:
+	///	- window: OpaquePointer! (GdkWindow*)
+	open func registerWindow(_ window: OpaquePointer!) -> Swift.Void {
 		gtk_widget_register_window(GTK_WIDGET(self.GOBJECT), window)
 	}
 
-	/// 
 	/// Removes an accelerator from @widget, previously installed with
 	/// gtk_widget_add_accelerator().
-	/// Parameters:
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>!
-	///	- accelKey: guint
-	///	- accelMods: GdkModifierType
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
+	///	- accelKey: guint (guint)
+	///	- accelMods: GdkModifierType (GdkModifierType)
+	/// - Returns: Bool (gboolean)
 	open func removeAccelerator(accelGroup: UnsafeMutablePointer<GtkAccelGroup>!, accelKey: guint, accelMods: GdkModifierType) -> Bool {
 		return gtk_widget_remove_accelerator(GTK_WIDGET(self.GOBJECT), accelGroup, accelKey, accelMods) != 0 ? true : false
 	}
 
-	/// 
 	/// Removes a widget from the list of mnemonic labels for
 	/// this widget. (See gtk_widget_list_mnemonic_labels()). The widget
 	/// must have previously been added to the list with
 	/// gtk_widget_add_mnemonic_label().
-	/// Parameters:
-	///	- label: CGTKWidget
-	open func removeMnemonicLabel(_ label: CGTKWidget) {
+	/// - Parameters:
+	///	- label: CGTKWidget (GtkWidget*)
+	open func removeMnemonicLabel(_ label: CGTKWidget) -> Swift.Void {
 		gtk_widget_remove_mnemonic_label(GTK_WIDGET(self.GOBJECT), label.WIDGET)
 	}
 
-	/// 
 	/// Removes a tick callback previously registered with
 	/// gtk_widget_add_tick_callback().
-	/// Parameters:
-	///	- id: guint
-	open func removeTickCallback(id: guint) {
+	/// - Parameters:
+	///	- id: guint (guint)
+	open func removeTickCallback(id: guint) -> Swift.Void {
 		gtk_widget_remove_tick_callback(GTK_WIDGET(self.GOBJECT), id)
 	}
 
-	/// 
 	/// A convenience function that uses the theme settings for @widget
 	/// to look up @stock_id and render it to a pixbuf. @stock_id should
 	/// be a stock icon ID such as #GTK_STOCK_OPEN or #GTK_STOCK_OK. @size
@@ -2575,16 +2399,15 @@ open class CGTKWidget : CGTKBase {
 	/// The pixels in the returned #GdkPixbuf are shared with the rest of
 	/// the application and should not be modified. The pixbuf should be
 	/// freed after use with g_object_unref().
-	/// Parameters:
-	///	- stockId: String
-	///	- size: GtkIconSize
-	///	- detail: String
-	/// - Returns: OpaquePointer?
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	///	- detail: String (const gchar*)
+	/// - Returns: OpaquePointer? (GdkPixbuf*)
 	open func renderIcon(stockId: String, size: GtkIconSize, detail: String) -> OpaquePointer? {
 		return gtk_widget_render_icon(GTK_WIDGET(self.GOBJECT), stockId, size, detail)
 	}
 
-	/// 
 	/// A convenience function that uses the theme engine and style
 	/// settings for @widget to look up @stock_id and render it to
 	/// a pixbuf. @stock_id should be a stock icon ID such as
@@ -2593,42 +2416,38 @@ open class CGTKWidget : CGTKBase {
 	/// The pixels in the returned #GdkPixbuf are shared with the rest of
 	/// the application and should not be modified. The pixbuf should be freed
 	/// after use with g_object_unref().
-	/// Parameters:
-	///	- stockId: String
-	///	- size: GtkIconSize
-	/// - Returns: OpaquePointer?
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	/// - Returns: OpaquePointer? (GdkPixbuf*)
 	open func renderIconPixbuf(stockId: String, size: GtkIconSize) -> OpaquePointer? {
 		return gtk_widget_render_icon_pixbuf(GTK_WIDGET(self.GOBJECT), stockId, size)
 	}
 
-	/// 
 	/// Moves a widget from one #GtkContainer to another, handling reference
 	/// count issues to avoid destroying the widget.
-	/// Parameters:
-	///	- newParent: CGTKWidget
-	open func reparent(newParent: CGTKWidget) {
+	/// - Parameters:
+	///	- newParent: CGTKWidget (GtkWidget*)
+	open func reparent(newParent: CGTKWidget) -> Swift.Void {
 		gtk_widget_reparent(GTK_WIDGET(self.GOBJECT), newParent.WIDGET)
 	}
 
-	/// 
 	/// Reset the styles of @widget and all descendents, so when
 	/// they are looked up again, they get the correct values
 	/// for the currently loaded RC file settings.
 	/// This function is not useful for applications.
-	open func resetRcStyles() {
+	open func resetRcStyles() -> Swift.Void {
 		gtk_widget_reset_rc_styles(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Updates the style context of @widget and all descendants
 	/// by updating its widget path. #GtkContainers may want
 	/// to use this on a child when reordering it in a way that a different
 	/// style might apply to it. See also gtk_container_get_path_for_child().
-	open func resetStyle() {
+	open func resetStyle() -> Swift.Void {
 		gtk_widget_reset_style(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Very rarely-used function. This function is used to emit
 	/// an expose event on a widget. This function is not normally used
 	/// directly. The only time it is used is when propagating an expose
@@ -2638,14 +2457,13 @@ open class CGTKWidget : CGTKBase {
 	/// use gdk_window_invalidate_rect() or gdk_window_invalidate_region().
 	/// To cause the redraw to be done immediately, follow that call
 	/// with a call to gdk_window_process_updates().
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: gint
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: gint (gint)
 	open func sendExpose(event: UnsafeMutablePointer<GdkEvent>!) -> gint {
 		return gtk_widget_send_expose(GTK_WIDGET(self.GOBJECT), event)
 	}
 
-	/// 
 	/// Sends the focus change @event to @widget
 	/// This function is not meant to be used by applications. The only time it
 	/// should be used is when it is necessary for a #GtkWidget to assign focus
@@ -2663,14 +2481,13 @@ open class CGTKWidget : CGTKBase {
 	/// gtk_widget_send_focus_change (widget, fevent);
 	/// gdk_event_free (event);
 	/// ]|
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: Bool (gboolean)
 	open func sendFocusChange(event: UnsafeMutablePointer<GdkEvent>!) -> Bool {
 		return gtk_widget_send_focus_change(GTK_WIDGET(self.GOBJECT), event) != 0 ? true : false
 	}
 
-	/// 
 	/// Given an accelerator group, @accel_group, and an accelerator path,
 	/// @accel_path, sets up an accelerator in @accel_group so whenever the
 	/// key binding that is defined for @accel_path is pressed, @widget
@@ -2689,14 +2506,13 @@ open class CGTKWidget : CGTKBase {
 	/// Note that @accel_path string will be stored in a #GQuark. Therefore, if you
 	/// pass a static string, you can save some memory by interning it first with
 	/// g_intern_static_string().
-	/// Parameters:
-	///	- accelPath: String
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>?
-	open func setAccelPath(_ accelPath: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) {
+	/// - Parameters:
+	///	- accelPath: String (const gchar*)
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>? (GtkAccelGroup*)
+	open func setAccelPath(_ accelPath: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) -> Swift.Void {
 		gtk_widget_set_accel_path(GTK_WIDGET(self.GOBJECT), accelPath, accelGroup)
 	}
 
-	/// 
 	/// Sets the widget’s allocation.  This should not be used
 	/// directly, but from within a widget’s size_allocate method.
 	/// The allocation set should be the “adjusted” or actual
@@ -2705,13 +2521,12 @@ open class CGTKWidget : CGTKBase {
 	/// The GtkWidgetClass::adjust_size_allocation virtual method adjusts the
 	/// allocation inside gtk_widget_size_allocate() to create an adjusted
 	/// allocation.
-	/// Parameters:
-	///	- allocation: UnsafePointer<GtkAllocation>!
-	open func setAllocation(_ allocation: UnsafePointer<GtkAllocation>!) {
+	/// - Parameters:
+	///	- allocation: UnsafePointer<GtkAllocation>! (const GtkAllocation*)
+	open func setAllocation(_ allocation: UnsafePointer<GtkAllocation>!) -> Swift.Void {
 		gtk_widget_set_allocation(GTK_WIDGET(self.GOBJECT), allocation)
 	}
 
-	/// 
 	/// Sets whether the application intends to draw on the widget in
 	/// an #GtkWidget::draw handler.
 	/// This is a hint to the widget and does not affect the behavior of
@@ -2721,33 +2536,30 @@ open class CGTKWidget : CGTKBase {
 	/// background. (Children of the widget will still be drawn.) The application
 	/// is then entirely responsible for drawing the widget background.
 	/// Note that the background is still drawn when the widget is mapped.
-	/// Parameters:
-	///	- appPaintable: Bool
-	open func setAppPaintable(_ appPaintable: Bool) {
+	/// - Parameters:
+	///	- appPaintable: Bool (gboolean)
+	open func setAppPaintable(_ appPaintable: Bool) -> Swift.Void {
 		gtk_widget_set_app_paintable(GTK_WIDGET(self.GOBJECT), appPaintable ? 1 : 0)
 	}
 
-	/// 
 	/// Specifies whether @widget can be a default widget. See
 	/// gtk_widget_grab_default() for details about the meaning of
 	/// “default”.
-	/// Parameters:
-	///	- canDefault: Bool
-	open func setCanDefault(_ canDefault: Bool) {
+	/// - Parameters:
+	///	- canDefault: Bool (gboolean)
+	open func setCanDefault(_ canDefault: Bool) -> Swift.Void {
 		gtk_widget_set_can_default(GTK_WIDGET(self.GOBJECT), canDefault ? 1 : 0)
 	}
 
-	/// 
 	/// Specifies whether @widget can own the input focus. See
 	/// gtk_widget_grab_focus() for actually setting the input focus on a
 	/// widget.
-	/// Parameters:
-	///	- canFocus: Bool
-	open func setCanFocus(_ canFocus: Bool) {
+	/// - Parameters:
+	///	- canFocus: Bool (gboolean)
+	open func setCanFocus(_ canFocus: Bool) -> Swift.Void {
 		gtk_widget_set_can_focus(GTK_WIDGET(self.GOBJECT), canFocus ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether @widget should be mapped along with its when its parent
 	/// is mapped and @widget has been shown with gtk_widget_show().
 	/// The child visibility can be set for widget before it is added to
@@ -2762,13 +2574,12 @@ open class CGTKWidget : CGTKBase {
 	/// can queue a resize itself.
 	/// This function is only useful for container implementations and
 	/// never should be called by an application.
-	/// Parameters:
-	///	- isVisible: Bool
-	open func setChildVisible(isVisible: Bool) {
+	/// - Parameters:
+	///	- isVisible: Bool (gboolean)
+	open func setChildVisible(isVisible: Bool) -> Swift.Void {
 		gtk_widget_set_child_visible(GTK_WIDGET(self.GOBJECT), isVisible ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the widget’s clip.  This must not be used directly,
 	/// but from within a widget’s size_allocate method.
 	/// It must be called after gtk_widget_set_allocation() (or after chaining up
@@ -2777,35 +2588,32 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkContainer, the area must contain all children's clips.
 	/// If this function is not called by @widget during a ::size-allocate handler,
 	/// the clip will be set to @widget's allocation.
-	/// Parameters:
-	///	- clip: UnsafePointer<GtkAllocation>!
-	open func setClip(_ clip: UnsafePointer<GtkAllocation>!) {
+	/// - Parameters:
+	///	- clip: UnsafePointer<GtkAllocation>! (const GtkAllocation*)
+	open func setClip(_ clip: UnsafePointer<GtkAllocation>!) -> Swift.Void {
 		gtk_widget_set_clip(GTK_WIDGET(self.GOBJECT), clip)
 	}
 
-	/// 
 	/// Sets a widgets composite name. The widget must be
 	/// a composite child of its parent; see gtk_widget_push_composite_child().
-	/// Parameters:
-	///	- name: String
-	open func setCompositeName(_ name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func setCompositeName(_ name: String) -> Swift.Void {
 		gtk_widget_set_composite_name(GTK_WIDGET(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Enables or disables a #GdkDevice to interact with @widget
 	/// and all its children.
 	/// It does so by descending through the #GdkWindow hierarchy
 	/// and enabling the same mask that is has for core events
 	/// (i.e. the one that gdk_window_get_events() returns).
-	/// Parameters:
-	///	- device: OpaquePointer!
-	///	- enabled: Bool
-	open func setDeviceEnabled(device: OpaquePointer!, enabled: Bool) {
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	///	- enabled: Bool (gboolean)
+	open func setDeviceEnabled(device: OpaquePointer!, enabled: Bool) -> Swift.Void {
 		gtk_widget_set_device_enabled(GTK_WIDGET(self.GOBJECT), device, enabled ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the device event mask (see #GdkEventMask) for a widget. The event
 	/// mask determines which events a widget will receive from @device. Keep
 	/// in mind that different widgets have different default event masks, and by
@@ -2817,14 +2625,13 @@ open class CGTKWidget : CGTKBase {
 	/// %FALSE from gtk_widget_get_has_window());
 	/// to get events on those widgets, place them inside a #GtkEventBox
 	/// and receive events on the event box.
-	/// Parameters:
-	///	- device: OpaquePointer!
-	///	- events: GdkEventMask
-	open func setDeviceEvents(device: OpaquePointer!, events: GdkEventMask) {
+	/// - Parameters:
+	///	- device: OpaquePointer! (GdkDevice*)
+	///	- events: GdkEventMask (GdkEventMask)
+	open func setDeviceEvents(device: OpaquePointer!, events: GdkEventMask) -> Swift.Void {
 		gtk_widget_set_device_events(GTK_WIDGET(self.GOBJECT), device, events)
 	}
 
-	/// 
 	/// Sets the reading direction on a particular widget. This direction
 	/// controls the primary direction for widgets containing text,
 	/// and also the direction in which the children of a container are
@@ -2836,13 +2643,12 @@ open class CGTKWidget : CGTKBase {
 	/// visual rather than logical (such as buttons for text justification).
 	/// If the direction is set to %GTK_TEXT_DIR_NONE, then the value
 	/// set by gtk_widget_set_default_direction() will be used.
-	/// Parameters:
-	///	- dir: GtkTextDirection
-	open func setDirection(dir: GtkTextDirection) {
+	/// - Parameters:
+	///	- dir: GtkTextDirection (GtkTextDirection)
+	open func setDirection(dir: GtkTextDirection) -> Swift.Void {
 		gtk_widget_set_direction(GTK_WIDGET(self.GOBJECT), dir)
 	}
 
-	/// 
 	/// Widgets are double buffered by default; you can use this function
 	/// to turn off the buffering. “Double buffered” simply means that
 	/// gdk_window_begin_draw_frame() and gdk_window_end_draw_frame() are called
@@ -2865,13 +2671,12 @@ open class CGTKWidget : CGTKBase {
 	/// will cause a separate rendering pass for every widget. This will likely
 	/// cause rendering problems - in particular related to stacking - and usually
 	/// increases rendering times significantly.
-	/// Parameters:
-	///	- doubleBuffered: Bool
-	open func setDoubleBuffered(_ doubleBuffered: Bool) {
+	/// - Parameters:
+	///	- doubleBuffered: Bool (gboolean)
+	open func setDoubleBuffered(_ doubleBuffered: Bool) -> Swift.Void {
 		gtk_widget_set_double_buffered(GTK_WIDGET(self.GOBJECT), doubleBuffered ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the event mask (see #GdkEventMask) for a widget. The event
 	/// mask determines which events a widget will receive. Keep in mind
 	/// that different widgets have different default event masks, and by
@@ -2883,60 +2688,54 @@ open class CGTKWidget : CGTKBase {
 	/// (See gtk_widget_get_has_window()).  To get events on those widgets,
 	/// place them inside a #GtkEventBox and receive events on the event
 	/// box.
-	/// Parameters:
-	///	- events: gint
-	open func setEvents(_ events: gint) {
+	/// - Parameters:
+	///	- events: gint (gint)
+	open func setEvents(_ events: gint) -> Swift.Void {
 		gtk_widget_set_events(GTK_WIDGET(self.GOBJECT), events)
 	}
 
-	/// 
 	/// Sets whether the widget should grab focus when it is clicked with the mouse.
 	/// Making mouse clicks not grab focus is useful in places like toolbars where
 	/// you don’t want the keyboard focus removed from the main area of the
 	/// application.
-	/// Parameters:
-	///	- focusOnClick: Bool
-	open func setFocusOnClick(_ focusOnClick: Bool) {
+	/// - Parameters:
+	///	- focusOnClick: Bool (gboolean)
+	open func setFocusOnClick(_ focusOnClick: Bool) -> Swift.Void {
 		gtk_widget_set_focus_on_click(GTK_WIDGET(self.GOBJECT), focusOnClick ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the font map to use for Pango rendering. When not set, the widget
 	/// will inherit the font map from its parent.
-	/// Parameters:
-	///	- fontMap: OpaquePointer?
-	open func setFontMap(_ fontMap: OpaquePointer?) {
+	/// - Parameters:
+	///	- fontMap: OpaquePointer? (PangoFontMap*)
+	open func setFontMap(_ fontMap: OpaquePointer?) -> Swift.Void {
 		gtk_widget_set_font_map(GTK_WIDGET(self.GOBJECT), fontMap)
 	}
 
-	/// 
 	/// Sets the #cairo_font_options_t used for Pango rendering in this widget.
 	/// When not set, the default font options for the #GdkScreen will be used.
-	/// Parameters:
-	///	- options: OpaquePointer?
-	open func setFontOptions(_ options: OpaquePointer?) {
+	/// - Parameters:
+	///	- options: OpaquePointer? (const cairo_font_options_t*)
+	open func setFontOptions(_ options: OpaquePointer?) -> Swift.Void {
 		gtk_widget_set_font_options(GTK_WIDGET(self.GOBJECT), options)
 	}
 
-	/// 
 	/// Sets the horizontal alignment of @widget.
 	/// See the #GtkWidget:halign property.
-	/// Parameters:
-	///	- align: GtkAlign
-	open func setHalign(align: GtkAlign) {
+	/// - Parameters:
+	///	- align: GtkAlign (GtkAlign)
+	open func setHalign(align: GtkAlign) -> Swift.Void {
 		gtk_widget_set_halign(GTK_WIDGET(self.GOBJECT), align)
 	}
 
-	/// 
 	/// Sets the has-tooltip property on @widget to @has_tooltip.  See
 	/// #GtkWidget:has-tooltip for more information.
-	/// Parameters:
-	///	- hasTooltip: Bool
-	open func setHasTooltip(_ hasTooltip: Bool) {
+	/// - Parameters:
+	///	- hasTooltip: Bool (gboolean)
+	open func setHasTooltip(_ hasTooltip: Bool) -> Swift.Void {
 		gtk_widget_set_has_tooltip(GTK_WIDGET(self.GOBJECT), hasTooltip ? 1 : 0)
 	}
 
-	/// 
 	/// Specifies whether @widget has a #GdkWindow of its own. Note that
 	/// all realized widgets have a non-%NULL “window” pointer
 	/// (gtk_widget_get_window() never returns a %NULL window when a widget
@@ -2946,13 +2745,12 @@ open class CGTKWidget : CGTKBase {
 	/// calling this function with @has_window = %FALSE.
 	/// This function should only be called by widget implementations,
 	/// and they should call it in their init() function.
-	/// Parameters:
-	///	- hasWindow: Bool
-	open func setHasWindow(_ hasWindow: Bool) {
+	/// - Parameters:
+	///	- hasWindow: Bool (gboolean)
+	open func setHasWindow(_ hasWindow: Bool) -> Swift.Void {
 		gtk_widget_set_has_window(GTK_WIDGET(self.GOBJECT), hasWindow ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the widget would like any available extra horizontal
 	/// space. When a user resizes a #GtkWindow, widgets with expand=TRUE
 	/// generally receive the extra space. For example, a list or
@@ -2974,13 +2772,12 @@ open class CGTKWidget : CGTKBase {
 	/// gtk_widget_set_hexpand() sets the hexpand-set property (see
 	/// gtk_widget_set_hexpand_set()) which causes the widget’s hexpand
 	/// value to be used, rather than looking at children and widget state.
-	/// Parameters:
-	///	- expand: Bool
-	open func setHexpand(expand: Bool) {
+	/// - Parameters:
+	///	- expand: Bool (gboolean)
+	open func setHexpand(expand: Bool) -> Swift.Void {
 		gtk_widget_set_hexpand(GTK_WIDGET(self.GOBJECT), expand ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the hexpand flag (see gtk_widget_get_hexpand()) will
 	/// be used.
 	/// The hexpand-set property will be set automatically when you call
@@ -2993,77 +2790,69 @@ open class CGTKWidget : CGTKBase {
 	/// children of the widget would like to expand.
 	/// There are few reasons to use this function, but it’s here
 	/// for completeness and consistency.
-	/// Parameters:
-	///	- set: Bool
-	open func setHexpandSet(_ set: Bool) {
+	/// - Parameters:
+	///	- set: Bool (gboolean)
+	open func setHexpandSet(_ set: Bool) -> Swift.Void {
 		gtk_widget_set_hexpand_set(GTK_WIDGET(self.GOBJECT), set ? 1 : 0)
 	}
 
-	/// 
 	/// Marks the widget as being mapped.
 	/// This function should only ever be called in a derived widget's
 	/// “map” or “unmap” implementation.
-	/// Parameters:
-	///	- mapped: Bool
-	open func setMapped(_ mapped: Bool) {
+	/// - Parameters:
+	///	- mapped: Bool (gboolean)
+	open func setMapped(_ mapped: Bool) -> Swift.Void {
 		gtk_widget_set_mapped(GTK_WIDGET(self.GOBJECT), mapped ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the bottom margin of @widget.
 	/// See the #GtkWidget:margin-bottom property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginBottom(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginBottom(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_bottom(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Sets the end margin of @widget.
 	/// See the #GtkWidget:margin-end property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginEnd(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginEnd(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_end(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Sets the left margin of @widget.
 	/// See the #GtkWidget:margin-left property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginLeft(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginLeft(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_left(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Sets the right margin of @widget.
 	/// See the #GtkWidget:margin-right property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginRight(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginRight(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_right(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Sets the start margin of @widget.
 	/// See the #GtkWidget:margin-start property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginStart(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginStart(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_start(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Sets the top margin of @widget.
 	/// See the #GtkWidget:margin-top property.
-	/// Parameters:
-	///	- margin: gint
-	open func setMarginTop(margin: gint) {
+	/// - Parameters:
+	///	- margin: gint (gint)
+	open func setMarginTop(margin: gint) -> Swift.Void {
 		gtk_widget_set_margin_top(GTK_WIDGET(self.GOBJECT), margin)
 	}
 
-	/// 
 	/// Widgets can be named, which allows you to refer to them from a
 	/// CSS file. You can apply a style to widgets with a particular name
 	/// in the CSS file. See the documentation for the CSS syntax (on the
@@ -3072,24 +2861,22 @@ open class CGTKWidget : CGTKBase {
 	/// and represent elements in a selector (period, #, >, *...), so using
 	/// these will make your widget impossible to match by name. Any combination
 	/// of alphanumeric symbols, dashes and underscores will suffice.
-	/// Parameters:
-	///	- name: String
-	open func setName(_ name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func setName(_ name: String) -> Swift.Void {
 		gtk_widget_set_name(GTK_WIDGET(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Sets the #GtkWidget:no-show-all property, which determines whether
 	/// calls to gtk_widget_show_all() will affect this widget.
 	/// This is mostly for use in constructing widget hierarchies with externally
 	/// controlled visibility, see #GtkUIManager.
-	/// Parameters:
-	///	- noShowAll: Bool
-	open func setNoShowAll(_ noShowAll: Bool) {
+	/// - Parameters:
+	///	- noShowAll: Bool (gboolean)
+	open func setNoShowAll(_ noShowAll: Bool) -> Swift.Void {
 		gtk_widget_set_no_show_all(GTK_WIDGET(self.GOBJECT), noShowAll ? 1 : 0)
 	}
 
-	/// 
 	/// Request the @widget to be rendered partially transparent,
 	/// with opacity 0 being fully transparent and 1 fully opaque. (Opacity values
 	/// are clamped to the [0,1] range.).
@@ -3102,63 +2889,58 @@ open class CGTKWidget : CGTKBase {
 	/// shown causes it to flicker once on Windows.
 	/// For child widgets it doesn’t work if any affected widget has a native window, or
 	/// disables double buffering.
-	/// Parameters:
-	///	- opacity: Double
-	open func setOpacity(_ opacity: Double) {
+	/// - Parameters:
+	///	- opacity: Double (double)
+	open func setOpacity(_ opacity: Double) -> Swift.Void {
 		gtk_widget_set_opacity(GTK_WIDGET(self.GOBJECT), opacity)
 	}
 
-	/// 
 	/// This function is useful only when implementing subclasses of
 	/// #GtkContainer.
 	/// Sets the container as the parent of @widget, and takes care of
 	/// some details such as updating the state and style of the child
 	/// to reflect its new location. The opposite function is
 	/// gtk_widget_unparent().
-	/// Parameters:
-	///	- parent: CGTKWidget
-	open func setParent(_ parent: CGTKWidget) {
+	/// - Parameters:
+	///	- parent: CGTKWidget (GtkWidget*)
+	open func setParent(_ parent: CGTKWidget) -> Swift.Void {
 		gtk_widget_set_parent(GTK_WIDGET(self.GOBJECT), parent.WIDGET)
 	}
 
-	/// 
 	/// Sets a non default parent window for @widget.
 	/// For #GtkWindow classes, setting a @parent_window effects whether
 	/// the window is a toplevel window or can be embedded into other
 	/// widgets.
 	/// For #GtkWindow classes, this needs to be called before the
 	/// window is realized.
-	/// Parameters:
-	///	- parentWindow: OpaquePointer!
-	open func setParentWindow(_ parentWindow: OpaquePointer!) {
+	/// - Parameters:
+	///	- parentWindow: OpaquePointer! (GdkWindow*)
+	open func setParentWindow(_ parentWindow: OpaquePointer!) -> Swift.Void {
 		gtk_widget_set_parent_window(GTK_WIDGET(self.GOBJECT), parentWindow)
 	}
 
-	/// 
 	/// Marks the widget as being realized. This function must only be
 	/// called after all #GdkWindows for the @widget have been created
 	/// and registered.
 	/// This function should only ever be called in a derived widget's
 	/// “realize” or “unrealize” implementation.
-	/// Parameters:
-	///	- realized: Bool
-	open func setRealized(_ realized: Bool) {
+	/// - Parameters:
+	///	- realized: Bool (gboolean)
+	open func setRealized(_ realized: Bool) -> Swift.Void {
 		gtk_widget_set_realized(GTK_WIDGET(self.GOBJECT), realized ? 1 : 0)
 	}
 
-	/// 
 	/// Specifies whether @widget will be treated as the default widget
 	/// within its toplevel when it has the focus, even if another widget
 	/// is the default.
 	/// See gtk_widget_grab_default() for details about the meaning of
 	/// “default”.
-	/// Parameters:
-	///	- receivesDefault: Bool
-	open func setReceivesDefault(_ receivesDefault: Bool) {
+	/// - Parameters:
+	///	- receivesDefault: Bool (gboolean)
+	open func setReceivesDefault(_ receivesDefault: Bool) -> Swift.Void {
 		gtk_widget_set_receives_default(GTK_WIDGET(self.GOBJECT), receivesDefault ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the entire widget is queued for drawing when its size
 	/// allocation changes. By default, this setting is %TRUE and
 	/// the entire widget is redrawn on every size change. If your widget
@@ -3173,24 +2955,22 @@ open class CGTKWidget : CGTKBase {
 	/// responsible for invalidating both the old and new allocation of the
 	/// widget when the widget is moved and responsible for invalidating
 	/// regions newly when the widget increases size.
-	/// Parameters:
-	///	- redrawOnAllocate: Bool
-	open func setRedrawOnAllocate(_ redrawOnAllocate: Bool) {
+	/// - Parameters:
+	///	- redrawOnAllocate: Bool (gboolean)
+	open func setRedrawOnAllocate(_ redrawOnAllocate: Bool) -> Swift.Void {
 		gtk_widget_set_redraw_on_allocate(GTK_WIDGET(self.GOBJECT), redrawOnAllocate ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the sensitivity of a widget. A widget is sensitive if the user
 	/// can interact with it. Insensitive widgets are “grayed out” and the
 	/// user can’t interact with them. Insensitive widgets are known as
 	/// “inactive”, “disabled”, or “ghosted” in some other toolkits.
-	/// Parameters:
-	///	- sensitive: Bool
-	open func setSensitive(_ sensitive: Bool) {
+	/// - Parameters:
+	///	- sensitive: Bool (gboolean)
+	open func setSensitive(_ sensitive: Bool) -> Swift.Void {
 		gtk_widget_set_sensitive(GTK_WIDGET(self.GOBJECT), sensitive ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the minimum size of a widget; that is, the widget’s size
 	/// request will be at least @width by @height. You can use this
 	/// function to force a widget to be larger than it normally would be.
@@ -3216,24 +2996,22 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkWidget properties margin-left, margin-right, margin-top, and
 	/// margin-bottom, but it does include pretty much all other padding
 	/// or border properties set by any subclass of #GtkWidget.
-	/// Parameters:
-	///	- width: gint
-	///	- height: gint
-	open func setSizeRequest(width: gint, height: gint) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func setSizeRequest(width: gint, height: gint) -> Swift.Void {
 		gtk_widget_set_size_request(GTK_WIDGET(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// This function is for use in widget implementations. Sets the state
 	/// of a widget (insensitive, prelighted, etc.) Usually you should set
 	/// the state using wrapper functions such as gtk_widget_set_sensitive().
-	/// Parameters:
-	///	- state: GtkStateType
-	open func setState(_ state: GtkStateType) {
+	/// - Parameters:
+	///	- state: GtkStateType (GtkStateType)
+	open func setState(_ state: GtkStateType) -> Swift.Void {
 		gtk_widget_set_state(GTK_WIDGET(self.GOBJECT), state)
 	}
 
-	/// 
 	/// This function is for use in widget implementations. Turns on flag
 	/// values in the current widget state (insensitive, prelighted, etc.).
 	/// This function accepts the values %GTK_STATE_FLAG_DIR_LTR and
@@ -3245,125 +3023,114 @@ open class CGTKWidget : CGTKBase {
 	/// down to all #GtkContainer children by different means than turning on the
 	/// state flag down the hierarchy, both gtk_widget_get_state_flags() and
 	/// gtk_widget_is_sensitive() will make use of these.
-	/// Parameters:
-	///	- flags: GtkStateFlags
-	///	- clear: Bool
-	open func setStateFlags(_ flags: GtkStateFlags, clear: Bool) {
+	/// - Parameters:
+	///	- flags: GtkStateFlags (GtkStateFlags)
+	///	- clear: Bool (gboolean)
+	open func setStateFlags(_ flags: GtkStateFlags, clear: Bool) -> Swift.Void {
 		gtk_widget_set_state_flags(GTK_WIDGET(self.GOBJECT), flags, clear ? 1 : 0)
 	}
 
-	/// 
 	/// Used to set the #GtkStyle for a widget (@widget->style). Since
 	/// GTK 3, this function does nothing, the passed in style is ignored.
-	/// Parameters:
-	///	- style: UnsafeMutablePointer<GtkStyle>?
-	open func setStyle(_ style: UnsafeMutablePointer<GtkStyle>?) {
+	/// - Parameters:
+	///	- style: UnsafeMutablePointer<GtkStyle>? (GtkStyle*)
+	open func setStyle(_ style: UnsafeMutablePointer<GtkStyle>?) -> Swift.Void {
 		gtk_widget_set_style(GTK_WIDGET(self.GOBJECT), style)
 	}
 
-	/// 
 	/// Enables or disables multiple pointer awareness. If this setting is %TRUE,
 	/// @widget will start receiving multiple, per device enter/leave events. Note
 	/// that if custom #GdkWindows are created in #GtkWidget::realize,
 	/// gdk_window_set_support_multidevice() will have to be called manually on them.
-	/// Parameters:
-	///	- supportMultidevice: Bool
-	open func setSupportMultidevice(_ supportMultidevice: Bool) {
+	/// - Parameters:
+	///	- supportMultidevice: Bool (gboolean)
+	open func setSupportMultidevice(_ supportMultidevice: Bool) -> Swift.Void {
 		gtk_widget_set_support_multidevice(GTK_WIDGET(self.GOBJECT), supportMultidevice ? 1 : 0)
 	}
 
-	/// 
 	/// Sets @markup as the contents of the tooltip, which is marked up with
 	/// the [Pango text markup language][PangoMarkupFormat].
 	/// This function will take care of setting #GtkWidget:has-tooltip to %TRUE
 	/// and of the default handler for the #GtkWidget::query-tooltip signal.
 	/// See also the #GtkWidget:tooltip-markup property and
 	/// gtk_tooltip_set_markup().
-	/// Parameters:
-	///	- markup: String
-	open func setTooltipMarkup(_ markup: String) {
+	/// - Parameters:
+	///	- markup: String (const gchar*)
+	open func setTooltipMarkup(_ markup: String) -> Swift.Void {
 		gtk_widget_set_tooltip_markup(GTK_WIDGET(self.GOBJECT), markup)
 	}
 
-	/// 
 	/// Sets @text as the contents of the tooltip. This function will take
 	/// care of setting #GtkWidget:has-tooltip to %TRUE and of the default
 	/// handler for the #GtkWidget::query-tooltip signal.
 	/// See also the #GtkWidget:tooltip-text property and gtk_tooltip_set_text().
-	/// Parameters:
-	///	- text: String
-	open func setTooltipText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func setTooltipText(_ text: String) -> Swift.Void {
 		gtk_widget_set_tooltip_text(GTK_WIDGET(self.GOBJECT), text)
 	}
 
-	/// 
 	/// Replaces the default window used for displaying
 	/// tooltips with @custom_window. GTK+ will take care of showing and
 	/// hiding @custom_window at the right moment, to behave likewise as
 	/// the default tooltip window. If @custom_window is %NULL, the default
 	/// tooltip window will be used.
-	/// Parameters:
-	///	- customWindow: CGTKWindow
-	open func setTooltipWindow(customWindow: CGTKWindow) {
+	/// - Parameters:
+	///	- customWindow: CGTKWindow (GtkWindow*)
+	open func setTooltipWindow(customWindow: CGTKWindow) -> Swift.Void {
 		gtk_widget_set_tooltip_window(GTK_WIDGET(self.GOBJECT), customWindow.WINDOW)
 	}
 
-	/// 
 	/// Sets the vertical alignment of @widget.
 	/// See the #GtkWidget:valign property.
-	/// Parameters:
-	///	- align: GtkAlign
-	open func setValign(align: GtkAlign) {
+	/// - Parameters:
+	///	- align: GtkAlign (GtkAlign)
+	open func setValign(align: GtkAlign) -> Swift.Void {
 		gtk_widget_set_valign(GTK_WIDGET(self.GOBJECT), align)
 	}
 
-	/// 
 	/// Sets whether the widget would like any available extra vertical
 	/// space.
 	/// See gtk_widget_set_hexpand() for more detail.
-	/// Parameters:
-	///	- expand: Bool
-	open func setVexpand(expand: Bool) {
+	/// - Parameters:
+	///	- expand: Bool (gboolean)
+	open func setVexpand(expand: Bool) -> Swift.Void {
 		gtk_widget_set_vexpand(GTK_WIDGET(self.GOBJECT), expand ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the vexpand flag (see gtk_widget_get_vexpand()) will
 	/// be used.
 	/// See gtk_widget_set_hexpand_set() for more detail.
-	/// Parameters:
-	///	- set: Bool
-	open func setVexpandSet(_ set: Bool) {
+	/// - Parameters:
+	///	- set: Bool (gboolean)
+	open func setVexpandSet(_ set: Bool) -> Swift.Void {
 		gtk_widget_set_vexpand_set(GTK_WIDGET(self.GOBJECT), set ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the visibility state of @widget. Note that setting this to
 	/// %TRUE doesn’t mean the widget is actually viewable, see
 	/// gtk_widget_get_visible().
 	/// This function simply calls gtk_widget_show() or gtk_widget_hide()
 	/// but is nicer to use when the visibility of the widget depends on
 	/// some condition.
-	/// Parameters:
-	///	- visible: Bool
-	open func setVisible(_ visible: Bool) {
+	/// - Parameters:
+	///	- visible: Bool (gboolean)
+	open func setVisible(_ visible: Bool) -> Swift.Void {
 		gtk_widget_set_visible(GTK_WIDGET(self.GOBJECT), visible ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the visual that should be used for by widget and its children for
 	/// creating #GdkWindows. The visual must be on the same #GdkScreen as
 	/// returned by gtk_widget_get_screen(), so handling the
 	/// #GtkWidget::screen-changed signal is necessary.
 	/// Setting a new @visual will not cause @widget to recreate its windows,
 	/// so you should call this function before @widget is realized.
-	/// Parameters:
-	///	- visual: OpaquePointer?
-	open func setVisual(_ visual: OpaquePointer?) {
+	/// - Parameters:
+	///	- visual: OpaquePointer? (GdkVisual*)
+	open func setVisual(_ visual: OpaquePointer?) -> Swift.Void {
 		gtk_widget_set_visual(GTK_WIDGET(self.GOBJECT), visual)
 	}
 
-	/// 
 	/// Sets a widget’s window. This function should only be used in a
 	/// widget’s #GtkWidget::realize implementation. The %window passed is
 	/// usually either new window created with gdk_window_new(), or the
@@ -3373,23 +3140,21 @@ open class CGTKWidget : CGTKBase {
 	/// by calling gtk_widget_set_has_window(). This is usually done in the
 	/// widget’s init() function.
 	/// Note that this function does not add any reference to @window.
-	/// Parameters:
-	///	- window: OpaquePointer!
-	open func setWindow(_ window: OpaquePointer!) {
+	/// - Parameters:
+	///	- window: OpaquePointer! (GdkWindow*)
+	open func setWindow(_ window: OpaquePointer!) -> Swift.Void {
 		gtk_widget_set_window(GTK_WIDGET(self.GOBJECT), window)
 	}
 
-	/// 
 	/// Sets a shape for this widget’s GDK window. This allows for
 	/// transparent windows etc., see gdk_window_shape_combine_region()
 	/// for more information.
-	/// Parameters:
-	///	- region: OpaquePointer?
-	open func shapeCombineRegion(_ region: OpaquePointer?) {
+	/// - Parameters:
+	///	- region: OpaquePointer? (cairo_region_t*)
+	open func shapeCombineRegion(_ region: OpaquePointer?) -> Swift.Void {
 		gtk_widget_shape_combine_region(GTK_WIDGET(self.GOBJECT), region)
 	}
 
-	/// 
 	/// Flags a widget to be displayed. Any widget that isn’t shown will
 	/// not appear on the screen. If you want to show all the widgets in a
 	/// container, it’s easier to call gtk_widget_show_all() on the
@@ -3399,28 +3164,25 @@ open class CGTKWidget : CGTKBase {
 	/// When a toplevel container is shown, it is immediately realized and
 	/// mapped; other shown widgets are realized and mapped when their
 	/// toplevel container is realized and mapped.
-	open func show() {
+	open func show() -> Swift.Void {
 		gtk_widget_show(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Recursively shows a widget, and any child widgets (if the widget is
 	/// a container).
-	open func showAll() {
+	open func showAll() -> Swift.Void {
 		gtk_widget_show_all(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Shows a widget. If the widget is an unmapped toplevel widget
 	/// (i.e. a #GtkWindow that has not yet been shown), enter the main
 	/// loop and wait for the window to actually be mapped. Be careful;
 	/// because the main loop is running, anything can happen during
 	/// this function.
-	open func showNow() {
+	open func showNow() -> Swift.Void {
 		gtk_widget_show_now(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function is only used by #GtkContainer subclasses, to assign a size
 	/// and position to their child widgets.
 	/// In this function, the allocation may be adjusted. It will be forced
@@ -3430,13 +3192,12 @@ open class CGTKWidget : CGTKBase {
 	/// widget’s #GtkWidget:halign and #GtkWidget:valign properties.
 	/// For baseline support in containers you need to use gtk_widget_size_allocate_with_baseline()
 	/// instead.
-	/// Parameters:
-	///	- allocation: UnsafeMutablePointer<GtkAllocation>!
-	open func sizeAllocate(allocation: UnsafeMutablePointer<GtkAllocation>!) {
+	/// - Parameters:
+	///	- allocation: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
+	open func sizeAllocate(allocation: UnsafeMutablePointer<GtkAllocation>!) -> Swift.Void {
 		gtk_widget_size_allocate(GTK_WIDGET(self.GOBJECT), allocation)
 	}
 
-	/// 
 	/// This function is only used by #GtkContainer subclasses, to assign a size,
 	/// position and (optionally) baseline to their child widgets.
 	/// In this function, the allocation and baseline may be adjusted. It
@@ -3448,14 +3209,13 @@ open class CGTKWidget : CGTKBase {
 	/// #GtkWidget:valign properties.
 	/// If the child widget does not have a valign of %GTK_ALIGN_BASELINE the
 	/// baseline argument is ignored and -1 is used instead.
-	/// Parameters:
-	///	- allocation: UnsafeMutablePointer<GtkAllocation>!
-	///	- baseline: gint
-	open func sizeAllocateWithBaseline(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: gint) {
+	/// - Parameters:
+	///	- allocation: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
+	///	- baseline: gint (gint)
+	open func sizeAllocateWithBaseline(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: gint) -> Swift.Void {
 		gtk_widget_size_allocate_with_baseline(GTK_WIDGET(self.GOBJECT), allocation, baseline)
 	}
 
-	/// 
 	/// This function is typically used when implementing a #GtkContainer
 	/// subclass.  Obtains the preferred size of a widget. The container
 	/// uses this information to arrange its child widgets and decide what
@@ -3466,13 +3226,12 @@ open class CGTKWidget : CGTKBase {
 	/// needed. Multihead-aware applications should keep this in mind.
 	/// Also remember that the size request is not necessarily the size
 	/// a widget will actually be allocated.
-	/// Parameters:
-	///	- requisition: UnsafeMutablePointer<GtkRequisition>!
-	open func sizeRequest(requisition: UnsafeMutablePointer<GtkRequisition>!) {
+	/// - Parameters:
+	///	- requisition: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
+	open func sizeRequest(requisition: UnsafeMutablePointer<GtkRequisition>!) -> Swift.Void {
 		gtk_widget_size_request(GTK_WIDGET(self.GOBJECT), requisition)
 	}
 
-	/// 
 	/// This function attaches the widget’s #GtkStyle to the widget's
 	/// #GdkWindow. It is a replacement for
 	/// |[
@@ -3482,102 +3241,176 @@ open class CGTKWidget : CGTKBase {
 	/// implementation which does not chain up to its parent class'
 	/// “realize” implementation, because one of the parent classes
 	/// (finally #GtkWidget) would attach the style itself.
-	open func styleAttach() {
+	open func styleAttach() -> Swift.Void {
 		gtk_widget_style_attach(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of a style property of @widget.
-	/// Parameters:
-	///	- propertyName: String
-	///	- value: UnsafeMutablePointer<GValue>!
-	open func styleGetProperty(propertyName: String, value: UnsafeMutablePointer<GValue>!) {
+	/// - Parameters:
+	///	- propertyName: String (const gchar*)
+	///	- value: UnsafeMutablePointer<GValue>! (GValue*)
+	open func styleGetProperty(propertyName: String, value: UnsafeMutablePointer<GValue>!) -> Swift.Void {
 		gtk_widget_style_get_property(GTK_WIDGET(self.GOBJECT), propertyName, value)
 	}
 
-	/// 
 	/// Non-vararg variant of gtk_widget_style_get(). Used primarily by language
 	/// bindings.
-	/// Parameters:
-	///	- firstPropertyName: String
-	///	- varArgs: CVaListPointer
-	open func styleGetValist(firstPropertyName: String, varArgs: CVaListPointer) {
+	/// - Parameters:
+	///	- firstPropertyName: String (const gchar*)
+	///	- varArgs: CVaListPointer (va_list)
+	open func styleGetValist(firstPropertyName: String, varArgs: CVaListPointer) -> Swift.Void {
 		gtk_widget_style_get_valist(GTK_WIDGET(self.GOBJECT), firstPropertyName, varArgs)
 	}
 
-	/// 
 	/// Reverts the effect of a previous call to gtk_widget_freeze_child_notify().
 	/// This causes all queued #GtkWidget::child-notify signals on @widget to be
 	/// emitted.
-	open func thawChildNotify() {
+	open func thawChildNotify() -> Swift.Void {
 		gtk_widget_thaw_child_notify(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Translate coordinates relative to @src_widget’s allocation to coordinates
 	/// relative to @dest_widget’s allocations. In order to perform this
 	/// operation, both widgets must be realized, and must share a common
 	/// toplevel.
-	/// Parameters:
-	///	- destWidget: CGTKWidget
-	///	- srcX: gint
-	///	- srcY: gint
-	///	- destX: UnsafeMutablePointer<Int32>!
-	///	- destY: UnsafeMutablePointer<Int32>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- destWidget: CGTKWidget (GtkWidget*)
+	///	- srcX: gint (gint)
+	///	- srcY: gint (gint)
+	///	- destX: UnsafeMutablePointer<Int32>! (gint*)
+	///	- destY: UnsafeMutablePointer<Int32>! (gint*)
+	/// - Returns: Bool (gboolean)
 	open func translateCoordinates(destWidget: CGTKWidget, srcX: gint, srcY: gint, destX: UnsafeMutablePointer<Int32>!, destY: UnsafeMutablePointer<Int32>!) -> Bool {
 		return gtk_widget_translate_coordinates(GTK_WIDGET(self.GOBJECT), destWidget.WIDGET, srcX, srcY, destX, destY) != 0 ? true : false
 	}
 
-	/// 
 	/// Triggers a tooltip query on the display where the toplevel of @widget
 	/// is located. See gtk_tooltip_trigger_tooltip_query() for more
 	/// information.
-	open func triggerTooltipQuery() {
+	open func triggerTooltipQuery() -> Swift.Void {
 		gtk_widget_trigger_tooltip_query(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function is only for use in widget implementations. Causes
 	/// a widget to be unmapped if it’s currently mapped.
-	open func unmap() {
+	open func unmap() -> Swift.Void {
 		gtk_widget_unmap(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function is only for use in widget implementations.
 	/// Should be called by implementations of the remove method
 	/// on #GtkContainer, to dissociate a child from the container.
-	open func unparent() {
+	open func unparent() -> Swift.Void {
 		gtk_widget_unparent(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// This function is only useful in widget implementations.
 	/// Causes a widget to be unrealized (frees all GDK resources
 	/// associated with the widget, such as @widget->window).
-	open func unrealize() {
+	open func unrealize() -> Swift.Void {
 		gtk_widget_unrealize(GTK_WIDGET(self.GOBJECT))
 	}
 
-	/// 
 	/// Unregisters a #GdkWindow from the widget that was previously set up with
 	/// gtk_widget_register_window(). You need to call this when the window is
 	/// no longer used by the widget, such as when you destroy it.
-	/// Parameters:
-	///	- window: OpaquePointer!
-	open func unregisterWindow(_ window: OpaquePointer!) {
+	/// - Parameters:
+	///	- window: OpaquePointer! (GdkWindow*)
+	open func unregisterWindow(_ window: OpaquePointer!) -> Swift.Void {
 		gtk_widget_unregister_window(GTK_WIDGET(self.GOBJECT), window)
 	}
 
-	/// 
 	/// This function is for use in widget implementations. Turns off flag
 	/// values for the current widget state (insensitive, prelighted, etc.).
 	/// See gtk_widget_set_state_flags().
-	/// Parameters:
-	///	- flags: GtkStateFlags
-	open func unsetStateFlags(_ flags: GtkStateFlags) {
+	/// - Parameters:
+	///	- flags: GtkStateFlags (GtkStateFlags)
+	open func unsetStateFlags(_ flags: GtkStateFlags) -> Swift.Void {
 		gtk_widget_unset_state_flags(GTK_WIDGET(self.GOBJECT), flags)
+	}
+
+	/// Adds a child to @buildable. @type is an optional string
+	/// describing how the child should be added.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- child: UnsafeMutablePointer<GObject>! (GObject*)
+	///	- type: String (const gchar*)
+	open func addChild(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>!, type: String) -> Swift.Void {
+		gtk_buildable_add_child(GTK_BUILDABLE(self.GOBJECT), builder, child, type)
+	}
+
+	/// Constructs a child of @buildable with the name @name.
+	/// #GtkBuilder calls this function if a “constructor” has been
+	/// specified in the UI definition.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- name: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GObject>! (GObject*)
+	open func constructChild(builder: UnsafeMutablePointer<GtkBuilder>!, name: String) -> UnsafeMutablePointer<GObject>! {
+		return gtk_buildable_construct_child(GTK_BUILDABLE(self.GOBJECT), builder, name)
+	}
+
+	/// This is similar to gtk_buildable_parser_finished() but is
+	/// called once for each custom tag handled by the @buildable.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- child: UnsafeMutablePointer<GObject>? (GObject*)
+	///	- tagname: String (const gchar*)
+	///	- data: gpointer (gpointer)
+	open func customFinished(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: gpointer) -> Swift.Void {
+		gtk_buildable_custom_finished(GTK_BUILDABLE(self.GOBJECT), builder, child, tagname, data)
+	}
+
+	/// This is called at the end of each custom element handled by
+	/// the buildable.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- child: UnsafeMutablePointer<GObject>? (GObject*)
+	///	- tagname: String (const gchar*)
+	///	- data: UnsafeMutablePointer<gpointer?>! (gpointer*)
+	open func customTagEnd(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: UnsafeMutablePointer<gpointer?>!) -> Swift.Void {
+		gtk_buildable_custom_tag_end(GTK_BUILDABLE(self.GOBJECT), builder, child, tagname, data)
+	}
+
+	/// This is called for each unknown element under <child>.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- child: UnsafeMutablePointer<GObject>? (GObject*)
+	///	- tagname: String (const gchar*)
+	///	- parser: UnsafeMutablePointer<GMarkupParser>! (GMarkupParser*)
+	///	- data: UnsafeMutablePointer<gpointer?>! (gpointer*)
+	/// - Returns: Bool (gboolean)
+	open func customTagStart(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, parser: UnsafeMutablePointer<GMarkupParser>!, data: UnsafeMutablePointer<gpointer?>!) -> Bool {
+		return gtk_buildable_custom_tag_start(GTK_BUILDABLE(self.GOBJECT), builder, child, tagname, parser, data) != 0 ? true : false
+	}
+
+	/// Get the internal child called @childname of the @buildable object.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- childname: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GObject>! (GObject*)
+	open func getInternalChild(builder: UnsafeMutablePointer<GtkBuilder>!, childname: String) -> UnsafeMutablePointer<GObject>! {
+		return gtk_buildable_get_internal_child(GTK_BUILDABLE(self.GOBJECT), builder, childname)
+	}
+
+	/// Called when the builder finishes the parsing of a
+	/// [GtkBuilder UI definition][BUILDER-UI].
+	/// Note that this will be called once for each time
+	/// gtk_builder_add_from_file() or gtk_builder_add_from_string()
+	/// is called on a builder.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	open func parserFinished(builder: UnsafeMutablePointer<GtkBuilder>!) -> Swift.Void {
+		gtk_buildable_parser_finished(GTK_BUILDABLE(self.GOBJECT), builder)
+	}
+
+	/// Sets the property name @name to @value on the @buildable object.
+	/// - Parameters:
+	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
+	///	- name: String (const gchar*)
+	///	- value: UnsafePointer<GValue>! (const GValue*)
+	open func setBuildableProperty(builder: UnsafeMutablePointer<GtkBuilder>!, name: String, value: UnsafePointer<GValue>!) -> Swift.Void {
+		gtk_buildable_set_buildable_property(GTK_BUILDABLE(self.GOBJECT), builder, name, value)
 	}
 
 }

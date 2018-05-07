@@ -34,7 +34,6 @@ public let GTK_TYPE_LOCK_BUTTON: GType = gtk_lock_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_LOCK_BUTTON)
 }
 
-/// 
 /// GtkLockButton is a widget that can be used in control panels or
 /// preference dialogs to allow users to obtain and revoke authorizations
 /// needed to operate the controls. The required authorization is represented
@@ -60,11 +59,10 @@ public let GTK_TYPE_LOCK_BUTTON: GType = gtk_lock_button_get_type()
 
 
 open class CGTKLockButton : CGTKButton {
-	/// 
 	/// Creates a new lock button which reflects the @permission.
-	/// Parameters:
-	///	- permission: UnsafeMutablePointer<GPermission>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- permission: UnsafeMutablePointer<GPermission>? (GPermission*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(permission: UnsafeMutablePointer<GPermission>?) {
 		self.init(withGObject: gtk_lock_button_new(permission))!
 	}
@@ -75,18 +73,16 @@ open class CGTKLockButton : CGTKButton {
 		}
 	}
 
-	/// 
 	/// Obtains the #GPermission object that controls @button.
-	/// - Returns: UnsafeMutablePointer<GPermission>!
+	/// - Returns: UnsafeMutablePointer<GPermission>! (GPermission*)
 	open func getPermission() -> UnsafeMutablePointer<GPermission>! {
 		return gtk_lock_button_get_permission(GTK_LOCK_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the #GPermission object that controls @button.
-	/// Parameters:
-	///	- permission: UnsafeMutablePointer<GPermission>?
-	open func setPermission(_ permission: UnsafeMutablePointer<GPermission>?) {
+	/// - Parameters:
+	///	- permission: UnsafeMutablePointer<GPermission>? (GPermission*)
+	open func setPermission(_ permission: UnsafeMutablePointer<GPermission>?) -> Swift.Void {
 		gtk_lock_button_set_permission(GTK_LOCK_BUTTON(self.GOBJECT), permission)
 	}
 

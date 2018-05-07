@@ -34,7 +34,6 @@ public let GTK_TYPE_GL_AREA: GType = gtk_gl_area_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_GL_AREA)
 }
 
-/// 
 /// #GtkGLArea is a widget that allows drawing with OpenGL.
 /// #GtkGLArea sets up its own #GdkGLContext for the window it creates, and
 /// creates a custom GL framebuffer that the widget will do GL rendering onto.
@@ -119,9 +118,8 @@ public let GTK_TYPE_GL_AREA: GType = gtk_gl_area_get_type()
 
 
 open class CGTKGLArea : CGTKWidget {
-	/// 
 	/// Creates a new #GtkGLArea widget.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_gl_area_new())!
 	}
@@ -132,98 +130,86 @@ open class CGTKGLArea : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Ensures that the @area framebuffer object is made the current draw
 	/// and read target, and that all the required buffers for the @area
 	/// are created and bound to the frambuffer.
 	/// This function is automatically called before emitting the
 	/// #GtkGLArea::render signal, and doesn't normally need to be called
 	/// by application code.
-	open func gtkGlAreaAttachBuffers() {
+	open func gtkGlAreaAttachBuffers() -> Swift.Void {
 		gtk_gl_area_attach_buffers(GTK_GL_AREA(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the area is in auto render mode or not.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkGlAreaGetAutoRender() -> Bool {
 		return gtk_gl_area_get_auto_render(GTK_GL_AREA(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the #GdkGLContext used by @area.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkGLContext*)
 	open func gtkGlAreaGetContext() -> OpaquePointer {
 		return gtk_gl_area_get_context(GTK_GL_AREA(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the current error set on the @area.
-	/// - Returns: UnsafeMutablePointer<GError>?
+	/// - Returns: UnsafeMutablePointer<GError>? (GError*)
 	open func gtkGlAreaGetError() -> UnsafeMutablePointer<GError>? {
 		return gtk_gl_area_get_error(GTK_GL_AREA(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the area has an alpha component.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkGlAreaGetHasAlpha() -> Bool {
 		return gtk_gl_area_get_has_alpha(GTK_GL_AREA(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the area has a depth buffer.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkGlAreaGetHasDepthBuffer() -> Bool {
 		return gtk_gl_area_get_has_depth_buffer(GTK_GL_AREA(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the area has a stencil buffer.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkGlAreaGetHasStencilBuffer() -> Bool {
 		return gtk_gl_area_get_has_stencil_buffer(GTK_GL_AREA(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the required version of OpenGL set
 	/// using gtk_gl_area_set_required_version().
-	/// Parameters:
-	///	- major: UnsafeMutablePointer<Int32>!
-	///	- minor: UnsafeMutablePointer<Int32>!
-	open func gtkGlAreaGetRequiredVersion(major: UnsafeMutablePointer<Int32>!, minor: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- major: UnsafeMutablePointer<Int32>! (gint*)
+	///	- minor: UnsafeMutablePointer<Int32>! (gint*)
+	open func gtkGlAreaGetRequiredVersion(major: UnsafeMutablePointer<Int32>!, minor: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_gl_area_get_required_version(GTK_GL_AREA(self.GOBJECT), major, minor)
 	}
 
-	/// 
 	/// Retrieves the value set by gtk_gl_area_set_use_es().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func gtkGlAreaGetUseEs() -> Bool {
 		return gtk_gl_area_get_use_es(GTK_GL_AREA(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Ensures that the #GdkGLContext used by @area is associated with
 	/// the #GtkGLArea.
 	/// This function is automatically called before emitting the
 	/// #GtkGLArea::render signal, and doesn't normally need to be called
 	/// by application code.
-	open func gtkGlAreaMakeCurrent() {
+	open func gtkGlAreaMakeCurrent() -> Swift.Void {
 		gtk_gl_area_make_current(GTK_GL_AREA(self.GOBJECT))
 	}
 
-	/// 
 	/// Marks the currently rendered data (if any) as invalid, and queues
 	/// a redraw of the widget, ensuring that the #GtkGLArea::render signal
 	/// is emitted during the draw.
 	/// This is only needed when the gtk_gl_area_set_auto_render() has
 	/// been called with a %FALSE value. The default behaviour is to
 	/// emit #GtkGLArea::render on each draw.
-	open func gtkGlAreaQueueRender() {
+	open func gtkGlAreaQueueRender() -> Swift.Void {
 		gtk_gl_area_queue_render(GTK_GL_AREA(self.GOBJECT))
 	}
 
-	/// 
 	/// If @auto_render is %TRUE the #GtkGLArea::render signal will be
 	/// emitted every time the widget draws. This is the default and is
 	/// useful if drawing the widget is faster.
@@ -232,72 +218,66 @@ open class CGTKGLArea : CGTKWidget {
 	/// unless the window is resized. In order to force a rendering
 	/// gtk_gl_area_queue_render() must be called. This mode is useful when
 	/// the scene changes seldomly, but takes a long time to redraw.
-	/// Parameters:
-	///	- autoRender: Bool
-	open func gtkGlAreaSetAutoRender(_ autoRender: Bool) {
+	/// - Parameters:
+	///	- autoRender: Bool (gboolean)
+	open func gtkGlAreaSetAutoRender(_ autoRender: Bool) -> Swift.Void {
 		gtk_gl_area_set_auto_render(GTK_GL_AREA(self.GOBJECT), autoRender ? 1 : 0)
 	}
 
-	/// 
 	/// Sets an error on the area which will be shown instead of the
 	/// GL rendering. This is useful in the #GtkGLArea::create-context
 	/// signal if GL context creation fails.
-	/// Parameters:
-	///	- error: UnsafePointer<GError>?
-	open func gtkGlAreaSetError(_ error: UnsafePointer<GError>?) {
+	/// - Parameters:
+	///	- error: UnsafePointer<GError>? (const GError*)
+	open func gtkGlAreaSetError(_ error: UnsafePointer<GError>?) -> Swift.Void {
 		gtk_gl_area_set_error(GTK_GL_AREA(self.GOBJECT), error)
 	}
 
-	/// 
 	/// If @has_alpha is %TRUE the buffer allocated by the widget will have
 	/// an alpha channel component, and when rendering to the window the
 	/// result will be composited over whatever is below the widget.
 	/// If @has_alpha is %FALSE there will be no alpha channel, and the
 	/// buffer will fully replace anything below the widget.
-	/// Parameters:
-	///	- hasAlpha: Bool
-	open func gtkGlAreaSetHasAlpha(_ hasAlpha: Bool) {
+	/// - Parameters:
+	///	- hasAlpha: Bool (gboolean)
+	open func gtkGlAreaSetHasAlpha(_ hasAlpha: Bool) -> Swift.Void {
 		gtk_gl_area_set_has_alpha(GTK_GL_AREA(self.GOBJECT), hasAlpha ? 1 : 0)
 	}
 
-	/// 
 	/// If @has_depth_buffer is %TRUE the widget will allocate and
 	/// enable a depth buffer for the target framebuffer. Otherwise
 	/// there will be none.
-	/// Parameters:
-	///	- hasDepthBuffer: Bool
-	open func gtkGlAreaSetHasDepthBuffer(_ hasDepthBuffer: Bool) {
+	/// - Parameters:
+	///	- hasDepthBuffer: Bool (gboolean)
+	open func gtkGlAreaSetHasDepthBuffer(_ hasDepthBuffer: Bool) -> Swift.Void {
 		gtk_gl_area_set_has_depth_buffer(GTK_GL_AREA(self.GOBJECT), hasDepthBuffer ? 1 : 0)
 	}
 
-	/// 
 	/// If @has_stencil_buffer is %TRUE the widget will allocate and
 	/// enable a stencil buffer for the target framebuffer. Otherwise
 	/// there will be none.
-	/// Parameters:
-	///	- hasStencilBuffer: Bool
-	open func gtkGlAreaSetHasStencilBuffer(_ hasStencilBuffer: Bool) {
+	/// - Parameters:
+	///	- hasStencilBuffer: Bool (gboolean)
+	open func gtkGlAreaSetHasStencilBuffer(_ hasStencilBuffer: Bool) -> Swift.Void {
 		gtk_gl_area_set_has_stencil_buffer(GTK_GL_AREA(self.GOBJECT), hasStencilBuffer ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the required version of OpenGL to be used when creating the context
 	/// for the widget.
 	/// This function must be called before the area has been realized.
-	/// Parameters:
-	///	- major: gint
-	///	- minor: gint
-	open func gtkGlAreaSetRequiredVersion(major: gint, minor: gint) {
+	/// - Parameters:
+	///	- major: gint (gint)
+	///	- minor: gint (gint)
+	open func gtkGlAreaSetRequiredVersion(major: gint, minor: gint) -> Swift.Void {
 		gtk_gl_area_set_required_version(GTK_GL_AREA(self.GOBJECT), major, minor)
 	}
 
-	/// 
 	/// Sets whether the @area should create an OpenGL or an OpenGL ES context.
 	/// You should check the capabilities of the #GdkGLContext before drawing
 	/// with either API.
-	/// Parameters:
-	///	- useEs: Bool
-	open func gtkGlAreaSetUseEs(_ useEs: Bool) {
+	/// - Parameters:
+	///	- useEs: Bool (gboolean)
+	open func gtkGlAreaSetUseEs(_ useEs: Bool) -> Swift.Void {
 		gtk_gl_area_set_use_es(GTK_GL_AREA(self.GOBJECT), useEs ? 1 : 0)
 	}
 

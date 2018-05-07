@@ -34,7 +34,6 @@ public let GTK_TYPE_MESSAGE_DIALOG: GType = gtk_message_dialog_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MESSAGE_DIALOG)
 }
 
-/// 
 /// #GtkMessageDialog presents a dialog with some message text. It’s simply a
 /// convenience widget; you could construct the equivalent of #GtkMessageDialog
 /// from #GtkDialog without too much effort, but #GtkMessageDialog saves typing.
@@ -103,38 +102,34 @@ open class CGTKMessageDialog : CGTKDialog {
 		}
 	}
 
-	/// 
 	/// Gets the dialog’s image.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getImage<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_message_dialog_get_image(GTK_MESSAGE_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the message area of the dialog. This is the box where the
 	/// dialog’s primary and secondary labels are packed. You can add your
 	/// own extra content to that box and it will appear below those labels.
 	/// See gtk_dialog_get_content_area() for the corresponding
 	/// function in the parent #GtkDialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getMessageArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_message_dialog_get_message_area(GTK_MESSAGE_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Sets the dialog’s image to @image.
-	/// Parameters:
-	///	- image: CGTKWidget
-	open func setImage(_ image: CGTKWidget) {
+	/// - Parameters:
+	///	- image: CGTKWidget (GtkWidget*)
+	open func setImage(_ image: CGTKWidget) -> Swift.Void {
 		gtk_message_dialog_set_image(GTK_MESSAGE_DIALOG(self.GOBJECT), image.WIDGET)
 	}
 
-	/// 
 	/// Sets the text of the message dialog to be @str, which is marked
 	/// up with the [Pango text markup language][PangoMarkupFormat].
-	/// Parameters:
-	///	- str: String
-	open func setMarkup(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setMarkup(str: String) -> Swift.Void {
 		gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(self.GOBJECT), str)
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_HEADER_BAR: GType = gtk_header_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_HEADER_BAR)
 }
 
-/// 
 /// GtkHeaderBar is similar to a horizontal #GtkBox. It allows children to
 /// be placed at the start or the end. In addition, it allows a title and
 /// subtitle to be displayed. The title will be centered with respect to
@@ -51,9 +50,8 @@ public let GTK_TYPE_HEADER_BAR: GType = gtk_header_bar_get_type()
 
 
 open class CGTKHeaderBar : CGTKContainer {
-	/// 
 	/// Creates a new #GtkHeaderBar widget.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_header_bar_new())!
 	}
@@ -64,71 +62,62 @@ open class CGTKHeaderBar : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Retrieves the custom title widget of the header. See
 	/// gtk_header_bar_set_custom_title().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getCustomTitle<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_header_bar_get_custom_title(GTK_HEADER_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the decoration layout set with
 	/// gtk_header_bar_set_decoration_layout().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getDecorationLayout() -> String? {
 		return String(utf8String: gtk_header_bar_get_decoration_layout(GTK_HEADER_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves whether the header bar reserves space for
 	/// a subtitle, regardless if one is currently set or not.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasSubtitle() -> Bool {
 		return gtk_header_bar_get_has_subtitle(GTK_HEADER_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether this header bar shows the standard window
 	/// decorations.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowCloseButton() -> Bool {
 		return gtk_header_bar_get_show_close_button(GTK_HEADER_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the subtitle of the header. See gtk_header_bar_set_subtitle().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getSubtitle() -> String? {
 		return String(utf8String: gtk_header_bar_get_subtitle(GTK_HEADER_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the title of the header. See gtk_header_bar_set_title().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTitle() -> String? {
 		return String(utf8String: gtk_header_bar_get_title(GTK_HEADER_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Adds @child to @bar, packed with reference to the
 	/// end of the @bar.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func packEnd(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func packEnd(child: CGTKWidget) -> Swift.Void {
 		gtk_header_bar_pack_end(GTK_HEADER_BAR(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Adds @child to @bar, packed with reference to the
 	/// start of the @bar.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func packStart(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func packStart(child: CGTKWidget) -> Swift.Void {
 		gtk_header_bar_pack_start(GTK_HEADER_BAR(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Sets a custom title for the #GtkHeaderBar.
 	/// The title should help a user identify the current view. This
 	/// supersedes any title set by gtk_header_bar_set_title() or
@@ -137,13 +126,12 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// style classes.
 	/// You should set the custom title to %NULL, for the header title
 	/// label to be visible again.
-	/// Parameters:
-	///	- titleWidget: CGTKWidget
-	open func setCustomTitle(titleWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- titleWidget: CGTKWidget (GtkWidget*)
+	open func setCustomTitle(titleWidget: CGTKWidget) -> Swift.Void {
 		gtk_header_bar_set_custom_title(GTK_HEADER_BAR(self.GOBJECT), titleWidget.WIDGET)
 	}
 
-	/// 
 	/// Sets the decoration layout for this header bar, overriding
 	/// the #GtkSettings:gtk-decoration-layout setting.
 	/// There can be valid reasons for overriding the setting, such
@@ -158,49 +146,45 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// for the fallback app menu).
 	/// For example, “menu:minimize,maximize,close” specifies a menu
 	/// on the left, and minimize, maximize and close buttons on the right.
-	/// Parameters:
-	///	- layout: String
-	open func setDecorationLayout(_ layout: String) {
+	/// - Parameters:
+	///	- layout: String (const gchar*)
+	open func setDecorationLayout(_ layout: String) -> Swift.Void {
 		gtk_header_bar_set_decoration_layout(GTK_HEADER_BAR(self.GOBJECT), layout)
 	}
 
-	/// 
 	/// Sets whether the header bar should reserve space
 	/// for a subtitle, even if none is currently set.
-	/// Parameters:
-	///	- setting: Bool
-	open func setHasSubtitle(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setHasSubtitle(setting: Bool) -> Swift.Void {
 		gtk_header_bar_set_has_subtitle(GTK_HEADER_BAR(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether this header bar shows the standard window decorations,
 	/// including close, maximize, and minimize.
-	/// Parameters:
-	///	- setting: Bool
-	open func setShowCloseButton(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setShowCloseButton(setting: Bool) -> Swift.Void {
 		gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the subtitle of the #GtkHeaderBar. The title should give a user
 	/// an additional detail to help him identify the current view.
 	/// Note that GtkHeaderBar by default reserves room for the subtitle,
 	/// even if none is currently set. If this is not desired, set the
 	/// #GtkHeaderBar:has-subtitle property to %FALSE.
-	/// Parameters:
-	///	- subtitle: String
-	open func setSubtitle(_ subtitle: String) {
+	/// - Parameters:
+	///	- subtitle: String (const gchar*)
+	open func setSubtitle(_ subtitle: String) -> Swift.Void {
 		gtk_header_bar_set_subtitle(GTK_HEADER_BAR(self.GOBJECT), subtitle)
 	}
 
-	/// 
 	/// Sets the title of the #GtkHeaderBar. The title should help a user
 	/// identify the current view. A good title should not include the
 	/// application name.
-	/// Parameters:
-	///	- title: String
-	open func setTitle(_ title: String) {
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	open func setTitle(_ title: String) -> Swift.Void {
 		gtk_header_bar_set_title(GTK_HEADER_BAR(self.GOBJECT), title)
 	}
 

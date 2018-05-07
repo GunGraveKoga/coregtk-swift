@@ -34,7 +34,6 @@ public let GTK_TYPE_STATUSBAR: GType = gtk_statusbar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_STATUSBAR)
 }
 
-/// 
 /// A #GtkStatusbar is usually placed along the bottom of an application's
 /// main #GtkWindow. It may provide a regular commentary of the application's
 /// status (as is usually the case in a web browser, for example), or may be
@@ -63,9 +62,8 @@ public let GTK_TYPE_STATUSBAR: GType = gtk_statusbar_get_type()
 
 
 open class CGTKStatusbar : CGTKBox {
-	/// 
 	/// Creates a new #GtkStatusbar ready for messages.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_statusbar_new())!
 	}
@@ -76,62 +74,56 @@ open class CGTKStatusbar : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Returns a new context identifier, given a description
 	/// of the actual context. Note that the description is
 	/// not shown in the UI.
-	/// Parameters:
-	///	- contextDescription: String
-	/// - Returns: guint
+	/// - Parameters:
+	///	- contextDescription: String (const gchar*)
+	/// - Returns: guint (guint)
 	open func getContextId(contextDescription: String) -> guint {
 		return gtk_statusbar_get_context_id(GTK_STATUSBAR(self.GOBJECT), contextDescription)
 	}
 
-	/// 
 	/// Retrieves the box containing the label widget.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getMessageArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_statusbar_get_message_area(GTK_STATUSBAR(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Removes the first message in the #GtkStatusbar’s stack
 	/// with the given context id.
 	/// Note that this may not change the displayed message, if
 	/// the message at the top of the stack has a different
 	/// context id.
-	/// Parameters:
-	///	- contextId: guint
-	open func pop(contextId: guint) {
+	/// - Parameters:
+	///	- contextId: guint (guint)
+	open func pop(contextId: guint) -> Swift.Void {
 		gtk_statusbar_pop(GTK_STATUSBAR(self.GOBJECT), contextId)
 	}
 
-	/// 
 	/// Pushes a new message onto a statusbar’s stack.
-	/// Parameters:
-	///	- contextId: guint
-	///	- text: String
-	/// - Returns: guint
+	/// - Parameters:
+	///	- contextId: guint (guint)
+	///	- text: String (const gchar*)
+	/// - Returns: guint (guint)
 	open func push(contextId: guint, text: String) -> guint {
 		return gtk_statusbar_push(GTK_STATUSBAR(self.GOBJECT), contextId, text)
 	}
 
-	/// 
 	/// Forces the removal of a message from a statusbar’s stack.
 	/// The exact @context_id and @message_id must be specified.
-	/// Parameters:
-	///	- contextId: guint
-	///	- messageId: guint
-	open func remove(contextId: guint, messageId: guint) {
+	/// - Parameters:
+	///	- contextId: guint (guint)
+	///	- messageId: guint (guint)
+	open func remove(contextId: guint, messageId: guint) -> Swift.Void {
 		gtk_statusbar_remove(GTK_STATUSBAR(self.GOBJECT), contextId, messageId)
 	}
 
-	/// 
 	/// Forces the removal of all messages from a statusbar's
 	/// stack with the exact @context_id.
-	/// Parameters:
-	///	- contextId: guint
-	open func removeAll(contextId: guint) {
+	/// - Parameters:
+	///	- contextId: guint (guint)
+	open func removeAll(contextId: guint) -> Swift.Void {
 		gtk_statusbar_remove_all(GTK_STATUSBAR(self.GOBJECT), contextId)
 	}
 

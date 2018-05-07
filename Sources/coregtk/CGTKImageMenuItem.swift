@@ -34,7 +34,6 @@ public let GTK_TYPE_IMAGE_MENU_ITEM: GType = gtk_image_menu_item_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_IMAGE_MENU_ITEM)
 }
 
-/// 
 /// A GtkImageMenuItem is a menu item which has an icon next to the text label.
 /// This is functionally equivalent to:
 /// |[<!-- language="C" -->
@@ -84,14 +83,12 @@ public let GTK_TYPE_IMAGE_MENU_ITEM: GType = gtk_image_menu_item_get_type()
 
 
 open class CGTKImageMenuItem : CGTKMenuItem {
-	/// 
 	/// Creates a new #GtkImageMenuItem with an empty label.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_image_menu_item_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkImageMenuItem containing the image and text from a
 	/// stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
 	/// and #GTK_STOCK_APPLY.
@@ -100,30 +97,28 @@ open class CGTKImageMenuItem : CGTKMenuItem {
 	/// appropriate path for the menu item, use gtk_stock_lookup() to look up the
 	/// standard accelerator for the stock item, and if one is found, call
 	/// gtk_accel_map_add_entry() to register it.
-	/// Parameters:
-	///	- stockId: String
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>? (GtkAccelGroup*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromStock stockId: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) {
 		self.init(withGObject: gtk_image_menu_item_new_from_stock(stockId, accelGroup))!
 	}
 
-	/// 
 	/// Creates a new #GtkImageMenuItem containing a label.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabel label: String) {
 		self.init(withGObject: gtk_image_menu_item_new_with_label(label))!
 	}
 
-	/// 
 	/// Creates a new #GtkImageMenuItem containing a label. The label
 	/// will be created using gtk_label_new_with_mnemonic(), so underscores
 	/// in @label indicate the mnemonic for the menu item.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic label: String) {
 		self.init(withGObject: gtk_image_menu_item_new_with_mnemonic(label))!
 	}
@@ -134,70 +129,63 @@ open class CGTKImageMenuItem : CGTKMenuItem {
 		}
 	}
 
-	/// 
 	/// Returns whether the menu item will ignore the #GtkSettings:gtk-menu-images
 	/// setting and always show the image, if available.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getAlwaysShowImage() -> Bool {
 		return gtk_image_menu_item_get_always_show_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the widget that is currently set as the image of @image_menu_item.
 	/// See gtk_image_menu_item_set_image().
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getImage<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_image_menu_item_get_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Checks whether the label set in the menuitem is used as a
 	/// stock id to select the stock item for the item.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getUseStock() -> Bool {
 		return gtk_image_menu_item_get_use_stock(GTK_IMAGE_MENU_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Specifies an @accel_group to add the menu items accelerator to
 	/// (this only applies to stock items so a stock item must already
 	/// be set, make sure to call gtk_image_menu_item_set_use_stock()
 	/// and gtk_menu_item_set_label() with a valid stock item first).
 	/// If you want this menu item to have changeable accelerators then
 	/// you shouldnt need this (see gtk_image_menu_item_new_from_stock()).
-	/// Parameters:
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>!
-	open func setAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) {
+	/// - Parameters:
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
+	open func setAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) -> Swift.Void {
 		gtk_image_menu_item_set_accel_group(GTK_IMAGE_MENU_ITEM(self.GOBJECT), accelGroup)
 	}
 
-	/// 
 	/// If %TRUE, the menu item will ignore the #GtkSettings:gtk-menu-images
 	/// setting and always show the image, if available.
 	/// Use this property if the menuitem would be useless or hard to use
 	/// without the image.
-	/// Parameters:
-	///	- alwaysShow: Bool
-	open func setAlwaysShowImage(alwaysShow: Bool) {
+	/// - Parameters:
+	///	- alwaysShow: Bool (gboolean)
+	open func setAlwaysShowImage(alwaysShow: Bool) -> Swift.Void {
 		gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT), alwaysShow ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the image of @image_menu_item to the given widget.
 	/// Note that it depends on the show-menu-images setting whether
 	/// the image will be displayed or not.
-	/// Parameters:
-	///	- image: CGTKWidget
-	open func setImage(_ image: CGTKWidget) {
+	/// - Parameters:
+	///	- image: CGTKWidget (GtkWidget*)
+	open func setImage(_ image: CGTKWidget) -> Swift.Void {
 		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT), image.WIDGET)
 	}
 
-	/// 
 	/// If %TRUE, the label set in the menuitem is used as a
 	/// stock id to select the stock item for the item.
-	/// Parameters:
-	///	- useStock: Bool
-	open func setUseStock(_ useStock: Bool) {
+	/// - Parameters:
+	///	- useStock: Bool (gboolean)
+	open func setUseStock(_ useStock: Bool) -> Swift.Void {
 		gtk_image_menu_item_set_use_stock(GTK_IMAGE_MENU_ITEM(self.GOBJECT), useStock ? 1 : 0)
 	}
 

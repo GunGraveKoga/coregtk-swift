@@ -34,7 +34,6 @@ public let GTK_TYPE_POPOVER_MENU: GType = gtk_popover_menu_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_POPOVER_MENU)
 }
 
-/// 
 /// GtkPopoverMenu is a subclass of #GtkPopover that treats its
 /// children like menus and allows switching between them. It is
 /// meant to be used primarily together with #GtkModelButton, but
@@ -105,9 +104,8 @@ public let GTK_TYPE_POPOVER_MENU: GType = gtk_popover_menu_get_type()
 
 
 open class CGTKPopoverMenu : CGTKPopover {
-	/// 
 	/// Creates a new popover menu.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_popover_menu_new())!
 	}
@@ -118,7 +116,6 @@ open class CGTKPopoverMenu : CGTKPopover {
 		}
 	}
 
-	/// 
 	/// Opens a submenu of the @popover. The @name
 	/// must be one of the names given to the submenus
 	/// of @popover with #GtkPopoverMenu:submenu, or
@@ -127,9 +124,9 @@ open class CGTKPopoverMenu : CGTKPopover {
 	/// when the #GtkModelButton:menu-name property is set,
 	/// so this function is only needed when you are using
 	/// other kinds of widgets to initiate menu changes.
-	/// Parameters:
-	///	- name: String
-	open func openSubmenu(name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func openSubmenu(name: String) -> Swift.Void {
 		gtk_popover_menu_open_submenu(GTK_POPOVER_MENU(self.GOBJECT), name)
 	}
 

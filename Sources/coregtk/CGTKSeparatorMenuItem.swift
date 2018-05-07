@@ -34,7 +34,6 @@ public let GTK_TYPE_SEPARATOR_MENU_ITEM: GType = gtk_separator_menu_item_get_typ
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SEPARATOR_MENU_ITEM)
 }
 
-/// 
 /// The #GtkSeparatorMenuItem is a separator used to group
 /// items within a menu. It displays a horizontal line with a shadow to
 /// make it appear sunken into the interface.
@@ -43,9 +42,8 @@ public let GTK_TYPE_SEPARATOR_MENU_ITEM: GType = gtk_separator_menu_item_get_typ
 
 
 open class CGTKSeparatorMenuItem : CGTKMenuItem {
-	/// 
 	/// Creates a new #GtkSeparatorMenuItem.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_separator_menu_item_new())!
 	}

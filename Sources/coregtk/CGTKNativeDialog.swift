@@ -34,7 +34,6 @@ public let GTK_TYPE_NATIVE_DIALOG: GType = gtk_native_dialog_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_NATIVE_DIALOG)
 }
 
-/// 
 /// Native dialogs are platform dialogs that don't use #GtkDialog or
 /// #GtkWindow. They are used in order to integrate better with a
 /// platform, by looking the same as other native applications and
@@ -57,7 +56,6 @@ open class CGTKNativeDialog : CGTKBase {
 		}
 	}
 
-	/// 
 	/// Destroys a dialog.
 	/// When a dialog is destroyed, it will break any references it holds
 	/// to other objects. If it is visible it will be hidden and any underlying
@@ -65,49 +63,43 @@ open class CGTKNativeDialog : CGTKBase {
 	/// Note that this does not release any reference to the object (as opposed to
 	/// destroying a GtkWindow) because there is no reference from the windowing
 	/// system to the #GtkNativeDialog.
-	open func destroy() {
+	open func destroy() -> Swift.Void {
 		gtk_native_dialog_destroy(GTK_NATIVE_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the dialog is modal. See gtk_native_dialog_set_modal().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getModal() -> Bool {
 		return gtk_native_dialog_get_modal(GTK_NATIVE_DIALOG(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the title of the #GtkNativeDialog.
-	/// - Returns: String?
+	/// - Returns: String? (const char*)
 	open func getTitle() -> String? {
 		return String(utf8String: gtk_native_dialog_get_title(GTK_NATIVE_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Fetches the transient parent for this window. See
 	/// gtk_native_dialog_set_transient_for().
-	/// - Returns: CGTKWindow?
+	/// - Returns: CGTKWindow? (GtkWindow*)
 	open func getTransientFor<T>() -> T? where T: CGTKWindow {
 		return T.init(withGObject: gtk_native_dialog_get_transient_for(GTK_NATIVE_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Determines whether the dialog is visible.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getVisible() -> Bool {
 		return gtk_native_dialog_get_visible(GTK_NATIVE_DIALOG(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Hides the dialog if it is visilbe, aborting any interaction. Once this
 	/// is called the  #GtkNativeDialog::response signal will not be emitted
 	/// until after the next call to gtk_native_dialog_show().
 	/// If the dialog is not visible this does nothing.
-	open func hide() {
+	open func hide() -> Swift.Void {
 		gtk_native_dialog_hide(GTK_NATIVE_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Blocks in a recursive main loop until @self emits the
 	/// #GtkNativeDialog::response signal. It then returns the response ID
 	/// from the ::response signal emission.
@@ -133,52 +125,48 @@ open class CGTKNativeDialog : CGTKBase {
 	/// windows in the same window group while the dialog is run), callbacks
 	/// such as timeouts, IO channel watches, DND drops, etc, will
 	/// be triggered during a gtk_nautilus_dialog_run() call.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func run() -> gint {
 		return gtk_native_dialog_run(GTK_NATIVE_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets a dialog modal or non-modal. Modal dialogs prevent interaction
 	/// with other windows in the same application. To keep modal dialogs
 	/// on top of main application windows, use
 	/// gtk_native_dialog_set_transient_for() to make the dialog transient for the
 	/// parent; most [window managers][gtk-X11-arch]
 	/// will then disallow lowering the dialog below the parent.
-	/// Parameters:
-	///	- modal: Bool
-	open func setModal(_ modal: Bool) {
+	/// - Parameters:
+	///	- modal: Bool (gboolean)
+	open func setModal(_ modal: Bool) -> Swift.Void {
 		gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(self.GOBJECT), modal ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the title of the #GtkNativeDialog.
-	/// Parameters:
-	///	- title: String
-	open func setTitle(_ title: String) {
+	/// - Parameters:
+	///	- title: String (const char*)
+	open func setTitle(_ title: String) -> Swift.Void {
 		gtk_native_dialog_set_title(GTK_NATIVE_DIALOG(self.GOBJECT), title)
 	}
 
-	/// 
 	/// Dialog windows should be set transient for the main application
 	/// window they were spawned from. This allows
 	/// [window managers][gtk-X11-arch] to e.g. keep the
 	/// dialog on top of the main window, or center the dialog over the
 	/// main window.
 	/// Passing %NULL for @parent unsets the current transient window.
-	/// Parameters:
-	///	- parent: CGTKWindow
-	open func setTransientFor(parent: CGTKWindow) {
+	/// - Parameters:
+	///	- parent: CGTKWindow (GtkWindow*)
+	open func setTransientFor(parent: CGTKWindow) -> Swift.Void {
 		gtk_native_dialog_set_transient_for(GTK_NATIVE_DIALOG(self.GOBJECT), parent.WINDOW)
 	}
 
-	/// 
 	/// Shows the dialog on the display, allowing the user to interact with
 	/// it. When the user accepts the state of the dialog the dialog will
 	/// be automatically hidden and the #GtkNativeDialog::response signal
 	/// will be emitted.
 	/// Multiple calls while the dialog is visible will be ignored.
-	open func show() {
+	open func show() -> Swift.Void {
 		gtk_native_dialog_show(GTK_NATIVE_DIALOG(self.GOBJECT))
 	}
 

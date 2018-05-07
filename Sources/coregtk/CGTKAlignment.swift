@@ -34,7 +34,6 @@ public let GTK_TYPE_ALIGNMENT: GType = gtk_alignment_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ALIGNMENT)
 }
 
-/// 
 /// The #GtkAlignment widget controls the alignment and size of its child widget.
 /// It has four settings: xscale, yscale, xalign, and yalign.
 /// The scale settings are used to specify how much the child widget should
@@ -52,14 +51,13 @@ public let GTK_TYPE_ALIGNMENT: GType = gtk_alignment_get_type()
 
 
 open class CGTKAlignment : CGTKBin {
-	/// 
 	/// Creates a new #GtkAlignment.
-	/// Parameters:
-	///	- xalign: Float
-	///	- yalign: Float
-	///	- xscale: Float
-	///	- yscale: Float
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	///	- xscale: Float (gfloat)
+	///	- yscale: Float (gfloat)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(xalign: Float, yalign: Float, xscale: Float, yscale: Float) {
 		self.init(withGObject: gtk_alignment_new(xalign, yalign, xscale, yscale))!
 	}
@@ -70,40 +68,37 @@ open class CGTKAlignment : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Gets the padding on the different sides of the widget.
 	/// See gtk_alignment_set_padding ().
-	/// Parameters:
-	///	- paddingTop: UnsafeMutablePointer<UInt32>!
-	///	- paddingBottom: UnsafeMutablePointer<UInt32>!
-	///	- paddingLeft: UnsafeMutablePointer<UInt32>!
-	///	- paddingRight: UnsafeMutablePointer<UInt32>!
-	open func getPadding(paddingTop: UnsafeMutablePointer<UInt32>!, paddingBottom: UnsafeMutablePointer<UInt32>!, paddingLeft: UnsafeMutablePointer<UInt32>!, paddingRight: UnsafeMutablePointer<UInt32>!) {
+	/// - Parameters:
+	///	- paddingTop: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- paddingBottom: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- paddingLeft: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- paddingRight: UnsafeMutablePointer<UInt32>! (guint*)
+	open func getPadding(paddingTop: UnsafeMutablePointer<UInt32>!, paddingBottom: UnsafeMutablePointer<UInt32>!, paddingLeft: UnsafeMutablePointer<UInt32>!, paddingRight: UnsafeMutablePointer<UInt32>!) -> Swift.Void {
 		gtk_alignment_get_padding(GTK_ALIGNMENT(self.GOBJECT), paddingTop, paddingBottom, paddingLeft, paddingRight)
 	}
 
-	/// 
 	/// Sets the #GtkAlignment values.
-	/// Parameters:
-	///	- xalign: Float
-	///	- yalign: Float
-	///	- xscale: Float
-	///	- yscale: Float
-	open func set(xalign: Float, yalign: Float, xscale: Float, yscale: Float) {
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	///	- xscale: Float (gfloat)
+	///	- yscale: Float (gfloat)
+	open func set(xalign: Float, yalign: Float, xscale: Float, yscale: Float) -> Swift.Void {
 		gtk_alignment_set(GTK_ALIGNMENT(self.GOBJECT), xalign, yalign, xscale, yscale)
 	}
 
-	/// 
 	/// Sets the padding on the different sides of the widget.
 	/// The padding adds blank space to the sides of the widget. For instance,
 	/// this can be used to indent the child widget towards the right by adding
 	/// padding on the left.
-	/// Parameters:
-	///	- paddingTop: guint
-	///	- paddingBottom: guint
-	///	- paddingLeft: guint
-	///	- paddingRight: guint
-	open func setPadding(paddingTop: guint, paddingBottom: guint, paddingLeft: guint, paddingRight: guint) {
+	/// - Parameters:
+	///	- paddingTop: guint (guint)
+	///	- paddingBottom: guint (guint)
+	///	- paddingLeft: guint (guint)
+	///	- paddingRight: guint (guint)
+	open func setPadding(paddingTop: guint, paddingBottom: guint, paddingLeft: guint, paddingRight: guint) -> Swift.Void {
 		gtk_alignment_set_padding(GTK_ALIGNMENT(self.GOBJECT), paddingTop, paddingBottom, paddingLeft, paddingRight)
 	}
 

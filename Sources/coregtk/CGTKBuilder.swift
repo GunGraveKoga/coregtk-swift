@@ -34,7 +34,6 @@ public let GTK_TYPE_BUILDER: GType = gtk_builder_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_BUILDER)
 }
 
-/// 
 /// A GtkBuilder is an auxiliary object that reads textual descriptions
 /// of a user interface and instantiates the described objects. To create
 /// a GtkBuilder from a user interface description, call
@@ -197,7 +196,6 @@ public let GTK_TYPE_BUILDER: GType = gtk_builder_get_type()
 
 
 open class CGTKBuilder : CGTKBase {
-	/// 
 	/// Creates a new empty builder object.
 	/// This function is only useful if you intend to make multiple calls
 	/// to gtk_builder_add_from_file(), gtk_builder_add_from_resource()
@@ -205,37 +203,34 @@ open class CGTKBuilder : CGTKBase {
 	/// descriptions into a single builder.
 	/// Most users will probably want to use gtk_builder_new_from_file(),
 	/// gtk_builder_new_from_resource() or gtk_builder_new_from_string().
-	/// - Returns: UnsafeMutablePointer<GtkBuilder>!
+	/// - Returns: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	public convenience init() {
 		self.init(withGObject: gtk_builder_new())!
 	}
 
-	/// 
 	/// Builds the [GtkBuilder UI definition][BUILDER-UI]
 	/// in the file @filename.
 	/// If there is an error opening the file or parsing the description then
 	/// the program will be aborted.  You should only ever attempt to parse
 	/// user interface descriptions that are shipped as part of your program.
-	/// Parameters:
-	///	- filename: String
-	/// - Returns: UnsafeMutablePointer<GtkBuilder>!
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	public convenience init(fromFile filename: String) {
 		self.init(withGObject: gtk_builder_new_from_file(filename))!
 	}
 
-	/// 
 	/// Builds the [GtkBuilder UI definition][BUILDER-UI]
 	/// at @resource_path.
 	/// If there is an error locating the resource or parsing the
 	/// description, then the program will be aborted.
-	/// Parameters:
-	///	- resourcePath: String
-	/// - Returns: UnsafeMutablePointer<GtkBuilder>!
+	/// - Parameters:
+	///	- resourcePath: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	public convenience init(fromResource resourcePath: String) {
 		self.init(withGObject: gtk_builder_new_from_resource(resourcePath))!
 	}
 
-	/// 
 	/// Builds the user interface described by @string (in the
 	/// [GtkBuilder UI definition][BUILDER-UI] format).
 	/// If @string is %NULL-terminated, then @length should be -1.
@@ -243,10 +238,10 @@ open class CGTKBuilder : CGTKBase {
 	/// If there is an error parsing @string then the program will be
 	/// aborted. You should not attempt to parse user interface description
 	/// from untrusted sources.
-	/// Parameters:
-	///	- string: String
-	///	- length: gssize
-	/// - Returns: UnsafeMutablePointer<GtkBuilder>!
+	/// - Parameters:
+	///	- string: String (const gchar*)
+	///	- length: gssize (gssize)
+	/// - Returns: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	public convenience init(fromString string: String, length: gssize) {
 		self.init(withGObject: gtk_builder_new_from_string(string, length))!
 	}
@@ -257,20 +252,18 @@ open class CGTKBuilder : CGTKBase {
 		}
 	}
 
-	/// 
 	/// Adds the @callback_symbol to the scope of @builder under the given @callback_name.
 	/// Using this function overrides the behavior of gtk_builder_connect_signals()
 	/// for any callback symbols that are added. Using this method allows for better
 	/// encapsulation as it does not require that callback symbols be declared in
 	/// the global namespace.
-	/// Parameters:
-	///	- callbackName: String
-	///	- callbackSymbol: @escaping GCallback
-	open func addCallbackSymbol(callbackName: String, callbackSymbol: @escaping GCallback) {
+	/// - Parameters:
+	///	- callbackName: String (const gchar*)
+	///	- callbackSymbol: @escaping GCallback (GCallback)
+	open func addCallbackSymbol(callbackName: String, callbackSymbol: @escaping GCallback) -> Swift.Void {
 		gtk_builder_add_callback_symbol(GTK_BUILDER(self.GOBJECT), callbackName, callbackSymbol)
 	}
 
-	/// 
 	/// Parses a file containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// and merges it with the current contents of @builder.
 	/// Most users will probably want to use gtk_builder_new_from_file().
@@ -283,15 +276,14 @@ open class CGTKBuilder : CGTKBase {
 	/// files can easily crash your program, and it’s possible that memory
 	/// was leaked leading up to the reported failure. The only reasonable
 	/// thing to do when an error is detected is to call g_error().
-	/// Parameters:
-	///	- filename: String
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addFromFile(filename: String, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_from_file(GTK_BUILDER(self.GOBJECT), filename, err)
 	}
 
-	/// 
 	/// Parses a resource file containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// and merges it with the current contents of @builder.
 	/// Most users will probably want to use gtk_builder_new_from_resource().
@@ -301,15 +293,14 @@ open class CGTKBuilder : CGTKBase {
 	/// It’s not really reasonable to attempt to handle failures of this
 	/// call.  The only reasonable thing to do when an error is detected is
 	/// to call g_error().
-	/// Parameters:
-	///	- resourcePath: String
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- resourcePath: String (const gchar*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addFromResource(resourcePath: String, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_from_resource(GTK_BUILDER(self.GOBJECT), resourcePath, err)
 	}
 
-	/// 
 	/// Parses a string containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// and merges it with the current contents of @builder.
 	/// Most users will probably want to use gtk_builder_new_from_string().
@@ -319,16 +310,15 @@ open class CGTKBuilder : CGTKBase {
 	/// It’s not really reasonable to attempt to handle failures of this
 	/// call.  The only reasonable thing to do when an error is detected is
 	/// to call g_error().
-	/// Parameters:
-	///	- buffer: String
-	///	- length: gsize
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- buffer: String (const gchar*)
+	///	- length: gsize (gsize)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addFromString(buffer: String, length: gsize, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_from_string(GTK_BUILDER(self.GOBJECT), buffer, length, err)
 	}
 
-	/// 
 	/// Parses a file containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// building only the requested objects and merges
 	/// them with the current contents of @builder.
@@ -338,16 +328,15 @@ open class CGTKBuilder : CGTKBase {
 	/// If you are adding an object that depends on an object that is not
 	/// its child (for instance a #GtkTreeView that depends on its
 	/// #GtkTreeModel), you have to explicitly list all of them in @object_ids.
-	/// Parameters:
-	///	- filename: String
-	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addObjectsFromFile(filename: String, objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_objects_from_file(GTK_BUILDER(self.GOBJECT), filename, objectIds, err)
 	}
 
-	/// 
 	/// Parses a resource file containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// building only the requested objects and merges
 	/// them with the current contents of @builder.
@@ -357,16 +346,15 @@ open class CGTKBuilder : CGTKBase {
 	/// If you are adding an object that depends on an object that is not
 	/// its child (for instance a #GtkTreeView that depends on its
 	/// #GtkTreeModel), you have to explicitly list all of them in @object_ids.
-	/// Parameters:
-	///	- resourcePath: String
-	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- resourcePath: String (const gchar*)
+	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addObjectsFromResource(resourcePath: String, objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_objects_from_resource(GTK_BUILDER(self.GOBJECT), resourcePath, objectIds, err)
 	}
 
-	/// 
 	/// Parses a string containing a [GtkBuilder UI definition][BUILDER-UI]
 	/// building only the requested objects and merges
 	/// them with the current contents of @builder.
@@ -375,17 +363,16 @@ open class CGTKBuilder : CGTKBase {
 	/// If you are adding an object that depends on an object that is not
 	/// its child (for instance a #GtkTreeView that depends on its
 	/// #GtkTreeModel), you have to explicitly list all of them in @object_ids.
-	/// Parameters:
-	///	- buffer: String
-	///	- length: gsize
-	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- buffer: String (const gchar*)
+	///	- length: gsize (gsize)
+	///	- objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func addObjectsFromString(buffer: String, length: gsize, objectIds: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_add_objects_from_string(GTK_BUILDER(self.GOBJECT), buffer, length, objectIds, err)
 	}
 
-	/// 
 	/// This method is a simpler variation of gtk_builder_connect_signals_full().
 	/// It uses symbols explicitly added to @builder with prior calls to
 	/// gtk_builder_add_callback_symbol(). In the case that symbols are not
@@ -404,131 +391,119 @@ open class CGTKBuilder : CGTKBase {
 	/// On Linux and Unices, this is not necessary; applications should instead
 	/// be compiled with the -Wl,--export-dynamic CFLAGS, and linked against
 	/// gmodule-export-2.0.
-	/// Parameters:
-	///	- userData: gpointer
-	open func connectSignals(userData: gpointer) {
+	/// - Parameters:
+	///	- userData: gpointer (gpointer)
+	open func connectSignals(userData: gpointer) -> Swift.Void {
 		gtk_builder_connect_signals(GTK_BUILDER(self.GOBJECT), userData)
 	}
 
-	/// 
 	/// This function can be thought of the interpreted language binding
 	/// version of gtk_builder_connect_signals(), except that it does not
 	/// require GModule to function correctly.
-	/// Parameters:
-	///	- function: @escaping GtkBuilderConnectFunc
-	///	- userData: gpointer
-	open func connectSignalsFull(function: @escaping GtkBuilderConnectFunc, userData: gpointer) {
+	/// - Parameters:
+	///	- function: @escaping GtkBuilderConnectFunc (GtkBuilderConnectFunc)
+	///	- userData: gpointer (gpointer)
+	open func connectSignalsFull(function: @escaping GtkBuilderConnectFunc, userData: gpointer) -> Swift.Void {
 		gtk_builder_connect_signals_full(GTK_BUILDER(self.GOBJECT), function, userData)
 	}
 
-	/// 
 	/// Add @object to the @builder object pool so it can be referenced just like any
 	/// other object built by builder.
-	/// Parameters:
-	///	- name: String
-	///	- object: UnsafeMutablePointer<GObject>!
-	open func exposeObject(name: String, object: UnsafeMutablePointer<GObject>!) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	///	- object: UnsafeMutablePointer<GObject>! (GObject*)
+	open func exposeObject(name: String, object: UnsafeMutablePointer<GObject>!) -> Swift.Void {
 		gtk_builder_expose_object(GTK_BUILDER(self.GOBJECT), name, object)
 	}
 
-	/// 
 	/// Main private entry point for building composite container
 	/// components from template XML.
 	/// This is exported purely to let gtk-builder-tool validate
 	/// templates, applications have no need to call this function.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- templateType: GType
-	///	- buffer: String
-	///	- length: gsize
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: guint
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- templateType: GType (GType)
+	///	- buffer: String (const gchar*)
+	///	- length: gsize (gsize)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: guint (guint)
 	open func extendWithTemplate(widget: CGTKWidget, templateType: GType, buffer: String, length: gsize, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> guint {
 		return gtk_builder_extend_with_template(GTK_BUILDER(self.GOBJECT), widget.WIDGET, templateType, buffer, length, err)
 	}
 
-	/// 
 	/// Gets the #GtkApplication associated with the builder.
 	/// The #GtkApplication is used for creating action proxies as requested
 	/// from XML that the builder is loading.
 	/// By default, the builder uses the default application: the one from
 	/// g_application_get_default(). If you want to use another application
 	/// for constructing proxies, use gtk_builder_set_application().
-	/// - Returns: CGTKApplication?
+	/// - Returns: CGTKApplication? (GtkApplication*)
 	open func getApplication<T>() -> T? where T: CGTKApplication {
 		return T.init(withGObject: gtk_builder_get_application(GTK_BUILDER(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the object named @name. Note that this function does not
 	/// increment the reference count of the returned object.
-	/// Parameters:
-	///	- name: String
-	/// - Returns: UnsafeMutablePointer<GObject>?
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GObject>? (GObject*)
 	open func getObject(name: String) -> UnsafeMutablePointer<GObject>? {
 		return gtk_builder_get_object(GTK_BUILDER(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Gets all objects that have been constructed by @builder. Note that
 	/// this function does not increment the reference counts of the returned
 	/// objects.
-	/// - Returns: UnsafeMutablePointer<GSList>!
+	/// - Returns: UnsafeMutablePointer<GSList>! (GSList*)
 	open func getObjects() -> UnsafeMutablePointer<GSList>! {
 		return gtk_builder_get_objects(GTK_BUILDER(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the translation domain of @builder.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTranslationDomain() -> String? {
 		return String(utf8String: gtk_builder_get_translation_domain(GTK_BUILDER(self.GOBJECT)))
 	}
 
-	/// 
 	/// Looks up a type by name, using the virtual function that
 	/// #GtkBuilder has for that purpose. This is mainly used when
 	/// implementing the #GtkBuildable interface on a type.
-	/// Parameters:
-	///	- typeName: String
-	/// - Returns: GType
+	/// - Parameters:
+	///	- typeName: String (const char*)
+	/// - Returns: GType (GType)
 	open func getTypeFromName(typeName: String) -> GType {
 		return gtk_builder_get_type_from_name(GTK_BUILDER(self.GOBJECT), typeName)
 	}
 
-	/// 
 	/// Fetches a symbol previously added to @builder
 	/// with gtk_builder_add_callback_symbols()
 	/// This function is intended for possible use in language bindings
 	/// or for any case that one might be cusomizing signal connections
 	/// using gtk_builder_connect_signals_full()
-	/// Parameters:
-	///	- callbackName: String
-	/// - Returns: GCallback?
+	/// - Parameters:
+	///	- callbackName: String (const gchar*)
+	/// - Returns: GCallback? (GCallback)
 	open func lookupCallbackSymbol(callbackName: String) -> GCallback? {
 		return gtk_builder_lookup_callback_symbol(GTK_BUILDER(self.GOBJECT), callbackName)
 	}
 
-	/// 
 	/// Sets the application associated with @builder.
 	/// You only need this function if there is more than one #GApplication
 	/// in your process. @application cannot be %NULL.
-	/// Parameters:
-	///	- application: CGTKApplication
-	open func setApplication(_ application: CGTKApplication) {
+	/// - Parameters:
+	///	- application: CGTKApplication (GtkApplication*)
+	open func setApplication(_ application: CGTKApplication) -> Swift.Void {
 		gtk_builder_set_application(GTK_BUILDER(self.GOBJECT), application.APPLICATION)
 	}
 
-	/// 
 	/// Sets the translation domain of @builder.
 	/// See #GtkBuilder:translation-domain.
-	/// Parameters:
-	///	- domain: String
-	open func setTranslationDomain(_ domain: String) {
+	/// - Parameters:
+	///	- domain: String (const gchar*)
+	open func setTranslationDomain(_ domain: String) -> Swift.Void {
 		gtk_builder_set_translation_domain(GTK_BUILDER(self.GOBJECT), domain)
 	}
 
-	/// 
 	/// This function demarshals a value from a string. This function
 	/// calls g_value_init() on the @value argument, so it need not be
 	/// initialised beforehand.
@@ -538,29 +513,28 @@ open class CGTKBuilder : CGTKBase {
 	/// still to come.
 	/// Upon errors %FALSE will be returned and @error will be assigned a
 	/// #GError from the #GTK_BUILDER_ERROR domain.
-	/// Parameters:
-	///	- pspec: UnsafeMutablePointer<GParamSpec>!
-	///	- string: String
-	///	- value: UnsafeMutablePointer<GValue>!
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- pspec: UnsafeMutablePointer<GParamSpec>! (GParamSpec*)
+	///	- string: String (const gchar*)
+	///	- value: UnsafeMutablePointer<GValue>! (GValue*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: Bool (gboolean)
 	open func valueFromString(pspec: UnsafeMutablePointer<GParamSpec>!, string: String, value: UnsafeMutablePointer<GValue>!, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> Bool {
 		return gtk_builder_value_from_string(GTK_BUILDER(self.GOBJECT), pspec, string, value, err) != 0 ? true : false
 	}
 
-	/// 
 	/// Like gtk_builder_value_from_string(), this function demarshals
 	/// a value from a string, but takes a #GType instead of #GParamSpec.
 	/// This function calls g_value_init() on the @value argument, so it
 	/// need not be initialised beforehand.
 	/// Upon errors %FALSE will be returned and @error will be assigned a
 	/// #GError from the #GTK_BUILDER_ERROR domain.
-	/// Parameters:
-	///	- type: GType
-	///	- string: String
-	///	- value: UnsafeMutablePointer<GValue>!
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- type: GType (GType)
+	///	- string: String (const gchar*)
+	///	- value: UnsafeMutablePointer<GValue>! (GValue*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: Bool (gboolean)
 	open func valueFromStringType(_ type: GType, string: String, value: UnsafeMutablePointer<GValue>!, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> Bool {
 		return gtk_builder_value_from_string_type(GTK_BUILDER(self.GOBJECT), type, string, value, err) != 0 ? true : false
 	}

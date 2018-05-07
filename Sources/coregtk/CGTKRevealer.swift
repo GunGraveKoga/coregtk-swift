@@ -34,7 +34,6 @@ public let GTK_TYPE_REVEALER: GType = gtk_revealer_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_REVEALER)
 }
 
-/// 
 /// The GtkRevealer widget is a container which animates
 /// the transition of its child from invisible to visible.
 /// The style of transition can be controlled with
@@ -47,9 +46,8 @@ public let GTK_TYPE_REVEALER: GType = gtk_revealer_get_type()
 
 
 open class CGTKRevealer : CGTKBin {
-	/// 
 	/// Creates a new #GtkRevealer.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_revealer_new())!
 	}
@@ -60,67 +58,60 @@ open class CGTKRevealer : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Returns whether the child is fully revealed, in other words whether
 	/// the transition to the revealed state is completed.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getChildRevealed() -> Bool {
 		return gtk_revealer_get_child_revealed(GTK_REVEALER(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the child is currently
 	/// revealed. See gtk_revealer_set_reveal_child().
 	/// This function returns %TRUE as soon as the transition
 	/// is to the revealed state is started. To learn whether
 	/// the child is fully revealed (ie the transition is completed),
 	/// use gtk_revealer_get_child_revealed().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getRevealChild() -> Bool {
 		return gtk_revealer_get_reveal_child(GTK_REVEALER(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the amount of time (in milliseconds) that
 	/// transitions will take.
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getTransitionDuration() -> guint {
 		return gtk_revealer_get_transition_duration(GTK_REVEALER(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the type of animation that will be used
 	/// for transitions in @revealer.
-	/// - Returns: GtkRevealerTransitionType
+	/// - Returns: GtkRevealerTransitionType (GtkRevealerTransitionType)
 	open func getTransitionType() -> GtkRevealerTransitionType {
 		return gtk_revealer_get_transition_type(GTK_REVEALER(self.GOBJECT))
 	}
 
-	/// 
 	/// Tells the #GtkRevealer to reveal or conceal its child.
 	/// The transition will be animated with the current
 	/// transition type of @revealer.
-	/// Parameters:
-	///	- revealChild: Bool
-	open func setRevealChild(_ revealChild: Bool) {
+	/// - Parameters:
+	///	- revealChild: Bool (gboolean)
+	open func setRevealChild(_ revealChild: Bool) -> Swift.Void {
 		gtk_revealer_set_reveal_child(GTK_REVEALER(self.GOBJECT), revealChild ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the duration that transitions will take.
-	/// Parameters:
-	///	- duration: guint
-	open func setTransitionDuration(_ duration: guint) {
+	/// - Parameters:
+	///	- duration: guint (guint)
+	open func setTransitionDuration(_ duration: guint) -> Swift.Void {
 		gtk_revealer_set_transition_duration(GTK_REVEALER(self.GOBJECT), duration)
 	}
 
-	/// 
 	/// Sets the type of animation that will be used for
 	/// transitions in @revealer. Available types include
 	/// various kinds of fades and slides.
-	/// Parameters:
-	///	- transition: GtkRevealerTransitionType
-	open func setTransitionType(transition: GtkRevealerTransitionType) {
+	/// - Parameters:
+	///	- transition: GtkRevealerTransitionType (GtkRevealerTransitionType)
+	open func setTransitionType(transition: GtkRevealerTransitionType) -> Swift.Void {
 		gtk_revealer_set_transition_type(GTK_REVEALER(self.GOBJECT), transition)
 	}
 

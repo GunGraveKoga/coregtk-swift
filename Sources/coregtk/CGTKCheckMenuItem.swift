@@ -34,7 +34,6 @@ public let GTK_TYPE_CHECK_MENU_ITEM: GType = gtk_check_menu_item_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_CHECK_MENU_ITEM)
 }
 
-/// 
 /// A #GtkCheckMenuItem is a menu item that maintains the state of a boolean
 /// value in addition to a #GtkMenuItem usual role in activating application
 /// code.
@@ -52,29 +51,26 @@ public let GTK_TYPE_CHECK_MENU_ITEM: GType = gtk_check_menu_item_get_type()
 
 
 open class CGTKCheckMenuItem : CGTKMenuItem {
-	/// 
 	/// Creates a new #GtkCheckMenuItem.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_check_menu_item_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkCheckMenuItem with a label.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabel label: String) {
 		self.init(withGObject: gtk_check_menu_item_new_with_label(label))!
 	}
 
-	/// 
 	/// Creates a new #GtkCheckMenuItem containing a label. The label
 	/// will be created using gtk_label_new_with_mnemonic(), so underscores
 	/// in @label indicate the mnemonic for the menu item.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic label: String) {
 		self.init(withGObject: gtk_check_menu_item_new_with_mnemonic(label))!
 	}
@@ -85,45 +81,39 @@ open class CGTKCheckMenuItem : CGTKMenuItem {
 		}
 	}
 
-	/// 
 	/// Returns whether the check menu item is active. See
 	/// gtk_check_menu_item_set_active ().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getActive() -> Bool {
 		return gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether @check_menu_item looks like a #GtkRadioMenuItem
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDrawAsRadio() -> Bool {
 		return gtk_check_menu_item_get_draw_as_radio(GTK_CHECK_MENU_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the value set by gtk_check_menu_item_set_inconsistent().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getInconsistent() -> Bool {
 		return gtk_check_menu_item_get_inconsistent(GTK_CHECK_MENU_ITEM(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the active state of the menu item’s check box.
-	/// Parameters:
-	///	- isActive: Bool
-	open func setActive(isActive: Bool) {
+	/// - Parameters:
+	///	- isActive: Bool (gboolean)
+	open func setActive(isActive: Bool) -> Swift.Void {
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(self.GOBJECT), isActive ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether @check_menu_item is drawn like a #GtkRadioMenuItem
-	/// Parameters:
-	///	- drawAsRadio: Bool
-	open func setDrawAsRadio(_ drawAsRadio: Bool) {
+	/// - Parameters:
+	///	- drawAsRadio: Bool (gboolean)
+	open func setDrawAsRadio(_ drawAsRadio: Bool) -> Swift.Void {
 		gtk_check_menu_item_set_draw_as_radio(GTK_CHECK_MENU_ITEM(self.GOBJECT), drawAsRadio ? 1 : 0)
 	}
 
-	/// 
 	/// If the user has selected a range of elements (such as some text or
 	/// spreadsheet cells) that are affected by a boolean setting, and the
 	/// current values in that range are inconsistent, you may want to
@@ -132,15 +122,14 @@ open class CGTKCheckMenuItem : CGTKMenuItem {
 	/// state again if the user explicitly selects a setting. This has to be
 	/// done manually, gtk_check_menu_item_set_inconsistent() only affects
 	/// visual appearance, it doesn’t affect the semantics of the widget.
-	/// Parameters:
-	///	- setting: Bool
-	open func setInconsistent(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setInconsistent(setting: Bool) -> Swift.Void {
 		gtk_check_menu_item_set_inconsistent(GTK_CHECK_MENU_ITEM(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Emits the #GtkCheckMenuItem::toggled signal.
-	open func toggled() {
+	open func toggled() -> Swift.Void {
 		gtk_check_menu_item_toggled(GTK_CHECK_MENU_ITEM(self.GOBJECT))
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_SEPARATOR: GType = gtk_separator_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SEPARATOR)
 }
 
-/// 
 /// GtkSeparator is a horizontal or vertical separator widget, depending on the
 /// value of the #GtkOrientable:orientation property, used to group the widgets
 /// within a window. It displays a line with a shadow to make it appear sunken
@@ -44,12 +43,11 @@ public let GTK_TYPE_SEPARATOR: GType = gtk_separator_get_type()
 /// gets one of the .horizontal or .vertical style classes.
 
 
-open class CGTKSeparator : CGTKWidget {
-	/// 
+open class CGTKSeparator : CGTKWidget, CGTKOrientable {
 	/// Creates a new #GtkSeparator with the given orientation.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation) {
 		self.init(withGObject: gtk_separator_new(orientation))!
 	}
@@ -58,6 +56,19 @@ open class CGTKSeparator : CGTKWidget {
 		get {
 			return GTK_SEPARATOR(self.GOBJECT)
 		}
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

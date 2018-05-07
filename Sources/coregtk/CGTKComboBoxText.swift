@@ -34,7 +34,6 @@ public let GTK_TYPE_COMBO_BOX_TEXT: GType = gtk_combo_box_text_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_COMBO_BOX_TEXT)
 }
 
-/// 
 /// A GtkComboBoxText is a simple variant of #GtkComboBox that hides
 /// the model-view complexity for simple text-only use cases.
 /// To create a GtkComboBoxText, use gtk_combo_box_text_new() or
@@ -79,18 +78,16 @@ public let GTK_TYPE_COMBO_BOX_TEXT: GType = gtk_combo_box_text_get_type()
 
 
 open class CGTKComboBoxText : CGTKComboBox {
-	/// 
 	/// Creates a new #GtkComboBoxText, which is a #GtkComboBox just displaying
 	/// strings. The combo box created by this function has an entry.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	override open class func newWithEntry<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_combo_box_text_new_with_entry())!
 	}
 
-	/// 
 	/// Creates a new #GtkComboBoxText, which is a #GtkComboBox just displaying
 	/// strings.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_combo_box_text_new())!
 	}
@@ -101,96 +98,87 @@ open class CGTKComboBoxText : CGTKComboBox {
 		}
 	}
 
-	/// 
 	/// Appends @text to the list of strings stored in @combo_box.
 	/// If @id is non-%NULL then it is used as the ID of the row.
 	/// This is the same as calling gtk_combo_box_text_insert() with a
 	/// position of -1.
-	/// Parameters:
-	///	- id: String
-	///	- text: String
-	open func append(id: String, text: String) {
+	/// - Parameters:
+	///	- id: String (const gchar*)
+	///	- text: String (const gchar*)
+	open func append(id: String, text: String) -> Swift.Void {
 		gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(self.GOBJECT), id, text)
 	}
 
-	/// 
 	/// Appends @text to the list of strings stored in @combo_box.
 	/// This is the same as calling gtk_combo_box_text_insert_text() with a
 	/// position of -1.
-	/// Parameters:
-	///	- text: String
-	open func appendText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func appendText(_ text: String) -> Swift.Void {
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(self.GOBJECT), text)
 	}
 
-	/// 
 	/// Returns the currently active string in @combo_box, or %NULL
 	/// if none is selected. If @combo_box contains an entry, this
 	/// function will return its contents (which will not necessarily
 	/// be an item from the list).
-	/// - Returns: String?
+	/// - Returns: String? (gchar*)
 	open func getActiveText() -> String? {
 		return String(utf8String: gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(self.GOBJECT)))
 	}
 
-	/// 
 	/// Inserts @text at @position in the list of strings stored in @combo_box.
 	/// If @id is non-%NULL then it is used as the ID of the row.  See
 	/// #GtkComboBox:id-column.
 	/// If @position is negative then @text is appended.
-	/// Parameters:
-	///	- position: gint
-	///	- id: String
-	///	- text: String
-	open func insert(position: gint, id: String, text: String) {
+	/// - Parameters:
+	///	- position: gint (gint)
+	///	- id: String (const gchar*)
+	///	- text: String (const gchar*)
+	open func insert(position: gint, id: String, text: String) -> Swift.Void {
 		gtk_combo_box_text_insert(GTK_COMBO_BOX_TEXT(self.GOBJECT), position, id, text)
 	}
 
-	/// 
 	/// Inserts @text at @position in the list of strings stored in @combo_box.
 	/// If @position is negative then @text is appended.
 	/// This is the same as calling gtk_combo_box_text_insert() with a %NULL
 	/// ID string.
-	/// Parameters:
-	///	- position: gint
-	///	- text: String
-	open func insertText(position: gint, text: String) {
+	/// - Parameters:
+	///	- position: gint (gint)
+	///	- text: String (const gchar*)
+	open func insertText(position: gint, text: String) -> Swift.Void {
 		gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(self.GOBJECT), position, text)
 	}
 
-	/// 
 	/// Prepends @text to the list of strings stored in @combo_box.
 	/// If @id is non-%NULL then it is used as the ID of the row.
 	/// This is the same as calling gtk_combo_box_text_insert() with a
 	/// position of 0.
-	/// Parameters:
-	///	- id: String
-	///	- text: String
-	open func prepend(id: String, text: String) {
+	/// - Parameters:
+	///	- id: String (const gchar*)
+	///	- text: String (const gchar*)
+	open func prepend(id: String, text: String) -> Swift.Void {
 		gtk_combo_box_text_prepend(GTK_COMBO_BOX_TEXT(self.GOBJECT), id, text)
 	}
 
-	/// 
 	/// Prepends @text to the list of strings stored in @combo_box.
 	/// This is the same as calling gtk_combo_box_text_insert_text() with a
 	/// position of 0.
-	/// Parameters:
-	///	- text: String
-	open func prependText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func prependText(_ text: String) -> Swift.Void {
 		gtk_combo_box_text_prepend_text(GTK_COMBO_BOX_TEXT(self.GOBJECT), text)
 	}
 
-	/// 
 	/// Removes the string at @position from @combo_box.
-	/// Parameters:
-	///	- position: gint
-	open func remove(position: gint) {
+	/// - Parameters:
+	///	- position: gint (gint)
+	open func remove(position: gint) -> Swift.Void {
 		gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Removes all the text entries from the combo box.
-	open func removeAll() {
+	open func removeAll() -> Swift.Void {
 		gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(self.GOBJECT))
 	}
 

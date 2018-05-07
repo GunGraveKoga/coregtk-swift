@@ -34,7 +34,6 @@ public let GTK_TYPE_VBOX: GType = gtk_vbox_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VBOX)
 }
 
-/// 
 /// A #GtkVBox is a container that organizes child widgets into a single column.
 /// Use the #GtkBox packing interface to determine the arrangement,
 /// spacing, height, and alignment of #GtkVBox children.
@@ -56,12 +55,11 @@ public let GTK_TYPE_VBOX: GType = gtk_vbox_get_type()
 
 
 open class CGTKVBox : CGTKBox {
-	/// 
 	/// Creates a new #GtkVBox.
-	/// Parameters:
-	///	- homogeneous: Bool
-	///	- spacing: gint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- homogeneous: Bool (gboolean)
+	///	- spacing: gint (gint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(homogeneous: Bool, spacing: gint) {
 		self.init(withGObject: gtk_vbox_new(homogeneous ? 1 : 0, spacing))!
 	}

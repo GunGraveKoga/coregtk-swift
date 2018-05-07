@@ -35,9 +35,8 @@ public let GTK_TYPE_VBUTTON_BOX: GType = gtk_vbutton_box_get_type()
 }
 
 open class CGTKVButtonBox : CGTKButtonBox {
-	/// 
 	/// Creates a new vertical button box.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_vbutton_box_new())!
 	}

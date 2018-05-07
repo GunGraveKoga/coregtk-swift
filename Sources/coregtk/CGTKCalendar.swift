@@ -34,7 +34,6 @@ public let GTK_TYPE_CALENDAR: GType = gtk_calendar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_CALENDAR)
 }
 
-/// 
 /// #GtkCalendar is a widget that displays a Gregorian calendar, one month
 /// at a time. It can be created with gtk_calendar_new().
 /// The month and year currently displayed can be altered with
@@ -54,9 +53,8 @@ public let GTK_TYPE_CALENDAR: GType = gtk_calendar_get_type()
 
 
 open class CGTKCalendar : CGTKWidget {
-	/// 
 	/// Creates a new calendar, with the current date being selected.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_calendar_new())!
 	}
@@ -67,80 +65,70 @@ open class CGTKCalendar : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Remove all visual markers.
-	open func clearMarks() {
+	open func clearMarks() -> Swift.Void {
 		gtk_calendar_clear_marks(GTK_CALENDAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the selected date from a #GtkCalendar.
-	/// Parameters:
-	///	- year: UnsafeMutablePointer<UInt32>!
-	///	- month: UnsafeMutablePointer<UInt32>!
-	///	- day: UnsafeMutablePointer<UInt32>!
-	open func getDate(year: UnsafeMutablePointer<UInt32>!, month: UnsafeMutablePointer<UInt32>!, day: UnsafeMutablePointer<UInt32>!) {
+	/// - Parameters:
+	///	- year: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- month: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- day: UnsafeMutablePointer<UInt32>! (guint*)
+	open func getDate(year: UnsafeMutablePointer<UInt32>!, month: UnsafeMutablePointer<UInt32>!, day: UnsafeMutablePointer<UInt32>!) -> Swift.Void {
 		gtk_calendar_get_date(GTK_CALENDAR(self.GOBJECT), year, month, day)
 	}
 
-	/// 
 	/// Returns if the @day of the @calendar is already marked.
-	/// Parameters:
-	///	- day: guint
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- day: guint (guint)
+	/// - Returns: Bool (gboolean)
 	open func getDayIsMarked(day: guint) -> Bool {
 		return gtk_calendar_get_day_is_marked(GTK_CALENDAR(self.GOBJECT), day) != 0 ? true : false
 	}
 
-	/// 
 	/// Queries the height of detail cells, in rows.
 	/// See #GtkCalendar:detail-width-chars.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getDetailHeightRows() -> gint {
 		return gtk_calendar_get_detail_height_rows(GTK_CALENDAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Queries the width of detail cells, in characters.
 	/// See #GtkCalendar:detail-width-chars.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getDetailWidthChars() -> gint {
 		return gtk_calendar_get_detail_width_chars(GTK_CALENDAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the current display options of @calendar.
-	/// - Returns: GtkCalendarDisplayOptions
+	/// - Returns: GtkCalendarDisplayOptions (GtkCalendarDisplayOptions)
 	open func getDisplayOptions() -> GtkCalendarDisplayOptions {
 		return gtk_calendar_get_display_options(GTK_CALENDAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Places a visual marker on a particular day.
-	/// Parameters:
-	///	- day: guint
-	open func markDay(_ day: guint) {
+	/// - Parameters:
+	///	- day: guint (guint)
+	open func markDay(_ day: guint) -> Swift.Void {
 		gtk_calendar_mark_day(GTK_CALENDAR(self.GOBJECT), day)
 	}
 
-	/// 
 	/// Selects a day from the current month.
-	/// Parameters:
-	///	- day: guint
-	open func selectDay(_ day: guint) {
+	/// - Parameters:
+	///	- day: guint (guint)
+	open func selectDay(_ day: guint) -> Swift.Void {
 		gtk_calendar_select_day(GTK_CALENDAR(self.GOBJECT), day)
 	}
 
-	/// 
 	/// Shifts the calendar to a different month.
-	/// Parameters:
-	///	- month: guint
-	///	- year: guint
-	open func selectMonth(_ month: guint, year: guint) {
+	/// - Parameters:
+	///	- month: guint (guint)
+	///	- year: guint (guint)
+	open func selectMonth(_ month: guint, year: guint) -> Swift.Void {
 		gtk_calendar_select_month(GTK_CALENDAR(self.GOBJECT), month, year)
 	}
 
-	/// 
 	/// Installs a function which provides Pango markup with detail information
 	/// for each day. Examples for such details are holidays or appointments. That
 	/// information is shown below each day when #GtkCalendar:show-details is set.
@@ -150,46 +138,42 @@ open class CGTKCalendar : CGTKWidget {
 	/// The size of the details area can be restricted by setting the
 	/// #GtkCalendar:detail-width-chars and #GtkCalendar:detail-height-rows
 	/// properties.
-	/// Parameters:
-	///	- function: @escaping GtkCalendarDetailFunc
-	///	- data: gpointer
-	///	- destroy: @escaping GDestroyNotify
-	open func setDetailFunc(_ function: @escaping GtkCalendarDetailFunc, data: gpointer, destroy: @escaping GDestroyNotify) {
+	/// - Parameters:
+	///	- function: @escaping GtkCalendarDetailFunc (GtkCalendarDetailFunc)
+	///	- data: gpointer (gpointer)
+	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
+	open func setDetailFunc(_ function: @escaping GtkCalendarDetailFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_calendar_set_detail_func(GTK_CALENDAR(self.GOBJECT), function, data, destroy)
 	}
 
-	/// 
 	/// Updates the height of detail cells.
 	/// See #GtkCalendar:detail-height-rows.
-	/// Parameters:
-	///	- rows: gint
-	open func setDetailHeightRows(_ rows: gint) {
+	/// - Parameters:
+	///	- rows: gint (gint)
+	open func setDetailHeightRows(_ rows: gint) -> Swift.Void {
 		gtk_calendar_set_detail_height_rows(GTK_CALENDAR(self.GOBJECT), rows)
 	}
 
-	/// 
 	/// Updates the width of detail cells.
 	/// See #GtkCalendar:detail-width-chars.
-	/// Parameters:
-	///	- chars: gint
-	open func setDetailWidthChars(_ chars: gint) {
+	/// - Parameters:
+	///	- chars: gint (gint)
+	open func setDetailWidthChars(_ chars: gint) -> Swift.Void {
 		gtk_calendar_set_detail_width_chars(GTK_CALENDAR(self.GOBJECT), chars)
 	}
 
-	/// 
 	/// Sets display options (whether to display the heading and the month
 	/// headings).
-	/// Parameters:
-	///	- flags: GtkCalendarDisplayOptions
-	open func setDisplayOptions(flags: GtkCalendarDisplayOptions) {
+	/// - Parameters:
+	///	- flags: GtkCalendarDisplayOptions (GtkCalendarDisplayOptions)
+	open func setDisplayOptions(flags: GtkCalendarDisplayOptions) -> Swift.Void {
 		gtk_calendar_set_display_options(GTK_CALENDAR(self.GOBJECT), flags)
 	}
 
-	/// 
 	/// Removes the visual marker from a particular day.
-	/// Parameters:
-	///	- day: guint
-	open func unmarkDay(_ day: guint) {
+	/// - Parameters:
+	///	- day: guint (guint)
+	open func unmarkDay(_ day: guint) -> Swift.Void {
 		gtk_calendar_unmark_day(GTK_CALENDAR(self.GOBJECT), day)
 	}
 

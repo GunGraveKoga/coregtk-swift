@@ -34,7 +34,6 @@ public let GTK_TYPE_MENU_SHELL: GType = gtk_menu_shell_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MENU_SHELL)
 }
 
-/// 
 /// A #GtkMenuShell is the abstract base class used to derive the
 /// #GtkMenu and #GtkMenuBar subclasses.
 /// A #GtkMenuShell is a container of #GtkMenuItem objects arranged
@@ -66,25 +65,22 @@ open class CGTKMenuShell : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Activates the menu item within the menu shell.
-	/// Parameters:
-	///	- menuItem: CGTKWidget
-	///	- forceDeactivate: Bool
-	open func activateItem(menuItem: CGTKWidget, forceDeactivate: Bool) {
+	/// - Parameters:
+	///	- menuItem: CGTKWidget (GtkWidget*)
+	///	- forceDeactivate: Bool (gboolean)
+	open func activateItem(menuItem: CGTKWidget, forceDeactivate: Bool) -> Swift.Void {
 		gtk_menu_shell_activate_item(GTK_MENU_SHELL(self.GOBJECT), menuItem.WIDGET, forceDeactivate ? 1 : 0)
 	}
 
-	/// 
 	/// Adds a new #GtkMenuItem to the end of the menu shell's
 	/// item list.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func append(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func append(child: CGTKWidget) -> Swift.Void {
 		gtk_menu_shell_append(GTK_MENU_SHELL(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Establishes a binding between a #GtkMenuShell and a #GMenuModel.
 	/// The contents of @shell are removed and then refilled with menu items
 	/// according to @model.  When @model changes, @shell is updated.
@@ -113,96 +109,85 @@ open class CGTKMenuShell : CGTKContainer {
 	/// gtk_menu_new_from_model() or gtk_menu_bar_new_from_model() or just
 	/// directly passing the #GMenuModel to gtk_application_set_app_menu() or
 	/// gtk_application_set_menubar().
-	/// Parameters:
-	///	- model: UnsafeMutablePointer<GMenuModel>?
-	///	- actionNamespace: String
-	///	- withSeparators: Bool
-	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String, withSeparators: Bool) {
+	/// - Parameters:
+	///	- model: UnsafeMutablePointer<GMenuModel>? (GMenuModel*)
+	///	- actionNamespace: String (const gchar*)
+	///	- withSeparators: Bool (gboolean)
+	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String, withSeparators: Bool) -> Swift.Void {
 		gtk_menu_shell_bind_model(GTK_MENU_SHELL(self.GOBJECT), model, actionNamespace, withSeparators ? 1 : 0)
 	}
 
-	/// 
 	/// Cancels the selection within the menu shell.
-	open func cancel() {
+	open func cancel() -> Swift.Void {
 		gtk_menu_shell_cancel(GTK_MENU_SHELL(self.GOBJECT))
 	}
 
-	/// 
 	/// Deactivates the menu shell.
 	/// Typically this results in the menu shell being erased
 	/// from the screen.
-	open func deactivate() {
+	open func deactivate() -> Swift.Void {
 		gtk_menu_shell_deactivate(GTK_MENU_SHELL(self.GOBJECT))
 	}
 
-	/// 
 	/// Deselects the currently selected item from the menu shell,
 	/// if any.
-	open func deselect() {
+	open func deselect() -> Swift.Void {
 		gtk_menu_shell_deselect(GTK_MENU_SHELL(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the parent menu shell.
 	/// The parent menu shell of a submenu is the #GtkMenu or #GtkMenuBar
 	/// from which it was opened up.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getParentShell<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_menu_shell_get_parent_shell(GTK_MENU_SHELL(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the currently selected item.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getSelectedItem<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_menu_shell_get_selected_item(GTK_MENU_SHELL(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns %TRUE if the menu shell will take the keyboard focus on popup.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getTakeFocus() -> Bool {
 		return gtk_menu_shell_get_take_focus(GTK_MENU_SHELL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Adds a new #GtkMenuItem to the menu shell’s item list
 	/// at the position indicated by @position.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- position: gint
-	open func insert(child: CGTKWidget, position: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	open func insert(child: CGTKWidget, position: gint) -> Swift.Void {
 		gtk_menu_shell_insert(GTK_MENU_SHELL(self.GOBJECT), child.WIDGET, position)
 	}
 
-	/// 
 	/// Adds a new #GtkMenuItem to the beginning of the menu shell's
 	/// item list.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func prepend(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func prepend(child: CGTKWidget) -> Swift.Void {
 		gtk_menu_shell_prepend(GTK_MENU_SHELL(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Select the first visible or selectable child of the menu shell;
 	/// don’t select tearoff items unless the only item is a tearoff
 	/// item.
-	/// Parameters:
-	///	- searchSensitive: Bool
-	open func selectFirst(searchSensitive: Bool) {
+	/// - Parameters:
+	///	- searchSensitive: Bool (gboolean)
+	open func selectFirst(searchSensitive: Bool) -> Swift.Void {
 		gtk_menu_shell_select_first(GTK_MENU_SHELL(self.GOBJECT), searchSensitive ? 1 : 0)
 	}
 
-	/// 
 	/// Selects the menu item from the menu shell.
-	/// Parameters:
-	///	- menuItem: CGTKWidget
-	open func selectItem(menuItem: CGTKWidget) {
+	/// - Parameters:
+	///	- menuItem: CGTKWidget (GtkWidget*)
+	open func selectItem(menuItem: CGTKWidget) -> Swift.Void {
 		gtk_menu_shell_select_item(GTK_MENU_SHELL(self.GOBJECT), menuItem.WIDGET)
 	}
 
-	/// 
 	/// If @take_focus is %TRUE (the default) the menu shell will take
 	/// the keyboard focus so that it will receive all keyboard events
 	/// which is needed to enable keyboard navigation in menus.
@@ -223,9 +208,9 @@ open class CGTKMenuShell : CGTKContainer {
 	/// should not display mnemonics or accelerators, since it cannot be
 	/// guaranteed that they will work.
 	/// See also gdk_keyboard_grab()
-	/// Parameters:
-	///	- takeFocus: Bool
-	open func setTakeFocus(_ takeFocus: Bool) {
+	/// - Parameters:
+	///	- takeFocus: Bool (gboolean)
+	open func setTakeFocus(_ takeFocus: Bool) -> Swift.Void {
 		gtk_menu_shell_set_take_focus(GTK_MENU_SHELL(self.GOBJECT), takeFocus ? 1 : 0)
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_SCALE: GType = gtk_scale_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SCALE)
 }
 
-/// 
 /// A GtkScale is a slider control used to select a numeric value.
 /// To use it, you’ll probably want to investigate the methods on
 /// its base class, #GtkRange, in addition to the methods for GtkScale itself.
@@ -97,17 +96,15 @@ public let GTK_TYPE_SCALE: GType = gtk_scale_get_type()
 
 
 open class CGTKScale : CGTKRange {
-	/// 
 	/// Creates a new #GtkScale.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation, adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
 		self.init(withGObject: gtk_scale_new(orientation, adjustment))!
 	}
 
-	/// 
 	/// Creates a new scale widget with the given orientation that lets the
 	/// user input a number between @min and @max (including @min and @max)
 	/// with the increment @step.  @step must be nonzero; it’s the distance
@@ -116,12 +113,12 @@ open class CGTKScale : CGTKRange {
 	/// Note that the way in which the precision is derived works best if @step
 	/// is a power of ten. If the resulting precision is not suitable for your
 	/// needs, use gtk_scale_set_digits() to correct it.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	///	- min: Double
-	///	- max: Double
-	///	- step: Double
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- min: Double (gdouble)
+	///	- max: Double (gdouble)
+	///	- step: Double (gdouble)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withRange orientation: GtkOrientation, min: Double, max: Double, step: Double) {
 		self.init(withGObject: gtk_scale_new_with_range(orientation, min, max, step))!
 	}
@@ -132,80 +129,71 @@ open class CGTKScale : CGTKRange {
 		}
 	}
 
-	/// 
 	/// Adds a mark at @value.
 	/// A mark is indicated visually by drawing a tick mark next to the scale,
 	/// and GTK+ makes it easy for the user to position the scale exactly at the
 	/// marks value.
 	/// If @markup is not %NULL, text is shown next to the tick mark.
 	/// To remove marks from a scale, use gtk_scale_clear_marks().
-	/// Parameters:
-	///	- value: Double
-	///	- position: GtkPositionType
-	///	- markup: String
-	open func addMark(value: Double, position: GtkPositionType, markup: String) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	///	- position: GtkPositionType (GtkPositionType)
+	///	- markup: String (const gchar*)
+	open func addMark(value: Double, position: GtkPositionType, markup: String) -> Swift.Void {
 		gtk_scale_add_mark(GTK_SCALE(self.GOBJECT), value, position, markup)
 	}
 
-	/// 
 	/// Removes any marks that have been added with gtk_scale_add_mark().
-	open func clearMarks() {
+	open func clearMarks() -> Swift.Void {
 		gtk_scale_clear_marks(GTK_SCALE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the number of decimal places that are displayed in the value.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getDigits() -> gint {
 		return gtk_scale_get_digits(GTK_SCALE(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the current value is displayed as a string
 	/// next to the slider.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDrawValue() -> Bool {
 		return gtk_scale_get_draw_value(GTK_SCALE(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the scale has an origin.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasOrigin() -> Bool {
 		return gtk_scale_get_has_origin(GTK_SCALE(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the #PangoLayout used to display the scale. The returned
 	/// object is owned by the scale so does not need to be freed by
 	/// the caller.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (PangoLayout*)
 	open func getLayout() -> OpaquePointer? {
 		return gtk_scale_get_layout(GTK_SCALE(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the coordinates where the scale will draw the
 	/// #PangoLayout representing the text in the scale. Remember
 	/// when using the #PangoLayout function you need to convert to
 	/// and from pixels using PANGO_PIXELS() or #PANGO_SCALE.
 	/// If the #GtkScale:draw-value property is %FALSE, the return
 	/// values are undefined.
-	/// Parameters:
-	///	- x: UnsafeMutablePointer<Int32>!
-	///	- y: UnsafeMutablePointer<Int32>!
-	open func getLayoutOffsets(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- x: UnsafeMutablePointer<Int32>! (gint*)
+	///	- y: UnsafeMutablePointer<Int32>! (gint*)
+	open func getLayoutOffsets(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_scale_get_layout_offsets(GTK_SCALE(self.GOBJECT), x, y)
 	}
 
-	/// 
 	/// Gets the position in which the current value is displayed.
-	/// - Returns: GtkPositionType
+	/// - Returns: GtkPositionType (GtkPositionType)
 	open func getValuePos() -> GtkPositionType {
 		return gtk_scale_get_value_pos(GTK_SCALE(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the number of decimal places that are displayed in the value. Also
 	/// causes the value of the adjustment to be rounded to this number of digits,
 	/// so the retrieved value matches the displayed one, if #GtkScale:draw-value is
@@ -215,36 +203,33 @@ open class CGTKScale : CGTKRange {
 	/// the smooth autoscrolling that is built into #GtkScale. As an alternative,
 	/// you can use the #GtkScale::format-value signal to format the displayed
 	/// value yourself.
-	/// Parameters:
-	///	- digits: gint
-	open func setDigits(_ digits: gint) {
+	/// - Parameters:
+	///	- digits: gint (gint)
+	open func setDigits(_ digits: gint) -> Swift.Void {
 		gtk_scale_set_digits(GTK_SCALE(self.GOBJECT), digits)
 	}
 
-	/// 
 	/// Specifies whether the current value is displayed as a string next
 	/// to the slider.
-	/// Parameters:
-	///	- drawValue: Bool
-	open func setDrawValue(_ drawValue: Bool) {
+	/// - Parameters:
+	///	- drawValue: Bool (gboolean)
+	open func setDrawValue(_ drawValue: Bool) -> Swift.Void {
 		gtk_scale_set_draw_value(GTK_SCALE(self.GOBJECT), drawValue ? 1 : 0)
 	}
 
-	/// 
 	/// If #GtkScale:has-origin is set to %TRUE (the default), the scale will
 	/// highlight the part of the trough between the origin (bottom or left side)
 	/// and the current value.
-	/// Parameters:
-	///	- hasOrigin: Bool
-	open func setHasOrigin(_ hasOrigin: Bool) {
+	/// - Parameters:
+	///	- hasOrigin: Bool (gboolean)
+	open func setHasOrigin(_ hasOrigin: Bool) -> Swift.Void {
 		gtk_scale_set_has_origin(GTK_SCALE(self.GOBJECT), hasOrigin ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the position in which the current value is displayed.
-	/// Parameters:
-	///	- pos: GtkPositionType
-	open func setValuePos(_ pos: GtkPositionType) {
+	/// - Parameters:
+	///	- pos: GtkPositionType (GtkPositionType)
+	open func setValuePos(_ pos: GtkPositionType) -> Swift.Void {
 		gtk_scale_set_value_pos(GTK_SCALE(self.GOBJECT), pos)
 	}
 

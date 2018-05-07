@@ -35,11 +35,10 @@ public let GTK_TYPE_BUTTON_BOX: GType = gtk_button_box_get_type()
 }
 
 open class CGTKButtonBox : CGTKBox {
-	/// 
 	/// Creates a new #GtkButtonBox.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation) {
 		self.init(withGObject: gtk_button_box_new(orientation))!
 	}
@@ -50,42 +49,37 @@ open class CGTKButtonBox : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Returns whether the child is exempted from homogenous
 	/// sizing.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func getChildNonHomogeneous(child: CGTKWidget) -> Bool {
 		return gtk_button_box_get_child_non_homogeneous(GTK_BUTTON_BOX(self.GOBJECT), child.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether @child should appear in a secondary group of children.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func getChildSecondary(child: CGTKWidget) -> Bool {
 		return gtk_button_box_get_child_secondary(GTK_BUTTON_BOX(self.GOBJECT), child.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the method being used to arrange the buttons in a button box.
-	/// - Returns: GtkButtonBoxStyle
+	/// - Returns: GtkButtonBoxStyle (GtkButtonBoxStyle)
 	open func getLayout() -> GtkButtonBoxStyle {
 		return gtk_button_box_get_layout(GTK_BUTTON_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets whether the child is exempted from homogeous sizing.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- nonHomogeneous: Bool
-	open func setChildNonHomogeneous(child: CGTKWidget, nonHomogeneous: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- nonHomogeneous: Bool (gboolean)
+	open func setChildNonHomogeneous(child: CGTKWidget, nonHomogeneous: Bool) -> Swift.Void {
 		gtk_button_box_set_child_non_homogeneous(GTK_BUTTON_BOX(self.GOBJECT), child.WIDGET, nonHomogeneous ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether @child should appear in a secondary group of children.
 	/// A typical use of a secondary child is the help button in a dialog.
 	/// This group appears after the other children if the style
@@ -97,18 +91,17 @@ open class CGTKButtonBox : CGTKBox {
 	/// or %GTK_BUTTONBOX_END, then the secondary children are aligned at
 	/// the other end of the button box from the main children. For the
 	/// other styles, they appear immediately next to the main children.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- isSecondary: Bool
-	open func setChildSecondary(child: CGTKWidget, isSecondary: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- isSecondary: Bool (gboolean)
+	open func setChildSecondary(child: CGTKWidget, isSecondary: Bool) -> Swift.Void {
 		gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(self.GOBJECT), child.WIDGET, isSecondary ? 1 : 0)
 	}
 
-	/// 
 	/// Changes the way buttons are arranged in their container.
-	/// Parameters:
-	///	- layoutStyle: GtkButtonBoxStyle
-	open func setLayout(layoutStyle: GtkButtonBoxStyle) {
+	/// - Parameters:
+	///	- layoutStyle: GtkButtonBoxStyle (GtkButtonBoxStyle)
+	open func setLayout(layoutStyle: GtkButtonBoxStyle) -> Swift.Void {
 		gtk_button_box_set_layout(GTK_BUTTON_BOX(self.GOBJECT), layoutStyle)
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_LEVEL_BAR: GType = gtk_level_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_LEVEL_BAR)
 }
 
-/// 
 /// The #GtkLevelBar is a bar widget that can be used
 /// as a level indicator. Typical use cases are displaying the strength
 /// of a password, or showing the charge level of a battery.
@@ -110,21 +109,19 @@ public let GTK_TYPE_LEVEL_BAR: GType = gtk_level_bar_get_type()
 /// regardless of text direction.
 
 
-open class CGTKLevelBar : CGTKWidget {
-	/// 
+open class CGTKLevelBar : CGTKWidget, CGTKOrientable {
 	/// Creates a new #GtkLevelBar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_level_bar_new())!
 	}
 
-	/// 
 	/// Utility constructor that creates a new #GtkLevelBar for the specified
 	/// interval.
-	/// Parameters:
-	///	- minValue: Double
-	///	- maxValue: Double
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- minValue: Double (gdouble)
+	///	- maxValue: Double (gdouble)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(forInterval minValue: Double, maxValue: Double) {
 		self.init(withGObject: gtk_level_bar_new_for_interval(minValue, maxValue))!
 	}
@@ -135,7 +132,6 @@ open class CGTKLevelBar : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Adds a new offset marker on @self at the position specified by @value.
 	/// When the bar value is in the interval topped by @value (or between @value
 	/// and #GtkLevelBar:max-value in case the offset is the last one on the bar)
@@ -143,110 +139,111 @@ open class CGTKLevelBar : CGTKWidget {
 	/// when rendering the level bar fill.
 	/// If another offset marker named @name exists, its value will be
 	/// replaced by @value.
-	/// Parameters:
-	///	- name: String
-	///	- value: Double
-	open func addOffsetValue(name: String, value: Double) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	///	- value: Double (gdouble)
+	open func addOffsetValue(name: String, value: Double) -> Swift.Void {
 		gtk_level_bar_add_offset_value(GTK_LEVEL_BAR(self.GOBJECT), name, value)
 	}
 
-	/// 
 	/// Return the value of the #GtkLevelBar:inverted property.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getInverted() -> Bool {
 		return gtk_level_bar_get_inverted(GTK_LEVEL_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value of the #GtkLevelBar:max-value property.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getMaxValue() -> Double {
 		return gtk_level_bar_get_max_value(GTK_LEVEL_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the value of the #GtkLevelBar:min-value property.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getMinValue() -> Double {
 		return gtk_level_bar_get_min_value(GTK_LEVEL_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the value of the #GtkLevelBar:mode property.
-	/// - Returns: GtkLevelBarMode
+	/// - Returns: GtkLevelBarMode (GtkLevelBarMode)
 	open func getMode() -> GtkLevelBarMode {
 		return gtk_level_bar_get_mode(GTK_LEVEL_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Fetches the value specified for the offset marker @name in @self,
 	/// returning %TRUE in case an offset named @name was found.
-	/// Parameters:
-	///	- name: String
-	///	- value: UnsafeMutablePointer<Double>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	///	- value: UnsafeMutablePointer<Double>! (gdouble*)
+	/// - Returns: Bool (gboolean)
 	open func getOffsetValue(name: String, value: UnsafeMutablePointer<Double>!) -> Bool {
 		return gtk_level_bar_get_offset_value(GTK_LEVEL_BAR(self.GOBJECT), name, value) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value of the #GtkLevelBar:value property.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getValue() -> Double {
 		return gtk_level_bar_get_value(GTK_LEVEL_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Removes an offset marker previously added with
 	/// gtk_level_bar_add_offset_value().
-	/// Parameters:
-	///	- name: String
-	open func removeOffsetValue(name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func removeOffsetValue(name: String) -> Swift.Void {
 		gtk_level_bar_remove_offset_value(GTK_LEVEL_BAR(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Sets the value of the #GtkLevelBar:inverted property.
-	/// Parameters:
-	///	- inverted: Bool
-	open func setInverted(_ inverted: Bool) {
+	/// - Parameters:
+	///	- inverted: Bool (gboolean)
+	open func setInverted(_ inverted: Bool) -> Swift.Void {
 		gtk_level_bar_set_inverted(GTK_LEVEL_BAR(self.GOBJECT), inverted ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the value of the #GtkLevelBar:max-value property.
 	/// You probably want to update preexisting level offsets after calling
 	/// this function.
-	/// Parameters:
-	///	- value: Double
-	open func setMaxValue(_ value: Double) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	open func setMaxValue(_ value: Double) -> Swift.Void {
 		gtk_level_bar_set_max_value(GTK_LEVEL_BAR(self.GOBJECT), value)
 	}
 
-	/// 
 	/// Sets the value of the #GtkLevelBar:min-value property.
 	/// You probably want to update preexisting level offsets after calling
 	/// this function.
-	/// Parameters:
-	///	- value: Double
-	open func setMinValue(_ value: Double) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	open func setMinValue(_ value: Double) -> Swift.Void {
 		gtk_level_bar_set_min_value(GTK_LEVEL_BAR(self.GOBJECT), value)
 	}
 
-	/// 
 	/// Sets the value of the #GtkLevelBar:mode property.
-	/// Parameters:
-	///	- mode: GtkLevelBarMode
-	open func setMode(_ mode: GtkLevelBarMode) {
+	/// - Parameters:
+	///	- mode: GtkLevelBarMode (GtkLevelBarMode)
+	open func setMode(_ mode: GtkLevelBarMode) -> Swift.Void {
 		gtk_level_bar_set_mode(GTK_LEVEL_BAR(self.GOBJECT), mode)
 	}
 
-	/// 
 	/// Sets the value of the #GtkLevelBar:value property.
-	/// Parameters:
-	///	- value: Double
-	open func setValue(_ value: Double) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	open func setValue(_ value: Double) -> Swift.Void {
 		gtk_level_bar_set_value(GTK_LEVEL_BAR(self.GOBJECT), value)
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

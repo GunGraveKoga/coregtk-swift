@@ -34,7 +34,6 @@ public let GTK_TYPE_FRAME: GType = gtk_frame_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_FRAME)
 }
 
-/// 
 /// The frame widget is a bin that surrounds its child with a decorative
 /// frame and an optional label. If present, the label is drawn in a gap
 /// in the top side of the frame. The position of the label can be
@@ -72,12 +71,11 @@ public let GTK_TYPE_FRAME: GType = gtk_frame_get_type()
 
 
 open class CGTKFrame : CGTKBin {
-	/// 
 	/// Creates a new #GtkFrame, with optional label @label.
 	/// If @label is %NULL, the label is omitted.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(label: String) {
 		self.init(withGObject: gtk_frame_new(label))!
 	}
@@ -88,78 +86,70 @@ open class CGTKFrame : CGTKBin {
 		}
 	}
 
-	/// 
 	/// If the frame’s label widget is a #GtkLabel, returns the
 	/// text in the label widget. (The frame will have a #GtkLabel
 	/// for the label widget if a non-%NULL argument was passed
 	/// to gtk_frame_new().)
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getLabel() -> String? {
 		return String(utf8String: gtk_frame_get_label(GTK_FRAME(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the X and Y alignment of the frame’s label. See
 	/// gtk_frame_set_label_align().
-	/// Parameters:
-	///	- xalign: UnsafeMutablePointer<Float>!
-	///	- yalign: UnsafeMutablePointer<Float>!
-	open func getLabelAlign(xalign: UnsafeMutablePointer<Float>!, yalign: UnsafeMutablePointer<Float>!) {
+	/// - Parameters:
+	///	- xalign: UnsafeMutablePointer<Float>! (gfloat*)
+	///	- yalign: UnsafeMutablePointer<Float>! (gfloat*)
+	open func getLabelAlign(xalign: UnsafeMutablePointer<Float>!, yalign: UnsafeMutablePointer<Float>!) -> Swift.Void {
 		gtk_frame_get_label_align(GTK_FRAME(self.GOBJECT), xalign, yalign)
 	}
 
-	/// 
 	/// Retrieves the label widget for the frame. See
 	/// gtk_frame_set_label_widget().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getLabelWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_frame_get_label_widget(GTK_FRAME(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the shadow type of the frame. See
 	/// gtk_frame_set_shadow_type().
-	/// - Returns: GtkShadowType
+	/// - Returns: GtkShadowType (GtkShadowType)
 	open func getShadowType() -> GtkShadowType {
 		return gtk_frame_get_shadow_type(GTK_FRAME(self.GOBJECT))
 	}
 
-	/// 
 	/// Removes the current #GtkFrame:label-widget. If @label is not %NULL, creates a
 	/// new #GtkLabel with that text and adds it as the #GtkFrame:label-widget.
-	/// Parameters:
-	///	- label: String
-	open func setLabel(_ label: String) {
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	open func setLabel(_ label: String) -> Swift.Void {
 		gtk_frame_set_label(GTK_FRAME(self.GOBJECT), label)
 	}
 
-	/// 
 	/// Sets the alignment of the frame widget’s label. The
 	/// default values for a newly created frame are 0.0 and 0.5.
-	/// Parameters:
-	///	- xalign: Float
-	///	- yalign: Float
-	open func setLabelAlign(xalign: Float, yalign: Float) {
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	open func setLabelAlign(xalign: Float, yalign: Float) -> Swift.Void {
 		gtk_frame_set_label_align(GTK_FRAME(self.GOBJECT), xalign, yalign)
 	}
 
-	/// 
 	/// Sets the #GtkFrame:label-widget for the frame. This is the widget that
 	/// will appear embedded in the top edge of the frame as a title.
-	/// Parameters:
-	///	- labelWidget: CGTKWidget
-	open func setLabelWidget(_ labelWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- labelWidget: CGTKWidget (GtkWidget*)
+	open func setLabelWidget(_ labelWidget: CGTKWidget) -> Swift.Void {
 		gtk_frame_set_label_widget(GTK_FRAME(self.GOBJECT), labelWidget.WIDGET)
 	}
 
-	/// 
 	/// Sets the #GtkFrame:shadow-type for @frame, i.e. whether it is drawn without
 	/// (%GTK_SHADOW_NONE) or with (other values) a visible border. Values other than
 	/// %GTK_SHADOW_NONE are treated identically by GtkFrame. The chosen type is
 	/// applied by removing or adding the .flat class to the CSS node named border.
-	/// Parameters:
-	///	- type: GtkShadowType
-	open func setShadowType(_ type: GtkShadowType) {
+	/// - Parameters:
+	///	- type: GtkShadowType (GtkShadowType)
+	open func setShadowType(_ type: GtkShadowType) -> Swift.Void {
 		gtk_frame_set_shadow_type(GTK_FRAME(self.GOBJECT), type)
 	}
 

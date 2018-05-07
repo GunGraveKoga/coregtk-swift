@@ -34,7 +34,6 @@ public let GTK_TYPE_BIN: GType = gtk_bin_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_BIN)
 }
 
-/// 
 /// The #GtkBin widget is a container with just one child.
 /// It is not very useful itself, but it is useful for deriving subclasses,
 /// since it provides common code needed for handling a single child widget.
@@ -49,11 +48,10 @@ open class CGTKBin : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Gets the child of the #GtkBin, or %NULL if the bin contains
 	/// no child widget. The returned widget does not have a reference
 	/// added, so you do not need to unref it.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getChild<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_bin_get_child(GTK_BIN(self.GOBJECT)))
 	}

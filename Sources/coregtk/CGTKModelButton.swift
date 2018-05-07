@@ -34,7 +34,6 @@ public let GTK_TYPE_MODEL_BUTTON: GType = gtk_model_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MODEL_BUTTON)
 }
 
-/// 
 /// GtkModelButton is a button class that can use a #GAction as its model.
 /// In contrast to #GtkToggleButton or #GtkRadioButton, which can also
 /// be backed by a #GAction via the #GtkActionable:action-name property,
@@ -122,9 +121,8 @@ public let GTK_TYPE_MODEL_BUTTON: GType = gtk_model_button_get_type()
 
 
 open class CGTKModelButton : CGTKButton {
-	/// 
 	/// Creates a new GtkModelButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_model_button_new())!
 	}

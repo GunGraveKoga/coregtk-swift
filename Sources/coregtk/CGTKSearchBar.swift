@@ -34,7 +34,6 @@ public let GTK_TYPE_SEARCH_BAR: GType = gtk_search_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SEARCH_BAR)
 }
 
-/// 
 /// #GtkSearchBar is a container made to have a search entry (possibly
 /// with additional connex widgets, such as drop-down menus, or buttons)
 /// built-in. The search bar would appear when a search is started through
@@ -55,11 +54,10 @@ public let GTK_TYPE_SEARCH_BAR: GType = gtk_search_bar_get_type()
 
 
 open class CGTKSearchBar : CGTKBin {
-	/// 
 	/// Creates a #GtkSearchBar. You will need to tell it about
 	/// which widget is going to be your text entry using
 	/// gtk_search_bar_connect_entry().
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_search_bar_new())!
 	}
@@ -70,32 +68,28 @@ open class CGTKSearchBar : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Connects the #GtkEntry widget passed as the one to be used in
 	/// this search bar. The entry should be a descendant of the search bar.
 	/// This is only required if the entry isn’t the direct child of the
 	/// search bar (as in our main example).
-	/// Parameters:
-	///	- entry: UnsafeMutablePointer<GtkEntry>!
-	open func connectEntry(_ entry: UnsafeMutablePointer<GtkEntry>!) {
+	/// - Parameters:
+	///	- entry: UnsafeMutablePointer<GtkEntry>! (GtkEntry*)
+	open func connectEntry(_ entry: UnsafeMutablePointer<GtkEntry>!) -> Swift.Void {
 		gtk_search_bar_connect_entry(GTK_SEARCH_BAR(self.GOBJECT), entry)
 	}
 
-	/// 
 	/// Returns whether the search mode is on or off.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSearchMode() -> Bool {
 		return gtk_search_bar_get_search_mode(GTK_SEARCH_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the close button is shown.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowCloseButton() -> Bool {
 		return gtk_search_bar_get_show_close_button(GTK_SEARCH_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// This function should be called when the top-level
 	/// window which contains the search bar received a key event.
 	/// If the key event is handled by the search bar, the bar will
@@ -127,29 +121,27 @@ open class CGTKSearchBar : CGTKBin {
 	/// search_bar);
 	/// }
 	/// ]|
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: Bool (gboolean)
 	open func handleEvent(_ event: UnsafeMutablePointer<GdkEvent>!) -> Bool {
 		return gtk_search_bar_handle_event(GTK_SEARCH_BAR(self.GOBJECT), event) != 0 ? true : false
 	}
 
-	/// 
 	/// Switches the search mode on or off.
-	/// Parameters:
-	///	- searchMode: Bool
-	open func setSearchMode(_ searchMode: Bool) {
+	/// - Parameters:
+	///	- searchMode: Bool (gboolean)
+	open func setSearchMode(_ searchMode: Bool) -> Swift.Void {
 		gtk_search_bar_set_search_mode(GTK_SEARCH_BAR(self.GOBJECT), searchMode ? 1 : 0)
 	}
 
-	/// 
 	/// Shows or hides the close button. Applications that
 	/// already have a “search” toggle button should not show a close
 	/// button in their search bar, as it duplicates the role of the
 	/// toggle button.
-	/// Parameters:
-	///	- visible: Bool
-	open func setShowCloseButton(visible: Bool) {
+	/// - Parameters:
+	///	- visible: Bool (gboolean)
+	open func setShowCloseButton(visible: Bool) -> Swift.Void {
 		gtk_search_bar_set_show_close_button(GTK_SEARCH_BAR(self.GOBJECT), visible ? 1 : 0)
 	}
 

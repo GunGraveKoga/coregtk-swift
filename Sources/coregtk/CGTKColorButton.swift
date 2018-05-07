@@ -34,7 +34,6 @@ public let GTK_TYPE_COLOR_BUTTON: GType = gtk_color_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_COLOR_BUTTON)
 }
 
-/// 
 /// The #GtkColorButton is a button which displays the currently selected
 /// color and allows to open a color selection dialog to change the color.
 /// It is suitable widget for selecting a color in a preference dialog.
@@ -43,33 +42,30 @@ public let GTK_TYPE_COLOR_BUTTON: GType = gtk_color_button_get_type()
 /// it from a plain #GtkButton, it gets the .color style class.
 
 
-open class CGTKColorButton : CGTKButton {
-	/// 
+open class CGTKColorButton : CGTKButton, CGTKColorChooser {
 	/// Creates a new color button.
 	/// This returns a widget in the form of a small button containing
 	/// a swatch representing the current selected color. When the button
 	/// is clicked, a color-selection dialog will open, allowing the user
 	/// to select a color. The swatch will be updated to reflect the new
 	/// color when the user finishes.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_color_button_new())!
 	}
 
-	/// 
 	/// Creates a new color button.
-	/// Parameters:
-	///	- color: UnsafePointer<GdkColor>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkColor>! (const GdkColor*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withColor color: UnsafePointer<GdkColor>!) {
 		self.init(withGObject: gtk_color_button_new_with_color(color))!
 	}
 
-	/// 
 	/// Creates a new color button.
-	/// Parameters:
-	///	- rgba: UnsafePointer<GdkRGBA>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- rgba: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withRgba rgba: UnsafePointer<GdkRGBA>!) {
 		self.init(withGObject: gtk_color_button_new_with_rgba(rgba))!
 	}
@@ -80,81 +76,107 @@ open class CGTKColorButton : CGTKButton {
 		}
 	}
 
-	/// 
 	/// Returns the current alpha value.
-	/// - Returns: guint16
+	/// - Returns: guint16 (guint16)
 	open func getAlpha() -> guint16 {
 		return gtk_color_button_get_alpha(GTK_COLOR_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets @color to be the current color in the #GtkColorButton widget.
-	/// Parameters:
-	///	- color: UnsafeMutablePointer<GdkColor>!
-	open func getColor(_ color: UnsafeMutablePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafeMutablePointer<GdkColor>! (GdkColor*)
+	open func getColor(_ color: UnsafeMutablePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_button_get_color(GTK_COLOR_BUTTON(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Sets @rgba to be the current color in the #GtkColorButton widget.
-	/// Parameters:
-	///	- rgba: UnsafeMutablePointer<GdkRGBA>!
-	open func getRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafeMutablePointer<GdkRGBA>! (GdkRGBA*)
+	open func getRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_button_get_rgba(GTK_COLOR_BUTTON(self.GOBJECT), rgba)
 	}
 
-	/// 
 	/// Gets the title of the color selection dialog.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTitle() -> String? {
 		return String(utf8String: gtk_color_button_get_title(GTK_COLOR_BUTTON(self.GOBJECT)))
 	}
 
-	/// 
 	/// Does the color selection dialog use the alpha channel ?
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getUseAlpha() -> Bool {
 		return gtk_color_button_get_use_alpha(GTK_COLOR_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the current opacity to be @alpha.
-	/// Parameters:
-	///	- alpha: guint16
-	open func setAlpha(_ alpha: guint16) {
+	/// - Parameters:
+	///	- alpha: guint16 (guint16)
+	open func setAlpha(_ alpha: guint16) -> Swift.Void {
 		gtk_color_button_set_alpha(GTK_COLOR_BUTTON(self.GOBJECT), alpha)
 	}
 
-	/// 
 	/// Sets the current color to be @color.
-	/// Parameters:
-	///	- color: UnsafePointer<GdkColor>!
-	open func setColor(_ color: UnsafePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkColor>! (const GdkColor*)
+	open func setColor(_ color: UnsafePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_button_set_color(GTK_COLOR_BUTTON(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Sets the current color to be @rgba.
-	/// Parameters:
-	///	- rgba: UnsafePointer<GdkRGBA>!
-	open func setRgba(_ rgba: UnsafePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	open func setRgba(_ rgba: UnsafePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_button_set_rgba(GTK_COLOR_BUTTON(self.GOBJECT), rgba)
 	}
 
-	/// 
 	/// Sets the title for the color selection dialog.
-	/// Parameters:
-	///	- title: String
-	open func setTitle(_ title: String) {
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	open func setTitle(_ title: String) -> Swift.Void {
 		gtk_color_button_set_title(GTK_COLOR_BUTTON(self.GOBJECT), title)
 	}
 
-	/// 
 	/// Sets whether or not the color button should use the alpha channel.
-	/// Parameters:
-	///	- useAlpha: Bool
-	open func setUseAlpha(_ useAlpha: Bool) {
+	/// - Parameters:
+	///	- useAlpha: Bool (gboolean)
+	open func setUseAlpha(_ useAlpha: Bool) -> Swift.Void {
 		gtk_color_button_set_use_alpha(GTK_COLOR_BUTTON(self.GOBJECT), useAlpha ? 1 : 0)
+	}
+
+	/// Adds a palette to the color chooser. If @orientation is horizontal,
+	/// the colors are grouped in rows, with @colors_per_line colors
+	/// in each row. If @horizontal is %FALSE, the colors are grouped
+	/// in columns instead.
+	/// The default color palette of #GtkColorChooserWidget has
+	/// 27 colors, organized in columns of 3 colors. The default gray
+	/// palette has 9 grays in a single row.
+	/// The layout of the color chooser widget works best when the
+	/// palettes have 9-10 columns.
+	/// Calling this function for the first time has the
+	/// side effect of removing the default color and gray palettes
+	/// from the color chooser.
+	/// If @colors is %NULL, removes all previously added palettes.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- colorsPerLine: gint (gint)
+	///	- ncolors: gint (gint)
+	///	- colors: UnsafeMutablePointer<GdkRGBA>? (GdkRGBA*)
+	open func addPalette(orientation: GtkOrientation, colorsPerLine: gint, ncolors: gint, colors: UnsafeMutablePointer<GdkRGBA>?) -> Swift.Void {
+		gtk_color_chooser_add_palette(GTK_COLOR_CHOOSER(self.GOBJECT), orientation, colorsPerLine, ncolors, colors)
+	}
+
+	/// Gets the currently-selected color.
+	/// - Parameters:
+	///	- color: UnsafeMutablePointer<GdkRGBA>! (GdkRGBA*)
+	open func getRgba(color: UnsafeMutablePointer<GdkRGBA>!) -> Swift.Void {
+		gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(self.GOBJECT), color)
+	}
+
+	/// Sets the color.
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	open func setRgba(color: UnsafePointer<GdkRGBA>!) -> Swift.Void {
+		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(self.GOBJECT), color)
 	}
 
 }

@@ -34,7 +34,6 @@ public let GTK_TYPE_PLACES_SIDEBAR: GType = gtk_places_sidebar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_PLACES_SIDEBAR)
 }
 
-/// 
 /// #GtkPlacesSidebar is a widget that displays a list of frequently-used places in the
 /// file system:  the user’s home directory, the user’s bookmarks, and volumes and drives.
 /// This widget is used as a sidebar in #GtkFileChooser and may be used by file managers
@@ -64,12 +63,11 @@ public let GTK_TYPE_PLACES_SIDEBAR: GType = gtk_places_sidebar_get_type()
 
 
 open class CGTKPlacesSidebar : CGTKScrolledWindow {
-	/// 
 	/// Creates a new #GtkPlacesSidebar widget.
 	/// The application should connect to at least the
 	/// #GtkPlacesSidebar::open-location signal to be notified
 	/// when the user makes a selection in the sidebar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_places_sidebar_new())!
 	}
@@ -80,7 +78,6 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 		}
 	}
 
-	/// 
 	/// Applications may want to present some folders in the places sidebar if
 	/// they could be immediately useful to users.  For example, a drawing
 	/// program could add a “/usr/share/clipart” location when the sidebar is
@@ -90,20 +87,18 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 	/// across applications, and they are not persistent.  If this function
 	/// is called multiple times with different locations, then they are added
 	/// to the sidebar’s list in the same order as the function is called.
-	/// Parameters:
-	///	- location: OpaquePointer!
-	open func addShortcut(location: OpaquePointer!) {
+	/// - Parameters:
+	///	- location: OpaquePointer! (GFile*)
+	open func addShortcut(location: OpaquePointer!) -> Swift.Void {
 		gtk_places_sidebar_add_shortcut(GTK_PLACES_SIDEBAR(self.GOBJECT), location)
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_local_only().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getLocalOnly() -> Bool {
 		return gtk_places_sidebar_get_local_only(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the currently selected location in the @sidebar. This can be %NULL when
 	/// nothing is selected, for example, when gtk_places_sidebar_set_location() has
 	/// been called with a location that is not among the sidebar’s list of places to
@@ -112,96 +107,84 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 	/// connect to the #GtkPlacesSidebar::populate-popup signal, you can use this
 	/// function to get the location that is being referred to during the callbacks
 	/// for your menu items.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GFile*)
 	open func getLocation() -> OpaquePointer? {
 		return gtk_places_sidebar_get_location(GTK_PLACES_SIDEBAR(self.GOBJECT))
 	}
 
-	/// 
 	/// This function queries the bookmarks added by the user to the places sidebar,
 	/// and returns one of them.  This function is used by #GtkFileChooser to implement
 	/// the “Alt-1”, “Alt-2”, etc. shortcuts, which activate the cooresponding bookmark.
-	/// Parameters:
-	///	- n: gint
-	/// - Returns: OpaquePointer?
+	/// - Parameters:
+	///	- n: gint (gint)
+	/// - Returns: OpaquePointer? (GFile*)
 	open func getNthBookmark(n: gint) -> OpaquePointer? {
 		return gtk_places_sidebar_get_nth_bookmark(GTK_PLACES_SIDEBAR(self.GOBJECT), n)
 	}
 
-	/// 
 	/// Gets the open flags.
-	/// - Returns: GtkPlacesOpenFlags
+	/// - Returns: GtkPlacesOpenFlags (GtkPlacesOpenFlags)
 	open func getOpenFlags() -> GtkPlacesOpenFlags {
 		return gtk_places_sidebar_get_open_flags(GTK_PLACES_SIDEBAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_connect_to_server()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowConnectToServer() -> Bool {
 		return gtk_places_sidebar_get_show_connect_to_server(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_desktop()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowDesktop() -> Bool {
 		return gtk_places_sidebar_get_show_desktop(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_enter_location()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowEnterLocation() -> Bool {
 		return gtk_places_sidebar_get_show_enter_location(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_other_locations()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowOtherLocations() -> Bool {
 		return gtk_places_sidebar_get_show_other_locations(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_recent()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowRecent() -> Bool {
 		return gtk_places_sidebar_get_show_recent(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_starred_location()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowStarredLocation() -> Bool {
 		return gtk_places_sidebar_get_show_starred_location(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the value previously set with gtk_places_sidebar_set_show_trash()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowTrash() -> Bool {
 		return gtk_places_sidebar_get_show_trash(GTK_PLACES_SIDEBAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the list of shortcuts.
-	/// - Returns: UnsafeMutablePointer<GSList>!
+	/// - Returns: UnsafeMutablePointer<GSList>! (GSList*)
 	open func listShortcuts() -> UnsafeMutablePointer<GSList>! {
 		return gtk_places_sidebar_list_shortcuts(GTK_PLACES_SIDEBAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Removes an application-specific shortcut that has been previously been
 	/// inserted with gtk_places_sidebar_add_shortcut().  If the @location is not a
 	/// shortcut in the sidebar, then nothing is done.
-	/// Parameters:
-	///	- location: OpaquePointer!
-	open func removeShortcut(location: OpaquePointer!) {
+	/// - Parameters:
+	///	- location: OpaquePointer! (GFile*)
+	open func removeShortcut(location: OpaquePointer!) -> Swift.Void {
 		gtk_places_sidebar_remove_shortcut(GTK_PLACES_SIDEBAR(self.GOBJECT), location)
 	}
 
-	/// 
 	/// Make the GtkPlacesSidebar show drop targets, so it can show the available
 	/// drop targets and a "new bookmark" row. This improves the Drag-and-Drop
 	/// experience of the user and allows applications to show all available
@@ -210,34 +193,31 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 	/// that might target the sidebar. The drop-targets-visible state will be unset
 	/// automatically if the drag finishes in the GtkPlacesSidebar. You only need
 	/// to unset the state when the drag ends on some other widget on your application.
-	/// Parameters:
-	///	- visible: Bool
-	///	- context: OpaquePointer!
-	open func setDropTargetsVisible(_ visible: Bool, context: OpaquePointer!) {
+	/// - Parameters:
+	///	- visible: Bool (gboolean)
+	///	- context: OpaquePointer! (GdkDragContext*)
+	open func setDropTargetsVisible(_ visible: Bool, context: OpaquePointer!) -> Swift.Void {
 		gtk_places_sidebar_set_drop_targets_visible(GTK_PLACES_SIDEBAR(self.GOBJECT), visible ? 1 : 0, context)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should only show local files.
-	/// Parameters:
-	///	- localOnly: Bool
-	open func setLocalOnly(_ localOnly: Bool) {
+	/// - Parameters:
+	///	- localOnly: Bool (gboolean)
+	open func setLocalOnly(_ localOnly: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_local_only(GTK_PLACES_SIDEBAR(self.GOBJECT), localOnly ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the location that is being shown in the widgets surrounding the
 	/// @sidebar, for example, in a folder view in a file manager.  In turn, the
 	/// @sidebar will highlight that location if it is being shown in the list of
 	/// places, or it will unhighlight everything if the @location is not among the
 	/// places in the list.
-	/// Parameters:
-	///	- location: OpaquePointer?
-	open func setLocation(_ location: OpaquePointer?) {
+	/// - Parameters:
+	///	- location: OpaquePointer? (GFile*)
+	open func setLocation(_ location: OpaquePointer?) -> Swift.Void {
 		gtk_places_sidebar_set_location(GTK_PLACES_SIDEBAR(self.GOBJECT), location)
 	}
 
-	/// 
 	/// Sets the way in which the calling application can open new locations from
 	/// the places sidebar.  For example, some applications only open locations
 	/// “directly” into their main view, while others may support opening locations
@@ -250,48 +230,44 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 	/// gtk_places_sidebar_set_open_flags().
 	/// Passing 0 for @flags will cause #GTK_PLACES_OPEN_NORMAL to always be sent
 	/// to callbacks for the “open-location” signal.
-	/// Parameters:
-	///	- flags: GtkPlacesOpenFlags
-	open func setOpenFlags(_ flags: GtkPlacesOpenFlags) {
+	/// - Parameters:
+	///	- flags: GtkPlacesOpenFlags (GtkPlacesOpenFlags)
+	open func setOpenFlags(_ flags: GtkPlacesOpenFlags) -> Swift.Void {
 		gtk_places_sidebar_set_open_flags(GTK_PLACES_SIDEBAR(self.GOBJECT), flags)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for connecting to a network server;
 	/// this is off by default. An application may want to turn this on if it implements
 	/// a way for the user to connect to network servers directly.
 	/// If you enable this, you should connect to the
 	/// #GtkPlacesSidebar::show-connect-to-server signal.
-	/// Parameters:
-	///	- showConnectToServer: Bool
-	open func setShowConnectToServer(_ showConnectToServer: Bool) {
+	/// - Parameters:
+	///	- showConnectToServer: Bool (gboolean)
+	open func setShowConnectToServer(_ showConnectToServer: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_connect_to_server(GTK_PLACES_SIDEBAR(self.GOBJECT), showConnectToServer ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for the Desktop folder.
 	/// The default value for this option is determined by the desktop
 	/// environment and the user’s configuration, but this function can be
 	/// used to override it on a per-application basis.
-	/// Parameters:
-	///	- showDesktop: Bool
-	open func setShowDesktop(_ showDesktop: Bool) {
+	/// - Parameters:
+	///	- showDesktop: Bool (gboolean)
+	open func setShowDesktop(_ showDesktop: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_desktop(GTK_PLACES_SIDEBAR(self.GOBJECT), showDesktop ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for entering a location;
 	/// this is off by default. An application may want to turn this on if manually
 	/// entering URLs is an expected user action.
 	/// If you enable this, you should connect to the
 	/// #GtkPlacesSidebar::show-enter-location signal.
-	/// Parameters:
-	///	- showEnterLocation: Bool
-	open func setShowEnterLocation(_ showEnterLocation: Bool) {
+	/// - Parameters:
+	///	- showEnterLocation: Bool (gboolean)
+	open func setShowEnterLocation(_ showEnterLocation: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_enter_location(GTK_PLACES_SIDEBAR(self.GOBJECT), showEnterLocation ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for the application to show
 	/// an Other Locations view; this is off by default. When set to %TRUE, persistent
 	/// devices such as hard drives are hidden, otherwise they are shown in the sidebar.
@@ -299,37 +275,34 @@ open class CGTKPlacesSidebar : CGTKScrolledWindow {
 	/// see and interact with drives and network servers directly.
 	/// If you enable this, you should connect to the
 	/// #GtkPlacesSidebar::show-other-locations signal.
-	/// Parameters:
-	///	- showOtherLocations: Bool
-	open func setShowOtherLocations(_ showOtherLocations: Bool) {
+	/// - Parameters:
+	///	- showOtherLocations: Bool (gboolean)
+	open func setShowOtherLocations(_ showOtherLocations: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_other_locations(GTK_PLACES_SIDEBAR(self.GOBJECT), showOtherLocations ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for recent files.
 	/// The default value for this option is determined by the desktop
 	/// environment, but this function can be used to override it on a
 	/// per-application basis.
-	/// Parameters:
-	///	- showRecent: Bool
-	open func setShowRecent(_ showRecent: Bool) {
+	/// - Parameters:
+	///	- showRecent: Bool (gboolean)
+	open func setShowRecent(_ showRecent: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_recent(GTK_PLACES_SIDEBAR(self.GOBJECT), showRecent ? 1 : 0)
 	}
 
-	/// 
 	/// If you enable this, you should connect to the
 	/// #GtkPlacesSidebar::show-starred-location signal.
-	/// Parameters:
-	///	- showStarredLocation: Bool
-	open func setShowStarredLocation(_ showStarredLocation: Bool) {
+	/// - Parameters:
+	///	- showStarredLocation: Bool (gboolean)
+	open func setShowStarredLocation(_ showStarredLocation: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_starred_location(GTK_PLACES_SIDEBAR(self.GOBJECT), showStarredLocation ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the @sidebar should show an item for the Trash location.
-	/// Parameters:
-	///	- showTrash: Bool
-	open func setShowTrash(_ showTrash: Bool) {
+	/// - Parameters:
+	///	- showTrash: Bool (gboolean)
+	open func setShowTrash(_ showTrash: Bool) -> Swift.Void {
 		gtk_places_sidebar_set_show_trash(GTK_PLACES_SIDEBAR(self.GOBJECT), showTrash ? 1 : 0)
 	}
 

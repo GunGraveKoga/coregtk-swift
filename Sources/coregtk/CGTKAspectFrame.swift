@@ -34,7 +34,6 @@ public let GTK_TYPE_ASPECT_FRAME: GType = gtk_aspect_frame_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ASPECT_FRAME)
 }
 
-/// 
 /// The #GtkAspectFrame is useful when you want
 /// pack a widget so that it can resize but always retains
 /// the same aspect ratio. For instance, one might be
@@ -47,15 +46,14 @@ public let GTK_TYPE_ASPECT_FRAME: GType = gtk_aspect_frame_get_type()
 
 
 open class CGTKAspectFrame : CGTKFrame {
-	/// 
 	/// Create a new #GtkAspectFrame.
-	/// Parameters:
-	///	- label: String
-	///	- xalign: Float
-	///	- yalign: Float
-	///	- ratio: Float
-	///	- obeyChild: Bool
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	///	- ratio: Float (gfloat)
+	///	- obeyChild: Bool (gboolean)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(label: String, xalign: Float, yalign: Float, ratio: Float, obeyChild: Bool) {
 		self.init(withGObject: gtk_aspect_frame_new(label, xalign, yalign, ratio, obeyChild ? 1 : 0))!
 	}
@@ -66,14 +64,13 @@ open class CGTKAspectFrame : CGTKFrame {
 		}
 	}
 
-	/// 
 	/// Set parameters for an existing #GtkAspectFrame.
-	/// Parameters:
-	///	- xalign: Float
-	///	- yalign: Float
-	///	- ratio: Float
-	///	- obeyChild: Bool
-	open func set(xalign: Float, yalign: Float, ratio: Float, obeyChild: Bool) {
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	///	- ratio: Float (gfloat)
+	///	- obeyChild: Bool (gboolean)
+	open func set(xalign: Float, yalign: Float, ratio: Float, obeyChild: Bool) -> Swift.Void {
 		gtk_aspect_frame_set(GTK_ASPECT_FRAME(self.GOBJECT), xalign, yalign, ratio, obeyChild ? 1 : 0)
 	}
 

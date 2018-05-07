@@ -34,7 +34,6 @@ public let GTK_TYPE_MENU_TOOL_BUTTON: GType = gtk_menu_tool_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MENU_TOOL_BUTTON)
 }
 
-/// 
 /// A #GtkMenuToolButton is a #GtkToolItem that contains a button and
 /// a small additional button with an arrow. When clicked, the arrow
 /// button pops up a dropdown menu.
@@ -55,24 +54,22 @@ public let GTK_TYPE_MENU_TOOL_BUTTON: GType = gtk_menu_tool_button_get_type()
 
 
 open class CGTKMenuToolButton : CGTKToolButton {
-	/// 
 	/// Creates a new #GtkMenuToolButton using @icon_widget as icon and
 	/// @label as label.
-	/// Parameters:
-	///	- iconWidget: CGTKWidget
-	///	- label: String
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- iconWidget: CGTKWidget (GtkWidget*)
+	///	- label: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(iconWidget: CGTKWidget, label: String) {
 		self.init(withGObject: gtk_menu_tool_button_new(iconWidget.WIDGET, label))!
 	}
 
-	/// 
 	/// Creates a new #GtkMenuToolButton.
 	/// The new #GtkMenuToolButton will contain an icon and label from
 	/// the stock item indicated by @stock_id.
-	/// Parameters:
-	///	- stockId: String
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(fromStock stockId: String) {
 		self.init(withGObject: gtk_menu_tool_button_new_from_stock(stockId))!
 	}
@@ -83,39 +80,35 @@ open class CGTKMenuToolButton : CGTKToolButton {
 		}
 	}
 
-	/// 
 	/// Gets the #GtkMenu associated with #GtkMenuToolButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getMenu<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_menu_tool_button_get_menu(GTK_MENU_TOOL_BUTTON(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Sets the tooltip markup text to be used as tooltip for the arrow button
 	/// which pops up the menu.  See gtk_tool_item_set_tooltip_text() for setting
 	/// a tooltip on the whole #GtkMenuToolButton.
-	/// Parameters:
-	///	- markup: String
-	open func setArrowTooltipMarkup(_ markup: String) {
+	/// - Parameters:
+	///	- markup: String (const gchar*)
+	open func setArrowTooltipMarkup(_ markup: String) -> Swift.Void {
 		gtk_menu_tool_button_set_arrow_tooltip_markup(GTK_MENU_TOOL_BUTTON(self.GOBJECT), markup)
 	}
 
-	/// 
 	/// Sets the tooltip text to be used as tooltip for the arrow button which
 	/// pops up the menu.  See gtk_tool_item_set_tooltip_text() for setting a tooltip
 	/// on the whole #GtkMenuToolButton.
-	/// Parameters:
-	///	- text: String
-	open func setArrowTooltipText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func setArrowTooltipText(_ text: String) -> Swift.Void {
 		gtk_menu_tool_button_set_arrow_tooltip_text(GTK_MENU_TOOL_BUTTON(self.GOBJECT), text)
 	}
 
-	/// 
 	/// Sets the #GtkMenu that is popped up when the user clicks on the arrow.
 	/// If @menu is NULL, the arrow button becomes insensitive.
-	/// Parameters:
-	///	- menu: CGTKWidget
-	open func setMenu(_ menu: CGTKWidget) {
+	/// - Parameters:
+	///	- menu: CGTKWidget (GtkWidget*)
+	open func setMenu(_ menu: CGTKWidget) -> Swift.Void {
 		gtk_menu_tool_button_set_menu(GTK_MENU_TOOL_BUTTON(self.GOBJECT), menu.WIDGET)
 	}
 

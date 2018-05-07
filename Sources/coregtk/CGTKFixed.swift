@@ -34,7 +34,6 @@ public let GTK_TYPE_FIXED: GType = gtk_fixed_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_FIXED)
 }
 
-/// 
 /// The #GtkFixed widget is a container which can place child widgets
 /// at fixed positions and with fixed sizes, given in pixels. #GtkFixed
 /// performs no automatic layout management.
@@ -70,9 +69,8 @@ public let GTK_TYPE_FIXED: GType = gtk_fixed_get_type()
 
 
 open class CGTKFixed : CGTKContainer {
-	/// 
 	/// Creates a new #GtkFixed.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_fixed_new())!
 	}
@@ -83,23 +81,21 @@ open class CGTKFixed : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Moves a child of a #GtkFixed container to the given position.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- x: gint
-	///	- y: gint
-	open func move(widget: CGTKWidget, x: gint, y: gint) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- x: gint (gint)
+	///	- y: gint (gint)
+	open func move(widget: CGTKWidget, x: gint, y: gint) -> Swift.Void {
 		gtk_fixed_move(GTK_FIXED(self.GOBJECT), widget.WIDGET, x, y)
 	}
 
-	/// 
 	/// Adds a widget to a #GtkFixed container at the given position.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- x: gint
-	///	- y: gint
-	open func put(widget: CGTKWidget, x: gint, y: gint) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- x: gint (gint)
+	///	- y: gint (gint)
+	open func put(widget: CGTKWidget, x: gint, y: gint) -> Swift.Void {
 		gtk_fixed_put(GTK_FIXED(self.GOBJECT), widget.WIDGET, x, y)
 	}
 

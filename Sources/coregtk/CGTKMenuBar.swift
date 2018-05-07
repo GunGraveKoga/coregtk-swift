@@ -34,7 +34,6 @@ public let GTK_TYPE_MENU_BAR: GType = gtk_menu_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MENU_BAR)
 }
 
-/// 
 /// The #GtkMenuBar is a subclass of #GtkMenuShell which contains one or
 /// more #GtkMenuItems. The result is a standard menu bar which can hold
 /// many menu items.
@@ -43,23 +42,21 @@ public let GTK_TYPE_MENU_BAR: GType = gtk_menu_bar_get_type()
 
 
 open class CGTKMenuBar : CGTKMenuShell {
-	/// 
 	/// Creates a new #GtkMenuBar
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_menu_bar_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkMenuBar and populates it with menu items
 	/// and submenus according to @model.
 	/// The created menu items are connected to actions found in the
 	/// #GtkApplicationWindow to which the menu bar belongs - typically
 	/// by means of being contained within the #GtkApplicationWindows
 	/// widget hierarchy.
-	/// Parameters:
-	///	- model: UnsafeMutablePointer<GMenuModel>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- model: UnsafeMutablePointer<GMenuModel>! (GMenuModel*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromModel model: UnsafeMutablePointer<GMenuModel>!) {
 		self.init(withGObject: gtk_menu_bar_new_from_model(model))!
 	}
@@ -70,35 +67,31 @@ open class CGTKMenuBar : CGTKMenuShell {
 		}
 	}
 
-	/// 
 	/// Retrieves the current child pack direction of the menubar.
 	/// See gtk_menu_bar_set_child_pack_direction().
-	/// - Returns: GtkPackDirection
+	/// - Returns: GtkPackDirection (GtkPackDirection)
 	open func getChildPackDirection() -> GtkPackDirection {
 		return gtk_menu_bar_get_child_pack_direction(GTK_MENU_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the current pack direction of the menubar.
 	/// See gtk_menu_bar_set_pack_direction().
-	/// - Returns: GtkPackDirection
+	/// - Returns: GtkPackDirection (GtkPackDirection)
 	open func getPackDirection() -> GtkPackDirection {
 		return gtk_menu_bar_get_pack_direction(GTK_MENU_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets how widgets should be packed inside the children of a menubar.
-	/// Parameters:
-	///	- childPackDir: GtkPackDirection
-	open func setChildPackDirection(childPackDir: GtkPackDirection) {
+	/// - Parameters:
+	///	- childPackDir: GtkPackDirection (GtkPackDirection)
+	open func setChildPackDirection(childPackDir: GtkPackDirection) -> Swift.Void {
 		gtk_menu_bar_set_child_pack_direction(GTK_MENU_BAR(self.GOBJECT), childPackDir)
 	}
 
-	/// 
 	/// Sets how items should be packed inside a menubar.
-	/// Parameters:
-	///	- packDir: GtkPackDirection
-	open func setPackDirection(packDir: GtkPackDirection) {
+	/// - Parameters:
+	///	- packDir: GtkPackDirection (GtkPackDirection)
+	open func setPackDirection(packDir: GtkPackDirection) -> Swift.Void {
 		gtk_menu_bar_set_pack_direction(GTK_MENU_BAR(self.GOBJECT), packDir)
 	}
 

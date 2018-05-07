@@ -34,7 +34,6 @@ public let GTK_TYPE_BOX: GType = gtk_box_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_BOX)
 }
 
-/// 
 /// The GtkBox widget organizes child widgets into a rectangular area.
 /// The rectangular area of a GtkBox is organized into either a single row
 /// or a single column of child widgets depending upon the orientation.
@@ -76,13 +75,12 @@ public let GTK_TYPE_BOX: GType = gtk_box_get_type()
 /// regardless of text direction.
 
 
-open class CGTKBox : CGTKContainer {
-	/// 
+open class CGTKBox : CGTKContainer, CGTKOrientable {
 	/// Creates a new #GtkBox.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	///	- spacing: gint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- spacing: gint (gint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation, spacing: gint) {
 		self.init(withGObject: gtk_box_new(orientation, spacing))!
 	}
@@ -93,74 +91,66 @@ open class CGTKBox : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Gets the value set by gtk_box_set_baseline_position().
-	/// - Returns: GtkBaselinePosition
+	/// - Returns: GtkBaselinePosition (GtkBaselinePosition)
 	open func getBaselinePosition() -> GtkBaselinePosition {
 		return gtk_box_get_baseline_position(GTK_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the center widget of the box.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getCenterWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_box_get_center_widget(GTK_BOX(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the box is homogeneous (all children are the
 	/// same size). See gtk_box_set_homogeneous().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHomogeneous() -> Bool {
 		return gtk_box_get_homogeneous(GTK_BOX(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value set by gtk_box_set_spacing().
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getSpacing() -> gint {
 		return gtk_box_get_spacing(GTK_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Adds @child to @box, packed with reference to the end of @box.
 	/// The @child is packed after (away from end of) any other child
 	/// packed with reference to the end of @box.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- expand: Bool
-	///	- fill: Bool
-	///	- padding: guint
-	open func packEnd(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- expand: Bool (gboolean)
+	///	- fill: Bool (gboolean)
+	///	- padding: guint (guint)
+	open func packEnd(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint) -> Swift.Void {
 		gtk_box_pack_end(GTK_BOX(self.GOBJECT), child.WIDGET, expand ? 1 : 0, fill ? 1 : 0, padding)
 	}
 
-	/// 
 	/// Adds @child to @box, packed with reference to the start of @box.
 	/// The @child is packed after any other child packed with reference
 	/// to the start of @box.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- expand: Bool
-	///	- fill: Bool
-	///	- padding: guint
-	open func packStart(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- expand: Bool (gboolean)
+	///	- fill: Bool (gboolean)
+	///	- padding: guint (guint)
+	open func packStart(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint) -> Swift.Void {
 		gtk_box_pack_start(GTK_BOX(self.GOBJECT), child.WIDGET, expand ? 1 : 0, fill ? 1 : 0, padding)
 	}
 
-	/// 
 	/// Obtains information about how @child is packed into @box.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- expand: UnsafeMutablePointer<gboolean>!
-	///	- fill: UnsafeMutablePointer<gboolean>!
-	///	- padding: UnsafeMutablePointer<UInt32>!
-	///	- packType: UnsafeMutablePointer<GtkPackType>!
-	open func queryChildPacking(child: CGTKWidget, expand: UnsafeMutablePointer<gboolean>!, fill: UnsafeMutablePointer<gboolean>!, padding: UnsafeMutablePointer<UInt32>!, packType: UnsafeMutablePointer<GtkPackType>!) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- expand: UnsafeMutablePointer<gboolean>! (gboolean*)
+	///	- fill: UnsafeMutablePointer<gboolean>! (gboolean*)
+	///	- padding: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- packType: UnsafeMutablePointer<GtkPackType>! (GtkPackType*)
+	open func queryChildPacking(child: CGTKWidget, expand: UnsafeMutablePointer<gboolean>!, fill: UnsafeMutablePointer<gboolean>!, padding: UnsafeMutablePointer<UInt32>!, packType: UnsafeMutablePointer<GtkPackType>!) -> Swift.Void {
 		gtk_box_query_child_packing(GTK_BOX(self.GOBJECT), child.WIDGET, expand, fill, padding, packType)
 	}
 
-	/// 
 	/// Moves @child to a new @position in the list of @box children.
 	/// The list contains widgets packed #GTK_PACK_START
 	/// as well as widgets packed #GTK_PACK_END, in the order that these
@@ -169,66 +159,74 @@ open class CGTKBox : CGTKContainer {
 	/// the widget is packed into @box.  A child widget at some position
 	/// in the list will be packed just after all other widgets of the
 	/// same packing type that appear earlier in the list.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- position: gint
-	open func reorderChild(_ child: CGTKWidget, position: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	open func reorderChild(_ child: CGTKWidget, position: gint) -> Swift.Void {
 		gtk_box_reorder_child(GTK_BOX(self.GOBJECT), child.WIDGET, position)
 	}
 
-	/// 
 	/// Sets the baseline position of a box. This affects
 	/// only horizontal boxes with at least one baseline aligned
 	/// child. If there is more vertical space available than requested,
 	/// and the baseline is not allocated by the parent then
 	/// @position is used to allocate the baseline wrt the
 	/// extra space available.
-	/// Parameters:
-	///	- position: GtkBaselinePosition
-	open func setBaselinePosition(_ position: GtkBaselinePosition) {
+	/// - Parameters:
+	///	- position: GtkBaselinePosition (GtkBaselinePosition)
+	open func setBaselinePosition(_ position: GtkBaselinePosition) -> Swift.Void {
 		gtk_box_set_baseline_position(GTK_BOX(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Sets a center widget; that is a child widget that will be
 	/// centered with respect to the full width of the box, even
 	/// if the children at either side take up different amounts
 	/// of space.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func setCenterWidget(_ widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func setCenterWidget(_ widget: CGTKWidget) -> Swift.Void {
 		gtk_box_set_center_widget(GTK_BOX(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// 
 	/// Sets the way @child is packed into @box.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- expand: Bool
-	///	- fill: Bool
-	///	- padding: guint
-	///	- packType: GtkPackType
-	open func setChildPacking(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint, packType: GtkPackType) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- expand: Bool (gboolean)
+	///	- fill: Bool (gboolean)
+	///	- padding: guint (guint)
+	///	- packType: GtkPackType (GtkPackType)
+	open func setChildPacking(child: CGTKWidget, expand: Bool, fill: Bool, padding: guint, packType: GtkPackType) -> Swift.Void {
 		gtk_box_set_child_packing(GTK_BOX(self.GOBJECT), child.WIDGET, expand ? 1 : 0, fill ? 1 : 0, padding, packType)
 	}
 
-	/// 
 	/// Sets the #GtkBox:homogeneous property of @box, controlling
 	/// whether or not all children of @box are given equal space
 	/// in the box.
-	/// Parameters:
-	///	- homogeneous: Bool
-	open func setHomogeneous(_ homogeneous: Bool) {
+	/// - Parameters:
+	///	- homogeneous: Bool (gboolean)
+	open func setHomogeneous(_ homogeneous: Bool) -> Swift.Void {
 		gtk_box_set_homogeneous(GTK_BOX(self.GOBJECT), homogeneous ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the #GtkBox:spacing property of @box, which is the
 	/// number of pixels to place between children of @box.
-	/// Parameters:
-	///	- spacing: gint
-	open func setSpacing(_ spacing: gint) {
+	/// - Parameters:
+	///	- spacing: gint (gint)
+	open func setSpacing(_ spacing: gint) -> Swift.Void {
 		gtk_box_set_spacing(GTK_BOX(self.GOBJECT), spacing)
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

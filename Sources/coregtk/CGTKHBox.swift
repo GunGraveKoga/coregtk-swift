@@ -34,7 +34,6 @@ public let GTK_TYPE_HBOX: GType = gtk_hbox_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_HBOX)
 }
 
-/// 
 /// #GtkHBox is a container that organizes child widgets into a single row.
 /// Use the #GtkBox packing interface to determine the arrangement,
 /// spacing, width, and alignment of #GtkHBox children.
@@ -52,12 +51,11 @@ public let GTK_TYPE_HBOX: GType = gtk_hbox_get_type()
 
 
 open class CGTKHBox : CGTKBox {
-	/// 
 	/// Creates a new #GtkHBox.
-	/// Parameters:
-	///	- homogeneous: Bool
-	///	- spacing: gint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- homogeneous: Bool (gboolean)
+	///	- spacing: gint (gint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(homogeneous: Bool, spacing: gint) {
 		self.init(withGObject: gtk_hbox_new(homogeneous ? 1 : 0, spacing))!
 	}

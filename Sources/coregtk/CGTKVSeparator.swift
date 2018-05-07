@@ -34,7 +34,6 @@ public let GTK_TYPE_VSEPARATOR: GType = gtk_vseparator_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VSEPARATOR)
 }
 
-/// 
 /// The #GtkVSeparator widget is a vertical separator, used to group the
 /// widgets within a window. It displays a vertical line with a shadow to
 /// make it appear sunken into the interface.
@@ -42,9 +41,8 @@ public let GTK_TYPE_VSEPARATOR: GType = gtk_vseparator_get_type()
 
 
 open class CGTKVSeparator : CGTKSeparator {
-	/// 
 	/// Creates a new #GtkVSeparator.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_vseparator_new())!
 	}

@@ -34,7 +34,6 @@ public let GTK_TYPE_IMAGE: GType = gtk_image_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_IMAGE)
 }
 
-/// 
 /// The #GtkImage widget displays an image. Various kinds of object
 /// can be displayed as an image; most typically, you would load a
 /// #GdkPixbuf ("pixel buffer") from a file, and then display that.
@@ -105,14 +104,12 @@ public let GTK_TYPE_IMAGE: GType = gtk_image_get_type()
 
 
 open class CGTKImage : CGTKMisc {
-	/// 
 	/// Creates a new empty #GtkImage widget.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_image_new())!
 	}
 
-	/// 
 	/// Creates a #GtkImage displaying the given animation.
 	/// The #GtkImage does not assume a reference to the
 	/// animation; you still need to unref it if you own references.
@@ -121,14 +118,13 @@ open class CGTKImage : CGTKMisc {
 	/// #G_PRIORITY_DEFAULT. When using animations to indicate busyness,
 	/// keep in mind that the animation will only be shown if the main loop
 	/// is not busy with something that has a higher priority.
-	/// Parameters:
-	///	- animation: OpaquePointer!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- animation: OpaquePointer! (GdkPixbufAnimation*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromAnimation animation: OpaquePointer!) {
 		self.init(withGObject: gtk_image_new_from_animation(animation))!
 	}
 
-	/// 
 	/// Creates a new #GtkImage displaying the file @filename. If the file
 	/// isn’t found or can’t be loaded, the resulting #GtkImage will
 	/// display a “broken image” icon. This function never returns %NULL,
@@ -142,40 +138,37 @@ open class CGTKImage : CGTKMisc {
 	/// The storage type (gtk_image_get_storage_type()) of the returned
 	/// image is not defined, it will be whatever is appropriate for
 	/// displaying the file.
-	/// Parameters:
-	///	- filename: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromFile filename: String) {
 		self.init(withGObject: gtk_image_new_from_file(filename))!
 	}
 
-	/// 
 	/// Creates a #GtkImage displaying an icon from the current icon theme.
 	/// If the icon name isn’t known, a “broken image” icon will be
 	/// displayed instead.  If the current icon theme is changed, the icon
 	/// will be updated appropriately.
-	/// Parameters:
-	///	- icon: OpaquePointer!
-	///	- size: GtkIconSize
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- icon: OpaquePointer! (GIcon*)
+	///	- size: GtkIconSize (GtkIconSize)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromGicon icon: OpaquePointer!, size: GtkIconSize) {
 		self.init(withGObject: gtk_image_new_from_gicon(icon, size))!
 	}
 
-	/// 
 	/// Creates a #GtkImage displaying an icon from the current icon theme.
 	/// If the icon name isn’t known, a “broken image” icon will be
 	/// displayed instead.  If the current icon theme is changed, the icon
 	/// will be updated appropriately.
-	/// Parameters:
-	///	- iconName: String
-	///	- size: GtkIconSize
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- iconName: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromIconName iconName: String, size: GtkIconSize) {
 		self.init(withGObject: gtk_image_new_from_icon_name(iconName, size))!
 	}
 
-	/// 
 	/// Creates a #GtkImage displaying an icon set. Sample stock sizes are
 	/// #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. Instead of using
 	/// this function, usually it’s better to create a #GtkIconFactory, put
@@ -186,15 +179,14 @@ open class CGTKImage : CGTKMisc {
 	/// The #GtkImage does not assume a reference to the
 	/// icon set; you still need to unref it if you own references.
 	/// #GtkImage will add its own reference rather than adopting yours.
-	/// Parameters:
-	///	- iconSet: OpaquePointer!
-	///	- size: GtkIconSize
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- iconSet: OpaquePointer! (GtkIconSet*)
+	///	- size: GtkIconSize (GtkIconSize)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromIconSet iconSet: OpaquePointer!, size: GtkIconSize) {
 		self.init(withGObject: gtk_image_new_from_icon_set(iconSet, size))!
 	}
 
-	/// 
 	/// Creates a new #GtkImage displaying @pixbuf.
 	/// The #GtkImage does not assume a reference to the
 	/// pixbuf; you still need to unref it if you own references.
@@ -202,14 +194,13 @@ open class CGTKImage : CGTKMisc {
 	/// Note that this function just creates an #GtkImage from the pixbuf. The
 	/// #GtkImage created will not react to state changes. Should you want that,
 	/// you should use gtk_image_new_from_icon_name().
-	/// Parameters:
-	///	- pixbuf: OpaquePointer?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- pixbuf: OpaquePointer? (GdkPixbuf*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromPixbuf pixbuf: OpaquePointer?) {
 		self.init(withGObject: gtk_image_new_from_pixbuf(pixbuf))!
 	}
 
-	/// 
 	/// Creates a new #GtkImage displaying the resource file @resource_path. If the file
 	/// isn’t found or can’t be loaded, the resulting #GtkImage will
 	/// display a “broken image” icon. This function never returns %NULL,
@@ -223,36 +214,34 @@ open class CGTKImage : CGTKMisc {
 	/// The storage type (gtk_image_get_storage_type()) of the returned
 	/// image is not defined, it will be whatever is appropriate for
 	/// displaying the file.
-	/// Parameters:
-	///	- resourcePath: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- resourcePath: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromResource resourcePath: String) {
 		self.init(withGObject: gtk_image_new_from_resource(resourcePath))!
 	}
 
-	/// 
 	/// Creates a #GtkImage displaying a stock icon. Sample stock icon
 	/// names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. Sample stock sizes
 	/// are #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. If the stock
 	/// icon name isn’t known, the image will be empty.
 	/// You can register your own stock icon names, see
 	/// gtk_icon_factory_add_default() and gtk_icon_factory_add().
-	/// Parameters:
-	///	- stockId: String
-	///	- size: GtkIconSize
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromStock stockId: String, size: GtkIconSize) {
 		self.init(withGObject: gtk_image_new_from_stock(stockId, size))!
 	}
 
-	/// 
 	/// Creates a new #GtkImage displaying @surface.
 	/// The #GtkImage does not assume a reference to the
 	/// surface; you still need to unref it if you own references.
 	/// #GtkImage will add its own reference rather than adopting yours.
-	/// Parameters:
-	///	- surface: OpaquePointer?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- surface: OpaquePointer? (cairo_surface_t*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromSurface surface: OpaquePointer?) {
 		self.init(withGObject: gtk_image_new_from_surface(surface))!
 	}
@@ -263,184 +252,165 @@ open class CGTKImage : CGTKMisc {
 		}
 	}
 
-	/// 
 	/// Resets the image to be empty.
-	open func clear() {
+	open func clear() -> Swift.Void {
 		gtk_image_clear(GTK_IMAGE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GdkPixbufAnimation being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_ANIMATION (see gtk_image_get_storage_type()).
 	/// The caller of this function does not own a reference to the
 	/// returned animation.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkPixbufAnimation*)
 	open func getAnimation() -> OpaquePointer? {
 		return gtk_image_get_animation(GTK_IMAGE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GIcon and size being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_GICON (see gtk_image_get_storage_type()).
 	/// The caller of this function does not own a reference to the
 	/// returned #GIcon.
-	/// Parameters:
-	///	- gicon: UnsafeMutablePointer<OpaquePointer?>
-	///	- size: UnsafeMutablePointer<GtkIconSize>!
-	open func getGicon(_ gicon: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) {
+	/// - Parameters:
+	///	- gicon: UnsafeMutablePointer<OpaquePointer?> (GIcon**)
+	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
+	open func getGicon(_ gicon: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
 		gtk_image_get_gicon(GTK_IMAGE(self.GOBJECT), gicon, size)
 	}
 
-	/// 
 	/// Gets the icon name and size being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_ICON_NAME (see gtk_image_get_storage_type()).
 	/// The returned string is owned by the #GtkImage and should not
 	/// be freed.
-	/// Parameters:
-	///	- iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	///	- size: UnsafeMutablePointer<GtkIconSize>!
-	open func getIconName(_ iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) {
+	/// - Parameters:
+	///	- iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>! (const gchar**)
+	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
+	open func getIconName(_ iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
 		gtk_image_get_icon_name(GTK_IMAGE(self.GOBJECT), iconName, size)
 	}
 
-	/// 
 	/// Gets the icon set and size being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
-	/// Parameters:
-	///	- iconSet: UnsafeMutablePointer<OpaquePointer?>
-	///	- size: UnsafeMutablePointer<GtkIconSize>!
-	open func getIconSet(_ iconSet: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) {
+	/// - Parameters:
+	///	- iconSet: UnsafeMutablePointer<OpaquePointer?> (GtkIconSet**)
+	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
+	open func getIconSet(_ iconSet: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
 		gtk_image_get_icon_set(GTK_IMAGE(self.GOBJECT), iconSet, size)
 	}
 
-	/// 
 	/// Gets the #GdkPixbuf being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_PIXBUF (see gtk_image_get_storage_type()).
 	/// The caller of this function does not own a reference to the
 	/// returned pixbuf.
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkPixbuf*)
 	open func getPixbuf() -> OpaquePointer? {
 		return gtk_image_get_pixbuf(GTK_IMAGE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the pixel size used for named icons.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getPixelSize() -> gint {
 		return gtk_image_get_pixel_size(GTK_IMAGE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the stock icon name and size being displayed by the #GtkImage.
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_STOCK (see gtk_image_get_storage_type()).
 	/// The returned string is owned by the #GtkImage and should not
 	/// be freed.
-	/// Parameters:
-	///	- stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!
-	///	- size: UnsafeMutablePointer<GtkIconSize>!
-	open func getStock(stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) {
+	/// - Parameters:
+	///	- stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
+	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
+	open func getStock(stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
 		gtk_image_get_stock(GTK_IMAGE(self.GOBJECT), stockId, size)
 	}
 
-	/// 
 	/// Gets the type of representation being used by the #GtkImage
 	/// to store image data. If the #GtkImage has no image data,
 	/// the return value will be %GTK_IMAGE_EMPTY.
-	/// - Returns: GtkImageType
+	/// - Returns: GtkImageType (GtkImageType)
 	open func getStorageType() -> GtkImageType {
 		return gtk_image_get_storage_type(GTK_IMAGE(self.GOBJECT))
 	}
 
-	/// 
 	/// Causes the #GtkImage to display the given animation (or display
 	/// nothing, if you set the animation to %NULL).
-	/// Parameters:
-	///	- animation: OpaquePointer!
-	open func setFromAnimation(_ animation: OpaquePointer!) {
+	/// - Parameters:
+	///	- animation: OpaquePointer! (GdkPixbufAnimation*)
+	open func setFromAnimation(_ animation: OpaquePointer!) -> Swift.Void {
 		gtk_image_set_from_animation(GTK_IMAGE(self.GOBJECT), animation)
 	}
 
-	/// 
 	/// See gtk_image_new_from_file() for details.
-	/// Parameters:
-	///	- filename: String
-	open func setFromFile(filename: String) {
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	open func setFromFile(filename: String) -> Swift.Void {
 		gtk_image_set_from_file(GTK_IMAGE(self.GOBJECT), filename)
 	}
 
-	/// 
 	/// See gtk_image_new_from_gicon() for details.
-	/// Parameters:
-	///	- icon: OpaquePointer!
-	///	- size: GtkIconSize
-	open func setFromGicon(icon: OpaquePointer!, size: GtkIconSize) {
+	/// - Parameters:
+	///	- icon: OpaquePointer! (GIcon*)
+	///	- size: GtkIconSize (GtkIconSize)
+	open func setFromGicon(icon: OpaquePointer!, size: GtkIconSize) -> Swift.Void {
 		gtk_image_set_from_gicon(GTK_IMAGE(self.GOBJECT), icon, size)
 	}
 
-	/// 
 	/// See gtk_image_new_from_icon_name() for details.
-	/// Parameters:
-	///	- iconName: String
-	///	- size: GtkIconSize
-	open func setFromIconName(_ iconName: String, size: GtkIconSize) {
+	/// - Parameters:
+	///	- iconName: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	open func setFromIconName(_ iconName: String, size: GtkIconSize) -> Swift.Void {
 		gtk_image_set_from_icon_name(GTK_IMAGE(self.GOBJECT), iconName, size)
 	}
 
-	/// 
 	/// See gtk_image_new_from_icon_set() for details.
-	/// Parameters:
-	///	- iconSet: OpaquePointer!
-	///	- size: GtkIconSize
-	open func setFromIconSet(_ iconSet: OpaquePointer!, size: GtkIconSize) {
+	/// - Parameters:
+	///	- iconSet: OpaquePointer! (GtkIconSet*)
+	///	- size: GtkIconSize (GtkIconSize)
+	open func setFromIconSet(_ iconSet: OpaquePointer!, size: GtkIconSize) -> Swift.Void {
 		gtk_image_set_from_icon_set(GTK_IMAGE(self.GOBJECT), iconSet, size)
 	}
 
-	/// 
 	/// See gtk_image_new_from_pixbuf() for details.
-	/// Parameters:
-	///	- pixbuf: OpaquePointer?
-	open func setFromPixbuf(_ pixbuf: OpaquePointer?) {
+	/// - Parameters:
+	///	- pixbuf: OpaquePointer? (GdkPixbuf*)
+	open func setFromPixbuf(_ pixbuf: OpaquePointer?) -> Swift.Void {
 		gtk_image_set_from_pixbuf(GTK_IMAGE(self.GOBJECT), pixbuf)
 	}
 
-	/// 
 	/// See gtk_image_new_from_resource() for details.
-	/// Parameters:
-	///	- resourcePath: String
-	open func setFromResource(resourcePath: String) {
+	/// - Parameters:
+	///	- resourcePath: String (const gchar*)
+	open func setFromResource(resourcePath: String) -> Swift.Void {
 		gtk_image_set_from_resource(GTK_IMAGE(self.GOBJECT), resourcePath)
 	}
 
-	/// 
 	/// See gtk_image_new_from_stock() for details.
-	/// Parameters:
-	///	- stockId: String
-	///	- size: GtkIconSize
-	open func setFromStock(stockId: String, size: GtkIconSize) {
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	///	- size: GtkIconSize (GtkIconSize)
+	open func setFromStock(stockId: String, size: GtkIconSize) -> Swift.Void {
 		gtk_image_set_from_stock(GTK_IMAGE(self.GOBJECT), stockId, size)
 	}
 
-	/// 
 	/// See gtk_image_new_from_surface() for details.
-	/// Parameters:
-	///	- surface: OpaquePointer?
-	open func setFromSurface(_ surface: OpaquePointer?) {
+	/// - Parameters:
+	///	- surface: OpaquePointer? (cairo_surface_t*)
+	open func setFromSurface(_ surface: OpaquePointer?) -> Swift.Void {
 		gtk_image_set_from_surface(GTK_IMAGE(self.GOBJECT), surface)
 	}
 
-	/// 
 	/// Sets the pixel size to use for named icons. If the pixel size is set
 	/// to a value != -1, it is used instead of the icon size set by
 	/// gtk_image_set_from_icon_name().
-	/// Parameters:
-	///	- pixelSize: gint
-	open func setPixelSize(_ pixelSize: gint) {
+	/// - Parameters:
+	///	- pixelSize: gint (gint)
+	open func setPixelSize(_ pixelSize: gint) -> Swift.Void {
 		gtk_image_set_pixel_size(GTK_IMAGE(self.GOBJECT), pixelSize)
 	}
 

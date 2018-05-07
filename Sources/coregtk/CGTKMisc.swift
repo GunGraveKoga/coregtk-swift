@@ -34,7 +34,6 @@ public let GTK_TYPE_MISC: GType = gtk_misc_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MISC)
 }
 
-/// 
 /// The #GtkMisc widget is an abstract widget which is not useful itself, but
 /// is used to derive subclasses which have alignment and padding attributes.
 /// The horizontal and vertical padding attributes allows extra space to be
@@ -56,41 +55,37 @@ open class CGTKMisc : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Gets the X and Y alignment of the widget within its allocation.
 	/// See gtk_misc_set_alignment().
-	/// Parameters:
-	///	- xalign: UnsafeMutablePointer<Float>!
-	///	- yalign: UnsafeMutablePointer<Float>!
-	open func getAlignment(xalign: UnsafeMutablePointer<Float>!, yalign: UnsafeMutablePointer<Float>!) {
+	/// - Parameters:
+	///	- xalign: UnsafeMutablePointer<Float>! (gfloat*)
+	///	- yalign: UnsafeMutablePointer<Float>! (gfloat*)
+	open func getAlignment(xalign: UnsafeMutablePointer<Float>!, yalign: UnsafeMutablePointer<Float>!) -> Swift.Void {
 		gtk_misc_get_alignment(GTK_MISC(self.GOBJECT), xalign, yalign)
 	}
 
-	/// 
 	/// Gets the padding in the X and Y directions of the widget.
 	/// See gtk_misc_set_padding().
-	/// Parameters:
-	///	- xpad: UnsafeMutablePointer<Int32>!
-	///	- ypad: UnsafeMutablePointer<Int32>!
-	open func getPadding(xpad: UnsafeMutablePointer<Int32>!, ypad: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- xpad: UnsafeMutablePointer<Int32>! (gint*)
+	///	- ypad: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPadding(xpad: UnsafeMutablePointer<Int32>!, ypad: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_misc_get_padding(GTK_MISC(self.GOBJECT), xpad, ypad)
 	}
 
-	/// 
 	/// Sets the alignment of the widget.
-	/// Parameters:
-	///	- xalign: Float
-	///	- yalign: Float
-	open func setAlignment(xalign: Float, yalign: Float) {
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	///	- yalign: Float (gfloat)
+	open func setAlignment(xalign: Float, yalign: Float) -> Swift.Void {
 		gtk_misc_set_alignment(GTK_MISC(self.GOBJECT), xalign, yalign)
 	}
 
-	/// 
 	/// Sets the amount of space to add around the widget.
-	/// Parameters:
-	///	- xpad: gint
-	///	- ypad: gint
-	open func setPadding(xpad: gint, ypad: gint) {
+	/// - Parameters:
+	///	- xpad: gint (gint)
+	///	- ypad: gint (gint)
+	open func setPadding(xpad: gint, ypad: gint) -> Swift.Void {
 		gtk_misc_set_padding(GTK_MISC(self.GOBJECT), xpad, ypad)
 	}
 

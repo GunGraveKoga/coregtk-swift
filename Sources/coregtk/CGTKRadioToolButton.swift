@@ -34,7 +34,6 @@ public let GTK_TYPE_RADIO_TOOL_BUTTON: GType = gtk_radio_tool_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_RADIO_TOOL_BUTTON)
 }
 
-/// 
 /// A #GtkRadioToolButton is a #GtkToolItem that contains a radio button,
 /// that is, a button that is part of a group of toggle buttons where only
 /// one button can be active at a time.
@@ -46,44 +45,40 @@ public let GTK_TYPE_RADIO_TOOL_BUTTON: GType = gtk_radio_tool_button_get_type()
 
 
 open class CGTKRadioToolButton : CGTKToggleToolButton {
-	/// 
 	/// Creates a new #GtkRadioToolButton, adding it to @group.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(group: UnsafeMutablePointer<GSList>?) {
 		self.init(withGObject: gtk_radio_tool_button_new(group))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioToolButton, adding it to @group.
 	/// The new #GtkRadioToolButton will contain an icon and label from the
 	/// stock item indicated by @stock_id.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	///	- stockId: String
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	///	- stockId: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(fromStock group: UnsafeMutablePointer<GSList>?, stockId: String) {
 		self.init(withGObject: gtk_radio_tool_button_new_from_stock(group, stockId))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioToolButton adding it to the same group as @gruup
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GtkRadioToolButton>?
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GtkRadioToolButton>? (GtkRadioToolButton*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(fromWidget group: UnsafeMutablePointer<GtkRadioToolButton>?) {
 		self.init(withGObject: gtk_radio_tool_button_new_from_widget(group))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioToolButton adding it to the same group as @group.
 	/// The new #GtkRadioToolButton will contain an icon and label from the
 	/// stock item indicated by @stock_id.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GtkRadioToolButton>?
-	///	- stockId: String
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GtkRadioToolButton>? (GtkRadioToolButton*)
+	///	- stockId: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(withStockFromWidget group: UnsafeMutablePointer<GtkRadioToolButton>?, stockId: String) {
 		self.init(withGObject: gtk_radio_tool_button_new_with_stock_from_widget(group, stockId))!
 	}
@@ -94,18 +89,16 @@ open class CGTKRadioToolButton : CGTKToggleToolButton {
 		}
 	}
 
-	/// 
 	/// Returns the radio button group @button belongs to.
-	/// - Returns: UnsafeMutablePointer<GSList>!
+	/// - Returns: UnsafeMutablePointer<GSList>! (GSList*)
 	open func getGroup() -> UnsafeMutablePointer<GSList>! {
 		return gtk_radio_tool_button_get_group(GTK_RADIO_TOOL_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Adds @button to @group, removing it from the group it belonged to before.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	open func setGroup(_ group: UnsafeMutablePointer<GSList>?) {
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	open func setGroup(_ group: UnsafeMutablePointer<GSList>?) -> Swift.Void {
 		gtk_radio_tool_button_set_group(GTK_RADIO_TOOL_BUTTON(self.GOBJECT), group)
 	}
 

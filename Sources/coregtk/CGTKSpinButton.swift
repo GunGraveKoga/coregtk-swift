@@ -34,7 +34,6 @@ public let GTK_TYPE_SPIN_BUTTON: GType = gtk_spin_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SPIN_BUTTON)
 }
 
-/// 
 /// A #GtkSpinButton is an ideal way to allow the user to set the value of
 /// some attribute. Rather than having to directly type a number into a
 /// #GtkEntry, GtkSpinButton allows the user to click on one of two arrows
@@ -122,19 +121,17 @@ public let GTK_TYPE_SPIN_BUTTON: GType = gtk_spin_button_get_type()
 /// ]|
 
 
-open class CGTKSpinButton : CGTKEntry {
-	/// 
+open class CGTKSpinButton : CGTKEntry, CGTKOrientable {
 	/// Creates a new #GtkSpinButton.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	///	- climbRate: Double
-	///	- digits: guint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	///	- climbRate: Double (gdouble)
+	///	- digits: guint (guint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(adjustment: UnsafeMutablePointer<GtkAdjustment>?, climbRate: Double, digits: guint) {
 		self.init(withGObject: gtk_spin_button_new(adjustment, climbRate, digits))!
 	}
 
-	/// 
 	/// This is a convenience constructor that allows creation of a numeric
 	/// #GtkSpinButton without manually creating an adjustment. The value is
 	/// initially set to the minimum value and a page increment of 10 * @step
@@ -143,11 +140,11 @@ open class CGTKSpinButton : CGTKEntry {
 	/// Note that the way in which the precision is derived works best if @step
 	/// is a power of ten. If the resulting precision is not suitable for your
 	/// needs, use gtk_spin_button_set_digits() to correct it.
-	/// Parameters:
-	///	- min: Double
-	///	- max: Double
-	///	- step: Double
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- min: Double (gdouble)
+	///	- max: Double (gdouble)
+	///	- step: Double (gdouble)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withRange min: Double, max: Double, step: Double) {
 		self.init(withGObject: gtk_spin_button_new_with_range(min, max, step))!
 	}
@@ -158,197 +155,188 @@ open class CGTKSpinButton : CGTKEntry {
 		}
 	}
 
-	/// 
 	/// Changes the properties of an existing spin button. The adjustment,
 	/// climb rate, and number of decimal places are updated accordingly.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	///	- climbRate: Double
-	///	- digits: guint
-	open func configure(adjustment: UnsafeMutablePointer<GtkAdjustment>?, climbRate: Double, digits: guint) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	///	- climbRate: Double (gdouble)
+	///	- digits: guint (guint)
+	open func configure(adjustment: UnsafeMutablePointer<GtkAdjustment>?, climbRate: Double, digits: guint) -> Swift.Void {
 		gtk_spin_button_configure(GTK_SPIN_BUTTON(self.GOBJECT), adjustment, climbRate, digits)
 	}
 
-	/// 
 	/// Get the adjustment associated with a #GtkSpinButton
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>!
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
 	open func getAdjustment() -> UnsafeMutablePointer<GtkAdjustment>! {
 		return gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Fetches the precision of @spin_button. See gtk_spin_button_set_digits().
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getDigits() -> guint {
 		return gtk_spin_button_get_digits(GTK_SPIN_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the current step and page the increments used by @spin_button. See
 	/// gtk_spin_button_set_increments().
-	/// Parameters:
-	///	- step: UnsafeMutablePointer<Double>!
-	///	- page: UnsafeMutablePointer<Double>!
-	open func getIncrements(step: UnsafeMutablePointer<Double>!, page: UnsafeMutablePointer<Double>!) {
+	/// - Parameters:
+	///	- step: UnsafeMutablePointer<Double>! (gdouble*)
+	///	- page: UnsafeMutablePointer<Double>! (gdouble*)
+	open func getIncrements(step: UnsafeMutablePointer<Double>!, page: UnsafeMutablePointer<Double>!) -> Swift.Void {
 		gtk_spin_button_get_increments(GTK_SPIN_BUTTON(self.GOBJECT), step, page)
 	}
 
-	/// 
 	/// Returns whether non-numeric text can be typed into the spin button.
 	/// See gtk_spin_button_set_numeric().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getNumeric() -> Bool {
 		return gtk_spin_button_get_numeric(GTK_SPIN_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the range allowed for @spin_button.
 	/// See gtk_spin_button_set_range().
-	/// Parameters:
-	///	- min: UnsafeMutablePointer<Double>!
-	///	- max: UnsafeMutablePointer<Double>!
-	open func getRange(min: UnsafeMutablePointer<Double>!, max: UnsafeMutablePointer<Double>!) {
+	/// - Parameters:
+	///	- min: UnsafeMutablePointer<Double>! (gdouble*)
+	///	- max: UnsafeMutablePointer<Double>! (gdouble*)
+	open func getRange(min: UnsafeMutablePointer<Double>!, max: UnsafeMutablePointer<Double>!) -> Swift.Void {
 		gtk_spin_button_get_range(GTK_SPIN_BUTTON(self.GOBJECT), min, max)
 	}
 
-	/// 
 	/// Returns whether the values are corrected to the nearest step.
 	/// See gtk_spin_button_set_snap_to_ticks().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSnapToTicks() -> Bool {
 		return gtk_spin_button_get_snap_to_ticks(GTK_SPIN_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the update behavior of a spin button.
 	/// See gtk_spin_button_set_update_policy().
-	/// - Returns: GtkSpinButtonUpdatePolicy
+	/// - Returns: GtkSpinButtonUpdatePolicy (GtkSpinButtonUpdatePolicy)
 	open func getUpdatePolicy() -> GtkSpinButtonUpdatePolicy {
 		return gtk_spin_button_get_update_policy(GTK_SPIN_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Get the value in the @spin_button.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getValue() -> Double {
 		return gtk_spin_button_get_value(GTK_SPIN_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Get the value @spin_button represented as an integer.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getValueAsInt() -> gint {
 		return gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the spin button’s value wraps around to the
 	/// opposite limit when the upper or lower limit of the range is
 	/// exceeded. See gtk_spin_button_set_wrap().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getWrap() -> Bool {
 		return gtk_spin_button_get_wrap(GTK_SPIN_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Replaces the #GtkAdjustment associated with @spin_button.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>!
-	open func setAdjustment(_ adjustment: UnsafeMutablePointer<GtkAdjustment>!) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
+	open func setAdjustment(_ adjustment: UnsafeMutablePointer<GtkAdjustment>!) -> Swift.Void {
 		gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(self.GOBJECT), adjustment)
 	}
 
-	/// 
 	/// Set the precision to be displayed by @spin_button. Up to 20 digit precision
 	/// is allowed.
-	/// Parameters:
-	///	- digits: guint
-	open func setDigits(_ digits: guint) {
+	/// - Parameters:
+	///	- digits: guint (guint)
+	open func setDigits(_ digits: guint) -> Swift.Void {
 		gtk_spin_button_set_digits(GTK_SPIN_BUTTON(self.GOBJECT), digits)
 	}
 
-	/// 
 	/// Sets the step and page increments for spin_button.  This affects how
 	/// quickly the value changes when the spin button’s arrows are activated.
-	/// Parameters:
-	///	- step: Double
-	///	- page: Double
-	open func setIncrements(step: Double, page: Double) {
+	/// - Parameters:
+	///	- step: Double (gdouble)
+	///	- page: Double (gdouble)
+	open func setIncrements(step: Double, page: Double) -> Swift.Void {
 		gtk_spin_button_set_increments(GTK_SPIN_BUTTON(self.GOBJECT), step, page)
 	}
 
-	/// 
 	/// Sets the flag that determines if non-numeric text can be typed
 	/// into the spin button.
-	/// Parameters:
-	///	- numeric: Bool
-	open func setNumeric(_ numeric: Bool) {
+	/// - Parameters:
+	///	- numeric: Bool (gboolean)
+	open func setNumeric(_ numeric: Bool) -> Swift.Void {
 		gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(self.GOBJECT), numeric ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the minimum and maximum allowable values for @spin_button.
 	/// If the current value is outside this range, it will be adjusted
 	/// to fit within the range, otherwise it will remain unchanged.
-	/// Parameters:
-	///	- min: Double
-	///	- max: Double
-	open func setRange(min: Double, max: Double) {
+	/// - Parameters:
+	///	- min: Double (gdouble)
+	///	- max: Double (gdouble)
+	open func setRange(min: Double, max: Double) -> Swift.Void {
 		gtk_spin_button_set_range(GTK_SPIN_BUTTON(self.GOBJECT), min, max)
 	}
 
-	/// 
 	/// Sets the policy as to whether values are corrected to the
 	/// nearest step increment when a spin button is activated after
 	/// providing an invalid value.
-	/// Parameters:
-	///	- snapToTicks: Bool
-	open func setSnapToTicks(_ snapToTicks: Bool) {
+	/// - Parameters:
+	///	- snapToTicks: Bool (gboolean)
+	open func setSnapToTicks(_ snapToTicks: Bool) -> Swift.Void {
 		gtk_spin_button_set_snap_to_ticks(GTK_SPIN_BUTTON(self.GOBJECT), snapToTicks ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the update behavior of a spin button.
 	/// This determines whether the spin button is always updated
 	/// or only when a valid value is set.
-	/// Parameters:
-	///	- policy: GtkSpinButtonUpdatePolicy
-	open func setUpdatePolicy(_ policy: GtkSpinButtonUpdatePolicy) {
+	/// - Parameters:
+	///	- policy: GtkSpinButtonUpdatePolicy (GtkSpinButtonUpdatePolicy)
+	open func setUpdatePolicy(_ policy: GtkSpinButtonUpdatePolicy) -> Swift.Void {
 		gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(self.GOBJECT), policy)
 	}
 
-	/// 
 	/// Sets the value of @spin_button.
-	/// Parameters:
-	///	- value: Double
-	open func setValue(_ value: Double) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	open func setValue(_ value: Double) -> Swift.Void {
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(self.GOBJECT), value)
 	}
 
-	/// 
 	/// Sets the flag that determines if a spin button value wraps
 	/// around to the opposite limit when the upper or lower limit
 	/// of the range is exceeded.
-	/// Parameters:
-	///	- wrap: Bool
-	open func setWrap(_ wrap: Bool) {
+	/// - Parameters:
+	///	- wrap: Bool (gboolean)
+	open func setWrap(_ wrap: Bool) -> Swift.Void {
 		gtk_spin_button_set_wrap(GTK_SPIN_BUTTON(self.GOBJECT), wrap ? 1 : 0)
 	}
 
-	/// 
 	/// Increment or decrement a spin button’s value in a specified
 	/// direction by a specified amount.
-	/// Parameters:
-	///	- direction: GtkSpinType
-	///	- increment: Double
-	open func spin(direction: GtkSpinType, increment: Double) {
+	/// - Parameters:
+	///	- direction: GtkSpinType (GtkSpinType)
+	///	- increment: Double (gdouble)
+	open func spin(direction: GtkSpinType, increment: Double) -> Swift.Void {
 		gtk_spin_button_spin(GTK_SPIN_BUTTON(self.GOBJECT), direction, increment)
 	}
 
-	/// 
 	/// Manually force an update of the spin button.
-	open func update() {
+	open func update() -> Swift.Void {
 		gtk_spin_button_update(GTK_SPIN_BUTTON(self.GOBJECT))
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

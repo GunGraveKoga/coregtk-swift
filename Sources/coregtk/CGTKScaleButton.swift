@@ -34,7 +34,6 @@ public let GTK_TYPE_SCALE_BUTTON: GType = gtk_scale_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SCALE_BUTTON)
 }
 
-/// 
 /// #GtkScaleButton provides a button which pops up a scale widget.
 /// This kind of widget is commonly used for volume controls in multimedia
 /// applications, and GTK+ provides a #GtkVolumeButton subclass that
@@ -44,17 +43,16 @@ public let GTK_TYPE_SCALE_BUTTON: GType = gtk_scale_button_get_type()
 /// it from a plain #GtkButton, it gets the .scale style class.
 
 
-open class CGTKScaleButton : CGTKButton {
-	/// 
+open class CGTKScaleButton : CGTKButton, CGTKOrientable {
 	/// Creates a #GtkScaleButton, with a range between @min and @max, with
 	/// a stepping of @step.
-	/// Parameters:
-	///	- size: GtkIconSize
-	///	- min: Double
-	///	- max: Double
-	///	- step: Double
-	///	- icons: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- size: GtkIconSize (GtkIconSize)
+	///	- min: Double (gdouble)
+	///	- max: Double (gdouble)
+	///	- step: Double (gdouble)
+	///	- icons: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(size: GtkIconSize, min: Double, max: Double, step: Double, icons: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
 		self.init(withGObject: gtk_scale_button_new(size, min, max, step, icons))!
 	}
@@ -65,70 +63,75 @@ open class CGTKScaleButton : CGTKButton {
 		}
 	}
 
-	/// 
 	/// Gets the #GtkAdjustment associated with the #GtkScaleButton’s scale.
 	/// See gtk_range_get_adjustment() for details.
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>!
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
 	open func getAdjustment() -> UnsafeMutablePointer<GtkAdjustment>! {
 		return gtk_scale_button_get_adjustment(GTK_SCALE_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the minus button of the #GtkScaleButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getMinusButton<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_scale_button_get_minus_button(GTK_SCALE_BUTTON(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Retrieves the plus button of the #GtkScaleButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getPlusButton<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_scale_button_get_plus_button(GTK_SCALE_BUTTON(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Retrieves the popup of the #GtkScaleButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getPopup<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_scale_button_get_popup(GTK_SCALE_BUTTON(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the current value of the scale button.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getValue() -> Double {
 		return gtk_scale_button_get_value(GTK_SCALE_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the #GtkAdjustment to be used as a model
 	/// for the #GtkScaleButton’s scale.
 	/// See gtk_range_set_adjustment() for details.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>!
-	open func setAdjustment(_ adjustment: UnsafeMutablePointer<GtkAdjustment>!) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
+	open func setAdjustment(_ adjustment: UnsafeMutablePointer<GtkAdjustment>!) -> Swift.Void {
 		gtk_scale_button_set_adjustment(GTK_SCALE_BUTTON(self.GOBJECT), adjustment)
 	}
 
-	/// 
 	/// Sets the icons to be used by the scale button.
 	/// For details, see the #GtkScaleButton:icons property.
-	/// Parameters:
-	///	- icons: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	open func setIcons(_ icons: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- icons: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	open func setIcons(_ icons: UnsafeMutablePointer<UnsafePointer<gchar>?>!) -> Swift.Void {
 		gtk_scale_button_set_icons(GTK_SCALE_BUTTON(self.GOBJECT), icons)
 	}
 
-	/// 
 	/// Sets the current value of the scale; if the value is outside
 	/// the minimum or maximum range values, it will be clamped to fit
 	/// inside them. The scale button emits the #GtkScaleButton::value-changed
 	/// signal if the value changes.
-	/// Parameters:
-	///	- value: Double
-	open func setValue(_ value: Double) {
+	/// - Parameters:
+	///	- value: Double (gdouble)
+	open func setValue(_ value: Double) -> Swift.Void {
 		gtk_scale_button_set_value(GTK_SCALE_BUTTON(self.GOBJECT), value)
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

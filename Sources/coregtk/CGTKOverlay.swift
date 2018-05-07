@@ -34,7 +34,6 @@ public let GTK_TYPE_OVERLAY: GType = gtk_overlay_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_OVERLAY)
 }
 
-/// 
 /// GtkOverlay is a container which contains a single main child, on top
 /// of which it can place “overlay” widgets. The position of each overlay
 /// widget is determined by its #GtkWidget:halign and #GtkWidget:valign
@@ -57,9 +56,8 @@ public let GTK_TYPE_OVERLAY: GType = gtk_overlay_get_type()
 
 
 open class CGTKOverlay : CGTKBin {
-	/// 
 	/// Creates a new #GtkOverlay.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_overlay_new())!
 	}
@@ -70,49 +68,45 @@ open class CGTKOverlay : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Adds @widget to @overlay.
 	/// The widget will be stacked on top of the main widget
 	/// added with gtk_container_add().
 	/// The position at which @widget is placed is determined
 	/// from its #GtkWidget:halign and #GtkWidget:valign properties.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func addOverlay(widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func addOverlay(widget: CGTKWidget) -> Swift.Void {
 		gtk_overlay_add_overlay(GTK_OVERLAY(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// 
 	/// Convenience function to get the value of the #GtkOverlay:pass-through
 	/// child property for @widget.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func getOverlayPassThrough(widget: CGTKWidget) -> Bool {
 		return gtk_overlay_get_overlay_pass_through(GTK_OVERLAY(self.GOBJECT), widget.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Moves @child to a new @index in the list of @overlay children.
 	/// The list contains overlays in the order that these were
 	/// added to @overlay.
 	/// A widget’s index in the @overlay children list determines which order
 	/// the children are drawn if they overlap. The first child is drawn at
 	/// the bottom. It also affects the default focus chain order.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- position: gint
-	open func reorderOverlay(child: CGTKWidget, position: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	open func reorderOverlay(child: CGTKWidget, position: gint) -> Swift.Void {
 		gtk_overlay_reorder_overlay(GTK_OVERLAY(self.GOBJECT), child.WIDGET, position)
 	}
 
-	/// 
 	/// Convenience function to set the value of the #GtkOverlay:pass-through
 	/// child property for @widget.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- passThrough: Bool
-	open func setOverlayPassThrough(widget: CGTKWidget, passThrough: Bool) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- passThrough: Bool (gboolean)
+	open func setOverlayPassThrough(widget: CGTKWidget, passThrough: Bool) -> Swift.Void {
 		gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(self.GOBJECT), widget.WIDGET, passThrough ? 1 : 0)
 	}
 

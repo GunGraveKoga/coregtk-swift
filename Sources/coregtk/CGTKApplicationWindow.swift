@@ -34,7 +34,6 @@ public let GTK_TYPE_APPLICATION_WINDOW: GType = gtk_application_window_get_type(
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_APPLICATION_WINDOW)
 }
 
-/// 
 /// #GtkApplicationWindow is a #GtkWindow subclass that offers some
 /// extra functionality for better integration with #GtkApplication
 /// features.  Notably, it can handle both the application menu as well
@@ -123,11 +122,10 @@ public let GTK_TYPE_APPLICATION_WINDOW: GType = gtk_application_window_get_type(
 
 
 open class CGTKApplicationWindow : CGTKWindow {
-	/// 
 	/// Creates a new #GtkApplicationWindow.
-	/// Parameters:
-	///	- application: CGTKApplication
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- application: CGTKApplication (GtkApplication*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(application: CGTKApplication) {
 		self.init(withGObject: gtk_application_window_new(application.APPLICATION))!
 	}
@@ -138,47 +136,42 @@ open class CGTKApplicationWindow : CGTKWindow {
 		}
 	}
 
-	/// 
 	/// Gets the #GtkShortcutsWindow that has been set up with
 	/// a prior call to gtk_application_window_set_help_overlay().
-	/// - Returns: UnsafeMutablePointer<GtkShortcutsWindow>?
+	/// - Returns: UnsafeMutablePointer<GtkShortcutsWindow>? (GtkShortcutsWindow*)
 	open func getHelpOverlay() -> UnsafeMutablePointer<GtkShortcutsWindow>? {
 		return gtk_application_window_get_help_overlay(GTK_APPLICATION_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the unique ID of the window. If the window has not yet been added to
 	/// a #GtkApplication, returns `0`.
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getId() -> guint {
 		return gtk_application_window_get_id(GTK_APPLICATION_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the window will display a menubar for the app menu
 	/// and menubar as needed.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowMenubar() -> Bool {
 		return gtk_application_window_get_show_menubar(GTK_APPLICATION_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Associates a shortcuts window with the application window, and
 	/// sets up an action with the name win.show-help-overlay to present
 	/// it.
 	/// @window takes resposibility for destroying @help_overlay.
-	/// Parameters:
-	///	- helpOverlay: UnsafeMutablePointer<GtkShortcutsWindow>?
-	open func setHelpOverlay(_ helpOverlay: UnsafeMutablePointer<GtkShortcutsWindow>?) {
+	/// - Parameters:
+	///	- helpOverlay: UnsafeMutablePointer<GtkShortcutsWindow>? (GtkShortcutsWindow*)
+	open func setHelpOverlay(_ helpOverlay: UnsafeMutablePointer<GtkShortcutsWindow>?) -> Swift.Void {
 		gtk_application_window_set_help_overlay(GTK_APPLICATION_WINDOW(self.GOBJECT), helpOverlay)
 	}
 
-	/// 
 	/// Sets whether the window will display a menubar for the app menu
 	/// and menubar as needed.
-	/// Parameters:
-	///	- showMenubar: Bool
-	open func setShowMenubar(_ showMenubar: Bool) {
+	/// - Parameters:
+	///	- showMenubar: Bool (gboolean)
+	open func setShowMenubar(_ showMenubar: Bool) -> Swift.Void {
 		gtk_application_window_set_show_menubar(GTK_APPLICATION_WINDOW(self.GOBJECT), showMenubar ? 1 : 0)
 	}
 

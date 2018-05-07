@@ -34,7 +34,6 @@ public let GTK_TYPE_VIEWPORT: GType = gtk_viewport_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VIEWPORT)
 }
 
-/// 
 /// The #GtkViewport widget acts as an adaptor class, implementing
 /// scrollability for child widgets that lack their own scrolling
 /// capabilities. Use GtkViewport to scroll child widgets such as
@@ -52,14 +51,13 @@ public let GTK_TYPE_VIEWPORT: GType = gtk_viewport_get_type()
 /// GtkViewport has a single CSS node with name viewport.
 
 
-open class CGTKViewport : CGTKBin {
-	/// 
+open class CGTKViewport : CGTKBin, CGTKScrollable {
 	/// Creates a new #GtkViewport with the given adjustments, or with default
 	/// adjustments if none are given.
-	/// Parameters:
-	///	- hadjustment: UnsafeMutablePointer<GtkAdjustment>?
-	///	- vadjustment: UnsafeMutablePointer<GtkAdjustment>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- hadjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	///	- vadjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(hadjustment: UnsafeMutablePointer<GtkAdjustment>?, vadjustment: UnsafeMutablePointer<GtkAdjustment>?) {
 		self.init(withGObject: gtk_viewport_new(hadjustment, vadjustment))!
 	}
@@ -70,64 +68,112 @@ open class CGTKViewport : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Gets the bin window of the #GtkViewport.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkWindow*)
 	open func getBinWindow() -> OpaquePointer {
 		return gtk_viewport_get_bin_window(GTK_VIEWPORT(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the horizontal adjustment of the viewport.
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>!
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
 	open func getHadjustment() -> UnsafeMutablePointer<GtkAdjustment>! {
 		return gtk_viewport_get_hadjustment(GTK_VIEWPORT(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the shadow type of the #GtkViewport. See
 	/// gtk_viewport_set_shadow_type().
-	/// - Returns: GtkShadowType
+	/// - Returns: GtkShadowType (GtkShadowType)
 	open func getShadowType() -> GtkShadowType {
 		return gtk_viewport_get_shadow_type(GTK_VIEWPORT(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the vertical adjustment of the viewport.
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>!
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
 	open func getVadjustment() -> UnsafeMutablePointer<GtkAdjustment>! {
 		return gtk_viewport_get_vadjustment(GTK_VIEWPORT(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the view window of the #GtkViewport.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkWindow*)
 	open func getViewWindow() -> OpaquePointer {
 		return gtk_viewport_get_view_window(GTK_VIEWPORT(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the horizontal adjustment of the viewport.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	open func setHadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	open func setHadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>?) -> Swift.Void {
 		gtk_viewport_set_hadjustment(GTK_VIEWPORT(self.GOBJECT), adjustment)
 	}
 
-	/// 
 	/// Sets the shadow type of the viewport.
-	/// Parameters:
-	///	- type: GtkShadowType
-	open func setShadowType(_ type: GtkShadowType) {
+	/// - Parameters:
+	///	- type: GtkShadowType (GtkShadowType)
+	open func setShadowType(_ type: GtkShadowType) -> Swift.Void {
 		gtk_viewport_set_shadow_type(GTK_VIEWPORT(self.GOBJECT), type)
 	}
 
-	/// 
 	/// Sets the vertical adjustment of the viewport.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	open func setVadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	open func setVadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>?) -> Swift.Void {
 		gtk_viewport_set_vadjustment(GTK_VIEWPORT(self.GOBJECT), adjustment)
+	}
+
+	/// Returns the size of a non-scrolling border around the
+	/// outside of the scrollable. An example for this would
+	/// be treeview headers. GTK+ can use this information to
+	/// display overlayed graphics, like the overshoot indication,
+	/// at the right position.
+	/// - Parameters:
+	///	- border: UnsafeMutablePointer<GtkBorder>! (GtkBorder*)
+	/// - Returns: Bool (gboolean)
+	open func getBorder(_ border: UnsafeMutablePointer<GtkBorder>!) -> Bool {
+		return gtk_scrollable_get_border(GTK_SCROLLABLE(self.GOBJECT), border) != 0 ? true : false
+	}
+
+	/// Gets the horizontal #GtkScrollablePolicy.
+	/// - Returns: GtkScrollablePolicy (GtkScrollablePolicy)
+	open func getHscrollPolicy() -> GtkScrollablePolicy {
+		return gtk_scrollable_get_hscroll_policy(GTK_SCROLLABLE(self.GOBJECT))
+	}
+
+	/// Gets the vertical #GtkScrollablePolicy.
+	/// - Returns: GtkScrollablePolicy (GtkScrollablePolicy)
+	open func getVscrollPolicy() -> GtkScrollablePolicy {
+		return gtk_scrollable_get_vscroll_policy(GTK_SCROLLABLE(self.GOBJECT))
+	}
+
+	/// Sets the horizontal adjustment of the #GtkScrollable.
+	/// - Parameters:
+	///	- hadjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	open func setHadjustment(_ hadjustment: UnsafeMutablePointer<GtkAdjustment>?) -> Swift.Void {
+		gtk_scrollable_set_hadjustment(GTK_SCROLLABLE(self.GOBJECT), hadjustment)
+	}
+
+	/// Sets the #GtkScrollablePolicy to determine whether
+	/// horizontal scrolling should start below the minimum width or
+	/// below the natural width.
+	/// - Parameters:
+	///	- policy: GtkScrollablePolicy (GtkScrollablePolicy)
+	open func setHscrollPolicy(_ policy: GtkScrollablePolicy) -> Swift.Void {
+		gtk_scrollable_set_hscroll_policy(GTK_SCROLLABLE(self.GOBJECT), policy)
+	}
+
+	/// Sets the vertical adjustment of the #GtkScrollable.
+	/// - Parameters:
+	///	- vadjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	open func setVadjustment(_ vadjustment: UnsafeMutablePointer<GtkAdjustment>?) -> Swift.Void {
+		gtk_scrollable_set_vadjustment(GTK_SCROLLABLE(self.GOBJECT), vadjustment)
+	}
+
+	/// Sets the #GtkScrollablePolicy to determine whether
+	/// vertical scrolling should start below the minimum height or
+	/// below the natural height.
+	/// - Parameters:
+	///	- policy: GtkScrollablePolicy (GtkScrollablePolicy)
+	open func setVscrollPolicy(_ policy: GtkScrollablePolicy) -> Swift.Void {
+		gtk_scrollable_set_vscroll_policy(GTK_SCROLLABLE(self.GOBJECT), policy)
 	}
 
 }

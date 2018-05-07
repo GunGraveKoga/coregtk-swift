@@ -35,44 +35,40 @@ public let GTK_TYPE_COLOR_SELECTION: GType = gtk_color_selection_get_type()
 }
 
 open class CGTKColorSelection : CGTKBox {
-	/// 
 	/// Parses a color palette string; the string is a colon-separated
 	/// list of color names readable by gdk_color_parse().
-	/// Parameters:
-	///	- str: String
-	///	- colors: UnsafeMutablePointer<UnsafeMutablePointer<GdkColor>?>!
-	///	- ncolors: UnsafeMutablePointer<Int32>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	///	- colors: UnsafeMutablePointer<UnsafeMutablePointer<GdkColor>?>! (GdkColor**)
+	///	- ncolors: UnsafeMutablePointer<Int32>! (gint*)
+	/// - Returns: Bool (gboolean)
 	open class func paletteFromString(str: String, colors: UnsafeMutablePointer<UnsafeMutablePointer<GdkColor>?>!, ncolors: UnsafeMutablePointer<Int32>!) -> Bool {
 		return gtk_color_selection_palette_from_string(str, colors, ncolors) != 0 ? true : false
 	}
 
-	/// 
 	/// Encodes a palette as a string, useful for persistent storage.
-	/// Parameters:
-	///	- colors: UnsafeMutablePointer<GdkColor>!
-	///	- ncolors: gint
-	/// - Returns: String?
+	/// - Parameters:
+	///	- colors: UnsafeMutablePointer<GdkColor>! (GdkColor*)
+	///	- ncolors: gint (gint)
+	/// - Returns: String? (gchar*)
 	open class func paletteToString(colors: UnsafeMutablePointer<GdkColor>!, ncolors: gint) -> String? {
 		return String(utf8String: gtk_color_selection_palette_to_string(colors, ncolors))
 	}
 
-	/// 
 	/// Installs a global function to be called whenever the user
 	/// tries to modify the palette in a color selection.
 	/// This function should save the new palette contents, and update
 	/// the #GtkSettings:gtk-color-palette GtkSettings property so all
 	/// GtkColorSelection widgets will be modified.
-	/// Parameters:
-	///	- function: @escaping GtkColorSelectionChangePaletteWithScreenFunc
-	/// - Returns: GtkColorSelectionChangePaletteWithScreenFunc
+	/// - Parameters:
+	///	- function: @escaping GtkColorSelectionChangePaletteWithScreenFunc (GtkColorSelectionChangePaletteWithScreenFunc)
+	/// - Returns: GtkColorSelectionChangePaletteWithScreenFunc (GtkColorSelectionChangePaletteWithScreenFunc)
 	open class func setChangePaletteWithScreenHook(function: @escaping GtkColorSelectionChangePaletteWithScreenFunc) -> GtkColorSelectionChangePaletteWithScreenFunc {
 		return gtk_color_selection_set_change_palette_with_screen_hook(function)
 	}
 
-	/// 
 	/// Creates a new GtkColorSelection.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_color_selection_new())!
 	}
@@ -83,150 +79,133 @@ open class CGTKColorSelection : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Returns the current alpha value.
-	/// - Returns: guint16
+	/// - Returns: guint16 (guint16)
 	open func getCurrentAlpha() -> guint16 {
 		return gtk_color_selection_get_current_alpha(GTK_COLOR_SELECTION(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets @color to be the current color in the GtkColorSelection widget.
-	/// Parameters:
-	///	- color: UnsafeMutablePointer<GdkColor>!
-	open func getCurrentColor(_ color: UnsafeMutablePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafeMutablePointer<GdkColor>! (GdkColor*)
+	open func getCurrentColor(_ color: UnsafeMutablePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_selection_get_current_color(GTK_COLOR_SELECTION(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Sets @rgba to be the current color in the GtkColorSelection widget.
-	/// Parameters:
-	///	- rgba: UnsafeMutablePointer<GdkRGBA>!
-	open func getCurrentRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafeMutablePointer<GdkRGBA>! (GdkRGBA*)
+	open func getCurrentRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_selection_get_current_rgba(GTK_COLOR_SELECTION(self.GOBJECT), rgba)
 	}
 
-	/// 
 	/// Determines whether the colorsel has an opacity control.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasOpacityControl() -> Bool {
 		return gtk_color_selection_get_has_opacity_control(GTK_COLOR_SELECTION(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Determines whether the color selector has a color palette.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasPalette() -> Bool {
 		return gtk_color_selection_get_has_palette(GTK_COLOR_SELECTION(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the previous alpha value.
-	/// - Returns: guint16
+	/// - Returns: guint16 (guint16)
 	open func getPreviousAlpha() -> guint16 {
 		return gtk_color_selection_get_previous_alpha(GTK_COLOR_SELECTION(self.GOBJECT))
 	}
 
-	/// 
 	/// Fills @color in with the original color value.
-	/// Parameters:
-	///	- color: UnsafeMutablePointer<GdkColor>!
-	open func getPreviousColor(_ color: UnsafeMutablePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafeMutablePointer<GdkColor>! (GdkColor*)
+	open func getPreviousColor(_ color: UnsafeMutablePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_selection_get_previous_color(GTK_COLOR_SELECTION(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Fills @rgba in with the original color value.
-	/// Parameters:
-	///	- rgba: UnsafeMutablePointer<GdkRGBA>!
-	open func getPreviousRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafeMutablePointer<GdkRGBA>! (GdkRGBA*)
+	open func getPreviousRgba(_ rgba: UnsafeMutablePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_selection_get_previous_rgba(GTK_COLOR_SELECTION(self.GOBJECT), rgba)
 	}
 
-	/// 
 	/// Gets the current state of the @colorsel.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isAdjusting() -> Bool {
 		return gtk_color_selection_is_adjusting(GTK_COLOR_SELECTION(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the current opacity to be @alpha.
 	/// The first time this is called, it will also set
 	/// the original opacity to be @alpha too.
-	/// Parameters:
-	///	- alpha: guint16
-	open func setCurrentAlpha(_ alpha: guint16) {
+	/// - Parameters:
+	///	- alpha: guint16 (guint16)
+	open func setCurrentAlpha(_ alpha: guint16) -> Swift.Void {
 		gtk_color_selection_set_current_alpha(GTK_COLOR_SELECTION(self.GOBJECT), alpha)
 	}
 
-	/// 
 	/// Sets the current color to be @color.
 	/// The first time this is called, it will also set
 	/// the original color to be @color too.
-	/// Parameters:
-	///	- color: UnsafePointer<GdkColor>!
-	open func setCurrentColor(_ color: UnsafePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkColor>! (const GdkColor*)
+	open func setCurrentColor(_ color: UnsafePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_selection_set_current_color(GTK_COLOR_SELECTION(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Sets the current color to be @rgba.
 	/// The first time this is called, it will also set
 	/// the original color to be @rgba too.
-	/// Parameters:
-	///	- rgba: UnsafePointer<GdkRGBA>!
-	open func setCurrentRgba(_ rgba: UnsafePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	open func setCurrentRgba(_ rgba: UnsafePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_selection_set_current_rgba(GTK_COLOR_SELECTION(self.GOBJECT), rgba)
 	}
 
-	/// 
 	/// Sets the @colorsel to use or not use opacity.
-	/// Parameters:
-	///	- hasOpacity: Bool
-	open func setHasOpacityControl(hasOpacity: Bool) {
+	/// - Parameters:
+	///	- hasOpacity: Bool (gboolean)
+	open func setHasOpacityControl(hasOpacity: Bool) -> Swift.Void {
 		gtk_color_selection_set_has_opacity_control(GTK_COLOR_SELECTION(self.GOBJECT), hasOpacity ? 1 : 0)
 	}
 
-	/// 
 	/// Shows and hides the palette based upon the value of @has_palette.
-	/// Parameters:
-	///	- hasPalette: Bool
-	open func setHasPalette(_ hasPalette: Bool) {
+	/// - Parameters:
+	///	- hasPalette: Bool (gboolean)
+	open func setHasPalette(_ hasPalette: Bool) -> Swift.Void {
 		gtk_color_selection_set_has_palette(GTK_COLOR_SELECTION(self.GOBJECT), hasPalette ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the “previous” alpha to be @alpha.
 	/// This function should be called with some hesitations,
 	/// as it might seem confusing to have that alpha change.
-	/// Parameters:
-	///	- alpha: guint16
-	open func setPreviousAlpha(_ alpha: guint16) {
+	/// - Parameters:
+	///	- alpha: guint16 (guint16)
+	open func setPreviousAlpha(_ alpha: guint16) -> Swift.Void {
 		gtk_color_selection_set_previous_alpha(GTK_COLOR_SELECTION(self.GOBJECT), alpha)
 	}
 
-	/// 
 	/// Sets the “previous” color to be @color.
 	/// This function should be called with some hesitations,
 	/// as it might seem confusing to have that color change.
 	/// Calling gtk_color_selection_set_current_color() will also
 	/// set this color the first time it is called.
-	/// Parameters:
-	///	- color: UnsafePointer<GdkColor>!
-	open func setPreviousColor(_ color: UnsafePointer<GdkColor>!) {
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkColor>! (const GdkColor*)
+	open func setPreviousColor(_ color: UnsafePointer<GdkColor>!) -> Swift.Void {
 		gtk_color_selection_set_previous_color(GTK_COLOR_SELECTION(self.GOBJECT), color)
 	}
 
-	/// 
 	/// Sets the “previous” color to be @rgba.
 	/// This function should be called with some hesitations,
 	/// as it might seem confusing to have that color change.
 	/// Calling gtk_color_selection_set_current_rgba() will also
 	/// set this color the first time it is called.
-	/// Parameters:
-	///	- rgba: UnsafePointer<GdkRGBA>!
-	open func setPreviousRgba(_ rgba: UnsafePointer<GdkRGBA>!) {
+	/// - Parameters:
+	///	- rgba: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	open func setPreviousRgba(_ rgba: UnsafePointer<GdkRGBA>!) -> Swift.Void {
 		gtk_color_selection_set_previous_rgba(GTK_COLOR_SELECTION(self.GOBJECT), rgba)
 	}
 

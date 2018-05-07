@@ -34,7 +34,6 @@ public let GTK_TYPE_SPINNER: GType = gtk_spinner_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SPINNER)
 }
 
-/// 
 /// A GtkSpinner widget displays an icon-size spinning animation.
 /// It is often used as an alternative to a #GtkProgressBar for
 /// displaying indefinite activity, instead of actual progress.
@@ -46,9 +45,8 @@ public let GTK_TYPE_SPINNER: GType = gtk_spinner_get_type()
 
 
 open class CGTKSpinner : CGTKWidget {
-	/// 
 	/// Returns a new spinner widget. Not yet started.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_spinner_new())!
 	}
@@ -59,15 +57,13 @@ open class CGTKSpinner : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Starts the animation of the spinner.
-	open func start() {
+	open func start() -> Swift.Void {
 		gtk_spinner_start(GTK_SPINNER(self.GOBJECT))
 	}
 
-	/// 
 	/// Stops the animation of the spinner.
-	open func stop() {
+	open func stop() -> Swift.Void {
 		gtk_spinner_stop(GTK_SPINNER(self.GOBJECT))
 	}
 

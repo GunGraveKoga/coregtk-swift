@@ -28,7 +28,6 @@
 
 @_exported import CGtk
 
-/// 
 /// The HPaned widget is a container widget with two
 /// children arranged horizontally. The division between
 /// the two panes is adjustable by the user by dragging
@@ -37,9 +36,8 @@
 
 
 open class CGTKHPaned : CGTKPaned {
-	/// 
 	/// Create a new #GtkHPaned
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_hpaned_new())!
 	}

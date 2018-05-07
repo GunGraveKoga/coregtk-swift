@@ -34,7 +34,6 @@ public let GTK_TYPE_DIALOG: GType = gtk_dialog_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_DIALOG)
 }
 
-/// 
 /// Dialog boxes are a convenient way to prompt the user for a small amount
 /// of input, e.g. to display a message, ask a question, or anything else
 /// that does not require extensive effort on the user’s part.
@@ -153,11 +152,10 @@ open class CGTKDialog : CGTKWindow {
 		}
 	}
 
-	/// 
 	/// Creates a new dialog box.
 	/// Widgets should not be packed into this #GtkWindow
 	/// directly, but into the @vbox and @action_area, as described above.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_dialog_new())!
 	}
@@ -168,89 +166,80 @@ open class CGTKDialog : CGTKWindow {
 		}
 	}
 
-	/// 
 	/// Adds an activatable widget to the action area of a #GtkDialog,
 	/// connecting a signal handler that will emit the #GtkDialog::response
 	/// signal on the dialog when the widget is activated. The widget is
 	/// appended to the end of the dialog’s action area. If you want to add a
 	/// non-activatable widget, simply pack it into the @action_area field
 	/// of the #GtkDialog struct.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- responseId: gint
-	open func addActionWidget(child: CGTKWidget, responseId: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- responseId: gint (gint)
+	open func addActionWidget(child: CGTKWidget, responseId: gint) -> Swift.Void {
 		gtk_dialog_add_action_widget(GTK_DIALOG(self.GOBJECT), child.WIDGET, responseId)
 	}
 
-	/// 
 	/// Adds a button with the given text and sets things up so that
 	/// clicking the button will emit the #GtkDialog::response signal with
 	/// the given @response_id. The button is appended to the end of the
 	/// dialog’s action area. The button widget is returned, but usually
 	/// you don’t need it.
-	/// Parameters:
-	///	- buttonText: String
-	///	- responseId: gint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- buttonText: String (const gchar*)
+	///	- responseId: gint (gint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func addButton<T>(buttonText: String, responseId: gint) -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_dialog_add_button(GTK_DIALOG(self.GOBJECT), buttonText, responseId))!
 	}
 
-	/// 
 	/// Returns the action area of @dialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getActionArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_dialog_get_action_area(GTK_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the content area of @dialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getContentArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_dialog_get_content_area(GTK_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the header bar of @dialog. Note that the
 	/// headerbar is only used by the dialog if the
 	/// #GtkDialog:use-header-bar property is %TRUE.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getHeaderBar<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_dialog_get_header_bar(GTK_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the response id of a widget in the action area
 	/// of a dialog.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func getResponseForWidget(_ widget: CGTKWidget) -> gint {
 		return gtk_dialog_get_response_for_widget(GTK_DIALOG(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// 
 	/// Gets the widget button that uses the given response ID in the action area
 	/// of a dialog.
-	/// Parameters:
-	///	- responseId: gint
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getWidgetForResponse<T>(responseId: gint) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_dialog_get_widget_for_response(GTK_DIALOG(self.GOBJECT), responseId))
 	}
 
-	/// 
 	/// Emits the #GtkDialog::response signal with the given response ID.
 	/// Used to indicate that the user has responded to the dialog in some way;
 	/// typically either you or gtk_dialog_run() will be monitoring the
 	/// ::response signal and take appropriate action.
-	/// Parameters:
-	///	- responseId: gint
-	open func response(responseId: gint) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	open func response(responseId: gint) -> Swift.Void {
 		gtk_dialog_response(GTK_DIALOG(self.GOBJECT), responseId)
 	}
 
-	/// 
 	/// Blocks in a recursive main loop until the @dialog either emits the
 	/// #GtkDialog::response signal, or is destroyed. If the dialog is
 	/// destroyed during the call to gtk_dialog_run(), gtk_dialog_run() returns
@@ -290,43 +279,40 @@ open class CGTKDialog : CGTKWindow {
 	/// windows in the same window group while the dialog is run), callbacks
 	/// such as timeouts, IO channel watches, DND drops, etc, will
 	/// be triggered during a gtk_dialog_run() call.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func run() -> gint {
 		return gtk_dialog_run(GTK_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets an alternative button order. If the
 	/// #GtkSettings:gtk-alternative-button-order setting is set to %TRUE,
 	/// the dialog buttons are reordered according to the order of the
 	/// response ids in @new_order.
 	/// See gtk_dialog_set_alternative_button_order() for more information.
 	/// This function is for use by language bindings.
-	/// Parameters:
-	///	- nparams: gint
-	///	- newOrder: UnsafeMutablePointer<Int32>!
-	open func setAlternativeButtonOrderFromArray(nparams: gint, newOrder: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- nparams: gint (gint)
+	///	- newOrder: UnsafeMutablePointer<Int32>! (gint*)
+	open func setAlternativeButtonOrderFromArray(nparams: gint, newOrder: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_dialog_set_alternative_button_order_from_array(GTK_DIALOG(self.GOBJECT), nparams, newOrder)
 	}
 
-	/// 
 	/// Sets the last widget in the dialog’s action area with the given @response_id
 	/// as the default widget for the dialog. Pressing “Enter” normally activates
 	/// the default widget.
-	/// Parameters:
-	///	- responseId: gint
-	open func setDefaultResponse(responseId: gint) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	open func setDefaultResponse(responseId: gint) -> Swift.Void {
 		gtk_dialog_set_default_response(GTK_DIALOG(self.GOBJECT), responseId)
 	}
 
-	/// 
 	/// Calls `gtk_widget_set_sensitive (widget, @setting)`
 	/// for each widget in the dialog’s action area with the given @response_id.
 	/// A convenient way to sensitize/desensitize dialog buttons.
-	/// Parameters:
-	///	- responseId: gint
-	///	- setting: Bool
-	open func setResponseSensitive(responseId: gint, setting: Bool) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	///	- setting: Bool (gboolean)
+	open func setResponseSensitive(responseId: gint, setting: Bool) -> Swift.Void {
 		gtk_dialog_set_response_sensitive(GTK_DIALOG(self.GOBJECT), responseId, setting ? 1 : 0)
 	}
 

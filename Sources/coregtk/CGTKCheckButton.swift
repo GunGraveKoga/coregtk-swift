@@ -34,7 +34,6 @@ public let GTK_TYPE_CHECK_BUTTON: GType = gtk_check_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_CHECK_BUTTON)
 }
 
-/// 
 /// A #GtkCheckButton places a discrete #GtkToggleButton next to a widget,
 /// (usually a #GtkLabel). See the section on #GtkToggleButton widgets for
 /// more information about toggle/check buttons.
@@ -59,29 +58,26 @@ public let GTK_TYPE_CHECK_BUTTON: GType = gtk_check_button_get_type()
 
 
 open class CGTKCheckButton : CGTKToggleButton {
-	/// 
 	/// Creates a new #GtkCheckButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_check_button_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkCheckButton with a #GtkLabel to the right of it.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabel label: String) {
 		self.init(withGObject: gtk_check_button_new_with_label(label))!
 	}
 
-	/// 
 	/// Creates a new #GtkCheckButton containing a label. The label
 	/// will be created using gtk_label_new_with_mnemonic(), so underscores
 	/// in @label indicate the mnemonic for the check button.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic label: String) {
 		self.init(withGObject: gtk_check_button_new_with_mnemonic(label))!
 	}

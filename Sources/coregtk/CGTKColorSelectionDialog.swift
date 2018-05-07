@@ -35,11 +35,10 @@ public let GTK_TYPE_COLOR_SELECTION_DIALOG: GType = gtk_color_selection_dialog_g
 }
 
 open class CGTKColorSelectionDialog : CGTKDialog {
-	/// 
 	/// Creates a new #GtkColorSelectionDialog.
-	/// Parameters:
-	///	- title: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(title: String) {
 		self.init(withGObject: gtk_color_selection_dialog_new(title))!
 	}
@@ -50,9 +49,8 @@ open class CGTKColorSelectionDialog : CGTKDialog {
 		}
 	}
 
-	/// 
 	/// Retrieves the #GtkColorSelection widget embedded in the dialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getColorSelection<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(self.GOBJECT)))!
 	}

@@ -34,7 +34,6 @@ public let GTK_TYPE_SCROLLBAR: GType = gtk_scrollbar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SCROLLBAR)
 }
 
-/// 
 /// The #GtkScrollbar widget is a horizontal or vertical scrollbar,
 /// depending on the value of the #GtkOrientable:orientation property.
 /// Its position and movement are controlled by the adjustment that is passed to
@@ -70,12 +69,11 @@ public let GTK_TYPE_SCROLLBAR: GType = gtk_scrollbar_get_type()
 
 
 open class CGTKScrollbar : CGTKRange {
-	/// 
 	/// Creates a new scrollbar with the given orientation.
-	/// Parameters:
-	///	- orientation: GtkOrientation
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(orientation: GtkOrientation, adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
 		self.init(withGObject: gtk_scrollbar_new(orientation, adjustment))!
 	}

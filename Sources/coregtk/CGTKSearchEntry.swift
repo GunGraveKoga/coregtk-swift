@@ -34,7 +34,6 @@ public let GTK_TYPE_SEARCH_ENTRY: GType = gtk_search_entry_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SEARCH_ENTRY)
 }
 
-/// 
 /// #GtkSearchEntry is a subclass of #GtkEntry that has been
 /// tailored for use as a search entry.
 /// It will show an inactive symbolic “find” icon when the search
@@ -57,10 +56,9 @@ public let GTK_TYPE_SEARCH_ENTRY: GType = gtk_search_entry_get_type()
 
 
 open class CGTKSearchEntry : CGTKEntry {
-	/// 
 	/// Creates a #GtkSearchEntry, with a find icon when the search field is
 	/// empty, and a clear icon when it isn't.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_search_entry_new())!
 	}
@@ -71,7 +69,6 @@ open class CGTKSearchEntry : CGTKEntry {
 		}
 	}
 
-	/// 
 	/// This function should be called when the top-level window
 	/// which contains the search entry received a key event. If
 	/// the entry is part of a #GtkSearchBar, it is preferable
@@ -82,9 +79,9 @@ open class CGTKSearchEntry : CGTKEntry {
 	/// or continues a search, %GDK_EVENT_STOP will be returned.
 	/// The caller should ensure that the entry is shown in this
 	/// case, and not propagate the event further.
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEvent>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEvent>! (GdkEvent*)
+	/// - Returns: Bool (gboolean)
 	open func handleEvent(_ event: UnsafeMutablePointer<GdkEvent>!) -> Bool {
 		return gtk_search_entry_handle_event(GTK_SEARCH_ENTRY(self.GOBJECT), event) != 0 ? true : false
 	}

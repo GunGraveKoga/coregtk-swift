@@ -34,7 +34,6 @@ public let GTK_TYPE_ACCEL_LABEL: GType = gtk_accel_label_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ACCEL_LABEL)
 }
 
-/// 
 /// The #GtkAccelLabel widget is a subclass of #GtkLabel that also displays an
 /// accelerator key on the right of the label text, e.g. “Ctrl+S”.
 /// It is commonly used in menus to show the keyboard short-cuts for commands.
@@ -86,11 +85,10 @@ public let GTK_TYPE_ACCEL_LABEL: GType = gtk_accel_label_get_type()
 
 
 open class CGTKAccelLabel : CGTKLabel {
-	/// 
 	/// Creates a new #GtkAccelLabel.
-	/// Parameters:
-	///	- string: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- string: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(string: String) {
 		self.init(withGObject: gtk_accel_label_new(string))!
 	}
@@ -101,72 +99,65 @@ open class CGTKAccelLabel : CGTKLabel {
 		}
 	}
 
-	/// 
 	/// Gets the keyval and modifier mask set with
 	/// gtk_accel_label_set_accel().
-	/// Parameters:
-	///	- acceleratorKey: UnsafeMutablePointer<UInt32>!
-	///	- acceleratorMods: UnsafeMutablePointer<GdkModifierType>!
-	open func getAccel(acceleratorKey: UnsafeMutablePointer<UInt32>!, acceleratorMods: UnsafeMutablePointer<GdkModifierType>!) {
+	/// - Parameters:
+	///	- acceleratorKey: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- acceleratorMods: UnsafeMutablePointer<GdkModifierType>! (GdkModifierType*)
+	open func getAccel(acceleratorKey: UnsafeMutablePointer<UInt32>!, acceleratorMods: UnsafeMutablePointer<GdkModifierType>!) -> Swift.Void {
 		gtk_accel_label_get_accel(GTK_ACCEL_LABEL(self.GOBJECT), acceleratorKey, acceleratorMods)
 	}
 
-	/// 
 	/// Fetches the widget monitored by this accelerator label. See
 	/// gtk_accel_label_set_accel_widget().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getAccelWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_accel_label_get_accel_widget(GTK_ACCEL_LABEL(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the width needed to display the accelerator key(s).
 	/// This is used by menus to align all of the #GtkMenuItem widgets, and shouldn't
 	/// be needed by applications.
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getAccelWidth() -> guint {
 		return gtk_accel_label_get_accel_width(GTK_ACCEL_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Recreates the string representing the accelerator keys.
 	/// This should not be needed since the string is automatically updated whenever
 	/// accelerators are added or removed from the associated widget.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func refetch() -> Bool {
 		return gtk_accel_label_refetch(GTK_ACCEL_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Manually sets a keyval and modifier mask as the accelerator rendered
 	/// by @accel_label.
 	/// If a keyval and modifier are explicitly set then these values are
 	/// used regardless of any associated accel closure or widget.
 	/// Providing an @accelerator_key of 0 removes the manual setting.
-	/// Parameters:
-	///	- acceleratorKey: guint
-	///	- acceleratorMods: GdkModifierType
-	open func setAccel(acceleratorKey: guint, acceleratorMods: GdkModifierType) {
+	/// - Parameters:
+	///	- acceleratorKey: guint (guint)
+	///	- acceleratorMods: GdkModifierType (GdkModifierType)
+	open func setAccel(acceleratorKey: guint, acceleratorMods: GdkModifierType) -> Swift.Void {
 		gtk_accel_label_set_accel(GTK_ACCEL_LABEL(self.GOBJECT), acceleratorKey, acceleratorMods)
 	}
 
-	/// 
 	/// Sets the closure to be monitored by this accelerator label. The closure
 	/// must be connected to an accelerator group; see gtk_accel_group_connect().
 	/// Passing %NULL for @accel_closure will dissociate @accel_label from its
 	/// current closure, if any.
-	/// Parameters:
-	///	- accelClosure: UnsafeMutablePointer<GClosure>?
-	open func setAccelClosure(_ accelClosure: UnsafeMutablePointer<GClosure>?) {
+	/// - Parameters:
+	///	- accelClosure: UnsafeMutablePointer<GClosure>? (GClosure*)
+	open func setAccelClosure(_ accelClosure: UnsafeMutablePointer<GClosure>?) -> Swift.Void {
 		gtk_accel_label_set_accel_closure(GTK_ACCEL_LABEL(self.GOBJECT), accelClosure)
 	}
 
-	/// 
 	/// Sets the widget to be monitored by this accelerator label. Passing %NULL for
 	/// @accel_widget will dissociate @accel_label from its current widget, if any.
-	/// Parameters:
-	///	- accelWidget: CGTKWidget
-	open func setAccelWidget(_ accelWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- accelWidget: CGTKWidget (GtkWidget*)
+	open func setAccelWidget(_ accelWidget: CGTKWidget) -> Swift.Void {
 		gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(self.GOBJECT), accelWidget.WIDGET)
 	}
 

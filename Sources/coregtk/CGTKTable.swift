@@ -34,7 +34,6 @@ public let GTK_TYPE_TABLE: GType = gtk_table_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_TABLE)
 }
 
-/// 
 /// The #GtkTable functions allow the programmer to arrange widgets in rows and
 /// columns, making it easy to align many widgets next to each other,
 /// horizontally and vertically.
@@ -57,17 +56,16 @@ public let GTK_TYPE_TABLE: GType = gtk_table_get_type()
 
 
 open class CGTKTable : CGTKContainer {
-	/// 
 	/// Used to create a new table widget. An initial size must be given by
 	/// specifying how many rows and columns the table should have, although
 	/// this can be changed later with gtk_table_resize().  @rows and @columns
 	/// must both be in the range 1 .. 65535. For historical reasons, 0 is accepted
 	/// as well and is silently interpreted as 1.
-	/// Parameters:
-	///	- rows: guint
-	///	- columns: guint
-	///	- homogeneous: Bool
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- rows: guint (guint)
+	///	- columns: guint (guint)
+	///	- homogeneous: Bool (gboolean)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(rows: guint, columns: guint, homogeneous: Bool) {
 		self.init(withGObject: gtk_table_new(rows, columns, homogeneous ? 1 : 0))!
 	}
@@ -78,7 +76,6 @@ open class CGTKTable : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Adds a widget to a table. The number of “cells” that a widget will occupy is
 	/// specified by @left_attach, @right_attach, @top_attach and @bottom_attach.
 	/// These each represent the leftmost, rightmost, uppermost and lowest column
@@ -92,141 +89,128 @@ open class CGTKTable : CGTKContainer {
 	/// xpadding, ypadding);
 	/// ]|
 	/// If you want to make the button span the entire bottom row, use @left_attach == 0 and @right_attach = 2 instead.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- leftAttach: guint
-	///	- rightAttach: guint
-	///	- topAttach: guint
-	///	- bottomAttach: guint
-	///	- xoptions: GtkAttachOptions
-	///	- yoptions: GtkAttachOptions
-	///	- xpadding: guint
-	///	- ypadding: guint
-	open func attach(child: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint, xoptions: GtkAttachOptions, yoptions: GtkAttachOptions, xpadding: guint, ypadding: guint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- leftAttach: guint (guint)
+	///	- rightAttach: guint (guint)
+	///	- topAttach: guint (guint)
+	///	- bottomAttach: guint (guint)
+	///	- xoptions: GtkAttachOptions (GtkAttachOptions)
+	///	- yoptions: GtkAttachOptions (GtkAttachOptions)
+	///	- xpadding: guint (guint)
+	///	- ypadding: guint (guint)
+	open func attach(child: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint, xoptions: GtkAttachOptions, yoptions: GtkAttachOptions, xpadding: guint, ypadding: guint) -> Swift.Void {
 		gtk_table_attach(GTK_TABLE(self.GOBJECT), child.WIDGET, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding)
 	}
 
-	/// 
 	/// As there are many options associated with gtk_table_attach(), this convenience
 	/// function provides the programmer with a means to add children to a table with
 	/// identical padding and expansion options. The values used for the #GtkAttachOptions
 	/// are `GTK_EXPAND | GTK_FILL`, and the padding is set to 0.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- leftAttach: guint
-	///	- rightAttach: guint
-	///	- topAttach: guint
-	///	- bottomAttach: guint
-	open func attachDefaults(widget: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- leftAttach: guint (guint)
+	///	- rightAttach: guint (guint)
+	///	- topAttach: guint (guint)
+	///	- bottomAttach: guint (guint)
+	open func attachDefaults(widget: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint) -> Swift.Void {
 		gtk_table_attach_defaults(GTK_TABLE(self.GOBJECT), widget.WIDGET, leftAttach, rightAttach, topAttach, bottomAttach)
 	}
 
-	/// 
 	/// Gets the amount of space between column @col, and
 	/// column @col + 1. See gtk_table_set_col_spacing().
-	/// Parameters:
-	///	- column: guint
-	/// - Returns: guint
+	/// - Parameters:
+	///	- column: guint (guint)
+	/// - Returns: guint (guint)
 	open func getColSpacing(column: guint) -> guint {
 		return gtk_table_get_col_spacing(GTK_TABLE(self.GOBJECT), column)
 	}
 
-	/// 
 	/// Gets the default column spacing for the table. This is
 	/// the spacing that will be used for newly added columns.
 	/// (See gtk_table_set_col_spacings())
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getDefaultColSpacing() -> guint {
 		return gtk_table_get_default_col_spacing(GTK_TABLE(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the default row spacing for the table. This is
 	/// the spacing that will be used for newly added rows.
 	/// (See gtk_table_set_row_spacings())
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getDefaultRowSpacing() -> guint {
 		return gtk_table_get_default_row_spacing(GTK_TABLE(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the table cells are all constrained to the same
 	/// width and height. (See gtk_table_set_homogeneous ())
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHomogeneous() -> Bool {
 		return gtk_table_get_homogeneous(GTK_TABLE(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the amount of space between row @row, and
 	/// row @row + 1. See gtk_table_set_row_spacing().
-	/// Parameters:
-	///	- row: guint
-	/// - Returns: guint
+	/// - Parameters:
+	///	- row: guint (guint)
+	/// - Returns: guint (guint)
 	open func getRowSpacing(row: guint) -> guint {
 		return gtk_table_get_row_spacing(GTK_TABLE(self.GOBJECT), row)
 	}
 
-	/// 
 	/// Gets the number of rows and columns in the table.
-	/// Parameters:
-	///	- rows: UnsafeMutablePointer<UInt32>!
-	///	- columns: UnsafeMutablePointer<UInt32>!
-	open func getSize(rows: UnsafeMutablePointer<UInt32>!, columns: UnsafeMutablePointer<UInt32>!) {
+	/// - Parameters:
+	///	- rows: UnsafeMutablePointer<UInt32>! (guint*)
+	///	- columns: UnsafeMutablePointer<UInt32>! (guint*)
+	open func getSize(rows: UnsafeMutablePointer<UInt32>!, columns: UnsafeMutablePointer<UInt32>!) -> Swift.Void {
 		gtk_table_get_size(GTK_TABLE(self.GOBJECT), rows, columns)
 	}
 
-	/// 
 	/// If you need to change a table’s size after
 	/// it has been created, this function allows you to do so.
-	/// Parameters:
-	///	- rows: guint
-	///	- columns: guint
-	open func resize(rows: guint, columns: guint) {
+	/// - Parameters:
+	///	- rows: guint (guint)
+	///	- columns: guint (guint)
+	open func resize(rows: guint, columns: guint) -> Swift.Void {
 		gtk_table_resize(GTK_TABLE(self.GOBJECT), rows, columns)
 	}
 
-	/// 
 	/// Alters the amount of space between a given table column and the following
 	/// column.
-	/// Parameters:
-	///	- column: guint
-	///	- spacing: guint
-	open func setColSpacing(column: guint, spacing: guint) {
+	/// - Parameters:
+	///	- column: guint (guint)
+	///	- spacing: guint (guint)
+	open func setColSpacing(column: guint, spacing: guint) -> Swift.Void {
 		gtk_table_set_col_spacing(GTK_TABLE(self.GOBJECT), column, spacing)
 	}
 
-	/// 
 	/// Sets the space between every column in @table equal to @spacing.
-	/// Parameters:
-	///	- spacing: guint
-	open func setColSpacings(spacing: guint) {
+	/// - Parameters:
+	///	- spacing: guint (guint)
+	open func setColSpacings(spacing: guint) -> Swift.Void {
 		gtk_table_set_col_spacings(GTK_TABLE(self.GOBJECT), spacing)
 	}
 
-	/// 
 	/// Changes the homogenous property of table cells, ie. whether all cells are
 	/// an equal size or not.
-	/// Parameters:
-	///	- homogeneous: Bool
-	open func setHomogeneous(_ homogeneous: Bool) {
+	/// - Parameters:
+	///	- homogeneous: Bool (gboolean)
+	open func setHomogeneous(_ homogeneous: Bool) -> Swift.Void {
 		gtk_table_set_homogeneous(GTK_TABLE(self.GOBJECT), homogeneous ? 1 : 0)
 	}
 
-	/// 
 	/// Changes the space between a given table row and the subsequent row.
-	/// Parameters:
-	///	- row: guint
-	///	- spacing: guint
-	open func setRowSpacing(row: guint, spacing: guint) {
+	/// - Parameters:
+	///	- row: guint (guint)
+	///	- spacing: guint (guint)
+	open func setRowSpacing(row: guint, spacing: guint) -> Swift.Void {
 		gtk_table_set_row_spacing(GTK_TABLE(self.GOBJECT), row, spacing)
 	}
 
-	/// 
 	/// Sets the space between every row in @table equal to @spacing.
-	/// Parameters:
-	///	- spacing: guint
-	open func setRowSpacings(spacing: guint) {
+	/// - Parameters:
+	///	- spacing: guint (guint)
+	open func setRowSpacings(spacing: guint) -> Swift.Void {
 		gtk_table_set_row_spacings(GTK_TABLE(self.GOBJECT), spacing)
 	}
 

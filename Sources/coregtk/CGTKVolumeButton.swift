@@ -34,18 +34,16 @@ public let GTK_TYPE_VOLUME_BUTTON: GType = gtk_volume_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VOLUME_BUTTON)
 }
 
-/// 
 /// #GtkVolumeButton is a subclass of #GtkScaleButton that has
 /// been tailored for use as a volume control widget with suitable
 /// icons, tooltips and accessible labels.
 
 
 open class CGTKVolumeButton : CGTKScaleButton {
-	/// 
 	/// Creates a #GtkVolumeButton, with a range between 0.0 and 1.0, with
 	/// a stepping of 0.02. Volume values can be obtained and modified using
 	/// the functions from #GtkScaleButton.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_volume_button_new())!
 	}

@@ -34,7 +34,6 @@ public let GTK_TYPE_STACK_SIDEBAR: GType = gtk_stack_sidebar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_STACK_SIDEBAR)
 }
 
-/// 
 /// A GtkStackSidebar enables you to quickly and easily provide a
 /// consistent "sidebar" object for your user interface.
 /// In order to use a GtkStackSidebar, you simply use a GtkStack to
@@ -50,9 +49,8 @@ public let GTK_TYPE_STACK_SIDEBAR: GType = gtk_stack_sidebar_get_type()
 
 
 open class CGTKStackSidebar : CGTKBin {
-	/// 
 	/// Creates a new sidebar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_stack_sidebar_new())!
 	}
@@ -63,21 +61,19 @@ open class CGTKStackSidebar : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Retrieves the stack.
 	/// See gtk_stack_sidebar_set_stack().
-	/// - Returns: UnsafeMutablePointer<GtkStack>?
+	/// - Returns: UnsafeMutablePointer<GtkStack>? (GtkStack*)
 	open func getStack() -> UnsafeMutablePointer<GtkStack>? {
 		return gtk_stack_sidebar_get_stack(GTK_STACK_SIDEBAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Set the #GtkStack associated with this #GtkStackSidebar.
 	/// The sidebar widget will automatically update according to the order
 	/// (packing) and items within the given #GtkStack.
-	/// Parameters:
-	///	- stack: UnsafeMutablePointer<GtkStack>!
-	open func setStack(_ stack: UnsafeMutablePointer<GtkStack>!) {
+	/// - Parameters:
+	///	- stack: UnsafeMutablePointer<GtkStack>! (GtkStack*)
+	open func setStack(_ stack: UnsafeMutablePointer<GtkStack>!) -> Swift.Void {
 		gtk_stack_sidebar_set_stack(GTK_STACK_SIDEBAR(self.GOBJECT), stack)
 	}
 

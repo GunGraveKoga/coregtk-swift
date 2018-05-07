@@ -34,7 +34,6 @@ public let GTK_TYPE_INFO_BAR: GType = gtk_info_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_INFO_BAR)
 }
 
-/// 
 /// #GtkInfoBar is a widget that can be used to show messages to
 /// the user without showing a dialog. It is often temporarily shown
 /// at the top or bottom of a document. In contrast to #GtkDialog, which
@@ -113,9 +112,8 @@ open class CGTKInfoBar : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Creates a new #GtkInfoBar object.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_info_bar_new())!
 	}
@@ -126,123 +124,111 @@ open class CGTKInfoBar : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Add an activatable widget to the action area of a #GtkInfoBar,
 	/// connecting a signal handler that will emit the #GtkInfoBar::response
 	/// signal on the message area when the widget is activated. The widget
 	/// is appended to the end of the message areas action area.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- responseId: gint
-	open func addActionWidget(child: CGTKWidget, responseId: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- responseId: gint (gint)
+	open func addActionWidget(child: CGTKWidget, responseId: gint) -> Swift.Void {
 		gtk_info_bar_add_action_widget(GTK_INFO_BAR(self.GOBJECT), child.WIDGET, responseId)
 	}
 
-	/// 
 	/// Adds a button with the given text and sets things up so that
 	/// clicking the button will emit the “response” signal with the given
 	/// response_id. The button is appended to the end of the info bars's
 	/// action area. The button widget is returned, but usually you don't
 	/// need it.
-	/// Parameters:
-	///	- buttonText: String
-	///	- responseId: gint
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- buttonText: String (const gchar*)
+	///	- responseId: gint (gint)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func addButton<T>(buttonText: String, responseId: gint) -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_info_bar_add_button(GTK_INFO_BAR(self.GOBJECT), buttonText, responseId))!
 	}
 
-	/// 
 	/// Returns the action area of @info_bar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getActionArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_info_bar_get_action_area(GTK_INFO_BAR(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the content area of @info_bar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getContentArea<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_info_bar_get_content_area(GTK_INFO_BAR(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the message type of the message area.
-	/// - Returns: GtkMessageType
+	/// - Returns: GtkMessageType (GtkMessageType)
 	open func getMessageType() -> GtkMessageType {
 		return gtk_info_bar_get_message_type(GTK_INFO_BAR(self.GOBJECT))
 	}
 
 	/// func getRevealed() -> Bool -> Bool
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getRevealed() -> Bool {
 		return gtk_info_bar_get_revealed(GTK_INFO_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the widget will display a standard close button.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowCloseButton() -> Bool {
 		return gtk_info_bar_get_show_close_button(GTK_INFO_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Emits the “response” signal with the given @response_id.
-	/// Parameters:
-	///	- responseId: gint
-	open func response(responseId: gint) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	open func response(responseId: gint) -> Swift.Void {
 		gtk_info_bar_response(GTK_INFO_BAR(self.GOBJECT), responseId)
 	}
 
-	/// 
 	/// Sets the last widget in the info bar’s action area with
 	/// the given response_id as the default widget for the dialog.
 	/// Pressing “Enter” normally activates the default widget.
 	/// Note that this function currently requires @info_bar to
 	/// be added to a widget hierarchy.
-	/// Parameters:
-	///	- responseId: gint
-	open func setDefaultResponse(responseId: gint) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	open func setDefaultResponse(responseId: gint) -> Swift.Void {
 		gtk_info_bar_set_default_response(GTK_INFO_BAR(self.GOBJECT), responseId)
 	}
 
-	/// 
 	/// Sets the message type of the message area.
 	/// GTK+ uses this type to determine how the message is displayed.
-	/// Parameters:
-	///	- messageType: GtkMessageType
-	open func setMessageType(_ messageType: GtkMessageType) {
+	/// - Parameters:
+	///	- messageType: GtkMessageType (GtkMessageType)
+	open func setMessageType(_ messageType: GtkMessageType) -> Swift.Void {
 		gtk_info_bar_set_message_type(GTK_INFO_BAR(self.GOBJECT), messageType)
 	}
 
-	/// 
 	/// Calls gtk_widget_set_sensitive (widget, setting) for each
 	/// widget in the info bars’s action area with the given response_id.
 	/// A convenient way to sensitize/desensitize dialog buttons.
-	/// Parameters:
-	///	- responseId: gint
-	///	- setting: Bool
-	open func setResponseSensitive(responseId: gint, setting: Bool) {
+	/// - Parameters:
+	///	- responseId: gint (gint)
+	///	- setting: Bool (gboolean)
+	open func setResponseSensitive(responseId: gint, setting: Bool) -> Swift.Void {
 		gtk_info_bar_set_response_sensitive(GTK_INFO_BAR(self.GOBJECT), responseId, setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the GtkInfoBar:revealed property to @revealed. This will cause
 	/// @info_bar to show up with a slide-in transition.
 	/// Note that this property does not automatically show @info_bar and thus won’t
 	/// have any effect if it is invisible.
-	/// Parameters:
-	///	- revealed: Bool
-	open func setRevealed(_ revealed: Bool) {
+	/// - Parameters:
+	///	- revealed: Bool (gboolean)
+	open func setRevealed(_ revealed: Bool) -> Swift.Void {
 		gtk_info_bar_set_revealed(GTK_INFO_BAR(self.GOBJECT), revealed ? 1 : 0)
 	}
 
-	/// 
 	/// If true, a standard close button is shown. When clicked it emits
 	/// the response %GTK_RESPONSE_CLOSE.
-	/// Parameters:
-	///	- setting: Bool
-	open func setShowCloseButton(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setShowCloseButton(setting: Bool) -> Swift.Void {
 		gtk_info_bar_set_show_close_button(GTK_INFO_BAR(self.GOBJECT), setting ? 1 : 0)
 	}
 

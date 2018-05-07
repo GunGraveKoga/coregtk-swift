@@ -35,11 +35,10 @@ public let GTK_TYPE_FONT_SELECTION_DIALOG: GType = gtk_font_selection_dialog_get
 }
 
 open class CGTKFontSelectionDialog : CGTKDialog {
-	/// 
 	/// Creates a new #GtkFontSelectionDialog.
-	/// Parameters:
-	///	- title: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(title: String) {
 		self.init(withGObject: gtk_font_selection_dialog_new(title))!
 	}
@@ -50,14 +49,12 @@ open class CGTKFontSelectionDialog : CGTKDialog {
 		}
 	}
 
-	/// 
 	/// Gets the “Cancel” button.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getCancelButton<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_font_selection_dialog_get_cancel_button(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the currently-selected font name.
 	/// Note that this can be a different string than what you set with
 	/// gtk_font_selection_dialog_set_font_name(), as the font selection widget
@@ -65,46 +62,41 @@ open class CGTKFontSelectionDialog : CGTKDialog {
 	/// structure. For example, “Helvetica Italic Bold 12” could be normalized
 	/// to “Helvetica Bold Italic 12”.  Use pango_font_description_equal()
 	/// if you want to compare two font descriptions.
-	/// - Returns: String?
+	/// - Returns: String? (gchar*)
 	open func getFontName() -> String? {
 		return String(utf8String: gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the #GtkFontSelection widget embedded in the dialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getFontSelection<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_font_selection_dialog_get_font_selection(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the “OK” button.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getOkButton<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_font_selection_dialog_get_ok_button(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Gets the text displayed in the preview area.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getPreviewText() -> String? {
 		return String(utf8String: gtk_font_selection_dialog_get_preview_text(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Sets the currently selected font.
-	/// Parameters:
-	///	- fontname: String
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- fontname: String (const gchar*)
+	/// - Returns: Bool (gboolean)
 	open func setFontName(fontname: String) -> Bool {
 		return gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(self.GOBJECT), fontname) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the text displayed in the preview area.
-	/// Parameters:
-	///	- text: String
-	open func setPreviewText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func setPreviewText(_ text: String) -> Swift.Void {
 		gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(self.GOBJECT), text)
 	}
 

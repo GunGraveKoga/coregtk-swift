@@ -34,7 +34,6 @@ public let GTK_TYPE_POPOVER: GType = gtk_popover_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_POPOVER)
 }
 
-/// 
 /// GtkPopover is a bubble-like context window, primarily meant to
 /// provide context-dependent information or options. Popovers are
 /// attached to a widget, passed at construction time on gtk_popover_new(),
@@ -90,16 +89,14 @@ public let GTK_TYPE_POPOVER: GType = gtk_popover_get_type()
 
 
 open class CGTKPopover : CGTKBin {
-	/// 
 	/// Creates a new popover to point to @relative_to
-	/// Parameters:
-	///	- relativeTo: CGTKWidget
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- relativeTo: CGTKWidget (GtkWidget*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(relativeTo: CGTKWidget) {
 		self.init(withGObject: gtk_popover_new(relativeTo.WIDGET))!
 	}
 
-	/// 
 	/// Creates a #GtkPopover and populates it according to
 	/// @model. The popover is pointed to the @relative_to widget.
 	/// The created buttons are connected to actions found in the
@@ -108,10 +105,10 @@ open class CGTKPopover : CGTKBin {
 	/// the #GtkApplicationWindows widget hierarchy.
 	/// Actions can also be added using gtk_widget_insert_action_group()
 	/// on the menus attach widget or on any of its parent widgets.
-	/// Parameters:
-	///	- relativeTo: CGTKWidget
-	///	- model: UnsafeMutablePointer<GMenuModel>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- relativeTo: CGTKWidget (GtkWidget*)
+	///	- model: UnsafeMutablePointer<GMenuModel>! (GMenuModel*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromModel relativeTo: CGTKWidget, model: UnsafeMutablePointer<GMenuModel>!) {
 		self.init(withGObject: gtk_popover_new_from_model(relativeTo.WIDGET, model))!
 	}
@@ -122,7 +119,6 @@ open class CGTKPopover : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Establishes a binding between a #GtkPopover and a #GMenuModel.
 	/// The contents of @popover are removed and then refilled with menu items
 	/// according to @model.  When @model changes, @popover is updated.
@@ -144,158 +140,142 @@ open class CGTKPopover : CGTKBin {
 	/// group with a “quit” action and inserted it with the name “mygroup”
 	/// then you would use the action name “mygroup.quit” in your
 	/// #GMenuModel.
-	/// Parameters:
-	///	- model: UnsafeMutablePointer<GMenuModel>?
-	///	- actionNamespace: String
-	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String) {
+	/// - Parameters:
+	///	- model: UnsafeMutablePointer<GMenuModel>? (GMenuModel*)
+	///	- actionNamespace: String (const gchar*)
+	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String) -> Swift.Void {
 		gtk_popover_bind_model(GTK_POPOVER(self.GOBJECT), model, actionNamespace)
 	}
 
-	/// 
 	/// Returns the constraint for placing this popover.
 	/// See gtk_popover_set_constrain_to().
-	/// - Returns: GtkPopoverConstraint
+	/// - Returns: GtkPopoverConstraint (GtkPopoverConstraint)
 	open func getConstrainTo() -> GtkPopoverConstraint {
 		return gtk_popover_get_constrain_to(GTK_POPOVER(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the widget that should be set as the default while
 	/// the popover is shown.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getDefaultWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_popover_get_default_widget(GTK_POPOVER(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the popover is modal, see gtk_popover_set_modal to
 	/// see the implications of this.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getModal() -> Bool {
 		return gtk_popover_get_modal(GTK_POPOVER(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// If a rectangle to point to has been set, this function will
 	/// return %TRUE and fill in @rect with such rectangle, otherwise
 	/// it will return %FALSE and fill in @rect with the attached
 	/// widget coordinates.
-	/// Parameters:
-	///	- rect: UnsafeMutablePointer<GdkRectangle>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- rect: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
+	/// - Returns: Bool (gboolean)
 	open func getPointingTo(rect: UnsafeMutablePointer<GdkRectangle>!) -> Bool {
 		return gtk_popover_get_pointing_to(GTK_POPOVER(self.GOBJECT), rect) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the preferred position of @popover.
-	/// - Returns: GtkPositionType
+	/// - Returns: GtkPositionType (GtkPositionType)
 	open func getPosition() -> GtkPositionType {
 		return gtk_popover_get_position(GTK_POPOVER(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the widget @popover is currently attached to
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getRelativeTo<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_popover_get_relative_to(GTK_POPOVER(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns whether show/hide transitions are enabled on this popover.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getTransitionsEnabled() -> Bool {
 		return gtk_popover_get_transitions_enabled(GTK_POPOVER(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Pops @popover down.This is different than a gtk_widget_hide() call
 	/// in that it shows the popover with a transition. If you want to hide
 	/// the popover without a transition, use gtk_widget_hide().
-	open func popdown() {
+	open func popdown() -> Swift.Void {
 		gtk_popover_popdown(GTK_POPOVER(self.GOBJECT))
 	}
 
-	/// 
 	/// Pops @popover up. This is different than a gtk_widget_show() call
 	/// in that it shows the popover with a transition. If you want to show
 	/// the popover without a transition, use gtk_widget_show().
-	open func popup() {
+	open func popup() -> Swift.Void {
 		gtk_popover_popup(GTK_POPOVER(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets a constraint for positioning this popover.
 	/// Note that not all platforms support placing popovers freely,
 	/// and may already impose constraints.
-	/// Parameters:
-	///	- constraint: GtkPopoverConstraint
-	open func setConstrainTo(constraint: GtkPopoverConstraint) {
+	/// - Parameters:
+	///	- constraint: GtkPopoverConstraint (GtkPopoverConstraint)
+	open func setConstrainTo(constraint: GtkPopoverConstraint) -> Swift.Void {
 		gtk_popover_set_constrain_to(GTK_POPOVER(self.GOBJECT), constraint)
 	}
 
-	/// 
 	/// Sets the widget that should be set as default widget while
 	/// the popover is shown (see gtk_window_set_default()). #GtkPopover
 	/// remembers the previous default widget and reestablishes it
 	/// when the popover is dismissed.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func setDefaultWidget(_ widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func setDefaultWidget(_ widget: CGTKWidget) -> Swift.Void {
 		gtk_popover_set_default_widget(GTK_POPOVER(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// 
 	/// Sets whether @popover is modal, a modal popover will grab all input
 	/// within the toplevel and grab the keyboard focus on it when being
 	/// displayed. Clicking outside the popover area or pressing Esc will
 	/// dismiss the popover and ungrab input.
-	/// Parameters:
-	///	- modal: Bool
-	open func setModal(_ modal: Bool) {
+	/// - Parameters:
+	///	- modal: Bool (gboolean)
+	open func setModal(_ modal: Bool) -> Swift.Void {
 		gtk_popover_set_modal(GTK_POPOVER(self.GOBJECT), modal ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the rectangle that @popover will point to, in the
 	/// coordinate space of the widget @popover is attached to,
 	/// see gtk_popover_set_relative_to().
-	/// Parameters:
-	///	- rect: UnsafePointer<GdkRectangle>!
-	open func setPointingTo(rect: UnsafePointer<GdkRectangle>!) {
+	/// - Parameters:
+	///	- rect: UnsafePointer<GdkRectangle>! (const GdkRectangle*)
+	open func setPointingTo(rect: UnsafePointer<GdkRectangle>!) -> Swift.Void {
 		gtk_popover_set_pointing_to(GTK_POPOVER(self.GOBJECT), rect)
 	}
 
-	/// 
 	/// Sets the preferred position for @popover to appear. If the @popover
 	/// is currently visible, it will be immediately updated.
 	/// This preference will be respected where possible, although
 	/// on lack of space (eg. if close to the window edges), the
 	/// #GtkPopover may choose to appear on the opposite side
-	/// Parameters:
-	///	- position: GtkPositionType
-	open func setPosition(_ position: GtkPositionType) {
+	/// - Parameters:
+	///	- position: GtkPositionType (GtkPositionType)
+	open func setPosition(_ position: GtkPositionType) -> Swift.Void {
 		gtk_popover_set_position(GTK_POPOVER(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Sets a new widget to be attached to @popover. If @popover is
 	/// visible, the position will be updated.
 	/// Note: the ownership of popovers is always given to their @relative_to
 	/// widget, so if @relative_to is set to %NULL on an attached @popover, it
 	/// will be detached from its previous widget, and consequently destroyed
 	/// unless extra references are kept.
-	/// Parameters:
-	///	- relativeTo: CGTKWidget
-	open func setRelativeTo(_ relativeTo: CGTKWidget) {
+	/// - Parameters:
+	///	- relativeTo: CGTKWidget (GtkWidget*)
+	open func setRelativeTo(_ relativeTo: CGTKWidget) -> Swift.Void {
 		gtk_popover_set_relative_to(GTK_POPOVER(self.GOBJECT), relativeTo.WIDGET)
 	}
 
-	/// 
 	/// Sets whether show/hide transitions are enabled on this popover
-	/// Parameters:
-	///	- transitionsEnabled: Bool
-	open func setTransitionsEnabled(_ transitionsEnabled: Bool) {
+	/// - Parameters:
+	///	- transitionsEnabled: Bool (gboolean)
+	open func setTransitionsEnabled(_ transitionsEnabled: Bool) -> Swift.Void {
 		gtk_popover_set_transitions_enabled(GTK_POPOVER(self.GOBJECT), transitionsEnabled ? 1 : 0)
 	}
 

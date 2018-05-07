@@ -28,7 +28,6 @@
 
 @_exported import CGtk
 
-/// 
 /// The VPaned widget is a container widget with two
 /// children arranged vertically. The division between
 /// the two panes is adjustable by the user by dragging
@@ -37,9 +36,8 @@
 
 
 open class CGTKVPaned : CGTKPaned {
-	/// 
 	/// Create a new #GtkVPaned
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_vpaned_new())!
 	}

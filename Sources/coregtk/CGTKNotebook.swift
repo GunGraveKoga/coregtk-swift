@@ -34,7 +34,6 @@ public let GTK_TYPE_NOTEBOOK: GType = gtk_notebook_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_NOTEBOOK)
 }
 
-/// 
 /// The #GtkNotebook widget is a #GtkContainer whose children are pages that
 /// can be switched between using tab labels along one edge.
 /// There are many configuration options for GtkNotebook. Among other
@@ -105,9 +104,8 @@ public let GTK_TYPE_NOTEBOOK: GType = gtk_notebook_get_type()
 
 
 open class CGTKNotebook : CGTKContainer {
-	/// 
 	/// Creates a new #GtkNotebook widget with no pages.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_notebook_new())!
 	}
@@ -118,370 +116,330 @@ open class CGTKNotebook : CGTKContainer {
 		}
 	}
 
-	/// 
 	/// Appends a page to @notebook.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func appendPage(child: CGTKWidget, tabLabel: CGTKWidget) -> gint {
 		return gtk_notebook_append_page(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET)
 	}
 
-	/// 
 	/// Appends a page to @notebook, specifying the widget to use as the
 	/// label in the popup menu.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	///	- menuLabel: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	///	- menuLabel: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func appendPageMenu(child: CGTKWidget, tabLabel: CGTKWidget, menuLabel: CGTKWidget) -> gint {
 		return gtk_notebook_append_page_menu(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET, menuLabel.WIDGET)
 	}
 
-	/// 
 	/// Removes the child from the notebook.
 	/// This function is very similar to gtk_container_remove(),
 	/// but additionally informs the notebook that the removal
 	/// is happening as part of a tab DND operation, which should
 	/// not be cancelled.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func detachTab(child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func detachTab(child: CGTKWidget) -> Swift.Void {
 		gtk_notebook_detach_tab(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Gets one of the action widgets. See gtk_notebook_set_action_widget().
-	/// Parameters:
-	///	- packType: GtkPackType
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- packType: GtkPackType (GtkPackType)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getActionWidget<T>(packType: GtkPackType) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_notebook_get_action_widget(GTK_NOTEBOOK(self.GOBJECT), packType))
 	}
 
-	/// 
 	/// Returns the page number of the current page.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getCurrentPage() -> gint {
 		return gtk_notebook_get_current_page(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the current group name for @notebook.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getGroupName() -> String? {
 		return String(utf8String: gtk_notebook_get_group_name(GTK_NOTEBOOK(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the menu label widget of the page containing @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getMenuLabel<T>(child: CGTKWidget) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_notebook_get_menu_label(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET))
 	}
 
-	/// 
 	/// Retrieves the text of the menu label for the page containing
 	/// @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: String?
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: String? (const gchar*)
 	open func getMenuLabelText(child: CGTKWidget) -> String? {
 		return String(utf8String: gtk_notebook_get_menu_label_text(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET))
 	}
 
-	/// 
 	/// Gets the number of pages in a notebook.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getNpages() -> gint {
 		return gtk_notebook_get_n_pages(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the child widget contained in page number @page_num.
-	/// Parameters:
-	///	- pageNum: gint
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- pageNum: gint (gint)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getNthPage<T>(pageNum: gint) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_notebook_get_nth_page(GTK_NOTEBOOK(self.GOBJECT), pageNum))
 	}
 
-	/// 
 	/// Returns whether the tab label area has arrows for scrolling.
 	/// See gtk_notebook_set_scrollable().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getScrollable() -> Bool {
 		return gtk_notebook_get_scrollable(GTK_NOTEBOOK(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether a bevel will be drawn around the notebook pages.
 	/// See gtk_notebook_set_show_border().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowBorder() -> Bool {
 		return gtk_notebook_get_show_border(GTK_NOTEBOOK(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the tabs of the notebook are shown.
 	/// See gtk_notebook_set_show_tabs().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowTabs() -> Bool {
 		return gtk_notebook_get_show_tabs(GTK_NOTEBOOK(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the tab contents can be detached from @notebook.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func getTabDetachable(child: CGTKWidget) -> Bool {
 		return gtk_notebook_get_tab_detachable(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the horizontal width of a tab border.
-	/// - Returns: guint16
+	/// - Returns: guint16 (guint16)
 	open func getTabHborder() -> guint16 {
 		return gtk_notebook_get_tab_hborder(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the tab label widget for the page @child.
 	/// %NULL is returned if @child is not in @notebook or
 	/// if no tab label has specifically been set for @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: CGTKWidget?
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getTabLabel<T>(child: CGTKWidget) -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_notebook_get_tab_label(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET))
 	}
 
-	/// 
 	/// Retrieves the text of the tab label for the page containing
 	/// @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: String?
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: String? (const gchar*)
 	open func getTabLabelText(child: CGTKWidget) -> String? {
 		return String(utf8String: gtk_notebook_get_tab_label_text(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET))
 	}
 
-	/// 
 	/// Gets the edge at which the tabs for switching pages in the
 	/// notebook are drawn.
-	/// - Returns: GtkPositionType
+	/// - Returns: GtkPositionType (GtkPositionType)
 	open func getTabPos() -> GtkPositionType {
 		return gtk_notebook_get_tab_pos(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets whether the tab can be reordered via drag and drop or not.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: Bool (gboolean)
 	open func getTabReorderable(child: CGTKWidget) -> Bool {
 		return gtk_notebook_get_tab_reorderable(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the vertical width of a tab border.
-	/// - Returns: guint16
+	/// - Returns: guint16 (guint16)
 	open func getTabVborder() -> guint16 {
 		return gtk_notebook_get_tab_vborder(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Insert a page into @notebook at the given position.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	///	- position: gint
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	/// - Returns: gint (gint)
 	open func insertPage(child: CGTKWidget, tabLabel: CGTKWidget, position: gint) -> gint {
 		return gtk_notebook_insert_page(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET, position)
 	}
 
-	/// 
 	/// Insert a page into @notebook at the given position, specifying
 	/// the widget to use as the label in the popup menu.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	///	- menuLabel: CGTKWidget
-	///	- position: gint
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	///	- menuLabel: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	/// - Returns: gint (gint)
 	open func insertPageMenu(child: CGTKWidget, tabLabel: CGTKWidget, menuLabel: CGTKWidget, position: gint) -> gint {
 		return gtk_notebook_insert_page_menu(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET, menuLabel.WIDGET, position)
 	}
 
-	/// 
 	/// Switches to the next page. Nothing happens if the current page is
 	/// the last page.
-	open func nextPage() {
+	open func nextPage() -> Swift.Void {
 		gtk_notebook_next_page(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Finds the index of the page which contains the given child
 	/// widget.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func pageNum(child: CGTKWidget) -> gint {
 		return gtk_notebook_page_num(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Disables the popup menu.
-	open func popupDisable() {
+	open func popupDisable() -> Swift.Void {
 		gtk_notebook_popup_disable(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Enables the popup menu: if the user clicks with the right
 	/// mouse button on the tab labels, a menu with all the pages
 	/// will be popped up.
-	open func popupEnable() {
+	open func popupEnable() -> Swift.Void {
 		gtk_notebook_popup_enable(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Prepends a page to @notebook.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func prependPage(child: CGTKWidget, tabLabel: CGTKWidget) -> gint {
 		return gtk_notebook_prepend_page(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET)
 	}
 
-	/// 
 	/// Prepends a page to @notebook, specifying the widget to use as the
 	/// label in the popup menu.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	///	- menuLabel: CGTKWidget
-	/// - Returns: gint
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	///	- menuLabel: CGTKWidget (GtkWidget*)
+	/// - Returns: gint (gint)
 	open func prependPageMenu(child: CGTKWidget, tabLabel: CGTKWidget, menuLabel: CGTKWidget) -> gint {
 		return gtk_notebook_prepend_page_menu(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET, menuLabel.WIDGET)
 	}
 
-	/// 
 	/// Switches to the previous page. Nothing happens if the current page
 	/// is the first page.
-	open func prevPage() {
+	open func prevPage() -> Swift.Void {
 		gtk_notebook_prev_page(GTK_NOTEBOOK(self.GOBJECT))
 	}
 
-	/// 
 	/// Removes a page from the notebook given its index
 	/// in the notebook.
-	/// Parameters:
-	///	- pageNum: gint
-	open func removePage(pageNum: gint) {
+	/// - Parameters:
+	///	- pageNum: gint (gint)
+	open func removePage(pageNum: gint) -> Swift.Void {
 		gtk_notebook_remove_page(GTK_NOTEBOOK(self.GOBJECT), pageNum)
 	}
 
-	/// 
 	/// Reorders the page containing @child, so that it appears in position
 	/// @position. If @position is greater than or equal to the number of
 	/// children in the list or negative, @child will be moved to the end
 	/// of the list.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- position: gint
-	open func reorderChild(_ child: CGTKWidget, position: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	open func reorderChild(_ child: CGTKWidget, position: gint) -> Swift.Void {
 		gtk_notebook_reorder_child(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, position)
 	}
 
-	/// 
 	/// Sets @widget as one of the action widgets. Depending on the pack type
 	/// the widget will be placed before or after the tabs. You can use
 	/// a #GtkBox if you need to pack more than one widget on the same side.
 	/// Note that action widgets are “internal” children of the notebook and thus
 	/// not included in the list returned from gtk_container_foreach().
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- packType: GtkPackType
-	open func setActionWidget(_ widget: CGTKWidget, packType: GtkPackType) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- packType: GtkPackType (GtkPackType)
+	open func setActionWidget(_ widget: CGTKWidget, packType: GtkPackType) -> Swift.Void {
 		gtk_notebook_set_action_widget(GTK_NOTEBOOK(self.GOBJECT), widget.WIDGET, packType)
 	}
 
-	/// 
 	/// Switches to the page number @page_num.
 	/// Note that due to historical reasons, GtkNotebook refuses
 	/// to switch to a page unless the child widget is visible.
 	/// Therefore, it is recommended to show child widgets before
 	/// adding them to a notebook.
-	/// Parameters:
-	///	- pageNum: gint
-	open func setCurrentPage(pageNum: gint) {
+	/// - Parameters:
+	///	- pageNum: gint (gint)
+	open func setCurrentPage(pageNum: gint) -> Swift.Void {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(self.GOBJECT), pageNum)
 	}
 
-	/// 
 	/// Sets a group name for @notebook.
 	/// Notebooks with the same name will be able to exchange tabs
 	/// via drag and drop. A notebook with a %NULL group name will
 	/// not be able to exchange tabs with any other notebook.
-	/// Parameters:
-	///	- groupName: String
-	open func setGroupName(_ groupName: String) {
+	/// - Parameters:
+	///	- groupName: String (const gchar*)
+	open func setGroupName(_ groupName: String) -> Swift.Void {
 		gtk_notebook_set_group_name(GTK_NOTEBOOK(self.GOBJECT), groupName)
 	}
 
-	/// 
 	/// Changes the menu label for the page containing @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- menuLabel: CGTKWidget
-	open func setMenuLabel(child: CGTKWidget, menuLabel: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- menuLabel: CGTKWidget (GtkWidget*)
+	open func setMenuLabel(child: CGTKWidget, menuLabel: CGTKWidget) -> Swift.Void {
 		gtk_notebook_set_menu_label(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, menuLabel.WIDGET)
 	}
 
-	/// 
 	/// Creates a new label and sets it as the menu label of @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- menuText: String
-	open func setMenuLabelText(child: CGTKWidget, menuText: String) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- menuText: String (const gchar*)
+	open func setMenuLabelText(child: CGTKWidget, menuText: String) -> Swift.Void {
 		gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, menuText)
 	}
 
-	/// 
 	/// Sets whether the tab label area will have arrows for
 	/// scrolling if there are too many tabs to fit in the area.
-	/// Parameters:
-	///	- scrollable: Bool
-	open func setScrollable(_ scrollable: Bool) {
+	/// - Parameters:
+	///	- scrollable: Bool (gboolean)
+	open func setScrollable(_ scrollable: Bool) -> Swift.Void {
 		gtk_notebook_set_scrollable(GTK_NOTEBOOK(self.GOBJECT), scrollable ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether a bevel will be drawn around the notebook pages.
 	/// This only has a visual effect when the tabs are not shown.
 	/// See gtk_notebook_set_show_tabs().
-	/// Parameters:
-	///	- showBorder: Bool
-	open func setShowBorder(_ showBorder: Bool) {
+	/// - Parameters:
+	///	- showBorder: Bool (gboolean)
+	open func setShowBorder(_ showBorder: Bool) -> Swift.Void {
 		gtk_notebook_set_show_border(GTK_NOTEBOOK(self.GOBJECT), showBorder ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether to show the tabs for the notebook or not.
-	/// Parameters:
-	///	- showTabs: Bool
-	open func setShowTabs(_ showTabs: Bool) {
+	/// - Parameters:
+	///	- showTabs: Bool (gboolean)
+	open func setShowTabs(_ showTabs: Bool) -> Swift.Void {
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(self.GOBJECT), showTabs ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the tab can be detached from @notebook to another
 	/// notebook or widget.
 	/// Note that 2 notebooks must share a common group identificator
@@ -519,50 +477,46 @@ open class CGTKNotebook : CGTKContainer {
 	/// ]|
 	/// If you want a notebook to accept drags from other widgets,
 	/// you will have to set your own DnD code to do it.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- detachable: Bool
-	open func setTabDetachable(child: CGTKWidget, detachable: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- detachable: Bool (gboolean)
+	open func setTabDetachable(child: CGTKWidget, detachable: Bool) -> Swift.Void {
 		gtk_notebook_set_tab_detachable(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, detachable ? 1 : 0)
 	}
 
-	/// 
 	/// Changes the tab label for @child.
 	/// If %NULL is specified for @tab_label, then the page will
 	/// have the label “page N”.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabLabel: CGTKWidget
-	open func setTabLabel(child: CGTKWidget, tabLabel: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabLabel: CGTKWidget (GtkWidget*)
+	open func setTabLabel(child: CGTKWidget, tabLabel: CGTKWidget) -> Swift.Void {
 		gtk_notebook_set_tab_label(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabLabel.WIDGET)
 	}
 
-	/// 
 	/// Creates a new label and sets it as the tab label for the page
 	/// containing @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- tabText: String
-	open func setTabLabelText(child: CGTKWidget, tabText: String) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- tabText: String (const gchar*)
+	open func setTabLabelText(child: CGTKWidget, tabText: String) -> Swift.Void {
 		gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, tabText)
 	}
 
-	/// 
 	/// Sets the edge at which the tabs for switching pages in the
 	/// notebook are drawn.
-	/// Parameters:
-	///	- pos: GtkPositionType
-	open func setTabPos(_ pos: GtkPositionType) {
+	/// - Parameters:
+	///	- pos: GtkPositionType (GtkPositionType)
+	open func setTabPos(_ pos: GtkPositionType) -> Swift.Void {
 		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(self.GOBJECT), pos)
 	}
 
-	/// 
 	/// Sets whether the notebook tab can be reordered
 	/// via drag and drop or not.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- reorderable: Bool
-	open func setTabReorderable(child: CGTKWidget, reorderable: Bool) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- reorderable: Bool (gboolean)
+	open func setTabReorderable(child: CGTKWidget, reorderable: Bool) -> Swift.Void {
 		gtk_notebook_set_tab_reorderable(GTK_NOTEBOOK(self.GOBJECT), child.WIDGET, reorderable ? 1 : 0)
 	}
 

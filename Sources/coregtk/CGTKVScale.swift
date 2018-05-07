@@ -34,7 +34,6 @@ public let GTK_TYPE_VSCALE: GType = gtk_vscale_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VSCALE)
 }
 
-/// 
 /// The #GtkVScale widget is used to allow the user to select a value using
 /// a vertical slider. To create one, use gtk_hscale_new_with_range().
 /// The position to show the current value, and the number of decimal places
@@ -43,16 +42,14 @@ public let GTK_TYPE_VSCALE: GType = gtk_vscale_get_type()
 
 
 open class CGTKVScale : CGTKScale {
-	/// 
 	/// Creates a new #GtkVScale.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(adjustment: UnsafeMutablePointer<GtkAdjustment>!) {
 		self.init(withGObject: gtk_vscale_new(adjustment))!
 	}
 
-	/// 
 	/// Creates a new vertical scale widget that lets the user input a
 	/// number between @min and @max (including @min and @max) with the
 	/// increment @step.  @step must be nonzero; it’s the distance the
@@ -60,11 +57,11 @@ open class CGTKVScale : CGTKScale {
 	/// Note that the way in which the precision is derived works best if @step
 	/// is a power of ten. If the resulting precision is not suitable for your
 	/// needs, use gtk_scale_set_digits() to correct it.
-	/// Parameters:
-	///	- min: Double
-	///	- max: Double
-	///	- step: Double
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- min: Double (gdouble)
+	///	- max: Double (gdouble)
+	///	- step: Double (gdouble)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withRange min: Double, max: Double, step: Double) {
 		self.init(withGObject: gtk_vscale_new_with_range(min, max, step))!
 	}

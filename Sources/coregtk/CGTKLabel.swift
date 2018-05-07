@@ -34,7 +34,6 @@ public let GTK_TYPE_LABEL: GType = gtk_label_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_LABEL)
 }
 
-/// 
 /// The #GtkLabel widget displays a small amount of text. As the name
 /// implies, most labels are used to label another widget such as a
 /// #GtkButton, a #GtkMenuItem, or a #GtkComboBox.
@@ -178,17 +177,15 @@ public let GTK_TYPE_LABEL: GType = gtk_label_get_type()
 
 
 open class CGTKLabel : CGTKMisc {
-	/// 
 	/// Creates a new label with the given text inside it. You can
 	/// pass %NULL to get an empty label widget.
-	/// Parameters:
-	///	- str: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(str: String) {
 		self.init(withGObject: gtk_label_new(str))!
 	}
 
-	/// 
 	/// Creates a new #GtkLabel, containing the text in @str.
 	/// If characters in @str are preceded by an underscore, they are
 	/// underlined. If you need a literal underscore character in a label, use
@@ -201,9 +198,9 @@ open class CGTKLabel : CGTKMisc {
 	/// widget. For instance, if the label is inside a button or menu item,
 	/// the button or menu item will automatically become the mnemonic widget
 	/// and be activated by the mnemonic.
-	/// Parameters:
-	///	- str: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic str: String) {
 		self.init(withGObject: gtk_label_new_with_mnemonic(str))!
 	}
@@ -214,74 +211,66 @@ open class CGTKLabel : CGTKMisc {
 		}
 	}
 
-	/// 
 	/// Gets the angle of rotation for the label. See
 	/// gtk_label_set_angle().
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getAngle() -> Double {
 		return gtk_label_get_angle(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the attribute list that was set on the label using
 	/// gtk_label_set_attributes(), if any. This function does
 	/// not reflect attributes that come from the labels markup
 	/// (see gtk_label_set_markup()). If you want to get the
 	/// effective attributes for the label, use
 	/// pango_layout_get_attribute (gtk_label_get_layout (label)).
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (PangoAttrList*)
 	open func getAttributes() -> OpaquePointer? {
 		return gtk_label_get_attributes(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the URI for the currently active link in the label.
 	/// The active link is the one under the mouse pointer or, in a
 	/// selectable label, the link in which the text cursor is currently
 	/// positioned.
 	/// This function is intended for use in a #GtkLabel::activate-link handler
 	/// or for use in a #GtkWidget::query-tooltip handler.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getCurrentUri() -> String? {
 		return String(utf8String: gtk_label_get_current_uri(GTK_LABEL(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the ellipsizing position of the label. See gtk_label_set_ellipsize().
-	/// - Returns: PangoEllipsizeMode
+	/// - Returns: PangoEllipsizeMode (PangoEllipsizeMode)
 	open func getEllipsize() -> PangoEllipsizeMode {
 		return gtk_label_get_ellipsize(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the justification of the label. See gtk_label_set_justify().
-	/// - Returns: GtkJustification
+	/// - Returns: GtkJustification (GtkJustification)
 	open func getJustify() -> GtkJustification {
 		return gtk_label_get_justify(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Fetches the text from a label widget including any embedded
 	/// underlines indicating mnemonics and Pango markup. (See
 	/// gtk_label_get_text()).
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getLabel() -> String? {
 		return String(utf8String: gtk_label_get_label(GTK_LABEL(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the #PangoLayout used to display the label.
 	/// The layout is useful to e.g. convert text positions to
 	/// pixel positions, in combination with gtk_label_get_layout_offsets().
 	/// The returned layout is owned by the @label so need not be
 	/// freed by the caller. The @label is free to recreate its layout at
 	/// any time, so it should be considered read-only.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (PangoLayout*)
 	open func getLayout() -> OpaquePointer {
 		return gtk_label_get_layout(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the coordinates where the label will draw the #PangoLayout
 	/// representing the text in the label; useful to convert mouse events
 	/// into coordinates inside the #PangoLayout, e.g. to take some action
@@ -291,166 +280,147 @@ open class CGTKLabel : CGTKMisc {
 	/// gtk_widget_get_has_window()). Remember
 	/// when using the #PangoLayout functions you need to convert to
 	/// and from pixels using PANGO_PIXELS() or #PANGO_SCALE.
-	/// Parameters:
-	///	- x: UnsafeMutablePointer<Int32>!
-	///	- y: UnsafeMutablePointer<Int32>!
-	open func getLayoutOffsets(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- x: UnsafeMutablePointer<Int32>! (gint*)
+	///	- y: UnsafeMutablePointer<Int32>! (gint*)
+	open func getLayoutOffsets(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_label_get_layout_offsets(GTK_LABEL(self.GOBJECT), x, y)
 	}
 
-	/// 
 	/// Returns whether lines in the label are automatically wrapped.
 	/// See gtk_label_set_line_wrap().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getLineWrap() -> Bool {
 		return gtk_label_get_line_wrap(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns line wrap mode used by the label. See gtk_label_set_line_wrap_mode().
-	/// - Returns: PangoWrapMode
+	/// - Returns: PangoWrapMode (PangoWrapMode)
 	open func getLineWrapMode() -> PangoWrapMode {
 		return gtk_label_get_line_wrap_mode(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the number of lines to which an ellipsized, wrapping
 	/// label should be limited. See gtk_label_set_lines().
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getLines() -> gint {
 		return gtk_label_get_lines(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the desired maximum width of @label, in characters. See
 	/// gtk_label_set_width_chars().
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMaxWidthChars() -> gint {
 		return gtk_label_get_max_width_chars(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// If the label has been set so that it has an mnemonic key this function
 	/// returns the keyval used for the mnemonic accelerator. If there is no
 	/// mnemonic set up it returns #GDK_KEY_VoidSymbol.
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getMnemonicKeyval() -> guint {
 		return gtk_label_get_mnemonic_keyval(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the target of the mnemonic (keyboard shortcut) of this
 	/// label. See gtk_label_set_mnemonic_widget().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getMnemonicWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_label_get_mnemonic_widget(GTK_LABEL(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the value set by gtk_label_set_selectable().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSelectable() -> Bool {
 		return gtk_label_get_selectable(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the selected range of characters in the label, returning %TRUE
 	/// if there’s a selection.
-	/// Parameters:
-	///	- start: UnsafeMutablePointer<Int32>!
-	///	- end: UnsafeMutablePointer<Int32>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- start: UnsafeMutablePointer<Int32>! (gint*)
+	///	- end: UnsafeMutablePointer<Int32>! (gint*)
+	/// - Returns: Bool (gboolean)
 	open func getSelectionBounds(start: UnsafeMutablePointer<Int32>!, end: UnsafeMutablePointer<Int32>!) -> Bool {
 		return gtk_label_get_selection_bounds(GTK_LABEL(self.GOBJECT), start, end) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the label is in single line mode.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSingleLineMode() -> Bool {
 		return gtk_label_get_single_line_mode(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Fetches the text from a label widget, as displayed on the
 	/// screen. This does not include any embedded underlines
 	/// indicating mnemonics or Pango markup. (See gtk_label_get_label())
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getText() -> String? {
 		return String(utf8String: gtk_label_get_text(GTK_LABEL(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the label is currently keeping track
 	/// of clicked links.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getTrackVisitedLinks() -> Bool {
 		return gtk_label_get_track_visited_links(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the label’s text is interpreted as marked up with
 	/// the [Pango text markup language][PangoMarkupFormat].
 	/// See gtk_label_set_use_markup ().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getUseMarkup() -> Bool {
 		return gtk_label_get_use_markup(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether an embedded underline in the label indicates a
 	/// mnemonic. See gtk_label_set_use_underline().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getUseUnderline() -> Bool {
 		return gtk_label_get_use_underline(GTK_LABEL(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the desired width of @label, in characters. See
 	/// gtk_label_set_width_chars().
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getWidthChars() -> gint {
 		return gtk_label_get_width_chars(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GtkLabel:xalign property for @label.
-	/// - Returns: Float
+	/// - Returns: Float (gfloat)
 	open func getXalign() -> Float {
 		return gtk_label_get_xalign(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GtkLabel:yalign property for @label.
-	/// - Returns: Float
+	/// - Returns: Float (gfloat)
 	open func getYalign() -> Float {
 		return gtk_label_get_yalign(GTK_LABEL(self.GOBJECT))
 	}
 
-	/// 
 	/// Selects a range of characters in the label, if the label is selectable.
 	/// See gtk_label_set_selectable(). If the label is not selectable,
 	/// this function has no effect. If @start_offset or
 	/// @end_offset are -1, then the end of the label will be substituted.
-	/// Parameters:
-	///	- startOffset: gint
-	///	- endOffset: gint
-	open func selectRegion(startOffset: gint, endOffset: gint) {
+	/// - Parameters:
+	///	- startOffset: gint (gint)
+	///	- endOffset: gint (gint)
+	open func selectRegion(startOffset: gint, endOffset: gint) -> Swift.Void {
 		gtk_label_select_region(GTK_LABEL(self.GOBJECT), startOffset, endOffset)
 	}
 
-	/// 
 	/// Sets the angle of rotation for the label. An angle of 90 reads from
 	/// from bottom to top, an angle of 270, from top to bottom. The angle
 	/// setting for the label is ignored if the label is selectable,
 	/// wrapped, or ellipsized.
-	/// Parameters:
-	///	- angle: Double
-	open func setAngle(_ angle: Double) {
+	/// - Parameters:
+	///	- angle: Double (gdouble)
+	open func setAngle(_ angle: Double) -> Swift.Void {
 		gtk_label_set_angle(GTK_LABEL(self.GOBJECT), angle)
 	}
 
-	/// 
 	/// Sets a #PangoAttrList; the attributes in the list are applied to the
 	/// label text.
 	/// The attributes set with this function will be applied
@@ -459,46 +429,42 @@ open class CGTKLabel : CGTKMisc {
 	/// While it is not recommended to mix markup strings with manually set
 	/// attributes, if you must; know that the attributes will be applied
 	/// to the label after the markup string is parsed.
-	/// Parameters:
-	///	- attrs: OpaquePointer?
-	open func setAttributes(attrs: OpaquePointer?) {
+	/// - Parameters:
+	///	- attrs: OpaquePointer? (PangoAttrList*)
+	open func setAttributes(attrs: OpaquePointer?) -> Swift.Void {
 		gtk_label_set_attributes(GTK_LABEL(self.GOBJECT), attrs)
 	}
 
-	/// 
 	/// Sets the mode used to ellipsize (add an ellipsis: "...") to the text
 	/// if there is not enough space to render the entire string.
-	/// Parameters:
-	///	- mode: PangoEllipsizeMode
-	open func setEllipsize(mode: PangoEllipsizeMode) {
+	/// - Parameters:
+	///	- mode: PangoEllipsizeMode (PangoEllipsizeMode)
+	open func setEllipsize(mode: PangoEllipsizeMode) -> Swift.Void {
 		gtk_label_set_ellipsize(GTK_LABEL(self.GOBJECT), mode)
 	}
 
-	/// 
 	/// Sets the alignment of the lines in the text of the label relative to
 	/// each other. %GTK_JUSTIFY_LEFT is the default value when the widget is
 	/// first created with gtk_label_new(). If you instead want to set the
 	/// alignment of the label as a whole, use gtk_widget_set_halign() instead.
 	/// gtk_label_set_justify() has no effect on labels containing only a
 	/// single line.
-	/// Parameters:
-	///	- jtype: GtkJustification
-	open func setJustify(jtype: GtkJustification) {
+	/// - Parameters:
+	///	- jtype: GtkJustification (GtkJustification)
+	open func setJustify(jtype: GtkJustification) -> Swift.Void {
 		gtk_label_set_justify(GTK_LABEL(self.GOBJECT), jtype)
 	}
 
-	/// 
 	/// Sets the text of the label. The label is interpreted as
 	/// including embedded underlines and/or Pango markup depending
 	/// on the values of the #GtkLabel:use-underline and
 	/// #GtkLabel:use-markup properties.
-	/// Parameters:
-	///	- str: String
-	open func setLabel(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setLabel(str: String) -> Swift.Void {
 		gtk_label_set_label(GTK_LABEL(self.GOBJECT), str)
 	}
 
-	/// 
 	/// Toggles line wrapping within the #GtkLabel widget. %TRUE makes it break
 	/// lines if text exceeds the widget’s size. %FALSE lets the text get cut off
 	/// by the edge of the widget if it exceeds the widget size.
@@ -507,34 +473,31 @@ open class CGTKLabel : CGTKMisc {
 	/// conceptually can’t make their requisition depend on the parent
 	/// container’s size. For a label that wraps at a specific position,
 	/// set the label’s width using gtk_widget_set_size_request().
-	/// Parameters:
-	///	- wrap: Bool
-	open func setLineWrap(_ wrap: Bool) {
+	/// - Parameters:
+	///	- wrap: Bool (gboolean)
+	open func setLineWrap(_ wrap: Bool) -> Swift.Void {
 		gtk_label_set_line_wrap(GTK_LABEL(self.GOBJECT), wrap ? 1 : 0)
 	}
 
-	/// 
 	/// If line wrapping is on (see gtk_label_set_line_wrap()) this controls how
 	/// the line wrapping is done. The default is %PANGO_WRAP_WORD which means
 	/// wrap on word boundaries.
-	/// Parameters:
-	///	- wrapMode: PangoWrapMode
-	open func setLineWrapMode(_ wrapMode: PangoWrapMode) {
+	/// - Parameters:
+	///	- wrapMode: PangoWrapMode (PangoWrapMode)
+	open func setLineWrapMode(_ wrapMode: PangoWrapMode) -> Swift.Void {
 		gtk_label_set_line_wrap_mode(GTK_LABEL(self.GOBJECT), wrapMode)
 	}
 
-	/// 
 	/// Sets the number of lines to which an ellipsized, wrapping label
 	/// should be limited. This has no effect if the label is not wrapping
 	/// or ellipsized. Set this to -1 if you don’t want to limit the
 	/// number of lines.
-	/// Parameters:
-	///	- lines: gint
-	open func setLines(_ lines: gint) {
+	/// - Parameters:
+	///	- lines: gint (gint)
+	open func setLines(_ lines: gint) -> Swift.Void {
 		gtk_label_set_lines(GTK_LABEL(self.GOBJECT), lines)
 	}
 
-	/// 
 	/// Parses @str which is marked up with the
 	/// [Pango text markup language][PangoMarkupFormat], setting the
 	/// label’s text and attribute list based on the parse results.
@@ -555,13 +518,12 @@ open class CGTKLabel : CGTKMisc {
 	/// should also ensure that you set the #GtkLabel:use-markup property
 	/// accordingly.
 	/// See also: gtk_label_set_text()
-	/// Parameters:
-	///	- str: String
-	open func setMarkup(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setMarkup(str: String) -> Swift.Void {
 		gtk_label_set_markup(GTK_LABEL(self.GOBJECT), str)
 	}
 
-	/// 
 	/// Parses @str which is marked up with the
 	/// [Pango text markup language][PangoMarkupFormat],
 	/// setting the label’s text and attribute list based on the parse results.
@@ -569,21 +531,19 @@ open class CGTKLabel : CGTKMisc {
 	/// indicating that they represent a keyboard accelerator called a mnemonic.
 	/// The mnemonic key can be used to activate another widget, chosen
 	/// automatically, or explicitly using gtk_label_set_mnemonic_widget().
-	/// Parameters:
-	///	- str: String
-	open func setMarkupWithMnemonic(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setMarkupWithMnemonic(str: String) -> Swift.Void {
 		gtk_label_set_markup_with_mnemonic(GTK_LABEL(self.GOBJECT), str)
 	}
 
-	/// 
 	/// Sets the desired maximum width in characters of @label to @n_chars.
-	/// Parameters:
-	///	- nchars: gint
-	open func setMaxWidthChars(nchars: gint) {
+	/// - Parameters:
+	///	- nchars: gint (gint)
+	open func setMaxWidthChars(nchars: gint) -> Swift.Void {
 		gtk_label_set_max_width_chars(GTK_LABEL(self.GOBJECT), nchars)
 	}
 
-	/// 
 	/// If the label has been set so that it has an mnemonic key (using
 	/// i.e. gtk_label_set_markup_with_mnemonic(),
 	/// gtk_label_set_text_with_mnemonic(), gtk_label_new_with_mnemonic()
@@ -597,41 +557,37 @@ open class CGTKLabel : CGTKMisc {
 	/// GtkWidget::mnemonic-activate signal on it. The default handler for
 	/// this signal will activate the widget if there are no mnemonic collisions
 	/// and toggle focus between the colliding widgets otherwise.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func setMnemonicWidget(_ widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func setMnemonicWidget(_ widget: CGTKWidget) -> Swift.Void {
 		gtk_label_set_mnemonic_widget(GTK_LABEL(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// 
 	/// The pattern of underlines you want under the existing text within the
 	/// #GtkLabel widget.  For example if the current text of the label says
 	/// “FooBarBaz” passing a pattern of “___   ___” will underline
 	/// “Foo” and “Baz” but not “Bar”.
-	/// Parameters:
-	///	- pattern: String
-	open func setPattern(_ pattern: String) {
+	/// - Parameters:
+	///	- pattern: String (const gchar*)
+	open func setPattern(_ pattern: String) -> Swift.Void {
 		gtk_label_set_pattern(GTK_LABEL(self.GOBJECT), pattern)
 	}
 
-	/// 
 	/// Selectable labels allow the user to select text from the label, for
 	/// copy-and-paste.
-	/// Parameters:
-	///	- setting: Bool
-	open func setSelectable(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setSelectable(setting: Bool) -> Swift.Void {
 		gtk_label_set_selectable(GTK_LABEL(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the label is in single line mode.
-	/// Parameters:
-	///	- singleLineMode: Bool
-	open func setSingleLineMode(_ singleLineMode: Bool) {
+	/// - Parameters:
+	///	- singleLineMode: Bool (gboolean)
+	open func setSingleLineMode(_ singleLineMode: Bool) -> Swift.Void {
 		gtk_label_set_single_line_mode(GTK_LABEL(self.GOBJECT), singleLineMode ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the text within the #GtkLabel widget. It overwrites any text that
 	/// was there before.
 	/// This function will clear any previously set mnemonic accelerators, and
@@ -639,73 +595,66 @@ open class CGTKLabel : CGTKMisc {
 	/// This function will set the #GtkLabel:use-markup property to %FALSE
 	/// as a side effect.
 	/// See also: gtk_label_set_markup()
-	/// Parameters:
-	///	- str: String
-	open func setText(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setText(str: String) -> Swift.Void {
 		gtk_label_set_text(GTK_LABEL(self.GOBJECT), str)
 	}
 
-	/// 
 	/// Sets the label’s text from the string @str.
 	/// If characters in @str are preceded by an underscore, they are underlined
 	/// indicating that they represent a keyboard accelerator called a mnemonic.
 	/// The mnemonic key can be used to activate another widget, chosen
 	/// automatically, or explicitly using gtk_label_set_mnemonic_widget().
-	/// Parameters:
-	///	- str: String
-	open func setTextWithMnemonic(str: String) {
+	/// - Parameters:
+	///	- str: String (const gchar*)
+	open func setTextWithMnemonic(str: String) -> Swift.Void {
 		gtk_label_set_text_with_mnemonic(GTK_LABEL(self.GOBJECT), str)
 	}
 
-	/// 
 	/// Sets whether the label should keep track of clicked
 	/// links (and use a different color for them).
-	/// Parameters:
-	///	- trackLinks: Bool
-	open func setTrackVisitedLinks(trackLinks: Bool) {
+	/// - Parameters:
+	///	- trackLinks: Bool (gboolean)
+	open func setTrackVisitedLinks(trackLinks: Bool) -> Swift.Void {
 		gtk_label_set_track_visited_links(GTK_LABEL(self.GOBJECT), trackLinks ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the text of the label contains markup in
 	/// [Pango’s text markup language][PangoMarkupFormat].
 	/// See gtk_label_set_markup().
-	/// Parameters:
-	///	- setting: Bool
-	open func setUseMarkup(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setUseMarkup(setting: Bool) -> Swift.Void {
 		gtk_label_set_use_markup(GTK_LABEL(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// If true, an underline in the text indicates the next character should be
 	/// used for the mnemonic accelerator key.
-	/// Parameters:
-	///	- setting: Bool
-	open func setUseUnderline(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setUseUnderline(setting: Bool) -> Swift.Void {
 		gtk_label_set_use_underline(GTK_LABEL(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the desired width in characters of @label to @n_chars.
-	/// Parameters:
-	///	- nchars: gint
-	open func setWidthChars(nchars: gint) {
+	/// - Parameters:
+	///	- nchars: gint (gint)
+	open func setWidthChars(nchars: gint) -> Swift.Void {
 		gtk_label_set_width_chars(GTK_LABEL(self.GOBJECT), nchars)
 	}
 
-	/// 
 	/// Sets the #GtkLabel:xalign property for @label.
-	/// Parameters:
-	///	- xalign: Float
-	open func setXalign(_ xalign: Float) {
+	/// - Parameters:
+	///	- xalign: Float (gfloat)
+	open func setXalign(_ xalign: Float) -> Swift.Void {
 		gtk_label_set_xalign(GTK_LABEL(self.GOBJECT), xalign)
 	}
 
-	/// 
 	/// Sets the #GtkLabel:yalign property for @label.
-	/// Parameters:
-	///	- yalign: Float
-	open func setYalign(_ yalign: Float) {
+	/// - Parameters:
+	///	- yalign: Float (gfloat)
+	open func setYalign(_ yalign: Float) -> Swift.Void {
 		gtk_label_set_yalign(GTK_LABEL(self.GOBJECT), yalign)
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_RADIO_BUTTON: GType = gtk_radio_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_RADIO_BUTTON)
 }
 
-/// 
 /// A single radio button performs the same basic function as a #GtkCheckButton,
 /// as its position in the object hierarchy reflects. It is only when multiple
 /// radio buttons are grouped together that they become a different user
@@ -103,69 +102,63 @@ public let GTK_TYPE_RADIO_BUTTON: GType = gtk_radio_button_get_type()
 
 
 open class CGTKRadioButton : CGTKCheckButton {
-	/// 
 	/// Creates a new #GtkRadioButton. To be of any practical value, a widget should
 	/// then be packed into the radio button.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(group: UnsafeMutablePointer<GSList>?) {
 		self.init(withGObject: gtk_radio_button_new(group))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioButton, adding it to the same group as
 	/// @radio_group_member. As with gtk_radio_button_new(), a widget
 	/// should be packed into the radio button.
-	/// Parameters:
-	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>? (GtkRadioButton*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromWidget radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?) {
 		self.init(withGObject: gtk_radio_button_new_from_widget(radioGroupMember))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioButton with a text label.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabel group: UnsafeMutablePointer<GSList>?, label: String) {
 		self.init(withGObject: gtk_radio_button_new_with_label(group, label))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioButton with a text label, adding it to
 	/// the same group as @radio_group_member.
-	/// Parameters:
-	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>? (GtkRadioButton*)
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabelFromWidget radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?, label: String) {
 		self.init(withGObject: gtk_radio_button_new_with_label_from_widget(radioGroupMember, label))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioButton containing a label, adding it to the same
 	/// group as @group. The label will be created using
 	/// gtk_label_new_with_mnemonic(), so underscores in @label indicate the
 	/// mnemonic for the button.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic group: UnsafeMutablePointer<GSList>?, label: String) {
 		self.init(withGObject: gtk_radio_button_new_with_mnemonic(group, label))!
 	}
 
-	/// 
 	/// Creates a new #GtkRadioButton containing a label. The label
 	/// will be created using gtk_label_new_with_mnemonic(), so underscores
 	/// in @label indicate the mnemonic for the button.
-	/// Parameters:
-	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- radioGroupMember: UnsafeMutablePointer<GtkRadioButton>? (GtkRadioButton*)
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonicFromWidget radioGroupMember: UnsafeMutablePointer<GtkRadioButton>?, label: String) {
 		self.init(withGObject: gtk_radio_button_new_with_mnemonic_from_widget(radioGroupMember, label))!
 	}
@@ -176,14 +169,12 @@ open class CGTKRadioButton : CGTKCheckButton {
 		}
 	}
 
-	/// 
 	/// Retrieves the group assigned to a radio button.
-	/// - Returns: UnsafeMutablePointer<GSList>!
+	/// - Returns: UnsafeMutablePointer<GSList>! (GSList*)
 	open func getGroup() -> UnsafeMutablePointer<GSList>! {
 		return gtk_radio_button_get_group(GTK_RADIO_BUTTON(self.GOBJECT))
 	}
 
-	/// 
 	/// Joins a #GtkRadioButton object to the group of another #GtkRadioButton object
 	/// Use this in language bindings instead of the gtk_radio_button_get_group()
 	/// and gtk_radio_button_set_group() methods
@@ -198,20 +189,19 @@ open class CGTKRadioButton : CGTKCheckButton {
 	/// last_button = radio_button;
 	/// }
 	/// ]|
-	/// Parameters:
-	///	- groupSource: UnsafeMutablePointer<GtkRadioButton>?
-	open func joinGroup(groupSource: UnsafeMutablePointer<GtkRadioButton>?) {
+	/// - Parameters:
+	///	- groupSource: UnsafeMutablePointer<GtkRadioButton>? (GtkRadioButton*)
+	open func joinGroup(groupSource: UnsafeMutablePointer<GtkRadioButton>?) -> Swift.Void {
 		gtk_radio_button_join_group(GTK_RADIO_BUTTON(self.GOBJECT), groupSource)
 	}
 
-	/// 
 	/// Sets a #GtkRadioButton’s group. It should be noted that this does not change
 	/// the layout of your interface in any way, so if you are changing the group,
 	/// it is likely you will need to re-arrange the user interface to reflect these
 	/// changes.
-	/// Parameters:
-	///	- group: UnsafeMutablePointer<GSList>?
-	open func setGroup(_ group: UnsafeMutablePointer<GSList>?) {
+	/// - Parameters:
+	///	- group: UnsafeMutablePointer<GSList>? (GSList*)
+	open func setGroup(_ group: UnsafeMutablePointer<GSList>?) -> Swift.Void {
 		gtk_radio_button_set_group(GTK_RADIO_BUTTON(self.GOBJECT), group)
 	}
 

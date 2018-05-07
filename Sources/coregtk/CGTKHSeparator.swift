@@ -34,7 +34,6 @@ public let GTK_TYPE_HSEPARATOR: GType = gtk_hseparator_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_HSEPARATOR)
 }
 
-/// 
 /// The #GtkHSeparator widget is a horizontal separator, used to group the
 /// widgets within a window. It displays a horizontal line with a shadow to
 /// make it appear sunken into the interface.
@@ -46,9 +45,8 @@ public let GTK_TYPE_HSEPARATOR: GType = gtk_hseparator_get_type()
 
 
 open class CGTKHSeparator : CGTKSeparator {
-	/// 
 	/// Creates a new #GtkHSeparator.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_hseparator_new())!
 	}

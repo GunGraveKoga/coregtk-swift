@@ -34,7 +34,6 @@ public let GTK_TYPE_STACK_SWITCHER: GType = gtk_stack_switcher_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_STACK_SWITCHER)
 }
 
-/// 
 /// The GtkStackSwitcher widget acts as a controller for a
 /// #GtkStack; it shows a row of buttons to switch between
 /// the various pages of the associated stack widget.
@@ -54,9 +53,8 @@ public let GTK_TYPE_STACK_SWITCHER: GType = gtk_stack_switcher_get_type()
 
 
 open class CGTKStackSwitcher : CGTKBox {
-	/// 
 	/// Create a new #GtkStackSwitcher.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_stack_switcher_new())!
 	}
@@ -67,19 +65,17 @@ open class CGTKStackSwitcher : CGTKBox {
 		}
 	}
 
-	/// 
 	/// Retrieves the stack.
 	/// See gtk_stack_switcher_set_stack().
-	/// - Returns: UnsafeMutablePointer<GtkStack>?
+	/// - Returns: UnsafeMutablePointer<GtkStack>? (GtkStack*)
 	open func getStack() -> UnsafeMutablePointer<GtkStack>? {
 		return gtk_stack_switcher_get_stack(GTK_STACK_SWITCHER(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the stack to control.
-	/// Parameters:
-	///	- stack: UnsafeMutablePointer<GtkStack>?
-	open func setStack(_ stack: UnsafeMutablePointer<GtkStack>?) {
+	/// - Parameters:
+	///	- stack: UnsafeMutablePointer<GtkStack>? (GtkStack*)
+	open func setStack(_ stack: UnsafeMutablePointer<GtkStack>?) -> Swift.Void {
 		gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(self.GOBJECT), stack)
 	}
 

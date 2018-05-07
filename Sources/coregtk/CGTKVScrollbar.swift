@@ -34,7 +34,6 @@ public let GTK_TYPE_VSCROLLBAR: GType = gtk_vscrollbar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_VSCROLLBAR)
 }
 
-/// 
 /// The #GtkVScrollbar widget is a widget arranged vertically creating a
 /// scrollbar. See #GtkScrollbar for details on
 /// scrollbars. #GtkAdjustment pointers may be added to handle the
@@ -45,11 +44,10 @@ public let GTK_TYPE_VSCROLLBAR: GType = gtk_vscrollbar_get_type()
 
 
 open class CGTKVScrollbar : CGTKScrollbar {
-	/// 
 	/// Creates a new vertical scrollbar.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
 		self.init(withGObject: gtk_vscrollbar_new(adjustment))!
 	}

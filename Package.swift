@@ -7,8 +7,12 @@ let package = Package(
     name: "coregtk",
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        .executable(
+            name: "SimpleTextEditor",
+            targets: ["SimpleTextEditor"]),
         .library(
             name: "coregtk",
+            type: .dynamic,
             targets: ["coregtk"])
     ],
     dependencies: [
@@ -20,6 +24,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "coregtk",
-            dependencies: [])
+            dependencies: []),
+        .target(
+            name: "SimpleTextEditor",
+            dependencies: [
+                "coregtk"
+            ])
     ]
 )

@@ -34,7 +34,6 @@ public let GTK_TYPE_TOGGLE_TOOL_BUTTON: GType = gtk_toggle_tool_button_get_type(
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_TOGGLE_TOOL_BUTTON)
 }
 
-/// 
 /// A #GtkToggleToolButton is a #GtkToolItem that contains a toggle
 /// button.
 /// Use gtk_toggle_tool_button_new() to create a new GtkToggleToolButton.
@@ -43,21 +42,19 @@ public let GTK_TYPE_TOGGLE_TOOL_BUTTON: GType = gtk_toggle_tool_button_get_type(
 
 
 open class CGTKToggleToolButton : CGTKToolButton {
-	/// 
 	/// Returns a new #GtkToggleToolButton
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init() {
 		self.init(withGObject: gtk_toggle_tool_button_new())!
 	}
 
-	/// 
 	/// Creates a new #GtkToggleToolButton containing the image and text from a
 	/// stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
 	/// and #GTK_STOCK_APPLY.
 	/// It is an error if @stock_id is not a name of a stock item.
-	/// Parameters:
-	///	- stockId: String
-	/// - Returns: UnsafeMutablePointer<GtkToolItem>!
+	/// - Parameters:
+	///	- stockId: String (const gchar*)
+	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
 	public convenience init(fromStock stockId: String) {
 		self.init(withGObject: gtk_toggle_tool_button_new_from_stock(stockId))!
 	}
@@ -68,21 +65,19 @@ open class CGTKToggleToolButton : CGTKToolButton {
 		}
 	}
 
-	/// 
 	/// Queries a #GtkToggleToolButton and returns its current state.
 	/// Returns %TRUE if the toggle button is pressed in and %FALSE if it is raised.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getActive() -> Bool {
 		return gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the status of the toggle tool button. Set to %TRUE if you
 	/// want the GtkToggleButton to be “pressed in”, and %FALSE to raise it.
 	/// This action causes the toggled signal to be emitted.
-	/// Parameters:
-	///	- isActive: Bool
-	open func setActive(isActive: Bool) {
+	/// - Parameters:
+	///	- isActive: Bool (gboolean)
+	open func setActive(isActive: Bool) -> Swift.Void {
 		gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(self.GOBJECT), isActive ? 1 : 0)
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_HSCROLLBAR: GType = gtk_hscrollbar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_HSCROLLBAR)
 }
 
-/// 
 /// The #GtkHScrollbar widget is a widget arranged horizontally creating a
 /// scrollbar. See #GtkScrollbar for details on
 /// scrollbars. #GtkAdjustment pointers may be added to handle the
@@ -45,11 +44,10 @@ public let GTK_TYPE_HSCROLLBAR: GType = gtk_hscrollbar_get_type()
 
 
 open class CGTKHScrollbar : CGTKScrollbar {
-	/// 
 	/// Creates a new horizontal scrollbar.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>?
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(adjustment: UnsafeMutablePointer<GtkAdjustment>?) {
 		self.init(withGObject: gtk_hscrollbar_new(adjustment))!
 	}

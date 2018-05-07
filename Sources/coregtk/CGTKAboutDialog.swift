@@ -34,7 +34,6 @@ public let GTK_TYPE_ABOUT_DIALOG: GType = gtk_about_dialog_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_ABOUT_DIALOG)
 }
 
-/// 
 /// The GtkAboutDialog offers a simple way to display information about
 /// a program like its logo, name, copyright, website and license. It is
 /// also possible to give credits to the authors, documenters, translators
@@ -70,9 +69,8 @@ public let GTK_TYPE_ABOUT_DIALOG: GType = gtk_about_dialog_get_type()
 
 
 open class CGTKAboutDialog : CGTKDialog {
-	/// 
 	/// Creates a new #GtkAboutDialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_about_dialog_new())!
 	}
@@ -83,221 +81,194 @@ open class CGTKAboutDialog : CGTKDialog {
 		}
 	}
 
-	/// 
 	/// Creates a new section in the Credits page.
-	/// Parameters:
-	///	- sectionName: String
-	///	- people: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	open func addCreditSection(sectionName: String, people: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- sectionName: String (const gchar*)
+	///	- people: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	open func addCreditSection(sectionName: String, people: UnsafeMutablePointer<UnsafePointer<gchar>?>!) -> Swift.Void {
 		gtk_about_dialog_add_credit_section(GTK_ABOUT_DIALOG(self.GOBJECT), sectionName, people)
 	}
 
-	/// 
 	/// Returns the string which are displayed in the artists tab
 	/// of the secondary credits dialog.
-	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>!
+	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>! (gchar**)
 	open func getArtists() -> UnsafePointer<UnsafePointer<gchar>?>! {
 		return gtk_about_dialog_get_artists(GTK_ABOUT_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the string which are displayed in the authors tab
 	/// of the secondary credits dialog.
-	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>!
+	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>! (gchar**)
 	open func getAuthors() -> UnsafePointer<UnsafePointer<gchar>?>! {
 		return gtk_about_dialog_get_authors(GTK_ABOUT_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the comments string.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getComments() -> String? {
 		return String(utf8String: gtk_about_dialog_get_comments(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the copyright string.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getCopyright() -> String? {
 		return String(utf8String: gtk_about_dialog_get_copyright(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the string which are displayed in the documenters
 	/// tab of the secondary credits dialog.
-	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>!
+	/// - Returns: UnsafePointer<UnsafePointer<gchar>?>! (gchar**)
 	open func getDocumenters() -> UnsafePointer<UnsafePointer<gchar>?>! {
 		return gtk_about_dialog_get_documenters(GTK_ABOUT_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the license information.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getLicense() -> String? {
 		return String(utf8String: gtk_about_dialog_get_license(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the license set using gtk_about_dialog_set_license_type()
-	/// - Returns: GtkLicense
+	/// - Returns: GtkLicense (GtkLicense)
 	open func getLicenseType() -> GtkLicense {
 		return gtk_about_dialog_get_license_type(GTK_ABOUT_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the pixbuf displayed as logo in the about dialog.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkPixbuf*)
 	open func getLogo() -> OpaquePointer {
 		return gtk_about_dialog_get_logo(GTK_ABOUT_DIALOG(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the icon name displayed as logo in the about dialog.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getLogoIconName() -> String? {
 		return String(utf8String: gtk_about_dialog_get_logo_icon_name(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the program name displayed in the about dialog.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getProgramName() -> String? {
 		return String(utf8String: gtk_about_dialog_get_program_name(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the translator credits string which is displayed
 	/// in the translators tab of the secondary credits dialog.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTranslatorCredits() -> String? {
 		return String(utf8String: gtk_about_dialog_get_translator_credits(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the version string.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getVersion() -> String? {
 		return String(utf8String: gtk_about_dialog_get_version(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the website URL.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getWebsite() -> String? {
 		return String(utf8String: gtk_about_dialog_get_website(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the label used for the website link.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getWebsiteLabel() -> String? {
 		return String(utf8String: gtk_about_dialog_get_website_label(GTK_ABOUT_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the license text in @about is
 	/// automatically wrapped.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getWrapLicense() -> Bool {
 		return gtk_about_dialog_get_wrap_license(GTK_ABOUT_DIALOG(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the strings which are displayed in the artists tab
 	/// of the secondary credits dialog.
-	/// Parameters:
-	///	- artists: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	open func setArtists(_ artists: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- artists: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	open func setArtists(_ artists: UnsafeMutablePointer<UnsafePointer<gchar>?>!) -> Swift.Void {
 		gtk_about_dialog_set_artists(GTK_ABOUT_DIALOG(self.GOBJECT), artists)
 	}
 
-	/// 
 	/// Sets the strings which are displayed in the authors tab
 	/// of the secondary credits dialog.
-	/// Parameters:
-	///	- authors: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	open func setAuthors(_ authors: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- authors: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	open func setAuthors(_ authors: UnsafeMutablePointer<UnsafePointer<gchar>?>!) -> Swift.Void {
 		gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(self.GOBJECT), authors)
 	}
 
-	/// 
 	/// Sets the comments string to display in the about dialog.
 	/// This should be a short string of one or two lines.
-	/// Parameters:
-	///	- comments: String
-	open func setComments(_ comments: String) {
+	/// - Parameters:
+	///	- comments: String (const gchar*)
+	open func setComments(_ comments: String) -> Swift.Void {
 		gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(self.GOBJECT), comments)
 	}
 
-	/// 
 	/// Sets the copyright string to display in the about dialog.
 	/// This should be a short string of one or two lines.
-	/// Parameters:
-	///	- copyright: String
-	open func setCopyright(_ copyright: String) {
+	/// - Parameters:
+	///	- copyright: String (const gchar*)
+	open func setCopyright(_ copyright: String) -> Swift.Void {
 		gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(self.GOBJECT), copyright)
 	}
 
-	/// 
 	/// Sets the strings which are displayed in the documenters tab
 	/// of the secondary credits dialog.
-	/// Parameters:
-	///	- documenters: UnsafeMutablePointer<UnsafePointer<gchar>?>!
-	open func setDocumenters(_ documenters: UnsafeMutablePointer<UnsafePointer<gchar>?>!) {
+	/// - Parameters:
+	///	- documenters: UnsafeMutablePointer<UnsafePointer<gchar>?>! (gchar**)
+	open func setDocumenters(_ documenters: UnsafeMutablePointer<UnsafePointer<gchar>?>!) -> Swift.Void {
 		gtk_about_dialog_set_documenters(GTK_ABOUT_DIALOG(self.GOBJECT), documenters)
 	}
 
-	/// 
 	/// Sets the license information to be displayed in the secondary
 	/// license dialog. If @license is %NULL, the license button is
 	/// hidden.
-	/// Parameters:
-	///	- license: String
-	open func setLicense(_ license: String) {
+	/// - Parameters:
+	///	- license: String (const gchar*)
+	open func setLicense(_ license: String) -> Swift.Void {
 		gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(self.GOBJECT), license)
 	}
 
-	/// 
 	/// Sets the license of the application showing the @about dialog from a
 	/// list of known licenses.
 	/// This function overrides the license set using
 	/// gtk_about_dialog_set_license().
-	/// Parameters:
-	///	- licenseType: GtkLicense
-	open func setLicenseType(_ licenseType: GtkLicense) {
+	/// - Parameters:
+	///	- licenseType: GtkLicense (GtkLicense)
+	open func setLicenseType(_ licenseType: GtkLicense) -> Swift.Void {
 		gtk_about_dialog_set_license_type(GTK_ABOUT_DIALOG(self.GOBJECT), licenseType)
 	}
 
-	/// 
 	/// Sets the pixbuf to be displayed as logo in the about dialog.
 	/// If it is %NULL, the default window icon set with
 	/// gtk_window_set_default_icon() will be used.
-	/// Parameters:
-	///	- logo: OpaquePointer?
-	open func setLogo(_ logo: OpaquePointer?) {
+	/// - Parameters:
+	///	- logo: OpaquePointer? (GdkPixbuf*)
+	open func setLogo(_ logo: OpaquePointer?) -> Swift.Void {
 		gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(self.GOBJECT), logo)
 	}
 
-	/// 
 	/// Sets the pixbuf to be displayed as logo in the about dialog.
 	/// If it is %NULL, the default window icon set with
 	/// gtk_window_set_default_icon() will be used.
-	/// Parameters:
-	///	- iconName: String
-	open func setLogoIconName(_ iconName: String) {
+	/// - Parameters:
+	///	- iconName: String (const gchar*)
+	open func setLogoIconName(_ iconName: String) -> Swift.Void {
 		gtk_about_dialog_set_logo_icon_name(GTK_ABOUT_DIALOG(self.GOBJECT), iconName)
 	}
 
-	/// 
 	/// Sets the name to display in the about dialog.
 	/// If this is not set, it defaults to g_get_application_name().
-	/// Parameters:
-	///	- name: String
-	open func setProgramName(_ name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func setProgramName(_ name: String) -> Swift.Void {
 		gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Sets the translator credits string which is displayed in
 	/// the translators tab of the secondary credits dialog.
 	/// The intended use for this string is to display the translator
@@ -313,42 +284,38 @@ open class CGTKAboutDialog : CGTKDialog {
 	/// purpose, since translators will already know the purpose of that msgid, and
 	/// since #GtkAboutDialog will detect if “translator-credits” is untranslated
 	/// and hide the tab.
-	/// Parameters:
-	///	- translatorCredits: String
-	open func setTranslatorCredits(_ translatorCredits: String) {
+	/// - Parameters:
+	///	- translatorCredits: String (const gchar*)
+	open func setTranslatorCredits(_ translatorCredits: String) -> Swift.Void {
 		gtk_about_dialog_set_translator_credits(GTK_ABOUT_DIALOG(self.GOBJECT), translatorCredits)
 	}
 
-	/// 
 	/// Sets the version string to display in the about dialog.
-	/// Parameters:
-	///	- version: String
-	open func setVersion(_ version: String) {
+	/// - Parameters:
+	///	- version: String (const gchar*)
+	open func setVersion(_ version: String) -> Swift.Void {
 		gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(self.GOBJECT), version)
 	}
 
-	/// 
 	/// Sets the URL to use for the website link.
-	/// Parameters:
-	///	- website: String
-	open func setWebsite(_ website: String) {
+	/// - Parameters:
+	///	- website: String (const gchar*)
+	open func setWebsite(_ website: String) -> Swift.Void {
 		gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(self.GOBJECT), website)
 	}
 
-	/// 
 	/// Sets the label to be used for the website link.
-	/// Parameters:
-	///	- websiteLabel: String
-	open func setWebsiteLabel(_ websiteLabel: String) {
+	/// - Parameters:
+	///	- websiteLabel: String (const gchar*)
+	open func setWebsiteLabel(_ websiteLabel: String) -> Swift.Void {
 		gtk_about_dialog_set_website_label(GTK_ABOUT_DIALOG(self.GOBJECT), websiteLabel)
 	}
 
-	/// 
 	/// Sets whether the license text in @about is
 	/// automatically wrapped.
-	/// Parameters:
-	///	- wrapLicense: Bool
-	open func setWrapLicense(_ wrapLicense: Bool) {
+	/// - Parameters:
+	///	- wrapLicense: Bool (gboolean)
+	open func setWrapLicense(_ wrapLicense: Bool) -> Swift.Void {
 		gtk_about_dialog_set_wrap_license(GTK_ABOUT_DIALOG(self.GOBJECT), wrapLicense ? 1 : 0)
 	}
 

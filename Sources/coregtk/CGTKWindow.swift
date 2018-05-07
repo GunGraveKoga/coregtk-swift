@@ -34,7 +34,6 @@ public let GTK_TYPE_WINDOW: GType = gtk_window_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_WINDOW)
 }
 
-/// 
 /// A GtkWindow is a toplevel window which can contain other widgets.
 /// Windows normally have decorations that are under the control
 /// of the windowing system and allow the user to manipulate the window
@@ -81,40 +80,36 @@ public let GTK_TYPE_WINDOW: GType = gtk_window_get_type()
 
 
 open class CGTKWindow : CGTKBin {
-	/// 
 	/// Gets the value set by gtk_window_set_default_icon_list().
 	/// The list is a copy and should be freed with g_list_free(),
 	/// but the pixbufs in the list have not had their reference count
 	/// incremented.
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open class func getDefaultIconList() -> UnsafeMutablePointer<GList>! {
 		return gtk_window_get_default_icon_list()
 	}
 
-	/// 
 	/// Returns the fallback icon name for windows that has been set
 	/// with gtk_window_set_default_icon_name(). The returned
 	/// string is owned by GTK+ and should not be modified. It
 	/// is only valid until the next call to
 	/// gtk_window_set_default_icon_name().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open class func getDefaultIconName() -> String? {
 		return String(utf8String: gtk_window_get_default_icon_name())
 	}
 
-	/// 
 	/// Returns a list of all existing toplevel windows. The widgets
 	/// in the list are not individually referenced. If you want
 	/// to iterate through the list and perform actions involving
 	/// callbacks that might destroy the widgets, you must call
 	/// `g_list_foreach (result, (GFunc)g_object_ref, NULL)` first, and
 	/// then unref all the widgets afterwards.
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open class func listToplevels() -> UnsafeMutablePointer<GList>! {
 		return gtk_window_list_toplevels()
 	}
 
-	/// 
 	/// By default, after showing the first #GtkWindow, GTK+ calls
 	/// gdk_notify_startup_complete().  Call this function to disable
 	/// the automatic startup notification. You might do this if your
@@ -123,66 +118,60 @@ open class CGTKWindow : CGTKBin {
 	/// In that example, you would disable startup notification
 	/// temporarily, show your splash screen, then re-enable it so that
 	/// showing the main window would automatically result in notification.
-	/// Parameters:
-	///	- setting: Bool
-	open class func setAutoStartupNotification(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open class func setAutoStartupNotification(setting: Bool) -> Swift.Void {
 		gtk_window_set_auto_startup_notification(setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets an icon to be used as fallback for windows that haven't
 	/// had gtk_window_set_icon() called on them from a pixbuf.
-	/// Parameters:
-	///	- icon: OpaquePointer!
-	open class func setDefaultIcon(_ icon: OpaquePointer!) {
+	/// - Parameters:
+	///	- icon: OpaquePointer! (GdkPixbuf*)
+	open class func setDefaultIcon(_ icon: OpaquePointer!) -> Swift.Void {
 		gtk_window_set_default_icon(icon)
 	}
 
-	/// 
 	/// Sets an icon to be used as fallback for windows that haven't
 	/// had gtk_window_set_icon_list() called on them from a file
 	/// on disk. Warns on failure if @err is %NULL.
-	/// Parameters:
-	///	- filename: String
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: Bool (gboolean)
 	open class func setDefaultIconFromFile(filename: String, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> Bool {
 		return gtk_window_set_default_icon_from_file(filename, err) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets an icon list to be used as fallback for windows that haven't
 	/// had gtk_window_set_icon_list() called on them to set up a
 	/// window-specific icon list. This function allows you to set up the
 	/// icon for all windows in your app at once.
 	/// See gtk_window_set_icon_list() for more details.
-	/// Parameters:
-	///	- list: UnsafeMutablePointer<GList>!
-	open class func setDefaultIconList(_ list: UnsafeMutablePointer<GList>!) {
+	/// - Parameters:
+	///	- list: UnsafeMutablePointer<GList>! (GList*)
+	open class func setDefaultIconList(_ list: UnsafeMutablePointer<GList>!) -> Swift.Void {
 		gtk_window_set_default_icon_list(list)
 	}
 
-	/// 
 	/// Sets an icon to be used as fallback for windows that haven't
 	/// had gtk_window_set_icon_list() called on them from a named
 	/// themed icon, see gtk_window_set_icon_name().
-	/// Parameters:
-	///	- name: String
-	open class func setDefaultIconName(_ name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open class func setDefaultIconName(_ name: String) -> Swift.Void {
 		gtk_window_set_default_icon_name(name)
 	}
 
-	/// 
 	/// Opens or closes the [interactive debugger][interactive-debugging],
 	/// which offers access to the widget hierarchy of the application
 	/// and to useful debugging tools.
-	/// Parameters:
-	///	- enable: Bool
-	open class func setInteractiveDebugging(enable: Bool) {
+	/// - Parameters:
+	///	- enable: Bool (gboolean)
+	open class func setInteractiveDebugging(enable: Bool) -> Swift.Void {
 		gtk_window_set_interactive_debugging(enable ? 1 : 0)
 	}
 
-	/// 
 	/// Creates a new #GtkWindow, which is a toplevel window that can
 	/// contain other widgets. Nearly always, the type of the window should
 	/// be #GTK_WINDOW_TOPLEVEL. If you’re implementing something like a
@@ -200,9 +189,9 @@ open class CGTKWindow : CGTKBin {
 	/// the window internally, gtk_window_new() does not return a reference
 	/// to the caller.
 	/// To delete a #GtkWindow, call gtk_widget_destroy().
-	/// Parameters:
-	///	- type: GtkWindowType
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- type: GtkWindowType (GtkWindowType)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(type: GtkWindowType) {
 		self.init(withGObject: gtk_window_new(type))!
 	}
@@ -213,97 +202,88 @@ open class CGTKWindow : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Activates the default widget for the window, unless the current
 	/// focused widget has been configured to receive the default action
 	/// (see gtk_widget_set_receives_default()), in which case the
 	/// focused widget is activated.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func activateDefault() -> Bool {
 		return gtk_window_activate_default(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Activates the current focused widget within the window.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func activateFocus() -> Bool {
 		return gtk_window_activate_focus(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Activates mnemonics and accelerators for this #GtkWindow. This is normally
 	/// called by the default ::key_press_event handler for toplevel windows,
 	/// however in some cases it may be useful to call this directly when
 	/// overriding the standard key handling for a toplevel window.
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEventKey>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEventKey>! (GdkEventKey*)
+	/// - Returns: Bool (gboolean)
 	open func activateKey(event: UnsafeMutablePointer<GdkEventKey>!) -> Bool {
 		return gtk_window_activate_key(GTK_WINDOW(self.GOBJECT), event) != 0 ? true : false
 	}
 
-	/// 
 	/// Associate @accel_group with @window, such that calling
 	/// gtk_accel_groups_activate() on @window will activate accelerators
 	/// in @accel_group.
-	/// Parameters:
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>!
-	open func addAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) {
+	/// - Parameters:
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
+	open func addAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) -> Swift.Void {
 		gtk_window_add_accel_group(GTK_WINDOW(self.GOBJECT), accelGroup)
 	}
 
-	/// 
 	/// Adds a mnemonic to this window.
-	/// Parameters:
-	///	- keyval: guint
-	///	- target: CGTKWidget
-	open func addMnemonic(keyval: guint, target: CGTKWidget) {
+	/// - Parameters:
+	///	- keyval: guint (guint)
+	///	- target: CGTKWidget (GtkWidget*)
+	open func addMnemonic(keyval: guint, target: CGTKWidget) -> Swift.Void {
 		gtk_window_add_mnemonic(GTK_WINDOW(self.GOBJECT), keyval, target.WIDGET)
 	}
 
-	/// 
 	/// Starts moving a window. This function is used if an application has
 	/// window movement grips. When GDK can support it, the window movement
 	/// will be done using the standard mechanism for the
 	/// [window manager][gtk-X11-arch] or windowing
 	/// system. Otherwise, GDK will try to emulate window movement,
 	/// potentially not all that well, depending on the windowing system.
-	/// Parameters:
-	///	- button: gint
-	///	- rootX: gint
-	///	- rootY: gint
-	///	- timestamp: guint32
-	open func beginMoveDrag(button: gint, rootX: gint, rootY: gint, timestamp: guint32) {
+	/// - Parameters:
+	///	- button: gint (gint)
+	///	- rootX: gint (gint)
+	///	- rootY: gint (gint)
+	///	- timestamp: guint32 (guint32)
+	open func beginMoveDrag(button: gint, rootX: gint, rootY: gint, timestamp: guint32) -> Swift.Void {
 		gtk_window_begin_move_drag(GTK_WINDOW(self.GOBJECT), button, rootX, rootY, timestamp)
 	}
 
-	/// 
 	/// Starts resizing a window. This function is used if an application
 	/// has window resizing controls. When GDK can support it, the resize
 	/// will be done using the standard mechanism for the
 	/// [window manager][gtk-X11-arch] or windowing
 	/// system. Otherwise, GDK will try to emulate window resizing,
 	/// potentially not all that well, depending on the windowing system.
-	/// Parameters:
-	///	- edge: GdkWindowEdge
-	///	- button: gint
-	///	- rootX: gint
-	///	- rootY: gint
-	///	- timestamp: guint32
-	open func beginResizeDrag(edge: GdkWindowEdge, button: gint, rootX: gint, rootY: gint, timestamp: guint32) {
+	/// - Parameters:
+	///	- edge: GdkWindowEdge (GdkWindowEdge)
+	///	- button: gint (gint)
+	///	- rootX: gint (gint)
+	///	- rootY: gint (gint)
+	///	- timestamp: guint32 (guint32)
+	open func beginResizeDrag(edge: GdkWindowEdge, button: gint, rootX: gint, rootY: gint, timestamp: guint32) -> Swift.Void {
 		gtk_window_begin_resize_drag(GTK_WINDOW(self.GOBJECT), edge, button, rootX, rootY, timestamp)
 	}
 
-	/// 
 	/// Requests that the window is closed, similar to what happens
 	/// when a window manager close button is clicked.
 	/// This function can be used with close buttons in custom
 	/// titlebars.
-	open func close() {
+	open func close() -> Swift.Void {
 		gtk_window_close(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to deiconify (i.e. unminimize) the specified @window. Note
 	/// that you shouldn’t assume the window is definitely deiconified
 	/// afterward, because other entities (e.g. the user or
@@ -311,11 +291,10 @@ open class CGTKWindow : CGTKBin {
 	/// again before your code which assumes deiconification gets to run.
 	/// You can track iconification via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func deiconify() {
+	open func deiconify() -> Swift.Void {
 		gtk_window_deiconify(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to place @window in the fullscreen state. Note that you
 	/// shouldn’t assume the window is definitely full screen afterward,
 	/// because other entities (e.g. the user or
@@ -325,201 +304,177 @@ open class CGTKWindow : CGTKBin {
 	/// don’t write code that crashes if not.
 	/// You can track the fullscreen state via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func fullscreen() {
+	open func fullscreen() -> Swift.Void {
 		gtk_window_fullscreen(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to place @window in the fullscreen state. Note that you shouldn't assume
 	/// the window is definitely full screen afterward.
 	/// You can track the fullscreen state via the "window-state-event" signal
 	/// on #GtkWidget.
-	/// Parameters:
-	///	- screen: OpaquePointer!
-	///	- monitor: gint
-	open func fullscreenOnMonitor(screen: OpaquePointer!, monitor: gint) {
+	/// - Parameters:
+	///	- screen: OpaquePointer! (GdkScreen*)
+	///	- monitor: gint (gint)
+	open func fullscreenOnMonitor(screen: OpaquePointer!, monitor: gint) -> Swift.Void {
 		gtk_window_fullscreen_on_monitor(GTK_WINDOW(self.GOBJECT), screen, monitor)
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_accept_focus().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getAcceptFocus() -> Bool {
 		return gtk_window_get_accept_focus(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the #GtkApplication associated with the window (if any).
-	/// - Returns: CGTKApplication?
+	/// - Returns: CGTKApplication? (GtkApplication*)
 	open func getApplication<T>() -> T? where T: CGTKApplication {
 		return T.init(withGObject: gtk_window_get_application(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Fetches the attach widget for this window. See
 	/// gtk_window_set_attached_to().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getAttachedTo<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_window_get_attached_to(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the window has been set to have decorations
 	/// such as a title bar via gtk_window_set_decorated().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDecorated() -> Bool {
 		return gtk_window_get_decorated(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the default size of the window. A value of -1 for the width or
 	/// height indicates that a default size has not been explicitly set
 	/// for that dimension, so the “natural” size of the window will be
 	/// used.
-	/// Parameters:
-	///	- width: UnsafeMutablePointer<Int32>!
-	///	- height: UnsafeMutablePointer<Int32>!
-	open func getDefaultSize(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- width: UnsafeMutablePointer<Int32>! (gint*)
+	///	- height: UnsafeMutablePointer<Int32>! (gint*)
+	open func getDefaultSize(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_window_get_default_size(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Returns the default widget for @window. See
 	/// gtk_window_set_default() for more details.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getDefaultWidget<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_window_get_default_widget(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns whether the window has been set to have a close button
 	/// via gtk_window_set_deletable().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDeletable() -> Bool {
 		return gtk_window_get_deletable(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the window will be destroyed with its transient parent. See
 	/// gtk_window_set_destroy_with_parent ().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getDestroyWithParent() -> Bool {
 		return gtk_window_get_destroy_with_parent(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the current focused widget within the window.
 	/// Note that this is the widget that would have the focus
 	/// if the toplevel window focused; if the toplevel window
 	/// is not focused then  `gtk_widget_has_focus (widget)` will
 	/// not be %TRUE for the widget.
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getFocus<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_window_get_focus(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_focus_on_map().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getFocusOnMap() -> Bool {
 		return gtk_window_get_focus_on_map(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value of the #GtkWindow:focus-visible property.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getFocusVisible() -> Bool {
 		return gtk_window_get_focus_visible(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_gravity().
-	/// - Returns: GdkGravity
+	/// - Returns: GdkGravity (GdkGravity)
 	open func getGravity() -> GdkGravity {
 		return gtk_window_get_gravity(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the group for @window or the default group, if
 	/// @window is %NULL or if @window does not have an explicit
 	/// window group.
-	/// - Returns: UnsafeMutablePointer<GtkWindowGroup>!
+	/// - Returns: UnsafeMutablePointer<GtkWindowGroup>! (GtkWindowGroup*)
 	open func getGroup() -> UnsafeMutablePointer<GtkWindowGroup>! {
 		return gtk_window_get_group(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Determines whether the window may have a resize grip.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHasResizeGrip() -> Bool {
 		return gtk_window_get_has_resize_grip(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the window has requested to have its titlebar hidden
 	/// when maximized. See gtk_window_set_hide_titlebar_when_maximized ().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getHideTitlebarWhenMaximized() -> Bool {
 		return gtk_window_get_hide_titlebar_when_maximized(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_icon() (or if you've
 	/// called gtk_window_set_icon_list(), gets the first icon in
 	/// the icon list).
-	/// - Returns: OpaquePointer?
+	/// - Returns: OpaquePointer? (GdkPixbuf*)
 	open func getIcon() -> OpaquePointer? {
 		return gtk_window_get_icon(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the list of icons set by gtk_window_set_icon_list().
 	/// The list is copied, but the reference count on each
 	/// member won’t be incremented.
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open func getIconList() -> UnsafeMutablePointer<GList>! {
 		return gtk_window_get_icon_list(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the name of the themed icon for the window,
 	/// see gtk_window_set_icon_name().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getIconName() -> String? {
 		return String(utf8String: gtk_window_get_icon_name(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the mnemonic modifier for this window. See
 	/// gtk_window_set_mnemonic_modifier().
-	/// - Returns: GdkModifierType
+	/// - Returns: GdkModifierType (GdkModifierType)
 	open func getMnemonicModifier() -> GdkModifierType {
 		return gtk_window_get_mnemonic_modifier(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkWindow:mnemonics-visible property.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getMnemonicsVisible() -> Bool {
 		return gtk_window_get_mnemonics_visible(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the window is modal. See gtk_window_set_modal().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getModal() -> Bool {
 		return gtk_window_get_modal(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Fetches the requested opacity for this window. See
 	/// gtk_window_set_opacity().
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	override open func getOpacity() -> Double {
 		return gtk_window_get_opacity(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// This function returns the position you need to pass to
 	/// gtk_window_move() to keep @window in its current position.
 	/// This means that the meaning of the returned value varies with
@@ -551,46 +506,41 @@ open class CGTKWindow : CGTKBin {
 	/// system and the window manager state to effectively do so. The
 	/// appropriate way to implement saving the window position is to
 	/// use a platform-specific protocol, wherever that is available.
-	/// Parameters:
-	///	- rootX: UnsafeMutablePointer<Int32>!
-	///	- rootY: UnsafeMutablePointer<Int32>!
-	open func getPosition(rootX: UnsafeMutablePointer<Int32>!, rootY: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- rootX: UnsafeMutablePointer<Int32>! (gint*)
+	///	- rootY: UnsafeMutablePointer<Int32>! (gint*)
+	open func getPosition(rootX: UnsafeMutablePointer<Int32>!, rootY: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_window_get_position(GTK_WINDOW(self.GOBJECT), rootX, rootY)
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_resizable().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getResizable() -> Bool {
 		return gtk_window_get_resizable(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// If a window has a resize grip, this will retrieve the grip
 	/// position, width and height into the specified #GdkRectangle.
-	/// Parameters:
-	///	- rect: UnsafeMutablePointer<GdkRectangle>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- rect: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
+	/// - Returns: Bool (gboolean)
 	open func getResizeGripArea(rect: UnsafeMutablePointer<GdkRectangle>!) -> Bool {
 		return gtk_window_get_resize_grip_area(GTK_WINDOW(self.GOBJECT), rect) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the role of the window. See gtk_window_set_role() for
 	/// further explanation.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getRole() -> String? {
 		return String(utf8String: gtk_window_get_role(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the #GdkScreen associated with @window.
-	/// - Returns: OpaquePointer
+	/// - Returns: OpaquePointer (GdkScreen*)
 	override open func getScreen() -> OpaquePointer {
 		return gtk_window_get_screen(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Obtains the current size of @window.
 	/// If @window is not visible on screen, this function return the size GTK+
 	/// will suggest to the [window manager][gtk-X11-arch] for the initial window
@@ -650,88 +600,77 @@ open class CGTKWindow : CGTKBin {
 	/// knowledge. Additionally, positioning windows in global screen coordinates
 	/// may not be allowed by the windowing system. For more information,
 	/// see: gtk_window_set_position().
-	/// Parameters:
-	///	- width: UnsafeMutablePointer<Int32>!
-	///	- height: UnsafeMutablePointer<Int32>!
-	open func getSize(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) {
+	/// - Parameters:
+	///	- width: UnsafeMutablePointer<Int32>! (gint*)
+	///	- height: UnsafeMutablePointer<Int32>! (gint*)
+	open func getSize(width: UnsafeMutablePointer<Int32>!, height: UnsafeMutablePointer<Int32>!) -> Swift.Void {
 		gtk_window_get_size(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_skip_pager_hint().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSkipPagerHint() -> Bool {
 		return gtk_window_get_skip_pager_hint(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_skip_taskbar_hint()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getSkipTaskbarHint() -> Bool {
 		return gtk_window_get_skip_taskbar_hint(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the title of the window. See gtk_window_set_title().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTitle() -> String? {
 		return String(utf8String: gtk_window_get_title(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the custom titlebar that has been set with
 	/// gtk_window_set_titlebar().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getTitlebar<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_window_get_titlebar(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Fetches the transient parent for this window. See
 	/// gtk_window_set_transient_for().
-	/// - Returns: CGTKWindow?
+	/// - Returns: CGTKWindow? (GtkWindow*)
 	open func getTransientFor<T>() -> T? where T: CGTKWindow {
 		return T.init(withGObject: gtk_window_get_transient_for(GTK_WINDOW(self.GOBJECT)))
 	}
 
-	/// 
 	/// Gets the type hint for this window. See gtk_window_set_type_hint().
-	/// - Returns: GdkWindowTypeHint
+	/// - Returns: GdkWindowTypeHint (GdkWindowTypeHint)
 	open func getTypeHint() -> GdkWindowTypeHint {
 		return gtk_window_get_type_hint(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value set by gtk_window_set_urgency_hint()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getUrgencyHint() -> Bool {
 		return gtk_window_get_urgency_hint(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the type of the window. See #GtkWindowType.
-	/// - Returns: GtkWindowType
+	/// - Returns: GtkWindowType (GtkWindowType)
 	open func getWindowType() -> GtkWindowType {
 		return gtk_window_get_window_type(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether @window has an explicit window group.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasGroup() -> Bool {
 		return gtk_window_has_group(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the input focus is within this GtkWindow.
 	/// For real toplevel windows, this is identical to gtk_window_is_active(),
 	/// but for embedded windows, like #GtkPlug, the results will differ.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func hasToplevelFocus() -> Bool {
 		return gtk_window_has_toplevel_focus(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Asks to iconify (i.e. minimize) the specified @window. Note that
 	/// you shouldn’t assume the window is definitely iconified afterward,
 	/// because other entities (e.g. the user or
@@ -744,11 +683,10 @@ open class CGTKWindow : CGTKBin {
 	/// onscreen.
 	/// You can track iconification via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func iconify() {
+	open func iconify() -> Swift.Void {
 		gtk_window_iconify(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the window is part of the current active toplevel.
 	/// (That is, the toplevel window receiving keystrokes.)
 	/// The return value is %TRUE if the window is active toplevel
@@ -756,24 +694,22 @@ open class CGTKWindow : CGTKBin {
 	/// You might use this function if you wanted to draw a widget
 	/// differently in an active window from a widget in an inactive window.
 	/// See gtk_window_has_toplevel_focus()
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isActive() -> Bool {
 		return gtk_window_is_active(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the current maximized state of @window.
 	/// Note that since maximization is ultimately handled by the window
 	/// manager and happens asynchronously to an application request, you
 	/// shouldn’t assume the return value of this function changing
 	/// immediately (or at all), as an effect of calling
 	/// gtk_window_maximize() or gtk_window_unmaximize().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func isMaximized() -> Bool {
 		return gtk_window_is_maximized(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Asks to maximize @window, so that it becomes full-screen. Note that
 	/// you shouldn’t assume the window is definitely maximized afterward,
 	/// because other entities (e.g. the user or
@@ -787,21 +723,19 @@ open class CGTKWindow : CGTKBin {
 	/// You can track maximization via the “window-state-event” signal
 	/// on #GtkWidget, or by listening to notifications on the
 	/// #GtkWindow:is-maximized property.
-	open func maximize() {
+	open func maximize() -> Swift.Void {
 		gtk_window_maximize(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Activates the targets associated with the mnemonic.
-	/// Parameters:
-	///	- keyval: guint
-	///	- modifier: GdkModifierType
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- keyval: guint (guint)
+	///	- modifier: GdkModifierType (GdkModifierType)
+	/// - Returns: Bool (gboolean)
 	open func mnemonicActivate(keyval: guint, modifier: GdkModifierType) -> Bool {
 		return gtk_window_mnemonic_activate(GTK_WINDOW(self.GOBJECT), keyval, modifier) != 0 ? true : false
 	}
 
-	/// 
 	/// Asks the [window manager][gtk-X11-arch] to move
 	/// @window to the given position.  Window managers are free to ignore
 	/// this; most window managers ignore requests for initial window
@@ -830,14 +764,13 @@ open class CGTKWindow : CGTKBin {
 	/// The [Extended Window Manager Hints Specification](http://www.freedesktop.org/Standards/wm-spec)
 	/// has a nice table of gravities in the “implementation notes” section.
 	/// The gtk_window_get_position() documentation may also be relevant.
-	/// Parameters:
-	///	- x: gint
-	///	- y: gint
-	open func move(x: gint, y: gint) {
+	/// - Parameters:
+	///	- x: gint (gint)
+	///	- y: gint (gint)
+	open func move(x: gint, y: gint) -> Swift.Void {
 		gtk_window_move(GTK_WINDOW(self.GOBJECT), x, y)
 	}
 
-	/// 
 	/// Parses a standard X Window System geometry string - see the
 	/// manual page for X (type “man X”) for details on this.
 	/// gtk_window_parse_geometry() does work on all GTK+ ports
@@ -897,14 +830,13 @@ open class CGTKWindow : CGTKBin {
 	/// return 0;
 	/// }
 	/// ]|
-	/// Parameters:
-	///	- geometry: String
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- geometry: String (const gchar*)
+	/// - Returns: Bool (gboolean)
 	open func parseGeometry(_ geometry: String) -> Bool {
 		return gtk_window_parse_geometry(GTK_WINDOW(self.GOBJECT), geometry) != 0 ? true : false
 	}
 
-	/// 
 	/// Presents a window to the user. This may mean raising the window
 	/// in the stacking order, deiconifying it, moving it to the current
 	/// desktop, and/or giving it the keyboard focus, possibly dependent
@@ -918,60 +850,54 @@ open class CGTKWindow : CGTKBin {
 	/// where the user can see it.
 	/// If you are calling this function in response to a user interaction,
 	/// it is preferable to use gtk_window_present_with_time().
-	open func present() {
+	open func present() -> Swift.Void {
 		gtk_window_present(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Presents a window to the user in response to a user interaction.
 	/// If you need to present a window without a timestamp, use
 	/// gtk_window_present(). See gtk_window_present() for details.
-	/// Parameters:
-	///	- timestamp: guint32
-	open func presentWithTime(timestamp: guint32) {
+	/// - Parameters:
+	///	- timestamp: guint32 (guint32)
+	open func presentWithTime(timestamp: guint32) -> Swift.Void {
 		gtk_window_present_with_time(GTK_WINDOW(self.GOBJECT), timestamp)
 	}
 
-	/// 
 	/// Propagate a key press or release event to the focus widget and
 	/// up the focus container chain until a widget handles @event.
 	/// This is normally called by the default ::key_press_event and
 	/// ::key_release_event handlers for toplevel windows,
 	/// however in some cases it may be useful to call this directly when
 	/// overriding the standard key handling for a toplevel window.
-	/// Parameters:
-	///	- event: UnsafeMutablePointer<GdkEventKey>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- event: UnsafeMutablePointer<GdkEventKey>! (GdkEventKey*)
+	/// - Returns: Bool (gboolean)
 	open func propagateKeyEvent(_ event: UnsafeMutablePointer<GdkEventKey>!) -> Bool {
 		return gtk_window_propagate_key_event(GTK_WINDOW(self.GOBJECT), event) != 0 ? true : false
 	}
 
-	/// 
 	/// Reverses the effects of gtk_window_add_accel_group().
-	/// Parameters:
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>!
-	open func removeAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) {
+	/// - Parameters:
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
+	open func removeAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>!) -> Swift.Void {
 		gtk_window_remove_accel_group(GTK_WINDOW(self.GOBJECT), accelGroup)
 	}
 
-	/// 
 	/// Removes a mnemonic from this window.
-	/// Parameters:
-	///	- keyval: guint
-	///	- target: CGTKWidget
-	open func removeMnemonic(keyval: guint, target: CGTKWidget) {
+	/// - Parameters:
+	///	- keyval: guint (guint)
+	///	- target: CGTKWidget (GtkWidget*)
+	open func removeMnemonic(keyval: guint, target: CGTKWidget) -> Swift.Void {
 		gtk_window_remove_mnemonic(GTK_WINDOW(self.GOBJECT), keyval, target.WIDGET)
 	}
 
-	/// 
 	/// Hides @window, then reshows it, resetting the
 	/// default size and position of the window. Used
 	/// by GUI builders only.
-	open func reshowWithInitialSize() {
+	open func reshowWithInitialSize() -> Swift.Void {
 		gtk_window_reshow_with_initial_size(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Resizes the window as if the user had done so, obeying geometry
 	/// constraints. The default geometry constraint is that windows may
 	/// not be smaller than their size request; to override this
@@ -996,41 +922,37 @@ open class CGTKWindow : CGTKBin {
 	/// and cause the titlebar widget to grow in height, this will result in a
 	/// window content smaller that specified by gtk_window_resize() and not
 	/// a larger window.
-	/// Parameters:
-	///	- width: gint
-	///	- height: gint
-	open func resize(width: gint, height: gint) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func resize(width: gint, height: gint) -> Swift.Void {
 		gtk_window_resize(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Determines whether a resize grip is visible for the specified window.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func resizeGripIsVisible() -> Bool {
 		return gtk_window_resize_grip_is_visible(GTK_WINDOW(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Like gtk_window_resize(), but @width and @height are interpreted
 	/// in terms of the base size and increment set with
 	/// gtk_window_set_geometry_hints.
-	/// Parameters:
-	///	- width: gint
-	///	- height: gint
-	open func resizeToGeometry(width: gint, height: gint) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func resizeToGeometry(width: gint, height: gint) -> Swift.Void {
 		gtk_window_resize_to_geometry(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Windows may set a hint asking the desktop environment not to receive
 	/// the input focus. This function sets this hint.
-	/// Parameters:
-	///	- setting: Bool
-	open func setAcceptFocus(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setAcceptFocus(setting: Bool) -> Swift.Void {
 		gtk_window_set_accept_focus(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets or unsets the #GtkApplication associated with the window.
 	/// The application will be kept alive for at least as long as it has any windows
 	/// associated with it (see g_application_hold() for a way to keep it alive
@@ -1040,13 +962,12 @@ open class CGTKWindow : CGTKBin {
 	/// the @application to %NULL.
 	/// This is equivalent to calling gtk_application_remove_window() and/or
 	/// gtk_application_add_window() on the old/new applications as relevant.
-	/// Parameters:
-	///	- application: CGTKApplication
-	open func setApplication(_ application: CGTKApplication) {
+	/// - Parameters:
+	///	- application: CGTKApplication (GtkApplication*)
+	open func setApplication(_ application: CGTKApplication) -> Swift.Void {
 		gtk_window_set_application(GTK_WINDOW(self.GOBJECT), application.APPLICATION)
 	}
 
-	/// 
 	/// Marks @window as attached to @attach_widget. This creates a logical binding
 	/// between the window and the widget it belongs to, which is used by GTK+ to
 	/// propagate information such as styling or accessibility to @window as if it
@@ -1058,13 +979,12 @@ open class CGTKWindow : CGTKBin {
 	/// gtk_window_set_transient_for(), which specifies a window manager relation
 	/// between two toplevels instead.
 	/// Passing %NULL for @attach_widget detaches the window.
-	/// Parameters:
-	///	- attachWidget: CGTKWidget
-	open func setAttachedTo(attachWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- attachWidget: CGTKWidget (GtkWidget*)
+	open func setAttachedTo(attachWidget: CGTKWidget) -> Swift.Void {
 		gtk_window_set_attached_to(GTK_WINDOW(self.GOBJECT), attachWidget.WIDGET)
 	}
 
-	/// 
 	/// By default, windows are decorated with a title bar, resize
 	/// controls, etc.  Some [window managers][gtk-X11-arch]
 	/// allow GTK+ to disable these decorations, creating a
@@ -1075,13 +995,12 @@ open class CGTKWindow : CGTKBin {
 	/// already visible, so you should call it before calling gtk_widget_show().
 	/// On Windows, this function always works, since there’s no window manager
 	/// policy involved.
-	/// Parameters:
-	///	- setting: Bool
-	open func setDecorated(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setDecorated(setting: Bool) -> Swift.Void {
 		gtk_window_set_decorated(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// The default widget is the widget that’s activated when the user
 	/// presses Enter in a dialog (for example). This function sets or
 	/// unsets the default widget for a #GtkWindow. When setting (rather
@@ -1089,24 +1008,22 @@ open class CGTKWindow : CGTKBin {
 	/// gtk_widget_grab_default() on the widget. Before making a widget
 	/// the default widget, you must call gtk_widget_set_can_default() on
 	/// the widget you’d like to make the default.
-	/// Parameters:
-	///	- defaultWidget: CGTKWidget
-	open func setDefault(defaultWidget: CGTKWidget) {
+	/// - Parameters:
+	///	- defaultWidget: CGTKWidget (GtkWidget*)
+	open func setDefault(defaultWidget: CGTKWidget) -> Swift.Void {
 		gtk_window_set_default(GTK_WINDOW(self.GOBJECT), defaultWidget.WIDGET)
 	}
 
-	/// 
 	/// Like gtk_window_set_default_size(), but @width and @height are interpreted
 	/// in terms of the base size and increment set with
 	/// gtk_window_set_geometry_hints.
-	/// Parameters:
-	///	- width: gint
-	///	- height: gint
-	open func setDefaultGeometry(width: gint, height: gint) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func setDefaultGeometry(width: gint, height: gint) -> Swift.Void {
 		gtk_window_set_default_geometry(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// Sets the default size of a window. If the window’s “natural” size
 	/// (its size request) is larger than the default, the default will be
 	/// ignored. More generally, if the default size does not obey the
@@ -1134,14 +1051,13 @@ open class CGTKWindow : CGTKBin {
 	/// note that the appropriate size to save is the one returned by
 	/// gtk_window_get_size(). Using the window allocation directly will not
 	/// work in all circumstances and can lead to growing or shrinking windows.
-	/// Parameters:
-	///	- width: gint
-	///	- height: gint
-	open func setDefaultSize(width: gint, height: gint) {
+	/// - Parameters:
+	///	- width: gint (gint)
+	///	- height: gint (gint)
+	open func setDefaultSize(width: gint, height: gint) -> Swift.Void {
 		gtk_window_set_default_size(GTK_WINDOW(self.GOBJECT), width, height)
 	}
 
-	/// 
 	/// By default, windows have a close button in the window frame. Some
 	/// [window managers][gtk-X11-arch] allow GTK+ to
 	/// disable this button. If you set the deletable property to %FALSE
@@ -1151,104 +1067,95 @@ open class CGTKWindow : CGTKBin {
 	/// already visible, so you should call it before calling gtk_widget_show().
 	/// On Windows, this function always works, since there’s no window manager
 	/// policy involved.
-	/// Parameters:
-	///	- setting: Bool
-	open func setDeletable(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setDeletable(setting: Bool) -> Swift.Void {
 		gtk_window_set_deletable(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// If @setting is %TRUE, then destroying the transient parent of @window
 	/// will also destroy @window itself. This is useful for dialogs that
 	/// shouldn’t persist beyond the lifetime of the main window they're
 	/// associated with, for example.
-	/// Parameters:
-	///	- setting: Bool
-	open func setDestroyWithParent(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setDestroyWithParent(setting: Bool) -> Swift.Void {
 		gtk_window_set_destroy_with_parent(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// If @focus is not the current focus widget, and is focusable, sets
 	/// it as the focus widget for the window. If @focus is %NULL, unsets
 	/// the focus widget for this window. To set the focus to a particular
 	/// widget in the toplevel, it is usually more convenient to use
 	/// gtk_widget_grab_focus() instead of this function.
-	/// Parameters:
-	///	- focus: CGTKWidget
-	open func setFocus(_ focus: CGTKWidget) {
+	/// - Parameters:
+	///	- focus: CGTKWidget (GtkWidget*)
+	open func setFocus(_ focus: CGTKWidget) -> Swift.Void {
 		gtk_window_set_focus(GTK_WINDOW(self.GOBJECT), focus.WIDGET)
 	}
 
-	/// 
 	/// Windows may set a hint asking the desktop environment not to receive
 	/// the input focus when the window is mapped.  This function sets this
 	/// hint.
-	/// Parameters:
-	///	- setting: Bool
-	open func setFocusOnMap(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setFocusOnMap(setting: Bool) -> Swift.Void {
 		gtk_window_set_focus_on_map(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the #GtkWindow:focus-visible property.
-	/// Parameters:
-	///	- setting: Bool
-	open func setFocusVisible(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setFocusVisible(setting: Bool) -> Swift.Void {
 		gtk_window_set_focus_visible(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// This function sets up hints about how a window can be resized by
 	/// the user.  You can set a minimum and maximum size; allowed resize
 	/// increments (e.g. for xterm, you can only resize by the size of a
 	/// character); aspect ratios; and more. See the #GdkGeometry struct.
-	/// Parameters:
-	///	- geometryWidget: CGTKWidget
-	///	- geometry: UnsafeMutablePointer<GdkGeometry>?
-	///	- geomMask: GdkWindowHints
-	open func setGeometryHints(geometryWidget: CGTKWidget, geometry: UnsafeMutablePointer<GdkGeometry>?, geomMask: GdkWindowHints) {
+	/// - Parameters:
+	///	- geometryWidget: CGTKWidget (GtkWidget*)
+	///	- geometry: UnsafeMutablePointer<GdkGeometry>? (GdkGeometry*)
+	///	- geomMask: GdkWindowHints (GdkWindowHints)
+	open func setGeometryHints(geometryWidget: CGTKWidget, geometry: UnsafeMutablePointer<GdkGeometry>?, geomMask: GdkWindowHints) -> Swift.Void {
 		gtk_window_set_geometry_hints(GTK_WINDOW(self.GOBJECT), geometryWidget.WIDGET, geometry, geomMask)
 	}
 
-	/// 
 	/// Window gravity defines the meaning of coordinates passed to
 	/// gtk_window_move(). See gtk_window_move() and #GdkGravity for
 	/// more details.
 	/// The default window gravity is #GDK_GRAVITY_NORTH_WEST which will
 	/// typically “do what you mean.”
-	/// Parameters:
-	///	- gravity: GdkGravity
-	open func setGravity(_ gravity: GdkGravity) {
+	/// - Parameters:
+	///	- gravity: GdkGravity (GdkGravity)
+	open func setGravity(_ gravity: GdkGravity) -> Swift.Void {
 		gtk_window_set_gravity(GTK_WINDOW(self.GOBJECT), gravity)
 	}
 
-	/// 
 	/// Sets whether @window has a corner resize grip.
 	/// Note that the resize grip is only shown if the window
 	/// is actually resizable and not maximized. Use
 	/// gtk_window_resize_grip_is_visible() to find out if the
 	/// resize grip is currently shown.
-	/// Parameters:
-	///	- value: Bool
-	open func setHasResizeGrip(value: Bool) {
+	/// - Parameters:
+	///	- value: Bool (gboolean)
+	open func setHasResizeGrip(value: Bool) -> Swift.Void {
 		gtk_window_set_has_resize_grip(GTK_WINDOW(self.GOBJECT), value ? 1 : 0)
 	}
 
-	/// 
 	/// Tells GTK+ whether to drop its extra reference to the window
 	/// when gtk_widget_destroy() is called.
 	/// This function is only exported for the benefit of language
 	/// bindings which may need to keep the window alive until their
 	/// wrapper object is garbage collected. There is no justification
 	/// for ever calling this function in an application.
-	/// Parameters:
-	///	- setting: Bool
-	open func setHasUserRefCount(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setHasUserRefCount(setting: Bool) -> Swift.Void {
 		gtk_window_set_has_user_ref_count(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// If @setting is %TRUE, then @window will request that it’s titlebar
 	/// should be hidden when maximized.
 	/// This is useful for windows that don’t convey any information other
@@ -1258,13 +1165,12 @@ open class CGTKWindow : CGTKBin {
 	/// Note that custom titlebars set with gtk_window_set_titlebar() are
 	/// not affected by this. The application is in full control of their
 	/// content and visibility anyway.
-	/// Parameters:
-	///	- setting: Bool
-	open func setHideTitlebarWhenMaximized(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setHideTitlebarWhenMaximized(setting: Bool) -> Swift.Void {
 		gtk_window_set_hide_titlebar_when_maximized(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets up the icon representing a #GtkWindow. This icon is used when
 	/// the window is minimized (also known as iconified).  Some window
 	/// managers or desktop environments may also place it in the window
@@ -1280,26 +1186,24 @@ open class CGTKWindow : CGTKBin {
 	/// with a 1-element list.
 	/// See also gtk_window_set_default_icon_list() to set the icon
 	/// for all windows in your application in one go.
-	/// Parameters:
-	///	- icon: OpaquePointer?
-	open func setIcon(_ icon: OpaquePointer?) {
+	/// - Parameters:
+	///	- icon: OpaquePointer? (GdkPixbuf*)
+	open func setIcon(_ icon: OpaquePointer?) -> Swift.Void {
 		gtk_window_set_icon(GTK_WINDOW(self.GOBJECT), icon)
 	}
 
-	/// 
 	/// Sets the icon for @window.
 	/// Warns on failure if @err is %NULL.
 	/// This function is equivalent to calling gtk_window_set_icon()
 	/// with a pixbuf created by loading the image from @filename.
-	/// Parameters:
-	///	- filename: String
-	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- filename: String (const gchar*)
+	///	- err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil (GError**)
+	/// - Returns: Bool (gboolean)
 	open func setIconFromFile(filename: String, err: UnsafeMutablePointer<UnsafeMutablePointer<GError>?>? = nil) -> Bool {
 		return gtk_window_set_icon_from_file(GTK_WINDOW(self.GOBJECT), filename, err) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets up the icon representing a #GtkWindow. The icon is used when
 	/// the window is minimized (also known as iconified).  Some window
 	/// managers or desktop environments may also place it in the window
@@ -1320,25 +1224,23 @@ open class CGTKWindow : CGTKBin {
 	/// window using gtk_window_set_transient_for()) will inherit their
 	/// icon from their transient parent. So there’s no need to explicitly
 	/// set the icon on transient windows.
-	/// Parameters:
-	///	- list: UnsafeMutablePointer<GList>!
-	open func setIconList(_ list: UnsafeMutablePointer<GList>!) {
+	/// - Parameters:
+	///	- list: UnsafeMutablePointer<GList>! (GList*)
+	open func setIconList(_ list: UnsafeMutablePointer<GList>!) -> Swift.Void {
 		gtk_window_set_icon_list(GTK_WINDOW(self.GOBJECT), list)
 	}
 
-	/// 
 	/// Sets the icon for the window from a named themed icon.
 	/// See the docs for #GtkIconTheme for more details.
 	/// On some platforms, the window icon is not used at all.
 	/// Note that this has nothing to do with the WM_ICON_NAME
 	/// property which is mentioned in the ICCCM.
-	/// Parameters:
-	///	- name: String
-	open func setIconName(_ name: String) {
+	/// - Parameters:
+	///	- name: String (const gchar*)
+	open func setIconName(_ name: String) -> Swift.Void {
 		gtk_window_set_icon_name(GTK_WINDOW(self.GOBJECT), name)
 	}
 
-	/// 
 	/// Asks to keep @window above, so that it stays on top. Note that
 	/// you shouldn’t assume the window is definitely above afterward,
 	/// because other entities (e.g. the user or
@@ -1356,13 +1258,12 @@ open class CGTKWindow : CGTKBin {
 	/// the above state is mainly meant for user preferences and should not
 	/// be used by applications e.g. for drawing attention to their
 	/// dialogs.
-	/// Parameters:
-	///	- setting: Bool
-	open func setKeepAbove(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setKeepAbove(setting: Bool) -> Swift.Void {
 		gtk_window_set_keep_above(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Asks to keep @window below, so that it stays in bottom. Note that
 	/// you shouldn’t assume the window is definitely below afterward,
 	/// because other entities (e.g. the user or
@@ -1380,42 +1281,38 @@ open class CGTKWindow : CGTKBin {
 	/// the above state is mainly meant for user preferences and should not
 	/// be used by applications e.g. for drawing attention to their
 	/// dialogs.
-	/// Parameters:
-	///	- setting: Bool
-	open func setKeepBelow(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setKeepBelow(setting: Bool) -> Swift.Void {
 		gtk_window_set_keep_below(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the mnemonic modifier for this window.
-	/// Parameters:
-	///	- modifier: GdkModifierType
-	open func setMnemonicModifier(_ modifier: GdkModifierType) {
+	/// - Parameters:
+	///	- modifier: GdkModifierType (GdkModifierType)
+	open func setMnemonicModifier(_ modifier: GdkModifierType) -> Swift.Void {
 		gtk_window_set_mnemonic_modifier(GTK_WINDOW(self.GOBJECT), modifier)
 	}
 
-	/// 
 	/// Sets the #GtkWindow:mnemonics-visible property.
-	/// Parameters:
-	///	- setting: Bool
-	open func setMnemonicsVisible(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setMnemonicsVisible(setting: Bool) -> Swift.Void {
 		gtk_window_set_mnemonics_visible(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets a window modal or non-modal. Modal windows prevent interaction
 	/// with other windows in the same application. To keep modal dialogs
 	/// on top of main application windows, use
 	/// gtk_window_set_transient_for() to make the dialog transient for the
 	/// parent; most [window managers][gtk-X11-arch]
 	/// will then disallow lowering the dialog below the parent.
-	/// Parameters:
-	///	- modal: Bool
-	open func setModal(_ modal: Bool) {
+	/// - Parameters:
+	///	- modal: Bool (gboolean)
+	open func setModal(_ modal: Bool) -> Swift.Void {
 		gtk_window_set_modal(GTK_WINDOW(self.GOBJECT), modal ? 1 : 0)
 	}
 
-	/// 
 	/// Request the windowing system to make @window partially transparent,
 	/// with opacity 0 being fully transparent and 1 fully opaque. (Values
 	/// of the opacity parameter are clamped to the [0,1] range.) On X11
@@ -1424,32 +1321,29 @@ open class CGTKWindow : CGTKBin {
 	/// always.
 	/// Note that setting a window’s opacity after the window has been
 	/// shown causes it to flicker once on Windows.
-	/// Parameters:
-	///	- opacity: Double
-	override open func setOpacity(_ opacity: Double) {
+	/// - Parameters:
+	///	- opacity: Double (gdouble)
+	override open func setOpacity(_ opacity: Double) -> Swift.Void {
 		gtk_window_set_opacity(GTK_WINDOW(self.GOBJECT), opacity)
 	}
 
-	/// 
 	/// Sets a position constraint for this window. If the old or new
 	/// constraint is %GTK_WIN_POS_CENTER_ALWAYS, this will also cause
 	/// the window to be repositioned to satisfy the new constraint.
-	/// Parameters:
-	///	- position: GtkWindowPosition
-	open func setPosition(_ position: GtkWindowPosition) {
+	/// - Parameters:
+	///	- position: GtkWindowPosition (GtkWindowPosition)
+	open func setPosition(_ position: GtkWindowPosition) -> Swift.Void {
 		gtk_window_set_position(GTK_WINDOW(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Sets whether the user can resize a window. Windows are user resizable
 	/// by default.
-	/// Parameters:
-	///	- resizable: Bool
-	open func setResizable(_ resizable: Bool) {
+	/// - Parameters:
+	///	- resizable: Bool (gboolean)
+	open func setResizable(_ resizable: Bool) -> Swift.Void {
 		gtk_window_set_resizable(GTK_WINDOW(self.GOBJECT), resizable ? 1 : 0)
 	}
 
-	/// 
 	/// This function is only useful on X11, not with other GTK+ targets.
 	/// In combination with the window title, the window role allows a
 	/// [window manager][gtk-X11-arch] to identify "the
@@ -1460,44 +1354,40 @@ open class CGTKWindow : CGTKBin {
 	/// If a window already has a unique title, you don’t need to set the
 	/// role, since the WM can use the title to identify the window when
 	/// restoring the session.
-	/// Parameters:
-	///	- role: String
-	open func setRole(_ role: String) {
+	/// - Parameters:
+	///	- role: String (const gchar*)
+	open func setRole(_ role: String) -> Swift.Void {
 		gtk_window_set_role(GTK_WINDOW(self.GOBJECT), role)
 	}
 
-	/// 
 	/// Sets the #GdkScreen where the @window is displayed; if
 	/// the window is already mapped, it will be unmapped, and
 	/// then remapped on the new screen.
-	/// Parameters:
-	///	- screen: OpaquePointer!
-	open func setScreen(_ screen: OpaquePointer!) {
+	/// - Parameters:
+	///	- screen: OpaquePointer! (GdkScreen*)
+	open func setScreen(_ screen: OpaquePointer!) -> Swift.Void {
 		gtk_window_set_screen(GTK_WINDOW(self.GOBJECT), screen)
 	}
 
-	/// 
 	/// Windows may set a hint asking the desktop environment not to display
 	/// the window in the pager. This function sets this hint.
 	/// (A "pager" is any desktop navigation tool such as a workspace
 	/// switcher that displays a thumbnail representation of the windows
 	/// on the screen.)
-	/// Parameters:
-	///	- setting: Bool
-	open func setSkipPagerHint(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setSkipPagerHint(setting: Bool) -> Swift.Void {
 		gtk_window_set_skip_pager_hint(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Windows may set a hint asking the desktop environment not to display
 	/// the window in the task bar. This function sets this hint.
-	/// Parameters:
-	///	- setting: Bool
-	open func setSkipTaskbarHint(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setSkipTaskbarHint(setting: Bool) -> Swift.Void {
 		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Startup notification identifiers are used by desktop environment to
 	/// track application startup, to provide user feedback and other
 	/// features. This function changes the corresponding property on the
@@ -1507,13 +1397,12 @@ open class CGTKWindow : CGTKBin {
 	/// function before calling gtk_window_present() or any equivalent
 	/// function generating a window map event.
 	/// This function is only useful on X11, not with other GTK+ targets.
-	/// Parameters:
-	///	- startupId: String
-	open func setStartupId(_ startupId: String) {
+	/// - Parameters:
+	///	- startupId: String (const gchar*)
+	open func setStartupId(_ startupId: String) -> Swift.Void {
 		gtk_window_set_startup_id(GTK_WINDOW(self.GOBJECT), startupId)
 	}
 
-	/// 
 	/// Sets the title of the #GtkWindow. The title of a window will be
 	/// displayed in its title bar; on the X Window System, the title bar
 	/// is rendered by the [window manager][gtk-X11-arch],
@@ -1522,13 +1411,12 @@ open class CGTKWindow : CGTKBin {
 	/// user distinguish this window from other windows they may have
 	/// open. A good title might include the application name and current
 	/// document filename, for example.
-	/// Parameters:
-	///	- title: String
-	open func setTitle(_ title: String) {
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	open func setTitle(_ title: String) -> Swift.Void {
 		gtk_window_set_title(GTK_WINDOW(self.GOBJECT), title)
 	}
 
-	/// 
 	/// Sets a custom titlebar for @window.
 	/// A typical widget used here is #GtkHeaderBar, as it provides various features
 	/// expected of a titlebar while allowing the addition of child widgets to it.
@@ -1537,13 +1425,12 @@ open class CGTKWindow : CGTKBin {
 	/// Depending on the system, this function may not work for a window
 	/// that is already visible, so you set the titlebar before calling
 	/// gtk_widget_show().
-	/// Parameters:
-	///	- titlebar: CGTKWidget
-	open func setTitlebar(_ titlebar: CGTKWidget) {
+	/// - Parameters:
+	///	- titlebar: CGTKWidget (GtkWidget*)
+	open func setTitlebar(_ titlebar: CGTKWidget) -> Swift.Void {
 		gtk_window_set_titlebar(GTK_WINDOW(self.GOBJECT), titlebar.WIDGET)
 	}
 
-	/// 
 	/// Dialog windows should be set transient for the main application
 	/// window they were spawned from. This allows
 	/// [window managers][gtk-X11-arch] to e.g. keep the
@@ -1559,35 +1446,32 @@ open class CGTKWindow : CGTKBin {
 	/// positioned at will relatively to the #GTK_WINDOW_TOPLEVEL surface.
 	/// On Windows, this function puts the child window on top of the parent,
 	/// much as the window manager would have done on X.
-	/// Parameters:
-	///	- parent: CGTKWindow
-	open func setTransientFor(parent: CGTKWindow) {
+	/// - Parameters:
+	///	- parent: CGTKWindow (GtkWindow*)
+	open func setTransientFor(parent: CGTKWindow) -> Swift.Void {
 		gtk_window_set_transient_for(GTK_WINDOW(self.GOBJECT), parent.WINDOW)
 	}
 
-	/// 
 	/// By setting the type hint for the window, you allow the window
 	/// manager to decorate and handle the window in a way which is
 	/// suitable to the function of the window in your application.
 	/// This function should be called before the window becomes visible.
 	/// gtk_dialog_new_with_buttons() and other convenience functions in GTK+
 	/// will sometimes call gtk_window_set_type_hint() on your behalf.
-	/// Parameters:
-	///	- hint: GdkWindowTypeHint
-	open func setTypeHint(_ hint: GdkWindowTypeHint) {
+	/// - Parameters:
+	///	- hint: GdkWindowTypeHint (GdkWindowTypeHint)
+	open func setTypeHint(_ hint: GdkWindowTypeHint) -> Swift.Void {
 		gtk_window_set_type_hint(GTK_WINDOW(self.GOBJECT), hint)
 	}
 
-	/// 
 	/// Windows may set a hint asking the desktop environment to draw
 	/// the users attention to the window. This function sets this hint.
-	/// Parameters:
-	///	- setting: Bool
-	open func setUrgencyHint(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setUrgencyHint(setting: Bool) -> Swift.Void {
 		gtk_window_set_urgency_hint(GTK_WINDOW(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Don’t use this function. It sets the X Window System “class” and
 	/// “name” hints for a window.  According to the ICCCM, you should
 	/// always set these to the same value for all windows in an
@@ -1596,14 +1480,13 @@ open class CGTKWindow : CGTKBin {
 	/// gtk_window_set_role() on each window in your application, for the
 	/// benefit of the session manager. Setting the role allows the window
 	/// manager to restore window positions when loading a saved session.
-	/// Parameters:
-	///	- wmclassName: String
-	///	- wmclassClass: String
-	open func setWmclass(wmclassName: String, wmclassClass: String) {
+	/// - Parameters:
+	///	- wmclassName: String (const gchar*)
+	///	- wmclassClass: String (const gchar*)
+	open func setWmclass(wmclassName: String, wmclassClass: String) -> Swift.Void {
 		gtk_window_set_wmclass(GTK_WINDOW(self.GOBJECT), wmclassName, wmclassClass)
 	}
 
-	/// 
 	/// Asks to stick @window, which means that it will appear on all user
 	/// desktops. Note that you shouldn’t assume the window is definitely
 	/// stuck afterward, because other entities (e.g. the user or
@@ -1614,11 +1497,10 @@ open class CGTKWindow : CGTKBin {
 	/// It’s permitted to call this function before showing a window.
 	/// You can track stickiness via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func stick() {
+	open func stick() -> Swift.Void {
 		gtk_window_stick(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to toggle off the fullscreen state for @window. Note that you
 	/// shouldn’t assume the window is definitely not full screen
 	/// afterward, because other entities (e.g. the user or
@@ -1628,11 +1510,10 @@ open class CGTKWindow : CGTKBin {
 	/// state. Just don’t write code that crashes if not.
 	/// You can track the fullscreen state via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func unfullscreen() {
+	open func unfullscreen() -> Swift.Void {
 		gtk_window_unfullscreen(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to unmaximize @window. Note that you shouldn’t assume the
 	/// window is definitely unmaximized afterward, because other entities
 	/// (e.g. the user or [window manager][gtk-X11-arch])
@@ -1641,11 +1522,10 @@ open class CGTKWindow : CGTKBin {
 	/// end up unmaximized. Just don’t write code that crashes if not.
 	/// You can track maximization via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func unmaximize() {
+	open func unmaximize() -> Swift.Void {
 		gtk_window_unmaximize(GTK_WINDOW(self.GOBJECT))
 	}
 
-	/// 
 	/// Asks to unstick @window, which means that it will appear on only
 	/// one of the user’s desktops. Note that you shouldn’t assume the
 	/// window is definitely unstuck afterward, because other entities
@@ -1654,7 +1534,7 @@ open class CGTKWindow : CGTKBin {
 	/// end up stuck. Just don’t write code that crashes if not.
 	/// You can track stickiness via the “window-state-event” signal
 	/// on #GtkWidget.
-	open func unstick() {
+	open func unstick() -> Swift.Void {
 		gtk_window_unstick(GTK_WINDOW(self.GOBJECT))
 	}
 

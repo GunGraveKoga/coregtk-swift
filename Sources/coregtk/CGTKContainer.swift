@@ -34,7 +34,6 @@ public let GTK_TYPE_CONTAINER: GType = gtk_container_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_CONTAINER)
 }
 
-/// 
 /// A GTK+ user interface is constructed by nesting widgets inside widgets.
 /// Container widgets are the inner nodes in the resulting tree of widgets:
 /// they contain other widgets. So, for example, you might have a #GtkWindow
@@ -221,7 +220,6 @@ open class CGTKContainer : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Adds @widget to @container. Typically used for simple containers
 	/// such as #GtkWindow, #GtkFrame, or #GtkButton; for more complicated
 	/// layout containers such as #GtkBox or #GtkGrid, this function will
@@ -233,93 +231,85 @@ open class CGTKContainer : CGTKWidget {
 	/// Note that some containers, such as #GtkScrolledWindow or #GtkListBox,
 	/// may add intermediate children between the added widget and the
 	/// container.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func add(widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func add(widget: CGTKWidget) -> Swift.Void {
 		gtk_container_add(GTK_CONTAINER(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// func checkResize() -> void
-	open func checkResize() {
+	/// func checkResize() -> Swift.Void -> void
+	open func checkResize() -> Swift.Void {
 		gtk_container_check_resize(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of a child property for @child and @container.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- propertyName: String
-	///	- value: UnsafeMutablePointer<GValue>!
-	open func childGetProperty(child: CGTKWidget, propertyName: String, value: UnsafeMutablePointer<GValue>!) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- propertyName: String (const gchar*)
+	///	- value: UnsafeMutablePointer<GValue>! (GValue*)
+	open func childGetProperty(child: CGTKWidget, propertyName: String, value: UnsafeMutablePointer<GValue>!) -> Swift.Void {
 		gtk_container_child_get_property(GTK_CONTAINER(self.GOBJECT), child.WIDGET, propertyName, value)
 	}
 
-	/// 
 	/// Gets the values of one or more child properties for @child and @container.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- firstPropertyName: String
-	///	- varArgs: CVaListPointer
-	open func childGetValist(child: CGTKWidget, firstPropertyName: String, varArgs: CVaListPointer) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- firstPropertyName: String (const gchar*)
+	///	- varArgs: CVaListPointer (va_list)
+	open func childGetValist(child: CGTKWidget, firstPropertyName: String, varArgs: CVaListPointer) -> Swift.Void {
 		gtk_container_child_get_valist(GTK_CONTAINER(self.GOBJECT), child.WIDGET, firstPropertyName, varArgs)
 	}
 
-	/// 
 	/// Emits a #GtkWidget::child-notify signal for the
 	/// [child property][child-properties]
 	/// @child_property on the child.
 	/// This is an analogue of g_object_notify() for child properties.
 	/// Also see gtk_widget_child_notify().
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- childProperty: String
-	open func childNotify(child: CGTKWidget, childProperty: String) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- childProperty: String (const gchar*)
+	open func childNotify(child: CGTKWidget, childProperty: String) -> Swift.Void {
 		gtk_container_child_notify(GTK_CONTAINER(self.GOBJECT), child.WIDGET, childProperty)
 	}
 
-	/// 
 	/// Emits a #GtkWidget::child-notify signal for the
 	/// [child property][child-properties] specified by
 	/// @pspec on the child.
 	/// This is an analogue of g_object_notify_by_pspec() for child properties.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- pspec: UnsafeMutablePointer<GParamSpec>!
-	open func childNotifyByPspec(child: CGTKWidget, pspec: UnsafeMutablePointer<GParamSpec>!) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- pspec: UnsafeMutablePointer<GParamSpec>! (GParamSpec*)
+	open func childNotifyByPspec(child: CGTKWidget, pspec: UnsafeMutablePointer<GParamSpec>!) -> Swift.Void {
 		gtk_container_child_notify_by_pspec(GTK_CONTAINER(self.GOBJECT), child.WIDGET, pspec)
 	}
 
-	/// 
 	/// Sets a child property for @child and @container.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- propertyName: String
-	///	- value: UnsafePointer<GValue>!
-	open func childSetProperty(child: CGTKWidget, propertyName: String, value: UnsafePointer<GValue>!) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- propertyName: String (const gchar*)
+	///	- value: UnsafePointer<GValue>! (const GValue*)
+	open func childSetProperty(child: CGTKWidget, propertyName: String, value: UnsafePointer<GValue>!) -> Swift.Void {
 		gtk_container_child_set_property(GTK_CONTAINER(self.GOBJECT), child.WIDGET, propertyName, value)
 	}
 
-	/// 
 	/// Sets one or more child properties for @child and @container.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- firstPropertyName: String
-	///	- varArgs: CVaListPointer
-	open func childSetValist(child: CGTKWidget, firstPropertyName: String, varArgs: CVaListPointer) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- firstPropertyName: String (const gchar*)
+	///	- varArgs: CVaListPointer (va_list)
+	open func childSetValist(child: CGTKWidget, firstPropertyName: String, varArgs: CVaListPointer) -> Swift.Void {
 		gtk_container_child_set_valist(GTK_CONTAINER(self.GOBJECT), child.WIDGET, firstPropertyName, varArgs)
 	}
 
-	/// 
 	/// Returns the type of the children supported by the container.
 	/// Note that this may return %G_TYPE_NONE to indicate that no more
 	/// children can be added, e.g. for a #GtkPaned which already has two
 	/// children.
-	/// - Returns: GType
+	/// - Returns: GType (GType)
 	open func childType() -> GType {
 		return gtk_container_child_type(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Invokes @callback on each direct child of @container, including
 	/// children that are considered “internal” (implementation details
 	/// of the container). “Internal” children generally weren’t added
@@ -327,14 +317,13 @@ open class CGTKContainer : CGTKWidget {
 	/// implementation itself.
 	/// Most applications should use gtk_container_foreach(), rather
 	/// than gtk_container_forall().
-	/// Parameters:
-	///	- callback: @escaping GtkCallback
-	///	- callbackData: gpointer
-	open func forall(callback: @escaping GtkCallback, callbackData: gpointer) {
+	/// - Parameters:
+	///	- callback: @escaping GtkCallback (GtkCallback)
+	///	- callbackData: gpointer (gpointer)
+	open func forall(callback: @escaping GtkCallback, callbackData: gpointer) -> Swift.Void {
 		gtk_container_forall(GTK_CONTAINER(self.GOBJECT), callback, callbackData)
 	}
 
-	/// 
 	/// Invokes @callback on each non-internal child of @container.
 	/// See gtk_container_forall() for details on what constitutes
 	/// an “internal” child. For all practical purposes, this function
@@ -343,86 +332,77 @@ open class CGTKContainer : CGTKWidget {
 	/// calls.
 	/// Most applications should use gtk_container_foreach(),
 	/// rather than gtk_container_forall().
-	/// Parameters:
-	///	- callback: @escaping GtkCallback
-	///	- callbackData: gpointer
-	open func foreach(callback: @escaping GtkCallback, callbackData: gpointer) {
+	/// - Parameters:
+	///	- callback: @escaping GtkCallback (GtkCallback)
+	///	- callbackData: gpointer (gpointer)
+	open func foreach(callback: @escaping GtkCallback, callbackData: gpointer) -> Swift.Void {
 		gtk_container_foreach(GTK_CONTAINER(self.GOBJECT), callback, callbackData)
 	}
 
-	/// 
 	/// Retrieves the border width of the container. See
 	/// gtk_container_set_border_width().
-	/// - Returns: guint
+	/// - Returns: guint (guint)
 	open func getBorderWidth() -> guint {
 		return gtk_container_get_border_width(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the container’s non-internal children. See
 	/// gtk_container_forall() for details on what constitutes an "internal" child.
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open func getChildren() -> UnsafeMutablePointer<GList>! {
 		return gtk_container_get_children(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the focus chain of the container, if one has been
 	/// set explicitly. If no focus chain has been explicitly
 	/// set, GTK+ computes the focus chain based on the positions
 	/// of the children. In that case, GTK+ stores %NULL in
 	/// @focusable_widgets and returns %FALSE.
-	/// Parameters:
-	///	- focusableWidgets: UnsafeMutablePointer<UnsafeMutablePointer<GList>?>!
-	/// - Returns: Bool
+	/// - Parameters:
+	///	- focusableWidgets: UnsafeMutablePointer<UnsafeMutablePointer<GList>?>! (GList**)
+	/// - Returns: Bool (gboolean)
 	open func getFocusChain(focusableWidgets: UnsafeMutablePointer<UnsafeMutablePointer<GList>?>!) -> Bool {
 		return gtk_container_get_focus_chain(GTK_CONTAINER(self.GOBJECT), focusableWidgets) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the current focus child widget inside @container. This is not the
 	/// currently focused widget. That can be obtained by calling
 	/// gtk_window_get_focus().
-	/// - Returns: CGTKWidget?
+	/// - Returns: CGTKWidget? (GtkWidget*)
 	open func getFocusChild<T>() -> T? where T: CGTKWidget {
 		return T.init(withGObject: gtk_container_get_focus_child(GTK_CONTAINER(self.GOBJECT)))
 	}
 
-	/// 
 	/// Retrieves the horizontal focus adjustment for the container. See
 	/// gtk_container_set_focus_hadjustment ().
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>?
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
 	open func getFocusHadjustment() -> UnsafeMutablePointer<GtkAdjustment>? {
 		return gtk_container_get_focus_hadjustment(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the vertical focus adjustment for the container. See
 	/// gtk_container_set_focus_vadjustment().
-	/// - Returns: UnsafeMutablePointer<GtkAdjustment>?
+	/// - Returns: UnsafeMutablePointer<GtkAdjustment>? (GtkAdjustment*)
 	open func getFocusVadjustment() -> UnsafeMutablePointer<GtkAdjustment>? {
 		return gtk_container_get_focus_vadjustment(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns a newly created widget path representing all the widget hierarchy
 	/// from the toplevel down to and including @child.
-	/// Parameters:
-	///	- child: CGTKWidget
-	/// - Returns: OpaquePointer
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	/// - Returns: OpaquePointer (GtkWidgetPath*)
 	open func getPathForChild(_ child: CGTKWidget) -> OpaquePointer {
 		return gtk_container_get_path_for_child(GTK_CONTAINER(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Returns the resize mode for the container. See
 	/// gtk_container_set_resize_mode ().
-	/// - Returns: GtkResizeMode
+	/// - Returns: GtkResizeMode (GtkResizeMode)
 	open func getResizeMode() -> GtkResizeMode {
 		return gtk_container_get_resize_mode(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// When a container receives a call to the draw function, it must send
 	/// synthetic #GtkWidget::draw calls to all children that don’t have their
 	/// own #GdkWindows. This function provides a convenient way of doing this.
@@ -436,14 +416,13 @@ open class CGTKContainer : CGTKWidget {
 	/// In most cases, a container can simply either inherit the
 	/// #GtkWidget::draw implementation from #GtkContainer, or do some drawing
 	/// and then chain to the ::draw implementation from #GtkContainer.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- cr: OpaquePointer!
-	open func propagateDraw(child: CGTKWidget, cr: OpaquePointer!) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- cr: OpaquePointer! (cairo_t*)
+	open func propagateDraw(child: CGTKWidget, cr: OpaquePointer!) -> Swift.Void {
 		gtk_container_propagate_draw(GTK_CONTAINER(self.GOBJECT), child.WIDGET, cr)
 	}
 
-	/// 
 	/// Removes @widget from @container. @widget must be inside @container.
 	/// Note that @container will own a reference to @widget, and that this
 	/// may be the last reference held; so removing a widget from its
@@ -453,18 +432,17 @@ open class CGTKContainer : CGTKWidget {
 	/// again it’s usually more efficient to simply destroy it directly
 	/// using gtk_widget_destroy() since this will remove it from the
 	/// container and help break any circular reference count cycles.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	open func remove(widget: CGTKWidget) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	open func remove(widget: CGTKWidget) -> Swift.Void {
 		gtk_container_remove(GTK_CONTAINER(self.GOBJECT), widget.WIDGET)
 	}
 
-	/// func resizeChildren() -> void
-	open func resizeChildren() {
+	/// func resizeChildren() -> Swift.Void -> void
+	open func resizeChildren() -> Swift.Void {
 		gtk_container_resize_children(GTK_CONTAINER(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the border width of the container.
 	/// The border width of a container is the amount of space to leave
 	/// around the outside of the container. The only exception to this is
@@ -473,39 +451,36 @@ open class CGTKContainer : CGTKWidget {
 	/// the container. To add space to only one side, use a specific
 	/// #GtkWidget:margin property on the child widget, for example
 	/// #GtkWidget:margin-top.
-	/// Parameters:
-	///	- borderWidth: guint
-	open func setBorderWidth(_ borderWidth: guint) {
+	/// - Parameters:
+	///	- borderWidth: guint (guint)
+	open func setBorderWidth(_ borderWidth: guint) -> Swift.Void {
 		gtk_container_set_border_width(GTK_CONTAINER(self.GOBJECT), borderWidth)
 	}
 
-	/// 
 	/// Sets a focus chain, overriding the one computed automatically by GTK+.
 	/// In principle each widget in the chain should be a descendant of the
 	/// container, but this is not enforced by this method, since it’s allowed
 	/// to set the focus chain before you pack the widgets, or have a widget
 	/// in the chain that isn’t always packed. The necessary checks are done
 	/// when the focus chain is actually traversed.
-	/// Parameters:
-	///	- focusableWidgets: UnsafeMutablePointer<GList>!
-	open func setFocusChain(focusableWidgets: UnsafeMutablePointer<GList>!) {
+	/// - Parameters:
+	///	- focusableWidgets: UnsafeMutablePointer<GList>! (GList*)
+	open func setFocusChain(focusableWidgets: UnsafeMutablePointer<GList>!) -> Swift.Void {
 		gtk_container_set_focus_chain(GTK_CONTAINER(self.GOBJECT), focusableWidgets)
 	}
 
-	/// 
 	/// Sets, or unsets if @child is %NULL, the focused child of @container.
 	/// This function emits the GtkContainer::set_focus_child signal of
 	/// @container. Implementations of #GtkContainer can override the
 	/// default behaviour by overriding the class closure of this signal.
 	/// This is function is mostly meant to be used by widgets. Applications can use
 	/// gtk_widget_grab_focus() to manually set the focus to a specific widget.
-	/// Parameters:
-	///	- child: CGTKWidget
-	open func setFocusChild(_ child: CGTKWidget) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	open func setFocusChild(_ child: CGTKWidget) -> Swift.Void {
 		gtk_container_set_focus_child(GTK_CONTAINER(self.GOBJECT), child.WIDGET)
 	}
 
-	/// 
 	/// Hooks up an adjustment to focus handling in a container, so when a child
 	/// of the container is focused, the adjustment is scrolled to show that
 	/// widget. This function sets the horizontal alignment.
@@ -514,13 +489,12 @@ open class CGTKContainer : CGTKWidget {
 	/// the vertical adjustment.
 	/// The adjustments have to be in pixel units and in the same coordinate
 	/// system as the allocation for immediate children of the container.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>!
-	open func setFocusHadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>!) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
+	open func setFocusHadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>!) -> Swift.Void {
 		gtk_container_set_focus_hadjustment(GTK_CONTAINER(self.GOBJECT), adjustment)
 	}
 
-	/// 
 	/// Hooks up an adjustment to focus handling in a container, so when a
 	/// child of the container is focused, the adjustment is scrolled to
 	/// show that widget. This function sets the vertical alignment. See
@@ -529,36 +503,33 @@ open class CGTKContainer : CGTKWidget {
 	/// the horizontal adjustment.
 	/// The adjustments have to be in pixel units and in the same coordinate
 	/// system as the allocation for immediate children of the container.
-	/// Parameters:
-	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>!
-	open func setFocusVadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>!) {
+	/// - Parameters:
+	///	- adjustment: UnsafeMutablePointer<GtkAdjustment>! (GtkAdjustment*)
+	open func setFocusVadjustment(adjustment: UnsafeMutablePointer<GtkAdjustment>!) -> Swift.Void {
 		gtk_container_set_focus_vadjustment(GTK_CONTAINER(self.GOBJECT), adjustment)
 	}
 
-	/// 
 	/// Sets the @reallocate_redraws flag of the container to the given value.
 	/// Containers requesting reallocation redraws get automatically
 	/// redrawn if any of their children changed allocation.
-	/// Parameters:
-	///	- needsRedraws: Bool
-	open func setReallocateRedraws(needsRedraws: Bool) {
+	/// - Parameters:
+	///	- needsRedraws: Bool (gboolean)
+	open func setReallocateRedraws(needsRedraws: Bool) -> Swift.Void {
 		gtk_container_set_reallocate_redraws(GTK_CONTAINER(self.GOBJECT), needsRedraws ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the resize mode for the container.
 	/// The resize mode of a container determines whether a resize request
 	/// will be passed to the container’s parent, queued for later execution
 	/// or executed immediately.
-	/// Parameters:
-	///	- resizeMode: GtkResizeMode
-	open func setResizeMode(_ resizeMode: GtkResizeMode) {
+	/// - Parameters:
+	///	- resizeMode: GtkResizeMode (GtkResizeMode)
+	open func setResizeMode(_ resizeMode: GtkResizeMode) -> Swift.Void {
 		gtk_container_set_resize_mode(GTK_CONTAINER(self.GOBJECT), resizeMode)
 	}
 
-	/// 
 	/// Removes a focus chain explicitly set with gtk_container_set_focus_chain().
-	open func unsetFocusChain() {
+	open func unsetFocusChain() -> Swift.Void {
 		gtk_container_unset_focus_chain(GTK_CONTAINER(self.GOBJECT))
 	}
 

@@ -34,7 +34,6 @@ public let GTK_TYPE_APP_CHOOSER_DIALOG: GType = gtk_app_chooser_dialog_get_type(
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_APP_CHOOSER_DIALOG)
 }
 
-/// 
 /// #GtkAppChooserDialog shows a #GtkAppChooserWidget inside a #GtkDialog.
 /// Note that #GtkAppChooserDialog does not have any interesting methods
 /// of its own. Instead, you should get the embedded #GtkAppChooserWidget
@@ -44,27 +43,25 @@ public let GTK_TYPE_APP_CHOOSER_DIALOG: GType = gtk_app_chooser_dialog_get_type(
 /// use gtk_app_chooser_dialog_set_heading().
 
 
-open class CGTKAppChooserDialog : CGTKDialog {
-	/// 
+open class CGTKAppChooserDialog : CGTKDialog, CGTKAppChooser {
 	/// Creates a new #GtkAppChooserDialog for the provided #GFile,
 	/// to allow the user to select an application for it.
-	/// Parameters:
-	///	- parent: CGTKWindow
-	///	- flags: GtkDialogFlags
-	///	- file: OpaquePointer!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- parent: CGTKWindow (GtkWindow*)
+	///	- flags: GtkDialogFlags (GtkDialogFlags)
+	///	- file: OpaquePointer! (GFile*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(parent: CGTKWindow, flags: GtkDialogFlags, file: OpaquePointer!) {
 		self.init(withGObject: gtk_app_chooser_dialog_new(parent.WINDOW, flags, file))!
 	}
 
-	/// 
 	/// Creates a new #GtkAppChooserDialog for the provided content type,
 	/// to allow the user to select an application for it.
-	/// Parameters:
-	///	- parent: CGTKWindow
-	///	- flags: GtkDialogFlags
-	///	- contentType: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- parent: CGTKWindow (GtkWindow*)
+	///	- flags: GtkDialogFlags (GtkDialogFlags)
+	///	- contentType: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(forContentType parent: CGTKWindow, flags: GtkDialogFlags, contentType: String) {
 		self.init(withGObject: gtk_app_chooser_dialog_new_for_content_type(parent.WINDOW, flags, contentType))!
 	}
@@ -75,27 +72,41 @@ open class CGTKAppChooserDialog : CGTKDialog {
 		}
 	}
 
-	/// 
 	/// Returns the text to display at the top of the dialog.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getHeading() -> String? {
 		return String(utf8String: gtk_app_chooser_dialog_get_heading(GTK_APP_CHOOSER_DIALOG(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the #GtkAppChooserWidget of this dialog.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getWidget<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_app_chooser_dialog_get_widget(GTK_APP_CHOOSER_DIALOG(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Sets the text to display at the top of the dialog.
 	/// If the heading is not set, the dialog displays a default text.
-	/// Parameters:
-	///	- heading: String
-	open func setHeading(_ heading: String) {
+	/// - Parameters:
+	///	- heading: String (const gchar*)
+	open func setHeading(_ heading: String) -> Swift.Void {
 		gtk_app_chooser_dialog_set_heading(GTK_APP_CHOOSER_DIALOG(self.GOBJECT), heading)
+	}
+
+	/// Returns the currently selected application.
+	/// - Returns: OpaquePointer? (GAppInfo*)
+	open func getAppInfo() -> OpaquePointer? {
+		return gtk_app_chooser_get_app_info(GTK_APP_CHOOSER(self.GOBJECT))
+	}
+
+	/// Returns the current value of the #GtkAppChooser:content-type property.
+	/// - Returns: String? (gchar*)
+	open func getContentType() -> String? {
+		return String(utf8String: gtk_app_chooser_get_content_type(GTK_APP_CHOOSER(self.GOBJECT)))
+	}
+
+	/// Reloads the list of applications.
+	open func refresh() -> Swift.Void {
+		gtk_app_chooser_refresh(GTK_APP_CHOOSER(self.GOBJECT))
 	}
 
 }

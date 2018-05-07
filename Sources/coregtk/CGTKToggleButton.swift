@@ -34,7 +34,6 @@ public let GTK_TYPE_TOGGLE_BUTTON: GType = gtk_toggle_button_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_TOGGLE_BUTTON)
 }
 
-/// 
 /// A #GtkToggleButton is a #GtkButton which will remain “pressed-in” when
 /// clicked. Clicking again will cause the toggle button to return to its
 /// normal state.
@@ -84,29 +83,26 @@ public let GTK_TYPE_TOGGLE_BUTTON: GType = gtk_toggle_button_get_type()
 
 
 open class CGTKToggleButton : CGTKButton {
-	/// 
 	/// Creates a new toggle button. A widget should be packed into the button, as in gtk_button_new().
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_toggle_button_new())!
 	}
 
-	/// 
 	/// Creates a new toggle button with a text label.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withLabel label: String) {
 		self.init(withGObject: gtk_toggle_button_new_with_label(label))!
 	}
 
-	/// 
 	/// Creates a new #GtkToggleButton containing a label. The label
 	/// will be created using gtk_label_new_with_mnemonic(), so underscores
 	/// in @label indicate the mnemonic for the button.
-	/// Parameters:
-	///	- label: String
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- label: String (const gchar*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(withMnemonic label: String) {
 		self.init(withGObject: gtk_toggle_button_new_with_mnemonic(label))!
 	}
@@ -117,41 +113,36 @@ open class CGTKToggleButton : CGTKButton {
 		}
 	}
 
-	/// 
 	/// Queries a #GtkToggleButton and returns its current state. Returns %TRUE if
 	/// the toggle button is pressed in and %FALSE if it is raised.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getActive() -> Bool {
 		return gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the value set by gtk_toggle_button_set_inconsistent().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getInconsistent() -> Bool {
 		return gtk_toggle_button_get_inconsistent(GTK_TOGGLE_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves whether the button is displayed as a separate indicator
 	/// and label. See gtk_toggle_button_set_mode().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getMode() -> Bool {
 		return gtk_toggle_button_get_mode(GTK_TOGGLE_BUTTON(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Sets the status of the toggle button. Set to %TRUE if you want the
 	/// GtkToggleButton to be “pressed in”, and %FALSE to raise it.
 	/// This action causes the #GtkToggleButton::toggled signal and the
 	/// #GtkButton::clicked signal to be emitted.
-	/// Parameters:
-	///	- isActive: Bool
-	open func setActive(isActive: Bool) {
+	/// - Parameters:
+	///	- isActive: Bool (gboolean)
+	open func setActive(isActive: Bool) -> Swift.Void {
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(self.GOBJECT), isActive ? 1 : 0)
 	}
 
-	/// 
 	/// If the user has selected a range of elements (such as some text or
 	/// spreadsheet cells) that are affected by a toggle button, and the
 	/// current values in that range are inconsistent, you may want to
@@ -160,13 +151,12 @@ open class CGTKToggleButton : CGTKButton {
 	/// state again if the user toggles the toggle button. This has to be
 	/// done manually, gtk_toggle_button_set_inconsistent() only affects
 	/// visual appearance, it doesn’t affect the semantics of the button.
-	/// Parameters:
-	///	- setting: Bool
-	open func setInconsistent(setting: Bool) {
+	/// - Parameters:
+	///	- setting: Bool (gboolean)
+	open func setInconsistent(setting: Bool) -> Swift.Void {
 		gtk_toggle_button_set_inconsistent(GTK_TOGGLE_BUTTON(self.GOBJECT), setting ? 1 : 0)
 	}
 
-	/// 
 	/// Sets whether the button is displayed as a separate indicator and label.
 	/// You can call this function on a checkbutton or a radiobutton with
 	/// @draw_indicator = %FALSE to make the button look like a normal button.
@@ -175,17 +165,16 @@ open class CGTKToggleButton : CGTKButton {
 	/// This function only affects instances of classes like #GtkCheckButton
 	/// and #GtkRadioButton that derive from #GtkToggleButton,
 	/// not instances of #GtkToggleButton itself.
-	/// Parameters:
-	///	- drawIndicator: Bool
-	open func setMode(drawIndicator: Bool) {
+	/// - Parameters:
+	///	- drawIndicator: Bool (gboolean)
+	open func setMode(drawIndicator: Bool) -> Swift.Void {
 		gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(self.GOBJECT), drawIndicator ? 1 : 0)
 	}
 
-	/// 
 	/// Emits the #GtkToggleButton::toggled signal on the
 	/// #GtkToggleButton. There is no good reason for an
 	/// application ever to call this function.
-	open func toggled() {
+	open func toggled() -> Swift.Void {
 		gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(self.GOBJECT))
 	}
 

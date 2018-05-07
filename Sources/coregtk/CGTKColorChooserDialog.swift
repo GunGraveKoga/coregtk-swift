@@ -34,18 +34,16 @@ public let GTK_TYPE_COLOR_CHOOSER_DIALOG: GType = gtk_color_chooser_dialog_get_t
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_COLOR_CHOOSER_DIALOG)
 }
 
-/// 
 /// The #GtkColorChooserDialog widget is a dialog for choosing
 /// a color. It implements the #GtkColorChooser interface.
 
 
-open class CGTKColorChooserDialog : CGTKDialog {
-	/// 
+open class CGTKColorChooserDialog : CGTKDialog, CGTKColorChooser {
 	/// Creates a new #GtkColorChooserDialog.
-	/// Parameters:
-	///	- title: String
-	///	- parent: CGTKWindow
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	///	- parent: CGTKWindow (GtkWindow*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(title: String, parent: CGTKWindow) {
 		self.init(withGObject: gtk_color_chooser_dialog_new(title, parent.WINDOW))!
 	}
@@ -54,6 +52,55 @@ open class CGTKColorChooserDialog : CGTKDialog {
 		get {
 			return GTK_COLOR_CHOOSER_DIALOG(self.GOBJECT)
 		}
+	}
+
+	/// Adds a palette to the color chooser. If @orientation is horizontal,
+	/// the colors are grouped in rows, with @colors_per_line colors
+	/// in each row. If @horizontal is %FALSE, the colors are grouped
+	/// in columns instead.
+	/// The default color palette of #GtkColorChooserWidget has
+	/// 27 colors, organized in columns of 3 colors. The default gray
+	/// palette has 9 grays in a single row.
+	/// The layout of the color chooser widget works best when the
+	/// palettes have 9-10 columns.
+	/// Calling this function for the first time has the
+	/// side effect of removing the default color and gray palettes
+	/// from the color chooser.
+	/// If @colors is %NULL, removes all previously added palettes.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	///	- colorsPerLine: gint (gint)
+	///	- ncolors: gint (gint)
+	///	- colors: UnsafeMutablePointer<GdkRGBA>? (GdkRGBA*)
+	open func addPalette(orientation: GtkOrientation, colorsPerLine: gint, ncolors: gint, colors: UnsafeMutablePointer<GdkRGBA>?) -> Swift.Void {
+		gtk_color_chooser_add_palette(GTK_COLOR_CHOOSER(self.GOBJECT), orientation, colorsPerLine, ncolors, colors)
+	}
+
+	/// Gets the currently-selected color.
+	/// - Parameters:
+	///	- color: UnsafeMutablePointer<GdkRGBA>! (GdkRGBA*)
+	open func getRgba(color: UnsafeMutablePointer<GdkRGBA>!) -> Swift.Void {
+		gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(self.GOBJECT), color)
+	}
+
+	/// Returns whether the color chooser shows the alpha channel.
+	/// - Returns: Bool (gboolean)
+	open func getUseAlpha() -> Bool {
+		return gtk_color_chooser_get_use_alpha(GTK_COLOR_CHOOSER(self.GOBJECT)) != 0 ? true : false
+	}
+
+	/// Sets the color.
+	/// - Parameters:
+	///	- color: UnsafePointer<GdkRGBA>! (const GdkRGBA*)
+	open func setRgba(color: UnsafePointer<GdkRGBA>!) -> Swift.Void {
+		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(self.GOBJECT), color)
+	}
+
+	/// Sets whether or not the color chooser should use the alpha channel.
+	/// - Parameters:
+	///	- useAlpha: Bool (gboolean)
+	open func setUseAlpha(_ useAlpha: Bool) -> Swift.Void {
+		gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(self.GOBJECT), useAlpha ? 1 : 0)
 	}
 
 }

@@ -34,7 +34,6 @@ public let GTK_TYPE_HANDLE_BOX: GType = gtk_handle_box_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_HANDLE_BOX)
 }
 
-/// 
 /// The #GtkHandleBox widget allows a portion of a window to be "torn
 /// off". It is a bin widget which displays its child and a handle that
 /// the user can drag to tear off a separate window (the “float
@@ -60,9 +59,8 @@ public let GTK_TYPE_HANDLE_BOX: GType = gtk_handle_box_get_type()
 
 
 open class CGTKHandleBox : CGTKBin {
-	/// 
 	/// Create a new handle box.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_handle_box_new())!
 	}
@@ -73,55 +71,48 @@ open class CGTKHandleBox : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Whether the handlebox’s child is currently detached.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getChildDetached() -> Bool {
 		return gtk_handle_box_get_child_detached(GTK_HANDLE_BOX(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Gets the handle position of the handle box. See
 	/// gtk_handle_box_set_handle_position().
-	/// - Returns: GtkPositionType
+	/// - Returns: GtkPositionType (GtkPositionType)
 	open func getHandlePosition() -> GtkPositionType {
 		return gtk_handle_box_get_handle_position(GTK_HANDLE_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the type of shadow drawn around the handle box. See
 	/// gtk_handle_box_set_shadow_type().
-	/// - Returns: GtkShadowType
+	/// - Returns: GtkShadowType (GtkShadowType)
 	open func getShadowType() -> GtkShadowType {
 		return gtk_handle_box_get_shadow_type(GTK_HANDLE_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the edge used for determining reattachment of the handle box.
 	/// See gtk_handle_box_set_snap_edge().
-	/// - Returns: GtkPositionType
+	/// - Returns: GtkPositionType (GtkPositionType)
 	open func getSnapEdge() -> GtkPositionType {
 		return gtk_handle_box_get_snap_edge(GTK_HANDLE_BOX(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the side of the handlebox where the handle is drawn.
-	/// Parameters:
-	///	- position: GtkPositionType
-	open func setHandlePosition(_ position: GtkPositionType) {
+	/// - Parameters:
+	///	- position: GtkPositionType (GtkPositionType)
+	open func setHandlePosition(_ position: GtkPositionType) -> Swift.Void {
 		gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(self.GOBJECT), position)
 	}
 
-	/// 
 	/// Sets the type of shadow to be drawn around the border
 	/// of the handle box.
-	/// Parameters:
-	///	- type: GtkShadowType
-	open func setShadowType(_ type: GtkShadowType) {
+	/// - Parameters:
+	///	- type: GtkShadowType (GtkShadowType)
+	open func setShadowType(_ type: GtkShadowType) -> Swift.Void {
 		gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(self.GOBJECT), type)
 	}
 
-	/// 
 	/// Sets the snap edge of a handlebox. The snap edge is
 	/// the edge of the detached child that must be aligned
 	/// with the corresponding edge of the “ghost” left
@@ -134,9 +125,9 @@ open class CGTKHandleBox : CGTKBin {
 	/// handle position is %GTK_POS_RIGHT or %GTK_POS_LEFT,
 	/// then the snap edge will be %GTK_POS_TOP, otherwise
 	/// it will be %GTK_POS_LEFT.
-	/// Parameters:
-	///	- edge: GtkPositionType
-	open func setSnapEdge(_ edge: GtkPositionType) {
+	/// - Parameters:
+	///	- edge: GtkPositionType (GtkPositionType)
+	open func setSnapEdge(_ edge: GtkPositionType) -> Swift.Void {
 		gtk_handle_box_set_snap_edge(GTK_HANDLE_BOX(self.GOBJECT), edge)
 	}
 

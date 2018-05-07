@@ -34,16 +34,14 @@ public let GTK_TYPE_EVENT_BOX: GType = gtk_event_box_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_EVENT_BOX)
 }
 
-/// 
 /// The #GtkEventBox widget is a subclass of #GtkBin which also has its
 /// own window. It is useful since it allows you to catch events for widgets
 /// which do not have their own window.
 
 
 open class CGTKEventBox : CGTKBin {
-	/// 
 	/// Creates a new #GtkEventBox.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_event_box_new())!
 	}
@@ -54,37 +52,33 @@ open class CGTKEventBox : CGTKBin {
 		}
 	}
 
-	/// 
 	/// Returns whether the event box window is above or below the
 	/// windows of its child. See gtk_event_box_set_above_child()
 	/// for details.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getAboveChild() -> Bool {
 		return gtk_event_box_get_above_child(GTK_EVENT_BOX(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the event box has a visible window.
 	/// See gtk_event_box_set_visible_window() for details.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getVisibleWindow() -> Bool {
 		return gtk_event_box_get_visible_window(GTK_EVENT_BOX(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Set whether the event box window is positioned above the windows
 	/// of its child, as opposed to below it. If the window is above, all
 	/// events inside the event box will go to the event box. If the window
 	/// is below, events in windows of child widgets will first got to that
 	/// widget, and then to its parents.
 	/// The default is to keep the window below the child.
-	/// Parameters:
-	///	- aboveChild: Bool
-	open func setAboveChild(_ aboveChild: Bool) {
+	/// - Parameters:
+	///	- aboveChild: Bool (gboolean)
+	open func setAboveChild(_ aboveChild: Bool) -> Swift.Void {
 		gtk_event_box_set_above_child(GTK_EVENT_BOX(self.GOBJECT), aboveChild ? 1 : 0)
 	}
 
-	/// 
 	/// Set whether the event box uses a visible or invisible child
 	/// window. The default is to use visible windows.
 	/// In an invisible window event box, the window that the
@@ -112,9 +106,9 @@ open class CGTKEventBox : CGTKBin {
 	/// This problem doesn’t occur for visible event boxes, because in
 	/// that case, the event box window is actually the ancestor of the
 	/// descendant windows, not just at the same place on the screen.
-	/// Parameters:
-	///	- visibleWindow: Bool
-	open func setVisibleWindow(_ visibleWindow: Bool) {
+	/// - Parameters:
+	///	- visibleWindow: Bool (gboolean)
+	open func setVisibleWindow(_ visibleWindow: Bool) -> Swift.Void {
 		gtk_event_box_set_visible_window(GTK_EVENT_BOX(self.GOBJECT), visibleWindow ? 1 : 0)
 	}
 

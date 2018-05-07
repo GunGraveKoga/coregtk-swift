@@ -34,7 +34,6 @@ public let GTK_TYPE_MENU: GType = gtk_menu_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_MENU)
 }
 
-/// 
 /// A #GtkMenu is a #GtkMenuShell that implements a drop down menu
 /// consisting of a list of #GtkMenuItem objects which can be navigated
 /// and activated by the user to perform application functions.
@@ -94,24 +93,21 @@ public let GTK_TYPE_MENU: GType = gtk_menu_get_type()
 
 
 open class CGTKMenu : CGTKMenuShell {
-	/// 
 	/// Returns a list of the menus which are attached to this widget.
 	/// This list is owned by GTK+ and must not be modified.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	/// - Returns: UnsafeMutablePointer<GList>!
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	/// - Returns: UnsafeMutablePointer<GList>! (GList*)
 	open class func getForAttachWidget(_ widget: CGTKWidget) -> UnsafeMutablePointer<GList>! {
 		return gtk_menu_get_for_attach_widget(widget.WIDGET)
 	}
 
-	/// 
 	/// Creates a new #GtkMenu
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_menu_new())!
 	}
 
-	/// 
 	/// Creates a #GtkMenu and populates it with menu items and
 	/// submenus according to @model.
 	/// The created menu items are connected to actions found in the
@@ -120,9 +116,9 @@ open class CGTKMenu : CGTKMenuShell {
 	/// that is contained within the #GtkApplicationWindows widget hierarchy.
 	/// Actions can also be added using gtk_widget_insert_action_group() on the menu's
 	/// attach widget or on any of its parent widgets.
-	/// Parameters:
-	///	- model: UnsafeMutablePointer<GMenuModel>!
-	/// - Returns: CGTKWidget
+	/// - Parameters:
+	///	- model: UnsafeMutablePointer<GMenuModel>! (GMenuModel*)
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init(fromModel model: UnsafeMutablePointer<GMenuModel>!) {
 		self.init(withGObject: gtk_menu_new_from_model(model))!
 	}
@@ -133,24 +129,22 @@ open class CGTKMenu : CGTKMenuShell {
 		}
 	}
 
-	/// 
 	/// Adds a new #GtkMenuItem to a (table) menu. The number of “cells” that
 	/// an item will occupy is specified by @left_attach, @right_attach,
 	/// @top_attach and @bottom_attach. These each represent the leftmost,
 	/// rightmost, uppermost and lower column and row numbers of the table.
 	/// (Columns and rows are indexed from zero).
 	/// Note that this function is not related to gtk_menu_detach().
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- leftAttach: guint
-	///	- rightAttach: guint
-	///	- topAttach: guint
-	///	- bottomAttach: guint
-	open func attach(child: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- leftAttach: guint (guint)
+	///	- rightAttach: guint (guint)
+	///	- topAttach: guint (guint)
+	///	- bottomAttach: guint (guint)
+	open func attach(child: CGTKWidget, leftAttach: guint, rightAttach: guint, topAttach: guint, bottomAttach: guint) -> Swift.Void {
 		gtk_menu_attach(GTK_MENU(self.GOBJECT), child.WIDGET, leftAttach, rightAttach, topAttach, bottomAttach)
 	}
 
-	/// 
 	/// Attaches the menu to the widget and provides a callback function
 	/// that will be invoked when the menu calls gtk_menu_detach() during
 	/// its destruction.
@@ -158,96 +152,84 @@ open class CGTKMenu : CGTKMenuShell {
 	/// when the widget is destroyed, as if it was a child widget.
 	/// An attached menu will also move between screens correctly if the
 	/// widgets moves between screens.
-	/// Parameters:
-	///	- attachWidget: CGTKWidget
-	///	- detacher: @escaping GtkMenuDetachFunc
-	open func attachToWidget(attachWidget: CGTKWidget, detacher: @escaping GtkMenuDetachFunc) {
+	/// - Parameters:
+	///	- attachWidget: CGTKWidget (GtkWidget*)
+	///	- detacher: @escaping GtkMenuDetachFunc (GtkMenuDetachFunc)
+	open func attachToWidget(attachWidget: CGTKWidget, detacher: @escaping GtkMenuDetachFunc) -> Swift.Void {
 		gtk_menu_attach_to_widget(GTK_MENU(self.GOBJECT), attachWidget.WIDGET, detacher)
 	}
 
-	/// 
 	/// Detaches the menu from the widget to which it had been attached.
 	/// This function will call the callback function, @detacher, provided
 	/// when the gtk_menu_attach_to_widget() function was called.
-	open func detach() {
+	open func detach() -> Swift.Void {
 		gtk_menu_detach(GTK_MENU(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the #GtkAccelGroup which holds global accelerators for the
 	/// menu. See gtk_menu_set_accel_group().
-	/// - Returns: UnsafeMutablePointer<GtkAccelGroup>!
+	/// - Returns: UnsafeMutablePointer<GtkAccelGroup>! (GtkAccelGroup*)
 	open func getAccelGroup() -> UnsafeMutablePointer<GtkAccelGroup>! {
 		return gtk_menu_get_accel_group(GTK_MENU(self.GOBJECT))
 	}
 
-	/// 
 	/// Retrieves the accelerator path set on the menu.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getAccelPath() -> String? {
 		return String(utf8String: gtk_menu_get_accel_path(GTK_MENU(self.GOBJECT)))
 	}
 
-	/// 
 	/// Returns the selected menu item from the menu.  This is used by the
 	/// #GtkComboBox.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getActive<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_menu_get_active(GTK_MENU(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Returns the #GtkWidget that the menu is attached to.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	open func getAttachWidget<T>() -> T where T: CGTKWidget {
 		return T.init(withGObject: gtk_menu_get_attach_widget(GTK_MENU(self.GOBJECT)))!
 	}
 
-	/// 
 	/// Retrieves the number of the monitor on which to show the menu.
-	/// - Returns: gint
+	/// - Returns: gint (gint)
 	open func getMonitor() -> gint {
 		return gtk_menu_get_monitor(GTK_MENU(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns whether the menu reserves space for toggles and
 	/// icons, regardless of their actual presence.
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getReserveToggleSize() -> Bool {
 		return gtk_menu_get_reserve_toggle_size(GTK_MENU(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns whether the menu is torn off.
 	/// See gtk_menu_set_tearoff_state().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getTearoffState() -> Bool {
 		return gtk_menu_get_tearoff_state(GTK_MENU(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Returns the title of the menu. See gtk_menu_set_title().
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getTitle() -> String? {
 		return String(utf8String: gtk_menu_get_title(GTK_MENU(self.GOBJECT)))
 	}
 
-	/// 
 	/// Places @menu on the given monitor.
-	/// Parameters:
-	///	- monitor: OpaquePointer!
-	open func placeOnMonitor(_ monitor: OpaquePointer!) {
+	/// - Parameters:
+	///	- monitor: OpaquePointer! (GdkMonitor*)
+	open func placeOnMonitor(_ monitor: OpaquePointer!) -> Swift.Void {
 		gtk_menu_place_on_monitor(GTK_MENU(self.GOBJECT), monitor)
 	}
 
-	/// 
 	/// Removes the menu from the screen.
-	open func popdown() {
+	open func popdown() -> Swift.Void {
 		gtk_menu_popdown(GTK_MENU(self.GOBJECT))
 	}
 
-	/// 
 	/// Displays a menu and makes it available for selection.
 	/// Applications can use this function to display context-sensitive
 	/// menus, and will typically supply %NULL for the @parent_menu_shell,
@@ -268,18 +250,17 @@ open class CGTKMenu : CGTKMenuShell {
 	/// do not have global coordinates, such as Wayland or Mir. You should
 	/// probably use one of the gtk_menu_popup_at_ variants, which do not
 	/// have this problem.
-	/// Parameters:
-	///	- parentMenuShell: CGTKWidget
-	///	- parentMenuItem: CGTKWidget
-	///	- function: @escaping GtkMenuPositionFunc
-	///	- data: gpointer
-	///	- button: guint
-	///	- activateTime: guint32
-	open func popup(parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, button: guint, activateTime: guint32) {
+	/// - Parameters:
+	///	- parentMenuShell: CGTKWidget (GtkWidget*)
+	///	- parentMenuItem: CGTKWidget (GtkWidget*)
+	///	- function: @escaping GtkMenuPositionFunc (GtkMenuPositionFunc)
+	///	- data: gpointer (gpointer)
+	///	- button: guint (guint)
+	///	- activateTime: guint32 (guint32)
+	open func popup(parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, button: guint, activateTime: guint32) -> Swift.Void {
 		gtk_menu_popup(GTK_MENU(self.GOBJECT), parentMenuShell.WIDGET, parentMenuItem.WIDGET, function, data, button, activateTime)
 	}
 
-	/// 
 	/// Displays @menu and makes it available for selection.
 	/// See gtk_menu_popup_at_widget () to pop up a menu at a widget.
 	/// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
@@ -289,13 +270,12 @@ open class CGTKMenu : CGTKMenuShell {
 	/// #GtkMenu:anchor-hints, #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
 	/// #GtkMenu:menu-type-hint. Connect to the #GtkMenu::popped-up signal to find
 	/// out how it was actually positioned.
-	/// Parameters:
-	///	- triggerEvent: UnsafePointer<GdkEvent>?
-	open func popupAtPointer(triggerEvent: UnsafePointer<GdkEvent>?) {
+	/// - Parameters:
+	///	- triggerEvent: UnsafePointer<GdkEvent>? (const GdkEvent*)
+	open func popupAtPointer(triggerEvent: UnsafePointer<GdkEvent>?) -> Swift.Void {
 		gtk_menu_popup_at_pointer(GTK_MENU(self.GOBJECT), triggerEvent)
 	}
 
-	/// 
 	/// Displays @menu and makes it available for selection.
 	/// See gtk_menu_popup_at_widget () and gtk_menu_popup_at_pointer (), which
 	/// handle more common cases for popping up menus.
@@ -310,17 +290,16 @@ open class CGTKMenu : CGTKMenuShell {
 	/// Other properties that influence the behaviour of this function are
 	/// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
 	/// #GtkMenu::popped-up signal to find out how it was actually positioned.
-	/// Parameters:
-	///	- rectWindow: OpaquePointer!
-	///	- rect: UnsafePointer<GdkRectangle>!
-	///	- rectAnchor: GdkGravity
-	///	- menuAnchor: GdkGravity
-	///	- triggerEvent: UnsafePointer<GdkEvent>?
-	open func popupAtRect(rectWindow: OpaquePointer!, rect: UnsafePointer<GdkRectangle>!, rectAnchor: GdkGravity, menuAnchor: GdkGravity, triggerEvent: UnsafePointer<GdkEvent>?) {
+	/// - Parameters:
+	///	- rectWindow: OpaquePointer! (GdkWindow*)
+	///	- rect: UnsafePointer<GdkRectangle>! (const GdkRectangle*)
+	///	- rectAnchor: GdkGravity (GdkGravity)
+	///	- menuAnchor: GdkGravity (GdkGravity)
+	///	- triggerEvent: UnsafePointer<GdkEvent>? (const GdkEvent*)
+	open func popupAtRect(rectWindow: OpaquePointer!, rect: UnsafePointer<GdkRectangle>!, rectAnchor: GdkGravity, menuAnchor: GdkGravity, triggerEvent: UnsafePointer<GdkEvent>?) -> Swift.Void {
 		gtk_menu_popup_at_rect(GTK_MENU(self.GOBJECT), rectWindow, rect, rectAnchor, menuAnchor, triggerEvent)
 	}
 
-	/// 
 	/// Displays @menu and makes it available for selection.
 	/// See gtk_menu_popup_at_pointer () to pop up a menu at the master pointer.
 	/// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
@@ -336,16 +315,15 @@ open class CGTKMenu : CGTKMenuShell {
 	/// Other properties that influence the behaviour of this function are
 	/// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
 	/// #GtkMenu::popped-up signal to find out how it was actually positioned.
-	/// Parameters:
-	///	- widget: CGTKWidget
-	///	- widgetAnchor: GdkGravity
-	///	- menuAnchor: GdkGravity
-	///	- triggerEvent: UnsafePointer<GdkEvent>?
-	open func popupAtWidget(_ widget: CGTKWidget, widgetAnchor: GdkGravity, menuAnchor: GdkGravity, triggerEvent: UnsafePointer<GdkEvent>?) {
+	/// - Parameters:
+	///	- widget: CGTKWidget (GtkWidget*)
+	///	- widgetAnchor: GdkGravity (GdkGravity)
+	///	- menuAnchor: GdkGravity (GdkGravity)
+	///	- triggerEvent: UnsafePointer<GdkEvent>? (const GdkEvent*)
+	open func popupAtWidget(_ widget: CGTKWidget, widgetAnchor: GdkGravity, menuAnchor: GdkGravity, triggerEvent: UnsafePointer<GdkEvent>?) -> Swift.Void {
 		gtk_menu_popup_at_widget(GTK_MENU(self.GOBJECT), widget.WIDGET, widgetAnchor, menuAnchor, triggerEvent)
 	}
 
-	/// 
 	/// Displays a menu and makes it available for selection.
 	/// Applications can use this function to display context-sensitive menus,
 	/// and will typically supply %NULL for the @parent_menu_shell,
@@ -366,48 +344,44 @@ open class CGTKMenu : CGTKMenuShell {
 	/// do not have global coordinates, such as Wayland or Mir. You should
 	/// probably use one of the gtk_menu_popup_at_ variants, which do not
 	/// have this problem.
-	/// Parameters:
-	///	- device: OpaquePointer?
-	///	- parentMenuShell: CGTKWidget
-	///	- parentMenuItem: CGTKWidget
-	///	- function: @escaping GtkMenuPositionFunc
-	///	- data: gpointer
-	///	- destroy: @escaping GDestroyNotify
-	///	- button: guint
-	///	- activateTime: guint32
-	open func popupForDevice(_ device: OpaquePointer?, parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, destroy: @escaping GDestroyNotify, button: guint, activateTime: guint32) {
+	/// - Parameters:
+	///	- device: OpaquePointer? (GdkDevice*)
+	///	- parentMenuShell: CGTKWidget (GtkWidget*)
+	///	- parentMenuItem: CGTKWidget (GtkWidget*)
+	///	- function: @escaping GtkMenuPositionFunc (GtkMenuPositionFunc)
+	///	- data: gpointer (gpointer)
+	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
+	///	- button: guint (guint)
+	///	- activateTime: guint32 (guint32)
+	open func popupForDevice(_ device: OpaquePointer?, parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, destroy: @escaping GDestroyNotify, button: guint, activateTime: guint32) -> Swift.Void {
 		gtk_menu_popup_for_device(GTK_MENU(self.GOBJECT), device, parentMenuShell.WIDGET, parentMenuItem.WIDGET, function, data, destroy, button, activateTime)
 	}
 
-	/// 
 	/// Moves @child to a new @position in the list of @menu
 	/// children.
-	/// Parameters:
-	///	- child: CGTKWidget
-	///	- position: gint
-	open func reorderChild(_ child: CGTKWidget, position: gint) {
+	/// - Parameters:
+	///	- child: CGTKWidget (GtkWidget*)
+	///	- position: gint (gint)
+	open func reorderChild(_ child: CGTKWidget, position: gint) -> Swift.Void {
 		gtk_menu_reorder_child(GTK_MENU(self.GOBJECT), child.WIDGET, position)
 	}
 
-	/// 
 	/// Repositions the menu according to its position function.
-	open func reposition() {
+	open func reposition() -> Swift.Void {
 		gtk_menu_reposition(GTK_MENU(self.GOBJECT))
 	}
 
-	/// 
 	/// Set the #GtkAccelGroup which holds global accelerators for the
 	/// menu.  This accelerator group needs to also be added to all windows
 	/// that this menu is being used in with gtk_window_add_accel_group(),
 	/// in order for those windows to support all the accelerators
 	/// contained in this group.
-	/// Parameters:
-	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>?
-	open func setAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) {
+	/// - Parameters:
+	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>? (GtkAccelGroup*)
+	open func setAccelGroup(_ accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) -> Swift.Void {
 		gtk_menu_set_accel_group(GTK_MENU(self.GOBJECT), accelGroup)
 	}
 
-	/// 
 	/// Sets an accelerator path for this menu from which accelerator paths
 	/// for its immediate children, its menu items, can be constructed.
 	/// The main purpose of this function is to spare the programmer the
@@ -426,22 +400,20 @@ open class CGTKMenu : CGTKMenuShell {
 	/// Note that @accel_path string will be stored in a #GQuark. Therefore,
 	/// if you pass a static string, you can save some memory by interning
 	/// it first with g_intern_static_string().
-	/// Parameters:
-	///	- accelPath: String
-	open func setAccelPath(_ accelPath: String) {
+	/// - Parameters:
+	///	- accelPath: String (const gchar*)
+	open func setAccelPath(_ accelPath: String) -> Swift.Void {
 		gtk_menu_set_accel_path(GTK_MENU(self.GOBJECT), accelPath)
 	}
 
-	/// 
 	/// Selects the specified menu item within the menu.  This is used by
 	/// the #GtkComboBox and should not be used by anyone else.
-	/// Parameters:
-	///	- index: guint
-	open func setActive(index: guint) {
+	/// - Parameters:
+	///	- index: guint (guint)
+	open func setActive(index: guint) -> Swift.Void {
 		gtk_menu_set_active(GTK_MENU(self.GOBJECT), index)
 	}
 
-	/// 
 	/// Informs GTK+ on which monitor a menu should be popped up.
 	/// See gdk_monitor_get_geometry().
 	/// This function should be called from a #GtkMenuPositionFunc
@@ -450,49 +422,45 @@ open class CGTKMenu : CGTKMenuShell {
 	/// returned by a #GtkMenuPositionFunc, since, for very long menus,
 	/// these coordinates may extend beyond the monitor boundaries or even
 	/// the screen boundaries.
-	/// Parameters:
-	///	- monitorNum: gint
-	open func setMonitor(monitorNum: gint) {
+	/// - Parameters:
+	///	- monitorNum: gint (gint)
+	open func setMonitor(monitorNum: gint) -> Swift.Void {
 		gtk_menu_set_monitor(GTK_MENU(self.GOBJECT), monitorNum)
 	}
 
-	/// 
 	/// Sets whether the menu should reserve space for drawing toggles
 	/// or icons, regardless of their actual presence.
-	/// Parameters:
-	///	- reserveToggleSize: Bool
-	open func setReserveToggleSize(_ reserveToggleSize: Bool) {
+	/// - Parameters:
+	///	- reserveToggleSize: Bool (gboolean)
+	open func setReserveToggleSize(_ reserveToggleSize: Bool) -> Swift.Void {
 		gtk_menu_set_reserve_toggle_size(GTK_MENU(self.GOBJECT), reserveToggleSize ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the #GdkScreen on which the menu will be displayed.
-	/// Parameters:
-	///	- screen: OpaquePointer?
-	open func setScreen(_ screen: OpaquePointer?) {
+	/// - Parameters:
+	///	- screen: OpaquePointer? (GdkScreen*)
+	open func setScreen(_ screen: OpaquePointer?) -> Swift.Void {
 		gtk_menu_set_screen(GTK_MENU(self.GOBJECT), screen)
 	}
 
-	/// 
 	/// Changes the tearoff state of the menu.  A menu is normally
 	/// displayed as drop down menu which persists as long as the menu is
 	/// active.  It can also be displayed as a tearoff menu which persists
 	/// until it is closed or reattached.
-	/// Parameters:
-	///	- tornOff: Bool
-	open func setTearoffState(tornOff: Bool) {
+	/// - Parameters:
+	///	- tornOff: Bool (gboolean)
+	open func setTearoffState(tornOff: Bool) -> Swift.Void {
 		gtk_menu_set_tearoff_state(GTK_MENU(self.GOBJECT), tornOff ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the title string for the menu.
 	/// The title is displayed when the menu is shown as a tearoff
 	/// menu. If @title is %NULL, the menu will see if it is attached
 	/// to a parent menu item, and if so it will try to use the same
 	/// text as that menu item’s label.
-	/// Parameters:
-	///	- title: String
-	open func setTitle(_ title: String) {
+	/// - Parameters:
+	///	- title: String (const gchar*)
+	open func setTitle(_ title: String) -> Swift.Void {
 		gtk_menu_set_title(GTK_MENU(self.GOBJECT), title)
 	}
 

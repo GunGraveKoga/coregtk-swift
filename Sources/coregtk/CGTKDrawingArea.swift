@@ -34,7 +34,6 @@ public let GTK_TYPE_DRAWING_AREA: GType = gtk_drawing_area_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_DRAWING_AREA)
 }
 
-/// 
 /// The #GtkDrawingArea widget is used for creating custom user interface
 /// elements. It’s essentially a blank widget; you can draw on it. After
 /// creating a drawing area, the application may want to connect to:
@@ -103,9 +102,8 @@ public let GTK_TYPE_DRAWING_AREA: GType = gtk_drawing_area_get_type()
 
 
 open class CGTKDrawingArea : CGTKWidget {
-	/// 
 	/// Creates a new drawing area.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_drawing_area_new())!
 	}

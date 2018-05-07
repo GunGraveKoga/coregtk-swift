@@ -34,7 +34,6 @@ public let GTK_TYPE_PROGRESS_BAR: GType = gtk_progress_bar_get_type()
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_PROGRESS_BAR)
 }
 
-/// 
 /// The #GtkProgressBar is typically used to display the progress of a long
 /// running operation. It provides a visual clue that processing is underway.
 /// The GtkProgressBar can be used in two different modes: percentage mode
@@ -70,10 +69,9 @@ public let GTK_TYPE_PROGRESS_BAR: GType = gtk_progress_bar_get_type()
 /// in overlays like the one Epiphany has for page loading progress.
 
 
-open class CGTKProgressBar : CGTKWidget {
-	/// 
+open class CGTKProgressBar : CGTKWidget, CGTKOrientable {
 	/// Creates a new #GtkProgressBar.
-	/// - Returns: CGTKWidget
+	/// - Returns: CGTKWidget (GtkWidget*)
 	public convenience init() {
 		self.init(withGObject: gtk_progress_bar_new())!
 	}
@@ -84,101 +82,89 @@ open class CGTKProgressBar : CGTKWidget {
 		}
 	}
 
-	/// 
 	/// Returns the ellipsizing position of the progress bar.
 	/// See gtk_progress_bar_set_ellipsize().
-	/// - Returns: PangoEllipsizeMode
+	/// - Returns: PangoEllipsizeMode (PangoEllipsizeMode)
 	open func getEllipsize() -> PangoEllipsizeMode {
 		return gtk_progress_bar_get_ellipsize(GTK_PROGRESS_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Returns the current fraction of the task that’s been completed.
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getFraction() -> Double {
 		return gtk_progress_bar_get_fraction(GTK_PROGRESS_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value set by gtk_progress_bar_set_inverted().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getInverted() -> Bool {
 		return gtk_progress_bar_get_inverted(GTK_PROGRESS_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the pulse step set with gtk_progress_bar_set_pulse_step().
-	/// - Returns: Double
+	/// - Returns: Double (gdouble)
 	open func getPulseStep() -> Double {
 		return gtk_progress_bar_get_pulse_step(GTK_PROGRESS_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Gets the value of the #GtkProgressBar:show-text property.
 	/// See gtk_progress_bar_set_show_text().
-	/// - Returns: Bool
+	/// - Returns: Bool (gboolean)
 	open func getShowText() -> Bool {
 		return gtk_progress_bar_get_show_text(GTK_PROGRESS_BAR(self.GOBJECT)) != 0 ? true : false
 	}
 
-	/// 
 	/// Retrieves the text that is displayed with the progress bar,
 	/// if any, otherwise %NULL. The return value is a reference
 	/// to the text, not a copy of it, so will become invalid
 	/// if you change the text in the progress bar.
-	/// - Returns: String?
+	/// - Returns: String? (const gchar*)
 	open func getText() -> String? {
 		return String(utf8String: gtk_progress_bar_get_text(GTK_PROGRESS_BAR(self.GOBJECT)))
 	}
 
-	/// 
 	/// Indicates that some progress has been made, but you don’t know how much.
 	/// Causes the progress bar to enter “activity mode,” where a block
 	/// bounces back and forth. Each call to gtk_progress_bar_pulse()
 	/// causes the block to move by a little bit (the amount of movement
 	/// per pulse is determined by gtk_progress_bar_set_pulse_step()).
-	open func pulse() {
+	open func pulse() -> Swift.Void {
 		gtk_progress_bar_pulse(GTK_PROGRESS_BAR(self.GOBJECT))
 	}
 
-	/// 
 	/// Sets the mode used to ellipsize (add an ellipsis: "...") the
 	/// text if there is not enough space to render the entire string.
-	/// Parameters:
-	///	- mode: PangoEllipsizeMode
-	open func setEllipsize(mode: PangoEllipsizeMode) {
+	/// - Parameters:
+	///	- mode: PangoEllipsizeMode (PangoEllipsizeMode)
+	open func setEllipsize(mode: PangoEllipsizeMode) -> Swift.Void {
 		gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(self.GOBJECT), mode)
 	}
 
-	/// 
 	/// Causes the progress bar to “fill in” the given fraction
 	/// of the bar. The fraction should be between 0.0 and 1.0,
 	/// inclusive.
-	/// Parameters:
-	///	- fraction: Double
-	open func setFraction(_ fraction: Double) {
+	/// - Parameters:
+	///	- fraction: Double (gdouble)
+	open func setFraction(_ fraction: Double) -> Swift.Void {
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(self.GOBJECT), fraction)
 	}
 
-	/// 
 	/// Progress bars normally grow from top to bottom or left to right.
 	/// Inverted progress bars grow in the opposite direction.
-	/// Parameters:
-	///	- inverted: Bool
-	open func setInverted(_ inverted: Bool) {
+	/// - Parameters:
+	///	- inverted: Bool (gboolean)
+	open func setInverted(_ inverted: Bool) -> Swift.Void {
 		gtk_progress_bar_set_inverted(GTK_PROGRESS_BAR(self.GOBJECT), inverted ? 1 : 0)
 	}
 
-	/// 
 	/// Sets the fraction of total progress bar length to move the
 	/// bouncing block for each call to gtk_progress_bar_pulse().
-	/// Parameters:
-	///	- fraction: Double
-	open func setPulseStep(fraction: Double) {
+	/// - Parameters:
+	///	- fraction: Double (gdouble)
+	open func setPulseStep(fraction: Double) -> Swift.Void {
 		gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(self.GOBJECT), fraction)
 	}
 
-	/// 
 	/// Sets whether the progress bar will show text next to the bar.
 	/// The shown text is either the value of the #GtkProgressBar:text
 	/// property or, if that is %NULL, the #GtkProgressBar:fraction value,
@@ -186,13 +172,12 @@ open class CGTKProgressBar : CGTKWidget {
 	/// To make a progress bar that is styled and sized suitably for containing
 	/// text (even if the actual text is blank), set #GtkProgressBar:show-text to
 	/// %TRUE and #GtkProgressBar:text to the empty string (not %NULL).
-	/// Parameters:
-	///	- showText: Bool
-	open func setShowText(_ showText: Bool) {
+	/// - Parameters:
+	///	- showText: Bool (gboolean)
+	open func setShowText(_ showText: Bool) -> Swift.Void {
 		gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(self.GOBJECT), showText ? 1 : 0)
 	}
 
-	/// 
 	/// Causes the given @text to appear next to the progress bar.
 	/// If @text is %NULL and #GtkProgressBar:show-text is %TRUE, the current
 	/// value of #GtkProgressBar:fraction will be displayed as a percentage.
@@ -201,10 +186,23 @@ open class CGTKProgressBar : CGTKWidget {
 	/// percentage. If @text is the empty string, the progress bar will still
 	/// be styled and sized suitably for containing text, as long as
 	/// #GtkProgressBar:show-text is %TRUE.
-	/// Parameters:
-	///	- text: String
-	open func setText(_ text: String) {
+	/// - Parameters:
+	///	- text: String (const gchar*)
+	open func setText(_ text: String) -> Swift.Void {
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(self.GOBJECT), text)
+	}
+
+	/// Retrieves the orientation of the @orientable.
+	/// - Returns: GtkOrientation (GtkOrientation)
+	open func getOrientation() -> GtkOrientation {
+		return gtk_orientable_get_orientation(GTK_ORIENTABLE(self.GOBJECT))
+	}
+
+	/// Sets the orientation of the @orientable.
+	/// - Parameters:
+	///	- orientation: GtkOrientation (GtkOrientation)
+	open func setOrientation(_ orientation: GtkOrientation) -> Swift.Void {
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(self.GOBJECT), orientation)
 	}
 
 }

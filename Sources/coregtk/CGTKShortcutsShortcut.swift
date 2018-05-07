@@ -34,7 +34,6 @@ public let GTK_TYPE_SHORTCUTS_SHORTCUT: GType = gtk_shortcuts_shortcut_get_type(
 	return G_TYPE_CHECK_INSTANCE_CAST(ptr, GTK_TYPE_SHORTCUTS_SHORTCUT)
 }
 
-/// 
 /// A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
 /// with a short text. This widget is only meant to be used with #GtkShortcutsWindow.
 
