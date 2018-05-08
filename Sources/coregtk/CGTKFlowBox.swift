@@ -97,9 +97,9 @@ open class CGTKFlowBox : CGTKContainer, CGTKOrientable {
 	/// - Parameters:
 	///	- model: OpaquePointer? (GListModel*)
 	///	- createWidgetFunc: @escaping GtkFlowBoxCreateWidgetFunc (GtkFlowBoxCreateWidgetFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- userDataFreeFunc: @escaping GDestroyNotify (GDestroyNotify)
-	open func bindModel(_ model: OpaquePointer?, createWidgetFunc: @escaping GtkFlowBoxCreateWidgetFunc, userData: gpointer, userDataFreeFunc: @escaping GDestroyNotify) -> Swift.Void {
+	open func bindModel(_ model: OpaquePointer?, createWidgetFunc: @escaping GtkFlowBoxCreateWidgetFunc, userData: gpointer?, userDataFreeFunc: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_flow_box_bind_model(GTK_FLOW_BOX(self.GOBJECT), model, createWidgetFunc, userData, userDataFreeFunc)
 	}
 
@@ -218,8 +218,8 @@ open class CGTKFlowBox : CGTKContainer, CGTKOrientable {
 	/// this function.
 	/// - Parameters:
 	///	- function: @escaping GtkFlowBoxForeachFunc (GtkFlowBoxForeachFunc)
-	///	- data: gpointer (gpointer)
-	open func selectedForeach(function: @escaping GtkFlowBoxForeachFunc, data: gpointer) -> Swift.Void {
+	///	- data: gpointer? (gpointer)
+	open func selectedForeach(function: @escaping GtkFlowBoxForeachFunc, data: gpointer?) -> Swift.Void {
 		gtk_flow_box_selected_foreach(GTK_FLOW_BOX(self.GOBJECT), function, data)
 	}
 
@@ -250,9 +250,9 @@ open class CGTKFlowBox : CGTKContainer, CGTKOrientable {
 	/// (see gtk_flow_box_bind_model()).
 	/// - Parameters:
 	///	- filterFunc: @escaping GtkFlowBoxFilterFunc (GtkFlowBoxFilterFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setFilterFunc(_ filterFunc: @escaping GtkFlowBoxFilterFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setFilterFunc(_ filterFunc: @escaping GtkFlowBoxFilterFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_flow_box_set_filter_func(GTK_FLOW_BOX(self.GOBJECT), filterFunc, userData, destroy)
 	}
 
@@ -326,9 +326,9 @@ open class CGTKFlowBox : CGTKContainer, CGTKOrientable {
 	/// (see gtk_flow_box_bind_model()).
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkFlowBoxSortFunc (GtkFlowBoxSortFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSortFunc(_ sortFunc: @escaping GtkFlowBoxSortFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSortFunc(_ sortFunc: @escaping GtkFlowBoxSortFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_flow_box_set_sort_func(GTK_FLOW_BOX(self.GOBJECT), sortFunc, userData, destroy)
 	}
 

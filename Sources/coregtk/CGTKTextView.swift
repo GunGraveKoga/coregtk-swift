@@ -235,9 +235,9 @@ open class CGTKTextView : CGTKContainer, CGTKScrollable {
 	/// coordinates to coordinates for one of the windows in the text view.
 	/// - Parameters:
 	///	- iter: UnsafePointer<GtkTextIter>? (const GtkTextIter*)
-	///	- strong: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
-	///	- weak: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
-	open func getCursorLocations(iter: UnsafePointer<GtkTextIter>?, strong: UnsafeMutablePointer<GdkRectangle>!, weak: UnsafeMutablePointer<GdkRectangle>!) -> Swift.Void {
+	///	- strong: UnsafeMutablePointer<GdkRectangle>? = nil (GdkRectangle*)
+	///	- weak: UnsafeMutablePointer<GdkRectangle>? = nil (GdkRectangle*)
+	open func getCursorLocations(iter: UnsafePointer<GtkTextIter>?, strong: UnsafeMutablePointer<GdkRectangle>? = nil, weak: UnsafeMutablePointer<GdkRectangle>? = nil) -> Swift.Void {
 		gtk_text_view_get_cursor_locations(GTK_TEXT_VIEW(self.GOBJECT), iter, strong, weak)
 	}
 

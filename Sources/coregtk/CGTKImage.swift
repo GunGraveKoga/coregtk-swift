@@ -162,10 +162,10 @@ open class CGTKImage : CGTKMisc {
 	/// displayed instead.  If the current icon theme is changed, the icon
 	/// will be updated appropriately.
 	/// - Parameters:
-	///	- iconName: String (const gchar*)
+	///	- iconName: String? (const gchar*)
 	///	- size: GtkIconSize (GtkIconSize)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(fromIconName iconName: String, size: GtkIconSize) {
+	public convenience init(fromIconName iconName: String?, size: GtkIconSize) {
 		self.init(withGObject: gtk_image_new_from_icon_name(iconName, size))!
 	}
 
@@ -273,9 +273,9 @@ open class CGTKImage : CGTKMisc {
 	/// The caller of this function does not own a reference to the
 	/// returned #GIcon.
 	/// - Parameters:
-	///	- gicon: UnsafeMutablePointer<OpaquePointer?> (GIcon**)
-	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
-	open func getGicon(_ gicon: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
+	///	- gicon: UnsafeMutablePointer<OpaquePointer?>? = nil (GIcon**)
+	///	- size: UnsafeMutablePointer<GtkIconSize>? = nil (GtkIconSize*)
+	open func getGicon(_ gicon: UnsafeMutablePointer<OpaquePointer?>? = nil, size: UnsafeMutablePointer<GtkIconSize>? = nil) -> Swift.Void {
 		gtk_image_get_gicon(GTK_IMAGE(self.GOBJECT), gicon, size)
 	}
 
@@ -286,8 +286,8 @@ open class CGTKImage : CGTKMisc {
 	/// be freed.
 	/// - Parameters:
 	///	- iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>! (const gchar**)
-	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
-	open func getIconName(_ iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
+	///	- size: UnsafeMutablePointer<GtkIconSize>? = nil (GtkIconSize*)
+	open func getIconName(_ iconName: UnsafeMutablePointer<UnsafePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>? = nil) -> Swift.Void {
 		gtk_image_get_icon_name(GTK_IMAGE(self.GOBJECT), iconName, size)
 	}
 
@@ -295,9 +295,9 @@ open class CGTKImage : CGTKMisc {
 	/// The storage type of the image must be %GTK_IMAGE_EMPTY or
 	/// %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
 	/// - Parameters:
-	///	- iconSet: UnsafeMutablePointer<OpaquePointer?> (GtkIconSet**)
-	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
-	open func getIconSet(_ iconSet: UnsafeMutablePointer<OpaquePointer?>, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
+	///	- iconSet: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkIconSet**)
+	///	- size: UnsafeMutablePointer<GtkIconSize>? = nil (GtkIconSize*)
+	open func getIconSet(_ iconSet: UnsafeMutablePointer<OpaquePointer?>? = nil, size: UnsafeMutablePointer<GtkIconSize>? = nil) -> Swift.Void {
 		gtk_image_get_icon_set(GTK_IMAGE(self.GOBJECT), iconSet, size)
 	}
 
@@ -324,8 +324,8 @@ open class CGTKImage : CGTKMisc {
 	/// be freed.
 	/// - Parameters:
 	///	- stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>! (UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!)
-	///	- size: UnsafeMutablePointer<GtkIconSize>! (GtkIconSize*)
-	open func getStock(stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>!) -> Swift.Void {
+	///	- size: UnsafeMutablePointer<GtkIconSize>? = nil (GtkIconSize*)
+	open func getStock(stockId: UnsafeMutablePointer<UnsafeMutablePointer<gchar>?>!, size: UnsafeMutablePointer<GtkIconSize>? = nil) -> Swift.Void {
 		gtk_image_get_stock(GTK_IMAGE(self.GOBJECT), stockId, size)
 	}
 
@@ -347,8 +347,8 @@ open class CGTKImage : CGTKMisc {
 
 	/// See gtk_image_new_from_file() for details.
 	/// - Parameters:
-	///	- filename: String (const gchar*)
-	open func setFromFile(filename: String) -> Swift.Void {
+	///	- filename: String? (const gchar*)
+	open func setFromFile(filename: String?) -> Swift.Void {
 		gtk_image_set_from_file(GTK_IMAGE(self.GOBJECT), filename)
 	}
 
@@ -362,9 +362,9 @@ open class CGTKImage : CGTKMisc {
 
 	/// See gtk_image_new_from_icon_name() for details.
 	/// - Parameters:
-	///	- iconName: String (const gchar*)
+	///	- iconName: String? (const gchar*)
 	///	- size: GtkIconSize (GtkIconSize)
-	open func setFromIconName(_ iconName: String, size: GtkIconSize) -> Swift.Void {
+	open func setFromIconName(_ iconName: String?, size: GtkIconSize) -> Swift.Void {
 		gtk_image_set_from_icon_name(GTK_IMAGE(self.GOBJECT), iconName, size)
 	}
 
@@ -385,8 +385,8 @@ open class CGTKImage : CGTKMisc {
 
 	/// See gtk_image_new_from_resource() for details.
 	/// - Parameters:
-	///	- resourcePath: String (const gchar*)
-	open func setFromResource(resourcePath: String) -> Swift.Void {
+	///	- resourcePath: String? (const gchar*)
+	open func setFromResource(resourcePath: String?) -> Swift.Void {
 		gtk_image_set_from_resource(GTK_IMAGE(self.GOBJECT), resourcePath)
 	}
 

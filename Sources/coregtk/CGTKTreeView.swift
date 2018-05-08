@@ -346,17 +346,17 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	///	- dragX: gint (gint)
 	///	- dragY: gint (gint)
 	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
-	///	- pos: UnsafeMutablePointer<GtkTreeViewDropPosition>! (GtkTreeViewDropPosition*)
+	///	- pos: UnsafeMutablePointer<GtkTreeViewDropPosition>? = nil (GtkTreeViewDropPosition*)
 	/// - Returns: Bool (gboolean)
-	open func getDestRowAtPos(dragX: gint, dragY: gint, path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkTreeViewDropPosition>!) -> Bool {
+	open func getDestRowAtPos(dragX: gint, dragY: gint, path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkTreeViewDropPosition>? = nil) -> Bool {
 		return gtk_tree_view_get_dest_row_at_pos(GTK_TREE_VIEW(self.GOBJECT), dragX, dragY, path, pos) != 0 ? true : false
 	}
 
 	/// Gets information about the row that is highlighted for feedback.
 	/// - Parameters:
 	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
-	///	- pos: UnsafeMutablePointer<GtkTreeViewDropPosition>! (GtkTreeViewDropPosition*)
-	open func getDragDestRow(path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkTreeViewDropPosition>!) -> Swift.Void {
+	///	- pos: UnsafeMutablePointer<GtkTreeViewDropPosition>? = nil (GtkTreeViewDropPosition*)
+	open func getDragDestRow(path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkTreeViewDropPosition>? = nil) -> Swift.Void {
 		gtk_tree_view_get_drag_dest_row(GTK_TREE_VIEW(self.GOBJECT), path, pos)
 	}
 
@@ -557,10 +557,10 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	///	- y: UnsafeMutablePointer<Int32>! (gint*)
 	///	- keyboardTip: Bool (gboolean)
 	///	- model: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreeModel**)
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- iter: UnsafeMutablePointer<GtkTreeIter>! (GtkTreeIter*)
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- iter: UnsafeMutablePointer<GtkTreeIter>? = nil (GtkTreeIter*)
 	/// - Returns: Bool (gboolean)
-	open func getTooltipContext(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!, keyboardTip: Bool, model: UnsafeMutablePointer<OpaquePointer?>? = nil, path: UnsafeMutablePointer<OpaquePointer?>, iter: UnsafeMutablePointer<GtkTreeIter>!) -> Bool {
+	open func getTooltipContext(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!, keyboardTip: Bool, model: UnsafeMutablePointer<OpaquePointer?>? = nil, path: UnsafeMutablePointer<OpaquePointer?>? = nil, iter: UnsafeMutablePointer<GtkTreeIter>? = nil) -> Bool {
 		return gtk_tree_view_get_tooltip_context(GTK_TREE_VIEW(self.GOBJECT), x, y, keyboardTip ? 1 : 0, model, path, iter) != 0 ? true : false
 	}
 
@@ -574,10 +574,10 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// Note that there may be invisible paths in between.
 	/// The paths should be freed with gtk_tree_path_free() after use.
 	/// - Parameters:
-	///	- startPath: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- endPath: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
+	///	- startPath: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- endPath: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
 	/// - Returns: Bool (gboolean)
-	open func getVisibleRange(startPath: UnsafeMutablePointer<OpaquePointer?>, endPath: UnsafeMutablePointer<OpaquePointer?>) -> Bool {
+	open func getVisibleRange(startPath: UnsafeMutablePointer<OpaquePointer?>? = nil, endPath: UnsafeMutablePointer<OpaquePointer?>? = nil) -> Bool {
 		return gtk_tree_view_get_visible_range(GTK_TREE_VIEW(self.GOBJECT), startPath, endPath) != 0 ? true : false
 	}
 
@@ -615,10 +615,10 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	///	- title: String (const gchar*)
 	///	- cell: UnsafeMutablePointer<GtkCellRenderer>! (GtkCellRenderer*)
 	///	- function: @escaping GtkTreeCellDataFunc (GtkTreeCellDataFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- dnotify: @escaping GDestroyNotify (GDestroyNotify)
 	/// - Returns: gint (gint)
-	open func insertColumnWithDataFunc(position: gint, title: String, cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkTreeCellDataFunc, data: gpointer, dnotify: @escaping GDestroyNotify) -> gint {
+	open func insertColumnWithDataFunc(position: gint, title: String, cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkTreeCellDataFunc, data: gpointer?, dnotify: @escaping GDestroyNotify) -> gint {
 		return gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(self.GOBJECT), position, title, cell, function, data, dnotify)
 	}
 
@@ -658,8 +658,8 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// Calls @func on all expanded rows.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeViewMappingFunc (GtkTreeViewMappingFunc)
-	///	- data: gpointer (gpointer)
-	open func mapExpandedRows(function: @escaping GtkTreeViewMappingFunc, data: gpointer) -> Swift.Void {
+	///	- data: gpointer? (gpointer)
+	open func mapExpandedRows(function: @escaping GtkTreeViewMappingFunc, data: gpointer?) -> Swift.Void {
 		gtk_tree_view_map_expanded_rows(GTK_TREE_VIEW(self.GOBJECT), function, data)
 	}
 
@@ -752,9 +752,9 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// dropped everywhere.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeViewColumnDropFunc (GtkTreeViewColumnDropFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setColumnDragFunction(function: @escaping GtkTreeViewColumnDropFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setColumnDragFunction(function: @escaping GtkTreeViewColumnDropFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_tree_view_set_column_drag_function(GTK_TREE_VIEW(self.GOBJECT), function, userData, destroy)
 	}
 
@@ -803,9 +803,9 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// user collapses a row, or a row is deleted.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeDestroyCountFunc (GtkTreeDestroyCountFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setDestroyCountFunc(_ function: @escaping GtkTreeDestroyCountFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setDestroyCountFunc(_ function: @escaping GtkTreeDestroyCountFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_tree_view_set_destroy_count_func(GTK_TREE_VIEW(self.GOBJECT), function, data, destroy)
 	}
 
@@ -949,9 +949,9 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// function is %NULL, no separators are drawn. This is the default value.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeViewRowSeparatorFunc (GtkTreeViewRowSeparatorFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setRowSeparatorFunc(_ function: @escaping GtkTreeViewRowSeparatorFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setRowSeparatorFunc(_ function: @escaping GtkTreeViewRowSeparatorFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_tree_view_set_row_separator_func(GTK_TREE_VIEW(self.GOBJECT), function, data, destroy)
 	}
 
@@ -1012,18 +1012,18 @@ open class CGTKTreeView : CGTKContainer, CGTKScrollable {
 	/// #GtkTreeViewSearchEqualFunc returns %FALSE on matches.
 	/// - Parameters:
 	///	- searchEqualFunc: @escaping GtkTreeViewSearchEqualFunc (GtkTreeViewSearchEqualFunc)
-	///	- searchUserData: gpointer (gpointer)
+	///	- searchUserData: gpointer? (gpointer)
 	///	- searchDestroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSearchEqualFunc(_ searchEqualFunc: @escaping GtkTreeViewSearchEqualFunc, searchUserData: gpointer, searchDestroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSearchEqualFunc(_ searchEqualFunc: @escaping GtkTreeViewSearchEqualFunc, searchUserData: gpointer?, searchDestroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(self.GOBJECT), searchEqualFunc, searchUserData, searchDestroy)
 	}
 
 	/// Sets the function to use when positioning the search dialog.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeViewSearchPositionFunc (GtkTreeViewSearchPositionFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSearchPositionFunc(_ function: @escaping GtkTreeViewSearchPositionFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSearchPositionFunc(_ function: @escaping GtkTreeViewSearchPositionFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_tree_view_set_search_position_func(GTK_TREE_VIEW(self.GOBJECT), function, data, destroy)
 	}
 

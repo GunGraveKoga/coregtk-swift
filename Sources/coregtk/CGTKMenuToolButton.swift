@@ -57,11 +57,11 @@ open class CGTKMenuToolButton : CGTKToolButton {
 	/// Creates a new #GtkMenuToolButton using @icon_widget as icon and
 	/// @label as label.
 	/// - Parameters:
-	///	- iconWidget: CGTKWidget (GtkWidget*)
-	///	- label: String (const gchar*)
+	///	- iconWidget: CGTKWidget? (GtkWidget*)
+	///	- label: String? (const gchar*)
 	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
-	public convenience init(iconWidget: CGTKWidget, label: String) {
-		self.init(withGObject: gtk_menu_tool_button_new(iconWidget.WIDGET, label))!
+	public convenience init(iconWidget: CGTKWidget?, label: String?) {
+		self.init(withGObject: gtk_menu_tool_button_new(iconWidget?.WIDGET, label))!
 	}
 
 	/// Creates a new #GtkMenuToolButton.

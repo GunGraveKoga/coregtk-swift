@@ -1,7 +1,7 @@
 
 
 import Foundation
-import coregtk
+import CoreGTK
 
 final class SimpleTextEditor {
     private var textView: CGTKTextView!
@@ -75,7 +75,7 @@ final class SimpleTextEditor {
     }
     
     fileprivate func btnSave_Clicked() {
-        if let fileName = MultiDialog.presentSaveDialog(self.window) {
+        if let fileName = MultiDialog.presentSaveDialog() {
             do {
                 try self.text?.write(toFile: fileName, atomically: true, encoding: .utf8)
             } catch let error {
@@ -85,7 +85,14 @@ final class SimpleTextEditor {
     }
     
     fileprivate func btnOpen_Clicked() {
-        self.text = MultiDialog.presentOpenDialog(self.window)
+        if let fileName = MultiDialog.presentOpenDialog() {
+            do {
+                self.text = try String(contentsOfFile: fileName)
+            } catch let error {
+                print("Error opening: \(error)")
+            }
+        }
+        
     }
     
     fileprivate func btnNew_Clicked() {

@@ -85,7 +85,15 @@ open class CGTKRecentChooserWidget : CGTKBox, CGTKRecentChooser {
 	/// Gets the URI currently selected by @chooser.
 	/// - Returns: String? (gchar*)
 	open func getCurrentUri() -> String? {
-		return String(utf8String: gtk_recent_chooser_get_current_uri(GTK_RECENT_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_recent_chooser_get_current_uri(GTK_RECENT_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the #GtkRecentFilter object currently used by @chooser to affect
@@ -277,9 +285,9 @@ open class CGTKRecentChooserWidget : CGTKBox, CGTKRecentChooser {
 	/// a negative integer if the first item comes after the second.
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkRecentSortFunc (GtkRecentSortFunc)
-	///	- sortData: gpointer (gpointer)
+	///	- sortData: gpointer? (gpointer)
 	///	- dataDestroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer, dataDestroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer?, dataDestroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_recent_chooser_set_sort_func(GTK_RECENT_CHOOSER(self.GOBJECT), sortFunc, sortData, dataDestroy)
 	}
 

@@ -48,13 +48,13 @@ public let GTK_TYPE_ASPECT_FRAME: GType = gtk_aspect_frame_get_type()
 open class CGTKAspectFrame : CGTKFrame {
 	/// Create a new #GtkAspectFrame.
 	/// - Parameters:
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	///	- xalign: Float (gfloat)
 	///	- yalign: Float (gfloat)
 	///	- ratio: Float (gfloat)
 	///	- obeyChild: Bool (gboolean)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(label: String, xalign: Float, yalign: Float, ratio: Float, obeyChild: Bool) {
+	public convenience init(label: String?, xalign: Float, yalign: Float, ratio: Float, obeyChild: Bool) {
 		self.init(withGObject: gtk_aspect_frame_new(label, xalign, yalign, ratio, obeyChild ? 1 : 0))!
 	}
 

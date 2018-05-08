@@ -218,7 +218,15 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// usual way to get the selection.
 	/// - Returns: String? (gchar*)
 	open func getCurrentFolder() -> String? {
-		return String(utf8String: gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the current folder of @chooser as #GFile.
@@ -239,7 +247,15 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// usual way to get the selection.
 	/// - Returns: String? (gchar*)
 	open func getCurrentFolderUri() -> String? {
-		return String(utf8String: gtk_file_chooser_get_current_folder_uri(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_current_folder_uri(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the current name in the file selector, as entered by the user in the
@@ -251,7 +267,15 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// from “.jpg” to “.png”.
 	/// - Returns: String? (gchar*)
 	open func getCurrentName() -> String? {
-		return String(utf8String: gtk_file_chooser_get_current_name(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_current_name(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Queries whether a file chooser is set to confirm for overwriting when the user
@@ -286,7 +310,15 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// folder.
 	/// - Returns: String? (gchar*)
 	open func getFilename() -> String? {
-		return String(utf8String: gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Lists all the selected files and subfolders in the current folder of
@@ -329,14 +361,30 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// widget. See gtk_file_chooser_set_preview_widget().
 	/// - Returns: String? (char*)
 	open func getPreviewFilename() -> String? {
-		return String(utf8String: gtk_file_chooser_get_preview_filename(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_preview_filename(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the URI that should be previewed in a custom preview
 	/// widget. See gtk_file_chooser_set_preview_widget().
 	/// - Returns: String? (char*)
 	open func getPreviewUri() -> String? {
-		return String(utf8String: gtk_file_chooser_get_preview_uri(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_preview_uri(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the current preview widget; see
@@ -375,7 +423,15 @@ open class CGTKFileChooserButton : CGTKBox, CGTKFileChooser {
 	/// folder.
 	/// - Returns: String? (gchar*)
 	open func getUri() -> String? {
-		return String(utf8String: gtk_file_chooser_get_uri(GTK_FILE_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_file_chooser_get_uri(GTK_FILE_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Lists all the selected files and subfolders in the current folder of

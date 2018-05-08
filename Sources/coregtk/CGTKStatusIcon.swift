@@ -150,11 +150,11 @@ open class CGTKStatusIcon : CGTKBase {
 	/// is embedded in a notification area, see
 	/// gtk_status_icon_is_embedded().
 	/// - Parameters:
-	///	- screen: UnsafeMutablePointer<OpaquePointer?> (GdkScreen**)
-	///	- area: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
-	///	- orientation: UnsafeMutablePointer<GtkOrientation>! (GtkOrientation*)
+	///	- screen: UnsafeMutablePointer<OpaquePointer?>? = nil (GdkScreen**)
+	///	- area: UnsafeMutablePointer<GdkRectangle>? = nil (GdkRectangle*)
+	///	- orientation: UnsafeMutablePointer<GtkOrientation>? = nil (GtkOrientation*)
 	/// - Returns: Bool (gboolean)
-	open func getGeometry(screen: UnsafeMutablePointer<OpaquePointer?>, area: UnsafeMutablePointer<GdkRectangle>!, orientation: UnsafeMutablePointer<GtkOrientation>!) -> Bool {
+	open func getGeometry(screen: UnsafeMutablePointer<OpaquePointer?>? = nil, area: UnsafeMutablePointer<GdkRectangle>? = nil, orientation: UnsafeMutablePointer<GtkOrientation>? = nil) -> Bool {
 		return gtk_status_icon_get_geometry(GTK_STATUS_ICON(self.GOBJECT), screen, area, orientation) != 0 ? true : false
 	}
 
@@ -241,13 +241,29 @@ open class CGTKStatusIcon : CGTKBase {
 	/// Gets the contents of the tooltip for @status_icon.
 	/// - Returns: String? (gchar*)
 	open func getTooltipMarkup() -> String? {
-		return String(utf8String: gtk_status_icon_get_tooltip_markup(GTK_STATUS_ICON(self.GOBJECT)))
+		return {
+			let ptr = gtk_status_icon_get_tooltip_markup(GTK_STATUS_ICON(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the contents of the tooltip for @status_icon.
 	/// - Returns: String? (gchar*)
 	open func getTooltipText() -> String? {
-		return String(utf8String: gtk_status_icon_get_tooltip_text(GTK_STATUS_ICON(self.GOBJECT)))
+		return {
+			let ptr = gtk_status_icon_get_tooltip_text(GTK_STATUS_ICON(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Returns whether the status icon is visible or not.
@@ -365,8 +381,8 @@ open class CGTKStatusIcon : CGTKBase {
 	/// See also the #GtkStatusIcon:tooltip-markup property and
 	/// gtk_tooltip_set_markup().
 	/// - Parameters:
-	///	- markup: String (const gchar*)
-	open func setTooltipMarkup(_ markup: String) -> Swift.Void {
+	///	- markup: String? (const gchar*)
+	open func setTooltipMarkup(_ markup: String?) -> Swift.Void {
 		gtk_status_icon_set_tooltip_markup(GTK_STATUS_ICON(self.GOBJECT), markup)
 	}
 

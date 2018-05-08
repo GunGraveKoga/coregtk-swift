@@ -97,9 +97,9 @@ public protocol CGTKFontChooser: class {
 	/// in the font chooser.
 	/// - Parameters:
 	///	- filter: @escaping GtkFontFilterFunc (GtkFontFilterFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	func setFilterFunc(filter: @escaping GtkFontFilterFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void
+	func setFilterFunc(filter: @escaping GtkFontFilterFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void
 
 	/// Sets the currently-selected font.
 	/// - Parameters:

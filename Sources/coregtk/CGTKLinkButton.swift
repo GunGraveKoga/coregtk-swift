@@ -63,9 +63,9 @@ open class CGTKLinkButton : CGTKButton {
 	/// Creates a new #GtkLinkButton containing a label.
 	/// - Parameters:
 	///	- uri: String (const gchar*)
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(withLabel uri: String, label: String) {
+	public convenience init(withLabel uri: String, label: String?) {
 		self.init(withGObject: gtk_link_button_new_with_label(uri, label))!
 	}
 

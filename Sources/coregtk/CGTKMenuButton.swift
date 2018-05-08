@@ -149,9 +149,9 @@ open class CGTKMenuButton : CGTKToggleButton {
 	/// Note that this property is only used with menus currently,
 	/// and not for popovers.
 	/// - Parameters:
-	///	- alignWidget: CGTKWidget (GtkWidget*)
-	open func setAlignWidget(_ alignWidget: CGTKWidget) -> Swift.Void {
-		gtk_menu_button_set_align_widget(GTK_MENU_BUTTON(self.GOBJECT), alignWidget.WIDGET)
+	///	- alignWidget: CGTKWidget? (GtkWidget*)
+	open func setAlignWidget(_ alignWidget: CGTKWidget?) -> Swift.Void {
+		gtk_menu_button_set_align_widget(GTK_MENU_BUTTON(self.GOBJECT), alignWidget?.WIDGET)
 	}
 
 	/// Sets the direction in which the popup will be popped up, as
@@ -185,18 +185,18 @@ open class CGTKMenuButton : CGTKToggleButton {
 	/// clicked, or %NULL to disable the button. If #GtkMenuButton:menu-model
 	/// or #GtkMenuButton:popup are set, they will be set to %NULL.
 	/// - Parameters:
-	///	- popover: CGTKWidget (GtkWidget*)
-	open func setPopover(_ popover: CGTKWidget) -> Swift.Void {
-		gtk_menu_button_set_popover(GTK_MENU_BUTTON(self.GOBJECT), popover.WIDGET)
+	///	- popover: CGTKWidget? (GtkWidget*)
+	open func setPopover(_ popover: CGTKWidget?) -> Swift.Void {
+		gtk_menu_button_set_popover(GTK_MENU_BUTTON(self.GOBJECT), popover?.WIDGET)
 	}
 
 	/// Sets the #GtkMenu that will be popped up when the button is clicked,
 	/// or %NULL to disable the button. If #GtkMenuButton:menu-model or
 	/// #GtkMenuButton:popover are set, they will be set to %NULL.
 	/// - Parameters:
-	///	- menu: CGTKWidget (GtkWidget*)
-	open func setPopup(menu: CGTKWidget) -> Swift.Void {
-		gtk_menu_button_set_popup(GTK_MENU_BUTTON(self.GOBJECT), menu.WIDGET)
+	///	- menu: CGTKWidget? (GtkWidget*)
+	open func setPopup(menu: CGTKWidget?) -> Swift.Void {
+		gtk_menu_button_set_popup(GTK_MENU_BUTTON(self.GOBJECT), menu?.WIDGET)
 	}
 
 	/// Sets whether to construct a #GtkPopover instead of #GtkMenu

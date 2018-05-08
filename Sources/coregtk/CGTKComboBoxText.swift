@@ -103,9 +103,9 @@ open class CGTKComboBoxText : CGTKComboBox {
 	/// This is the same as calling gtk_combo_box_text_insert() with a
 	/// position of -1.
 	/// - Parameters:
-	///	- id: String (const gchar*)
+	///	- id: String? (const gchar*)
 	///	- text: String (const gchar*)
-	open func append(id: String, text: String) -> Swift.Void {
+	open func append(id: String?, text: String) -> Swift.Void {
 		gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(self.GOBJECT), id, text)
 	}
 
@@ -124,7 +124,15 @@ open class CGTKComboBoxText : CGTKComboBox {
 	/// be an item from the list).
 	/// - Returns: String? (gchar*)
 	open func getActiveText() -> String? {
-		return String(utf8String: gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(self.GOBJECT)))
+		return {
+			let ptr = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Inserts @text at @position in the list of strings stored in @combo_box.
@@ -133,9 +141,9 @@ open class CGTKComboBoxText : CGTKComboBox {
 	/// If @position is negative then @text is appended.
 	/// - Parameters:
 	///	- position: gint (gint)
-	///	- id: String (const gchar*)
+	///	- id: String? (const gchar*)
 	///	- text: String (const gchar*)
-	open func insert(position: gint, id: String, text: String) -> Swift.Void {
+	open func insert(position: gint, id: String?, text: String) -> Swift.Void {
 		gtk_combo_box_text_insert(GTK_COMBO_BOX_TEXT(self.GOBJECT), position, id, text)
 	}
 
@@ -155,9 +163,9 @@ open class CGTKComboBoxText : CGTKComboBox {
 	/// This is the same as calling gtk_combo_box_text_insert() with a
 	/// position of 0.
 	/// - Parameters:
-	///	- id: String (const gchar*)
+	///	- id: String? (const gchar*)
 	///	- text: String (const gchar*)
-	open func prepend(id: String, text: String) -> Swift.Void {
+	open func prepend(id: String?, text: String) -> Swift.Void {
 		gtk_combo_box_text_prepend(GTK_COMBO_BOX_TEXT(self.GOBJECT), id, text)
 	}
 

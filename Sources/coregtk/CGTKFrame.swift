@@ -74,9 +74,9 @@ open class CGTKFrame : CGTKBin {
 	/// Creates a new #GtkFrame, with optional label @label.
 	/// If @label is %NULL, the label is omitted.
 	/// - Parameters:
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(label: String) {
+	public convenience init(label: String?) {
 		self.init(withGObject: gtk_frame_new(label))!
 	}
 
@@ -121,8 +121,8 @@ open class CGTKFrame : CGTKBin {
 	/// Removes the current #GtkFrame:label-widget. If @label is not %NULL, creates a
 	/// new #GtkLabel with that text and adds it as the #GtkFrame:label-widget.
 	/// - Parameters:
-	///	- label: String (const gchar*)
-	open func setLabel(_ label: String) -> Swift.Void {
+	///	- label: String? (const gchar*)
+	open func setLabel(_ label: String?) -> Swift.Void {
 		gtk_frame_set_label(GTK_FRAME(self.GOBJECT), label)
 	}
 
@@ -138,9 +138,9 @@ open class CGTKFrame : CGTKBin {
 	/// Sets the #GtkFrame:label-widget for the frame. This is the widget that
 	/// will appear embedded in the top edge of the frame as a title.
 	/// - Parameters:
-	///	- labelWidget: CGTKWidget (GtkWidget*)
-	open func setLabelWidget(_ labelWidget: CGTKWidget) -> Swift.Void {
-		gtk_frame_set_label_widget(GTK_FRAME(self.GOBJECT), labelWidget.WIDGET)
+	///	- labelWidget: CGTKWidget? (GtkWidget*)
+	open func setLabelWidget(_ labelWidget: CGTKWidget?) -> Swift.Void {
+		gtk_frame_set_label_widget(GTK_FRAME(self.GOBJECT), labelWidget?.WIDGET)
 	}
 
 	/// Sets the #GtkFrame:shadow-type for @frame, i.e. whether it is drawn without

@@ -111,9 +111,9 @@ open class CGTKListBoxRow : CGTKBin, CGTKActionable {
 	/// from a #GtkListBoxUpdateHeaderFunc. It will replace any existing
 	/// header in the row, and be shown in front of the row in the listbox.
 	/// - Parameters:
-	///	- header: CGTKWidget (GtkWidget*)
-	open func setHeader(_ header: CGTKWidget) -> Swift.Void {
-		gtk_list_box_row_set_header(GTK_LIST_BOX_ROW(self.GOBJECT), header.WIDGET)
+	///	- header: CGTKWidget? (GtkWidget*)
+	open func setHeader(_ header: CGTKWidget?) -> Swift.Void {
+		gtk_list_box_row_set_header(GTK_LIST_BOX_ROW(self.GOBJECT), header?.WIDGET)
 	}
 
 	/// Set the #GtkListBoxRow:selectable property for this row.
@@ -147,8 +147,8 @@ open class CGTKListBoxRow : CGTKBin, CGTKActionable {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	open func setActionName(_ actionName: String) -> Swift.Void {
+	///	- actionName: String? (const gchar*)
+	open func setActionName(_ actionName: String?) -> Swift.Void {
 		gtk_actionable_set_action_name(GTK_ACTIONABLE(self.GOBJECT), actionName)
 	}
 

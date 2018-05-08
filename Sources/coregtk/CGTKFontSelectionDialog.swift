@@ -64,7 +64,15 @@ open class CGTKFontSelectionDialog : CGTKDialog {
 	/// if you want to compare two font descriptions.
 	/// - Returns: String? (gchar*)
 	open func getFontName() -> String? {
-		return String(utf8String: gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(self.GOBJECT)))
+		return {
+			let ptr = gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Retrieves the #GtkFontSelection widget embedded in the dialog.

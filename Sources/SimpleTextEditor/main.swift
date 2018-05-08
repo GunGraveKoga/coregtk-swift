@@ -1,6 +1,6 @@
 
 import Foundation
-import coregtk
+import CoreGTK
 
 CGTK.initialize()
 

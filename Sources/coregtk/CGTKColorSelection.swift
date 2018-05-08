@@ -52,7 +52,15 @@ open class CGTKColorSelection : CGTKBox {
 	///	- ncolors: gint (gint)
 	/// - Returns: String? (gchar*)
 	open class func paletteToString(colors: UnsafeMutablePointer<GdkColor>!, ncolors: gint) -> String? {
-		return String(utf8String: gtk_color_selection_palette_to_string(colors, ncolors))
+		return {
+			let ptr = gtk_color_selection_palette_to_string(colors, ncolors)
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Installs a global function to be called whenever the user

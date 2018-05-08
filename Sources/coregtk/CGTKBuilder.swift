@@ -392,8 +392,8 @@ open class CGTKBuilder : CGTKBase {
 	/// be compiled with the -Wl,--export-dynamic CFLAGS, and linked against
 	/// gmodule-export-2.0.
 	/// - Parameters:
-	///	- userData: gpointer (gpointer)
-	open func connectSignals(userData: gpointer) -> Swift.Void {
+	///	- userData: gpointer? (gpointer)
+	open func connectSignals(userData: gpointer?) -> Swift.Void {
 		gtk_builder_connect_signals(GTK_BUILDER(self.GOBJECT), userData)
 	}
 
@@ -402,8 +402,8 @@ open class CGTKBuilder : CGTKBase {
 	/// require GModule to function correctly.
 	/// - Parameters:
 	///	- function: @escaping GtkBuilderConnectFunc (GtkBuilderConnectFunc)
-	///	- userData: gpointer (gpointer)
-	open func connectSignalsFull(function: @escaping GtkBuilderConnectFunc, userData: gpointer) -> Swift.Void {
+	///	- userData: gpointer? (gpointer)
+	open func connectSignalsFull(function: @escaping GtkBuilderConnectFunc, userData: gpointer?) -> Swift.Void {
 		gtk_builder_connect_signals_full(GTK_BUILDER(self.GOBJECT), function, userData)
 	}
 
@@ -499,8 +499,8 @@ open class CGTKBuilder : CGTKBase {
 	/// Sets the translation domain of @builder.
 	/// See #GtkBuilder:translation-domain.
 	/// - Parameters:
-	///	- domain: String (const gchar*)
-	open func setTranslationDomain(_ domain: String) -> Swift.Void {
+	///	- domain: String? (const gchar*)
+	open func setTranslationDomain(_ domain: String?) -> Swift.Void {
 		gtk_builder_set_translation_domain(GTK_BUILDER(self.GOBJECT), domain)
 	}
 

@@ -47,23 +47,23 @@ open class CGTKAppChooserDialog : CGTKDialog, CGTKAppChooser {
 	/// Creates a new #GtkAppChooserDialog for the provided #GFile,
 	/// to allow the user to select an application for it.
 	/// - Parameters:
-	///	- parent: CGTKWindow (GtkWindow*)
+	///	- parent: CGTKWindow? (GtkWindow*)
 	///	- flags: GtkDialogFlags (GtkDialogFlags)
 	///	- file: OpaquePointer! (GFile*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(parent: CGTKWindow, flags: GtkDialogFlags, file: OpaquePointer!) {
-		self.init(withGObject: gtk_app_chooser_dialog_new(parent.WINDOW, flags, file))!
+	public convenience init(parent: CGTKWindow?, flags: GtkDialogFlags, file: OpaquePointer!) {
+		self.init(withGObject: gtk_app_chooser_dialog_new(parent?.WINDOW, flags, file))!
 	}
 
 	/// Creates a new #GtkAppChooserDialog for the provided content type,
 	/// to allow the user to select an application for it.
 	/// - Parameters:
-	///	- parent: CGTKWindow (GtkWindow*)
+	///	- parent: CGTKWindow? (GtkWindow*)
 	///	- flags: GtkDialogFlags (GtkDialogFlags)
 	///	- contentType: String (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(forContentType parent: CGTKWindow, flags: GtkDialogFlags, contentType: String) {
-		self.init(withGObject: gtk_app_chooser_dialog_new_for_content_type(parent.WINDOW, flags, contentType))!
+	public convenience init(forContentType parent: CGTKWindow?, flags: GtkDialogFlags, contentType: String) {
+		self.init(withGObject: gtk_app_chooser_dialog_new_for_content_type(parent?.WINDOW, flags, contentType))!
 	}
 
 	open var APPCHOOSERDIALOG: UnsafeMutablePointer<GtkAppChooserDialog>! {
@@ -101,7 +101,15 @@ open class CGTKAppChooserDialog : CGTKDialog, CGTKAppChooser {
 	/// Returns the current value of the #GtkAppChooser:content-type property.
 	/// - Returns: String? (gchar*)
 	open func getContentType() -> String? {
-		return String(utf8String: gtk_app_chooser_get_content_type(GTK_APP_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_app_chooser_get_content_type(GTK_APP_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Reloads the list of applications.

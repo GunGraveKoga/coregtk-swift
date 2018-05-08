@@ -319,8 +319,8 @@ open class CGTKContainer : CGTKWidget {
 	/// than gtk_container_forall().
 	/// - Parameters:
 	///	- callback: @escaping GtkCallback (GtkCallback)
-	///	- callbackData: gpointer (gpointer)
-	open func forall(callback: @escaping GtkCallback, callbackData: gpointer) -> Swift.Void {
+	///	- callbackData: gpointer? (gpointer)
+	open func forall(callback: @escaping GtkCallback, callbackData: gpointer?) -> Swift.Void {
 		gtk_container_forall(GTK_CONTAINER(self.GOBJECT), callback, callbackData)
 	}
 
@@ -334,8 +334,8 @@ open class CGTKContainer : CGTKWidget {
 	/// rather than gtk_container_forall().
 	/// - Parameters:
 	///	- callback: @escaping GtkCallback (GtkCallback)
-	///	- callbackData: gpointer (gpointer)
-	open func foreach(callback: @escaping GtkCallback, callbackData: gpointer) -> Swift.Void {
+	///	- callbackData: gpointer? (gpointer)
+	open func foreach(callback: @escaping GtkCallback, callbackData: gpointer?) -> Swift.Void {
 		gtk_container_foreach(GTK_CONTAINER(self.GOBJECT), callback, callbackData)
 	}
 
@@ -476,9 +476,9 @@ open class CGTKContainer : CGTKWidget {
 	/// This is function is mostly meant to be used by widgets. Applications can use
 	/// gtk_widget_grab_focus() to manually set the focus to a specific widget.
 	/// - Parameters:
-	///	- child: CGTKWidget (GtkWidget*)
-	open func setFocusChild(_ child: CGTKWidget) -> Swift.Void {
-		gtk_container_set_focus_child(GTK_CONTAINER(self.GOBJECT), child.WIDGET)
+	///	- child: CGTKWidget? (GtkWidget*)
+	open func setFocusChild(_ child: CGTKWidget?) -> Swift.Void {
+		gtk_container_set_focus_child(GTK_CONTAINER(self.GOBJECT), child?.WIDGET)
 	}
 
 	/// Hooks up an adjustment to focus handling in a container, so when a child

@@ -176,9 +176,9 @@ open class CGTKImageMenuItem : CGTKMenuItem {
 	/// Note that it depends on the show-menu-images setting whether
 	/// the image will be displayed or not.
 	/// - Parameters:
-	///	- image: CGTKWidget (GtkWidget*)
-	open func setImage(_ image: CGTKWidget) -> Swift.Void {
-		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT), image.WIDGET)
+	///	- image: CGTKWidget? (GtkWidget*)
+	open func setImage(_ image: CGTKWidget?) -> Swift.Void {
+		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(self.GOBJECT), image?.WIDGET)
 	}
 
 	/// If %TRUE, the label set in the menuitem is used as a

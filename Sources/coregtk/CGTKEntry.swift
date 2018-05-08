@@ -270,7 +270,15 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
 	/// - Returns: String? (gchar*)
 	open func getIconTooltipMarkup(iconPos: GtkEntryIconPosition) -> String? {
-		return String(utf8String: gtk_entry_get_icon_tooltip_markup(GTK_ENTRY(self.GOBJECT), iconPos))
+		return {
+			let ptr = gtk_entry_get_icon_tooltip_markup(GTK_ENTRY(self.GOBJECT), iconPos)
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the contents of the tooltip on the icon at the specified
@@ -279,7 +287,15 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
 	/// - Returns: String? (gchar*)
 	open func getIconTooltipText(iconPos: GtkEntryIconPosition) -> String? {
-		return String(utf8String: gtk_entry_get_icon_tooltip_text(GTK_ENTRY(self.GOBJECT), iconPos))
+		return {
+			let ptr = gtk_entry_get_icon_tooltip_text(GTK_ENTRY(self.GOBJECT), iconPos)
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// This function returns the entry’s #GtkEntry:inner-border property. See
@@ -600,8 +616,8 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	/// If @icon_name is %NULL, no icon will be shown in the specified position.
 	/// - Parameters:
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
-	///	- iconName: String (const gchar*)
-	open func setIconFromIconName(iconPos: GtkEntryIconPosition, iconName: String) -> Swift.Void {
+	///	- iconName: String? (const gchar*)
+	open func setIconFromIconName(iconPos: GtkEntryIconPosition, iconName: String?) -> Swift.Void {
 		gtk_entry_set_icon_from_icon_name(GTK_ENTRY(self.GOBJECT), iconPos, iconName)
 	}
 
@@ -619,8 +635,8 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	/// If @stock_id is %NULL, no icon will be shown in the specified position.
 	/// - Parameters:
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
-	///	- stockId: String (const gchar*)
-	open func setIconFromStock(iconPos: GtkEntryIconPosition, stockId: String) -> Swift.Void {
+	///	- stockId: String? (const gchar*)
+	open func setIconFromStock(iconPos: GtkEntryIconPosition, stockId: String?) -> Swift.Void {
 		gtk_entry_set_icon_from_stock(GTK_ENTRY(self.GOBJECT), iconPos, stockId)
 	}
 
@@ -640,8 +656,8 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	/// gtk_entry_set_icon_tooltip_text().
 	/// - Parameters:
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
-	///	- tooltip: String (const gchar*)
-	open func setIconTooltipMarkup(iconPos: GtkEntryIconPosition, tooltip: String) -> Swift.Void {
+	///	- tooltip: String? (const gchar*)
+	open func setIconTooltipMarkup(iconPos: GtkEntryIconPosition, tooltip: String?) -> Swift.Void {
 		gtk_entry_set_icon_tooltip_markup(GTK_ENTRY(self.GOBJECT), iconPos, tooltip)
 	}
 
@@ -657,8 +673,8 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	/// setting at least one non-empty tooltip on any icon achieves the same result.
 	/// - Parameters:
 	///	- iconPos: GtkEntryIconPosition (GtkEntryIconPosition)
-	///	- tooltip: String (const gchar*)
-	open func setIconTooltipText(iconPos: GtkEntryIconPosition, tooltip: String) -> Swift.Void {
+	///	- tooltip: String? (const gchar*)
+	open func setIconTooltipText(iconPos: GtkEntryIconPosition, tooltip: String?) -> Swift.Void {
 		gtk_entry_set_icon_tooltip_text(GTK_ENTRY(self.GOBJECT), iconPos, tooltip)
 	}
 
@@ -740,8 +756,8 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	/// worked around by delaying the initial focus setting until the
 	/// first key event arrives.
 	/// - Parameters:
-	///	- text: String (const gchar*)
-	open func setPlaceholderText(_ text: String) -> Swift.Void {
+	///	- text: String? (const gchar*)
+	open func setPlaceholderText(_ text: String?) -> Swift.Void {
 		gtk_entry_set_placeholder_text(GTK_ENTRY(self.GOBJECT), text)
 	}
 
@@ -884,7 +900,15 @@ open class CGTKEntry : CGTKWidget, CGTKCellEditable, CGTKEditable {
 	///	- endPos: gint (gint)
 	/// - Returns: String? (gchar*)
 	open func getChars(startPos: gint, endPos: gint) -> String? {
-		return String(utf8String: gtk_editable_get_chars(GTK_EDITABLE(self.GOBJECT), startPos, endPos))
+		return {
+			let ptr = gtk_editable_get_chars(GTK_EDITABLE(self.GOBJECT), startPos, endPos)
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Retrieves whether @editable is editable. See

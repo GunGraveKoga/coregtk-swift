@@ -251,14 +251,14 @@ open class CGTKMenu : CGTKMenuShell {
 	/// probably use one of the gtk_menu_popup_at_ variants, which do not
 	/// have this problem.
 	/// - Parameters:
-	///	- parentMenuShell: CGTKWidget (GtkWidget*)
-	///	- parentMenuItem: CGTKWidget (GtkWidget*)
+	///	- parentMenuShell: CGTKWidget? (GtkWidget*)
+	///	- parentMenuItem: CGTKWidget? (GtkWidget*)
 	///	- function: @escaping GtkMenuPositionFunc (GtkMenuPositionFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- button: guint (guint)
 	///	- activateTime: guint32 (guint32)
-	open func popup(parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, button: guint, activateTime: guint32) -> Swift.Void {
-		gtk_menu_popup(GTK_MENU(self.GOBJECT), parentMenuShell.WIDGET, parentMenuItem.WIDGET, function, data, button, activateTime)
+	open func popup(parentMenuShell: CGTKWidget?, parentMenuItem: CGTKWidget?, function: @escaping GtkMenuPositionFunc, data: gpointer?, button: guint, activateTime: guint32) -> Swift.Void {
+		gtk_menu_popup(GTK_MENU(self.GOBJECT), parentMenuShell?.WIDGET, parentMenuItem?.WIDGET, function, data, button, activateTime)
 	}
 
 	/// Displays @menu and makes it available for selection.
@@ -346,15 +346,15 @@ open class CGTKMenu : CGTKMenuShell {
 	/// have this problem.
 	/// - Parameters:
 	///	- device: OpaquePointer? (GdkDevice*)
-	///	- parentMenuShell: CGTKWidget (GtkWidget*)
-	///	- parentMenuItem: CGTKWidget (GtkWidget*)
+	///	- parentMenuShell: CGTKWidget? (GtkWidget*)
+	///	- parentMenuItem: CGTKWidget? (GtkWidget*)
 	///	- function: @escaping GtkMenuPositionFunc (GtkMenuPositionFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
 	///	- button: guint (guint)
 	///	- activateTime: guint32 (guint32)
-	open func popupForDevice(_ device: OpaquePointer?, parentMenuShell: CGTKWidget, parentMenuItem: CGTKWidget, function: @escaping GtkMenuPositionFunc, data: gpointer, destroy: @escaping GDestroyNotify, button: guint, activateTime: guint32) -> Swift.Void {
-		gtk_menu_popup_for_device(GTK_MENU(self.GOBJECT), device, parentMenuShell.WIDGET, parentMenuItem.WIDGET, function, data, destroy, button, activateTime)
+	open func popupForDevice(_ device: OpaquePointer?, parentMenuShell: CGTKWidget?, parentMenuItem: CGTKWidget?, function: @escaping GtkMenuPositionFunc, data: gpointer?, destroy: @escaping GDestroyNotify, button: guint, activateTime: guint32) -> Swift.Void {
+		gtk_menu_popup_for_device(GTK_MENU(self.GOBJECT), device, parentMenuShell?.WIDGET, parentMenuItem?.WIDGET, function, data, destroy, button, activateTime)
 	}
 
 	/// Moves @child to a new @position in the list of @menu
@@ -401,8 +401,8 @@ open class CGTKMenu : CGTKMenuShell {
 	/// if you pass a static string, you can save some memory by interning
 	/// it first with g_intern_static_string().
 	/// - Parameters:
-	///	- accelPath: String (const gchar*)
-	open func setAccelPath(_ accelPath: String) -> Swift.Void {
+	///	- accelPath: String? (const gchar*)
+	open func setAccelPath(_ accelPath: String?) -> Swift.Void {
 		gtk_menu_set_accel_path(GTK_MENU(self.GOBJECT), accelPath)
 	}
 

@@ -177,8 +177,8 @@ open class CGTKMenuItem : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// Therefore, if you pass a static string, you can save some memory
 	/// by interning it first with g_intern_static_string().
 	/// - Parameters:
-	///	- accelPath: String (const gchar*)
-	open func setAccelPath(_ accelPath: String) -> Swift.Void {
+	///	- accelPath: String? (const gchar*)
+	open func setAccelPath(_ accelPath: String?) -> Swift.Void {
 		gtk_menu_item_set_accel_path(GTK_MENU_ITEM(self.GOBJECT), accelPath)
 	}
 
@@ -214,9 +214,9 @@ open class CGTKMenuItem : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// Sets or replaces the menu item’s submenu, or removes it when a %NULL
 	/// submenu is passed.
 	/// - Parameters:
-	///	- submenu: CGTKWidget (GtkWidget*)
-	open func setSubmenu(_ submenu: CGTKWidget) -> Swift.Void {
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(self.GOBJECT), submenu.WIDGET)
+	///	- submenu: CGTKWidget? (GtkWidget*)
+	open func setSubmenu(_ submenu: CGTKWidget?) -> Swift.Void {
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(self.GOBJECT), submenu?.WIDGET)
 	}
 
 	/// If true, an underline in the text indicates the next character
@@ -265,8 +265,8 @@ open class CGTKMenuItem : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	open func setActionName(_ actionName: String) -> Swift.Void {
+	///	- actionName: String? (const gchar*)
+	open func setActionName(_ actionName: String?) -> Swift.Void {
 		gtk_actionable_set_action_name(GTK_ACTIONABLE(self.GOBJECT), actionName)
 	}
 

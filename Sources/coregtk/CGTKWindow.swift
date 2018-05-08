@@ -963,9 +963,9 @@ open class CGTKWindow : CGTKBin {
 	/// This is equivalent to calling gtk_application_remove_window() and/or
 	/// gtk_application_add_window() on the old/new applications as relevant.
 	/// - Parameters:
-	///	- application: CGTKApplication (GtkApplication*)
-	open func setApplication(_ application: CGTKApplication) -> Swift.Void {
-		gtk_window_set_application(GTK_WINDOW(self.GOBJECT), application.APPLICATION)
+	///	- application: CGTKApplication? (GtkApplication*)
+	open func setApplication(_ application: CGTKApplication?) -> Swift.Void {
+		gtk_window_set_application(GTK_WINDOW(self.GOBJECT), application?.APPLICATION)
 	}
 
 	/// Marks @window as attached to @attach_widget. This creates a logical binding
@@ -980,9 +980,9 @@ open class CGTKWindow : CGTKBin {
 	/// between two toplevels instead.
 	/// Passing %NULL for @attach_widget detaches the window.
 	/// - Parameters:
-	///	- attachWidget: CGTKWidget (GtkWidget*)
-	open func setAttachedTo(attachWidget: CGTKWidget) -> Swift.Void {
-		gtk_window_set_attached_to(GTK_WINDOW(self.GOBJECT), attachWidget.WIDGET)
+	///	- attachWidget: CGTKWidget? (GtkWidget*)
+	open func setAttachedTo(attachWidget: CGTKWidget?) -> Swift.Void {
+		gtk_window_set_attached_to(GTK_WINDOW(self.GOBJECT), attachWidget?.WIDGET)
 	}
 
 	/// By default, windows are decorated with a title bar, resize
@@ -1009,9 +1009,9 @@ open class CGTKWindow : CGTKBin {
 	/// the default widget, you must call gtk_widget_set_can_default() on
 	/// the widget you’d like to make the default.
 	/// - Parameters:
-	///	- defaultWidget: CGTKWidget (GtkWidget*)
-	open func setDefault(defaultWidget: CGTKWidget) -> Swift.Void {
-		gtk_window_set_default(GTK_WINDOW(self.GOBJECT), defaultWidget.WIDGET)
+	///	- defaultWidget: CGTKWidget? (GtkWidget*)
+	open func setDefault(defaultWidget: CGTKWidget?) -> Swift.Void {
+		gtk_window_set_default(GTK_WINDOW(self.GOBJECT), defaultWidget?.WIDGET)
 	}
 
 	/// Like gtk_window_set_default_size(), but @width and @height are interpreted
@@ -1089,9 +1089,9 @@ open class CGTKWindow : CGTKBin {
 	/// widget in the toplevel, it is usually more convenient to use
 	/// gtk_widget_grab_focus() instead of this function.
 	/// - Parameters:
-	///	- focus: CGTKWidget (GtkWidget*)
-	open func setFocus(_ focus: CGTKWidget) -> Swift.Void {
-		gtk_window_set_focus(GTK_WINDOW(self.GOBJECT), focus.WIDGET)
+	///	- focus: CGTKWidget? (GtkWidget*)
+	open func setFocus(_ focus: CGTKWidget?) -> Swift.Void {
+		gtk_window_set_focus(GTK_WINDOW(self.GOBJECT), focus?.WIDGET)
 	}
 
 	/// Windows may set a hint asking the desktop environment not to receive
@@ -1115,11 +1115,11 @@ open class CGTKWindow : CGTKBin {
 	/// increments (e.g. for xterm, you can only resize by the size of a
 	/// character); aspect ratios; and more. See the #GdkGeometry struct.
 	/// - Parameters:
-	///	- geometryWidget: CGTKWidget (GtkWidget*)
+	///	- geometryWidget: CGTKWidget? (GtkWidget*)
 	///	- geometry: UnsafeMutablePointer<GdkGeometry>? (GdkGeometry*)
 	///	- geomMask: GdkWindowHints (GdkWindowHints)
-	open func setGeometryHints(geometryWidget: CGTKWidget, geometry: UnsafeMutablePointer<GdkGeometry>?, geomMask: GdkWindowHints) -> Swift.Void {
-		gtk_window_set_geometry_hints(GTK_WINDOW(self.GOBJECT), geometryWidget.WIDGET, geometry, geomMask)
+	open func setGeometryHints(geometryWidget: CGTKWidget?, geometry: UnsafeMutablePointer<GdkGeometry>?, geomMask: GdkWindowHints) -> Swift.Void {
+		gtk_window_set_geometry_hints(GTK_WINDOW(self.GOBJECT), geometryWidget?.WIDGET, geometry, geomMask)
 	}
 
 	/// Window gravity defines the meaning of coordinates passed to
@@ -1236,8 +1236,8 @@ open class CGTKWindow : CGTKBin {
 	/// Note that this has nothing to do with the WM_ICON_NAME
 	/// property which is mentioned in the ICCCM.
 	/// - Parameters:
-	///	- name: String (const gchar*)
-	open func setIconName(_ name: String) -> Swift.Void {
+	///	- name: String? (const gchar*)
+	open func setIconName(_ name: String?) -> Swift.Void {
 		gtk_window_set_icon_name(GTK_WINDOW(self.GOBJECT), name)
 	}
 
@@ -1426,9 +1426,9 @@ open class CGTKWindow : CGTKBin {
 	/// that is already visible, so you set the titlebar before calling
 	/// gtk_widget_show().
 	/// - Parameters:
-	///	- titlebar: CGTKWidget (GtkWidget*)
-	open func setTitlebar(_ titlebar: CGTKWidget) -> Swift.Void {
-		gtk_window_set_titlebar(GTK_WINDOW(self.GOBJECT), titlebar.WIDGET)
+	///	- titlebar: CGTKWidget? (GtkWidget*)
+	open func setTitlebar(_ titlebar: CGTKWidget?) -> Swift.Void {
+		gtk_window_set_titlebar(GTK_WINDOW(self.GOBJECT), titlebar?.WIDGET)
 	}
 
 	/// Dialog windows should be set transient for the main application
@@ -1447,9 +1447,9 @@ open class CGTKWindow : CGTKBin {
 	/// On Windows, this function puts the child window on top of the parent,
 	/// much as the window manager would have done on X.
 	/// - Parameters:
-	///	- parent: CGTKWindow (GtkWindow*)
-	open func setTransientFor(parent: CGTKWindow) -> Swift.Void {
-		gtk_window_set_transient_for(GTK_WINDOW(self.GOBJECT), parent.WINDOW)
+	///	- parent: CGTKWindow? (GtkWindow*)
+	open func setTransientFor(parent: CGTKWindow?) -> Swift.Void {
+		gtk_window_set_transient_for(GTK_WINDOW(self.GOBJECT), parent?.WINDOW)
 	}
 
 	/// By setting the type hint for the window, you allow the window

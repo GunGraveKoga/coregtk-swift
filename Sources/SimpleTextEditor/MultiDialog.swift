@@ -1,10 +1,10 @@
 
 import Foundation
-import coregtk
+import CoreGTK
 
 enum MultiDialog {
-    static func presentOpenDialog(_ parent: CGTKWindow) -> String? {
-        let dialog = CGTKFileChooserDialog(withTitle: "Open File", parent: parent, action: GTK_FILE_CHOOSER_ACTION_OPEN, [("_Cancel", GTK_RESPONSE_CANCEL.rawValue), ("_Open", GTK_RESPONSE_ACCEPT.rawValue)])
+    static func presentOpenDialog() -> String? {
+        let dialog = CGTKFileChooserDialog(withTitle: "Open File", parent: nil, action: GTK_FILE_CHOOSER_ACTION_OPEN, [("_Cancel", GTK_RESPONSE_CANCEL), ("_Open", GTK_RESPONSE_ACCEPT)])
         
         defer {
             dialog.destroy()
@@ -19,8 +19,8 @@ enum MultiDialog {
         return dialog.getFilename()
     }
     
-    static func presentSaveDialog(_ parent: CGTKWindow) -> String? {
-        let dialog = CGTKFileChooserDialog(withTitle: "Save File", parent: parent, action: GTK_FILE_CHOOSER_ACTION_SAVE, [("_Cancel", GTK_RESPONSE_CANCEL.rawValue), ("_Save", GTK_RESPONSE_ACCEPT.rawValue)])
+    static func presentSaveDialog() -> String? {
+        let dialog = CGTKFileChooserDialog(withTitle: "Save File", parent: nil, action: GTK_FILE_CHOOSER_ACTION_SAVE, [("_Cancel", GTK_RESPONSE_CANCEL), ("_Save", GTK_RESPONSE_ACCEPT)])
         
         defer {
             dialog.destroy()

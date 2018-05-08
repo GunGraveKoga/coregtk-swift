@@ -203,16 +203,16 @@ open class CGTKAboutDialog : CGTKDialog {
 	/// Sets the comments string to display in the about dialog.
 	/// This should be a short string of one or two lines.
 	/// - Parameters:
-	///	- comments: String (const gchar*)
-	open func setComments(_ comments: String) -> Swift.Void {
+	///	- comments: String? (const gchar*)
+	open func setComments(_ comments: String?) -> Swift.Void {
 		gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(self.GOBJECT), comments)
 	}
 
 	/// Sets the copyright string to display in the about dialog.
 	/// This should be a short string of one or two lines.
 	/// - Parameters:
-	///	- copyright: String (const gchar*)
-	open func setCopyright(_ copyright: String) -> Swift.Void {
+	///	- copyright: String? (const gchar*)
+	open func setCopyright(_ copyright: String?) -> Swift.Void {
 		gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(self.GOBJECT), copyright)
 	}
 
@@ -228,8 +228,8 @@ open class CGTKAboutDialog : CGTKDialog {
 	/// license dialog. If @license is %NULL, the license button is
 	/// hidden.
 	/// - Parameters:
-	///	- license: String (const gchar*)
-	open func setLicense(_ license: String) -> Swift.Void {
+	///	- license: String? (const gchar*)
+	open func setLicense(_ license: String?) -> Swift.Void {
 		gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(self.GOBJECT), license)
 	}
 
@@ -256,8 +256,8 @@ open class CGTKAboutDialog : CGTKDialog {
 	/// If it is %NULL, the default window icon set with
 	/// gtk_window_set_default_icon() will be used.
 	/// - Parameters:
-	///	- iconName: String (const gchar*)
-	open func setLogoIconName(_ iconName: String) -> Swift.Void {
+	///	- iconName: String? (const gchar*)
+	open func setLogoIconName(_ iconName: String?) -> Swift.Void {
 		gtk_about_dialog_set_logo_icon_name(GTK_ABOUT_DIALOG(self.GOBJECT), iconName)
 	}
 
@@ -285,22 +285,22 @@ open class CGTKAboutDialog : CGTKDialog {
 	/// since #GtkAboutDialog will detect if “translator-credits” is untranslated
 	/// and hide the tab.
 	/// - Parameters:
-	///	- translatorCredits: String (const gchar*)
-	open func setTranslatorCredits(_ translatorCredits: String) -> Swift.Void {
+	///	- translatorCredits: String? (const gchar*)
+	open func setTranslatorCredits(_ translatorCredits: String?) -> Swift.Void {
 		gtk_about_dialog_set_translator_credits(GTK_ABOUT_DIALOG(self.GOBJECT), translatorCredits)
 	}
 
 	/// Sets the version string to display in the about dialog.
 	/// - Parameters:
-	///	- version: String (const gchar*)
-	open func setVersion(_ version: String) -> Swift.Void {
+	///	- version: String? (const gchar*)
+	open func setVersion(_ version: String?) -> Swift.Void {
 		gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(self.GOBJECT), version)
 	}
 
 	/// Sets the URL to use for the website link.
 	/// - Parameters:
-	///	- website: String (const gchar*)
-	open func setWebsite(_ website: String) -> Swift.Void {
+	///	- website: String? (const gchar*)
+	open func setWebsite(_ website: String?) -> Swift.Void {
 		gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(self.GOBJECT), website)
 	}
 

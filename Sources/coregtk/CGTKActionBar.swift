@@ -82,9 +82,9 @@ open class CGTKActionBar : CGTKBin {
 
 	/// Sets the center widget for the #GtkActionBar.
 	/// - Parameters:
-	///	- centerWidget: CGTKWidget (GtkWidget*)
-	open func setCenterWidget(_ centerWidget: CGTKWidget) -> Swift.Void {
-		gtk_action_bar_set_center_widget(GTK_ACTION_BAR(self.GOBJECT), centerWidget.WIDGET)
+	///	- centerWidget: CGTKWidget? (GtkWidget*)
+	open func setCenterWidget(_ centerWidget: CGTKWidget?) -> Swift.Void {
+		gtk_action_bar_set_center_widget(GTK_ACTION_BAR(self.GOBJECT), centerWidget?.WIDGET)
 	}
 
 }

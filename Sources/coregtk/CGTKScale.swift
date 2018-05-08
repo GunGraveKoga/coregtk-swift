@@ -138,8 +138,8 @@ open class CGTKScale : CGTKRange {
 	/// - Parameters:
 	///	- value: Double (gdouble)
 	///	- position: GtkPositionType (GtkPositionType)
-	///	- markup: String (const gchar*)
-	open func addMark(value: Double, position: GtkPositionType, markup: String) -> Swift.Void {
+	///	- markup: String? (const gchar*)
+	open func addMark(value: Double, position: GtkPositionType, markup: String?) -> Swift.Void {
 		gtk_scale_add_mark(GTK_SCALE(self.GOBJECT), value, position, markup)
 	}
 

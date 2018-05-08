@@ -183,9 +183,9 @@ open class CGTKBox : CGTKContainer, CGTKOrientable {
 	/// if the children at either side take up different amounts
 	/// of space.
 	/// - Parameters:
-	///	- widget: CGTKWidget (GtkWidget*)
-	open func setCenterWidget(_ widget: CGTKWidget) -> Swift.Void {
-		gtk_box_set_center_widget(GTK_BOX(self.GOBJECT), widget.WIDGET)
+	///	- widget: CGTKWidget? (GtkWidget*)
+	open func setCenterWidget(_ widget: CGTKWidget?) -> Swift.Void {
+		gtk_box_set_center_widget(GTK_BOX(self.GOBJECT), widget?.WIDGET)
 	}
 
 	/// Sets the way @child is packed into @box.

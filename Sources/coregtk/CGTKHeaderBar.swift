@@ -127,9 +127,9 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// You should set the custom title to %NULL, for the header title
 	/// label to be visible again.
 	/// - Parameters:
-	///	- titleWidget: CGTKWidget (GtkWidget*)
-	open func setCustomTitle(titleWidget: CGTKWidget) -> Swift.Void {
-		gtk_header_bar_set_custom_title(GTK_HEADER_BAR(self.GOBJECT), titleWidget.WIDGET)
+	///	- titleWidget: CGTKWidget? (GtkWidget*)
+	open func setCustomTitle(titleWidget: CGTKWidget?) -> Swift.Void {
+		gtk_header_bar_set_custom_title(GTK_HEADER_BAR(self.GOBJECT), titleWidget?.WIDGET)
 	}
 
 	/// Sets the decoration layout for this header bar, overriding
@@ -147,8 +147,8 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// For example, “menu:minimize,maximize,close” specifies a menu
 	/// on the left, and minimize, maximize and close buttons on the right.
 	/// - Parameters:
-	///	- layout: String (const gchar*)
-	open func setDecorationLayout(_ layout: String) -> Swift.Void {
+	///	- layout: String? (const gchar*)
+	open func setDecorationLayout(_ layout: String?) -> Swift.Void {
 		gtk_header_bar_set_decoration_layout(GTK_HEADER_BAR(self.GOBJECT), layout)
 	}
 
@@ -174,8 +174,8 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// even if none is currently set. If this is not desired, set the
 	/// #GtkHeaderBar:has-subtitle property to %FALSE.
 	/// - Parameters:
-	///	- subtitle: String (const gchar*)
-	open func setSubtitle(_ subtitle: String) -> Swift.Void {
+	///	- subtitle: String? (const gchar*)
+	open func setSubtitle(_ subtitle: String?) -> Swift.Void {
 		gtk_header_bar_set_subtitle(GTK_HEADER_BAR(self.GOBJECT), subtitle)
 	}
 
@@ -183,8 +183,8 @@ open class CGTKHeaderBar : CGTKContainer {
 	/// identify the current view. A good title should not include the
 	/// application name.
 	/// - Parameters:
-	///	- title: String (const gchar*)
-	open func setTitle(_ title: String) -> Swift.Void {
+	///	- title: String? (const gchar*)
+	open func setTitle(_ title: String?) -> Swift.Void {
 		gtk_header_bar_set_title(GTK_HEADER_BAR(self.GOBJECT), title)
 	}
 

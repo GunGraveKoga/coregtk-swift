@@ -136,19 +136,19 @@ public let GTK_TYPE_DIALOG: GType = gtk_dialog_get_type()
 
 
 open class CGTKDialog : CGTKWindow {
-	public convenience init(withTitle title: String, parent: CGTKWindow, flags: GtkDialogFlags, _ buttons: [(buttonText: String, responseId: gint)]?) {
-		self.init(withGObject:swift_gtk_dialog_new_with_buttons(title, parent.WINDOW, flags))!
-
-		if let buttons = buttons {
-			for button in buttons {
-				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
-			}
+	open func addButtons(_ buttons: [(buttonText: String, responseId: GtkResponseType)]) {
+		for button in buttons {
+			_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
 		}
 	}
 
-	open func addButtons(_ buttons: [(buttonText: String, responseId: gint)]) {
-		for button in buttons {
-			_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
+	public convenience init(withTitle title: String, parent: CGTKWindow?, flags: GtkDialogFlags, _ buttons: [(buttonText: String, responseId: GtkResponseType)]?) {
+		self.init(withGObject:swift_gtk_dialog_new_with_buttons(title, parent?.WINDOW, flags))!
+
+		if let buttons = buttons {
+			for button in buttons {
+				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
+			}
 		}
 	}
 

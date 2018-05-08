@@ -67,8 +67,8 @@ public protocol CGTKActionable: class {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	func setActionName(_ actionName: String) -> Swift.Void
+	///	- actionName: String? (const gchar*)
+	func setActionName(_ actionName: String?) -> Swift.Void
 
 	/// Sets the target value of an actionable widget.
 	/// If @target_value is %NULL then the target value is unset.

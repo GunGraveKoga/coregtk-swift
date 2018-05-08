@@ -239,16 +239,16 @@ open class CGTKToolItem : CGTKBin, CGTKActivatable {
 	/// See also #GtkToolItem::create-menu-proxy.
 	/// - Parameters:
 	///	- menuItemId: String (const gchar*)
-	///	- menuItem: CGTKWidget (GtkWidget*)
-	open func setProxyMenuItem(menuItemId: String, menuItem: CGTKWidget) -> Swift.Void {
-		gtk_tool_item_set_proxy_menu_item(GTK_TOOL_ITEM(self.GOBJECT), menuItemId, menuItem.WIDGET)
+	///	- menuItem: CGTKWidget? (GtkWidget*)
+	open func setProxyMenuItem(menuItemId: String, menuItem: CGTKWidget?) -> Swift.Void {
+		gtk_tool_item_set_proxy_menu_item(GTK_TOOL_ITEM(self.GOBJECT), menuItemId, menuItem?.WIDGET)
 	}
 
 	/// Sets the markup text to be displayed as tooltip on the item.
 	/// See gtk_widget_set_tooltip_markup().
 	/// - Parameters:
 	///	- markup: String (const gchar*)
-	override open func setTooltipMarkup(_ markup: String) -> Swift.Void {
+	open func setTooltipMarkup(_ markup: String) -> Swift.Void {
 		gtk_tool_item_set_tooltip_markup(GTK_TOOL_ITEM(self.GOBJECT), markup)
 	}
 
@@ -256,7 +256,7 @@ open class CGTKToolItem : CGTKBin, CGTKActivatable {
 	/// See gtk_widget_set_tooltip_text().
 	/// - Parameters:
 	///	- text: String (const gchar*)
-	override open func setTooltipText(_ text: String) -> Swift.Void {
+	open func setTooltipText(_ text: String) -> Swift.Void {
 		gtk_tool_item_set_tooltip_text(GTK_TOOL_ITEM(self.GOBJECT), text)
 	}
 

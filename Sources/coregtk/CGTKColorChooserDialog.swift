@@ -41,11 +41,11 @@ public let GTK_TYPE_COLOR_CHOOSER_DIALOG: GType = gtk_color_chooser_dialog_get_t
 open class CGTKColorChooserDialog : CGTKDialog, CGTKColorChooser {
 	/// Creates a new #GtkColorChooserDialog.
 	/// - Parameters:
-	///	- title: String (const gchar*)
-	///	- parent: CGTKWindow (GtkWindow*)
+	///	- title: String? (const gchar*)
+	///	- parent: CGTKWindow? (GtkWindow*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(title: String, parent: CGTKWindow) {
-		self.init(withGObject: gtk_color_chooser_dialog_new(title, parent.WINDOW))!
+	public convenience init(title: String?, parent: CGTKWindow?) {
+		self.init(withGObject: gtk_color_chooser_dialog_new(title, parent?.WINDOW))!
 	}
 
 	open var COLORCHOOSERDIALOG: UnsafeMutablePointer<GtkColorChooserDialog>! {

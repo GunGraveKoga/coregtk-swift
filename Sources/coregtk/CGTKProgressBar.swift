@@ -187,8 +187,8 @@ open class CGTKProgressBar : CGTKWidget, CGTKOrientable {
 	/// be styled and sized suitably for containing text, as long as
 	/// #GtkProgressBar:show-text is %TRUE.
 	/// - Parameters:
-	///	- text: String (const gchar*)
-	open func setText(_ text: String) -> Swift.Void {
+	///	- text: String? (const gchar*)
+	open func setText(_ text: String?) -> Swift.Void {
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(self.GOBJECT), text)
 	}
 

@@ -111,9 +111,9 @@ open class CGTKMenuShell : CGTKContainer {
 	/// gtk_application_set_menubar().
 	/// - Parameters:
 	///	- model: UnsafeMutablePointer<GMenuModel>? (GMenuModel*)
-	///	- actionNamespace: String (const gchar*)
+	///	- actionNamespace: String? (const gchar*)
 	///	- withSeparators: Bool (gboolean)
-	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String, withSeparators: Bool) -> Swift.Void {
+	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String?, withSeparators: Bool) -> Swift.Void {
 		gtk_menu_shell_bind_model(GTK_MENU_SHELL(self.GOBJECT), model, actionNamespace, withSeparators ? 1 : 0)
 	}
 

@@ -232,9 +232,9 @@ open class CGTKAssistant : CGTKWindow {
 	/// next visible page.
 	/// - Parameters:
 	///	- pageFunc: @escaping GtkAssistantPageFunc (GtkAssistantPageFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setForwardPageFunc(_ pageFunc: @escaping GtkAssistantPageFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setForwardPageFunc(_ pageFunc: @escaping GtkAssistantPageFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_assistant_set_forward_page_func(GTK_ASSISTANT(self.GOBJECT), pageFunc, data, destroy)
 	}
 

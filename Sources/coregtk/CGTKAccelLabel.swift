@@ -156,9 +156,9 @@ open class CGTKAccelLabel : CGTKLabel {
 	/// Sets the widget to be monitored by this accelerator label. Passing %NULL for
 	/// @accel_widget will dissociate @accel_label from its current widget, if any.
 	/// - Parameters:
-	///	- accelWidget: CGTKWidget (GtkWidget*)
-	open func setAccelWidget(_ accelWidget: CGTKWidget) -> Swift.Void {
-		gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(self.GOBJECT), accelWidget.WIDGET)
+	///	- accelWidget: CGTKWidget? (GtkWidget*)
+	open func setAccelWidget(_ accelWidget: CGTKWidget?) -> Swift.Void {
+		gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(self.GOBJECT), accelWidget?.WIDGET)
 	}
 
 }

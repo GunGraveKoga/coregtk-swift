@@ -115,8 +115,8 @@ open class CGTKSwitch : CGTKWidget, CGTKActionable, CGTKActivatable {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	open func setActionName(_ actionName: String) -> Swift.Void {
+	///	- actionName: String? (const gchar*)
+	open func setActionName(_ actionName: String?) -> Swift.Void {
 		gtk_actionable_set_action_name(GTK_ACTIONABLE(self.GOBJECT), actionName)
 	}
 

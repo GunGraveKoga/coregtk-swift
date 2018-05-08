@@ -204,9 +204,9 @@ open class CGTKScrolledWindow : CGTKBin {
 	/// Retrieves the current policy values for the horizontal and vertical
 	/// scrollbars. See gtk_scrolled_window_set_policy().
 	/// - Parameters:
-	///	- hscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>! (GtkPolicyType*)
-	///	- vscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>! (GtkPolicyType*)
-	open func getPolicy(hscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>!, vscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>!) -> Swift.Void {
+	///	- hscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>? = nil (GtkPolicyType*)
+	///	- vscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>? = nil (GtkPolicyType*)
+	open func getPolicy(hscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>? = nil, vscrollbarPolicy: UnsafeMutablePointer<GtkPolicyType>? = nil) -> Swift.Void {
 		gtk_scrolled_window_get_policy(GTK_SCROLLED_WINDOW(self.GOBJECT), hscrollbarPolicy, vscrollbarPolicy)
 	}
 

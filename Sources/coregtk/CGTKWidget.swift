@@ -471,10 +471,10 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// have to worry about when a #GdkFrameClock is assigned to a widget.
 	/// - Parameters:
 	///	- callback: @escaping GtkTickCallback (GtkTickCallback)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- notify: @escaping GDestroyNotify (GDestroyNotify)
 	/// - Returns: guint (guint)
-	open func addTickCallback(_ callback: @escaping GtkTickCallback, userData: gpointer, notify: @escaping GDestroyNotify) -> guint {
+	open func addTickCallback(_ callback: @escaping GtkTickCallback, userData: gpointer?, notify: @escaping GDestroyNotify) -> guint {
 		return gtk_widget_add_tick_callback(GTK_WIDGET(self.GOBJECT), callback, userData, notify)
 	}
 
@@ -569,9 +569,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// This can be tracked by using the #GtkWidget::screen-changed signal
 	/// on the widget.
 	/// - Parameters:
-	///	- text: String (const gchar*)
+	///	- text: String? (const gchar*)
 	/// - Returns: OpaquePointer (PangoLayout*)
-	open func createPangoLayout(text: String) -> OpaquePointer {
+	open func createPangoLayout(text: String?) -> OpaquePointer {
 		return gtk_widget_create_pango_layout(GTK_WIDGET(self.GOBJECT), text)
 	}
 
@@ -963,8 +963,8 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// If a widget is not visible, its allocated size is 0.
 	/// - Parameters:
 	///	- allocation: UnsafeMutablePointer<GtkAllocation>! (GtkAllocation*)
-	///	- baseline: UnsafeMutablePointer<Int32> (int*)
-	open func getAllocatedSize(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: UnsafeMutablePointer<Int32>) -> Swift.Void {
+	///	- baseline: UnsafeMutablePointer<Int32>? = nil (int*)
+	open func getAllocatedSize(allocation: UnsafeMutablePointer<GtkAllocation>!, baseline: UnsafeMutablePointer<Int32>? = nil) -> Swift.Void {
 		gtk_widget_get_allocated_size(GTK_WIDGET(self.GOBJECT), allocation, baseline)
 	}
 
@@ -1091,7 +1091,15 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// Obtains the composite name of a widget.
 	/// - Returns: String? (gchar*)
 	open func getCompositeName() -> String? {
-		return String(utf8String: gtk_widget_get_composite_name(GTK_WIDGET(self.GOBJECT)))
+		return {
+			let ptr = gtk_widget_get_composite_name(GTK_WIDGET(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Returns whether @device can interact with @widget and its
@@ -1439,9 +1447,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// Use gtk_widget_get_preferred_height_and_baseline_for_width() if you want to support
 	/// baseline alignment.
 	/// - Parameters:
-	///	- minimumSize: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
-	///	- naturalSize: UnsafeMutablePointer<GtkRequisition>! (GtkRequisition*)
-	open func getPreferredSize(minimumSize: UnsafeMutablePointer<GtkRequisition>!, naturalSize: UnsafeMutablePointer<GtkRequisition>!) -> Swift.Void {
+	///	- minimumSize: UnsafeMutablePointer<GtkRequisition>? = nil (GtkRequisition*)
+	///	- naturalSize: UnsafeMutablePointer<GtkRequisition>? = nil (GtkRequisition*)
+	open func getPreferredSize(minimumSize: UnsafeMutablePointer<GtkRequisition>? = nil, naturalSize: UnsafeMutablePointer<GtkRequisition>? = nil) -> Swift.Void {
 		gtk_widget_get_preferred_size(GTK_WIDGET(self.GOBJECT), minimumSize, naturalSize)
 	}
 
@@ -1633,13 +1641,29 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// Gets the contents of the tooltip for @widget.
 	/// - Returns: String? (gchar*)
 	open func getTooltipMarkup() -> String? {
-		return String(utf8String: gtk_widget_get_tooltip_markup(GTK_WIDGET(self.GOBJECT)))
+		return {
+			let ptr = gtk_widget_get_tooltip_markup(GTK_WIDGET(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the contents of the tooltip for @widget.
 	/// - Returns: String? (gchar*)
 	open func getTooltipText() -> String? {
-		return String(utf8String: gtk_widget_get_tooltip_text(GTK_WIDGET(self.GOBJECT)))
+		return {
+			let ptr = gtk_widget_get_tooltip_text(GTK_WIDGET(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Returns the #GtkWindow of the current tooltip. This can be the
@@ -1904,9 +1928,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// interested in whether there was an intersection.
 	/// - Parameters:
 	///	- area: UnsafePointer<GdkRectangle>! (const GdkRectangle*)
-	///	- intersection: UnsafeMutablePointer<GdkRectangle>! (GdkRectangle*)
+	///	- intersection: UnsafeMutablePointer<GdkRectangle>? = nil (GdkRectangle*)
 	/// - Returns: Bool (gboolean)
-	open func intersect(area: UnsafePointer<GdkRectangle>!, intersection: UnsafeMutablePointer<GdkRectangle>!) -> Bool {
+	open func intersect(area: UnsafePointer<GdkRectangle>!, intersection: UnsafeMutablePointer<GdkRectangle>? = nil) -> Bool {
 		return gtk_widget_intersect(GTK_WIDGET(self.GOBJECT), area, intersection) != 0 ? true : false
 	}
 
@@ -2402,9 +2426,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// - Parameters:
 	///	- stockId: String (const gchar*)
 	///	- size: GtkIconSize (GtkIconSize)
-	///	- detail: String (const gchar*)
+	///	- detail: String? (const gchar*)
 	/// - Returns: OpaquePointer? (GdkPixbuf*)
-	open func renderIcon(stockId: String, size: GtkIconSize, detail: String) -> OpaquePointer? {
+	open func renderIcon(stockId: String, size: GtkIconSize, detail: String?) -> OpaquePointer? {
 		return gtk_widget_render_icon(GTK_WIDGET(self.GOBJECT), stockId, size, detail)
 	}
 
@@ -2507,9 +2531,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// pass a static string, you can save some memory by interning it first with
 	/// g_intern_static_string().
 	/// - Parameters:
-	///	- accelPath: String (const gchar*)
+	///	- accelPath: String? (const gchar*)
 	///	- accelGroup: UnsafeMutablePointer<GtkAccelGroup>? (GtkAccelGroup*)
-	open func setAccelPath(_ accelPath: String, accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) -> Swift.Void {
+	open func setAccelPath(_ accelPath: String?, accelGroup: UnsafeMutablePointer<GtkAccelGroup>?) -> Swift.Void {
 		gtk_widget_set_accel_path(GTK_WIDGET(self.GOBJECT), accelPath, accelGroup)
 	}
 
@@ -3055,8 +3079,8 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// See also the #GtkWidget:tooltip-markup property and
 	/// gtk_tooltip_set_markup().
 	/// - Parameters:
-	///	- markup: String (const gchar*)
-	open func setTooltipMarkup(_ markup: String) -> Swift.Void {
+	///	- markup: String? (const gchar*)
+	open func setTooltipMarkup(_ markup: String?) -> Swift.Void {
 		gtk_widget_set_tooltip_markup(GTK_WIDGET(self.GOBJECT), markup)
 	}
 
@@ -3065,8 +3089,8 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// handler for the #GtkWidget::query-tooltip signal.
 	/// See also the #GtkWidget:tooltip-text property and gtk_tooltip_set_text().
 	/// - Parameters:
-	///	- text: String (const gchar*)
-	open func setTooltipText(_ text: String) -> Swift.Void {
+	///	- text: String? (const gchar*)
+	open func setTooltipText(_ text: String?) -> Swift.Void {
 		gtk_widget_set_tooltip_text(GTK_WIDGET(self.GOBJECT), text)
 	}
 
@@ -3076,9 +3100,9 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// the default tooltip window. If @custom_window is %NULL, the default
 	/// tooltip window will be used.
 	/// - Parameters:
-	///	- customWindow: CGTKWindow (GtkWindow*)
-	open func setTooltipWindow(customWindow: CGTKWindow) -> Swift.Void {
-		gtk_widget_set_tooltip_window(GTK_WIDGET(self.GOBJECT), customWindow.WINDOW)
+	///	- customWindow: CGTKWindow? (GtkWindow*)
+	open func setTooltipWindow(customWindow: CGTKWindow?) -> Swift.Void {
+		gtk_widget_set_tooltip_window(GTK_WIDGET(self.GOBJECT), customWindow?.WINDOW)
 	}
 
 	/// Sets the vertical alignment of @widget.
@@ -3334,8 +3358,8 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	/// - Parameters:
 	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	///	- child: UnsafeMutablePointer<GObject>! (GObject*)
-	///	- type: String (const gchar*)
-	open func addChild(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>!, type: String) -> Swift.Void {
+	///	- type: String? (const gchar*)
+	open func addChild(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>!, type: String?) -> Swift.Void {
 		gtk_buildable_add_child(GTK_BUILDABLE(self.GOBJECT), builder, child, type)
 	}
 
@@ -3356,8 +3380,8 @@ open class CGTKWidget : CGTKBase, CGTKBuildable {
 	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	///	- child: UnsafeMutablePointer<GObject>? (GObject*)
 	///	- tagname: String (const gchar*)
-	///	- data: gpointer (gpointer)
-	open func customFinished(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: gpointer) -> Swift.Void {
+	///	- data: gpointer? (gpointer)
+	open func customFinished(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: gpointer?) -> Swift.Void {
 		gtk_buildable_custom_finished(GTK_BUILDABLE(self.GOBJECT), builder, child, tagname, data)
 	}
 

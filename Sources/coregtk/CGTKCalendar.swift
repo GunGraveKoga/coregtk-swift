@@ -140,9 +140,9 @@ open class CGTKCalendar : CGTKWidget {
 	/// properties.
 	/// - Parameters:
 	///	- function: @escaping GtkCalendarDetailFunc (GtkCalendarDetailFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setDetailFunc(_ function: @escaping GtkCalendarDetailFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setDetailFunc(_ function: @escaping GtkCalendarDetailFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_calendar_set_detail_func(GTK_CALENDAR(self.GOBJECT), function, data, destroy)
 	}
 

@@ -168,7 +168,15 @@ open class CGTKAppChooserWidget : CGTKBox, CGTKAppChooser {
 	/// Returns the current value of the #GtkAppChooser:content-type property.
 	/// - Returns: String? (gchar*)
 	open func getContentType() -> String? {
-		return String(utf8String: gtk_app_chooser_get_content_type(GTK_APP_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_app_chooser_get_content_type(GTK_APP_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Reloads the list of applications.

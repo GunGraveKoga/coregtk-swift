@@ -89,9 +89,9 @@ open class CGTKListBox : CGTKContainer {
 	/// - Parameters:
 	///	- model: OpaquePointer? (GListModel*)
 	///	- createWidgetFunc: @escaping GtkListBoxCreateWidgetFunc (GtkListBoxCreateWidgetFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- userDataFreeFunc: @escaping GDestroyNotify (GDestroyNotify)
-	open func bindModel(_ model: OpaquePointer?, createWidgetFunc: @escaping GtkListBoxCreateWidgetFunc, userData: gpointer, userDataFreeFunc: @escaping GDestroyNotify) -> Swift.Void {
+	open func bindModel(_ model: OpaquePointer?, createWidgetFunc: @escaping GtkListBoxCreateWidgetFunc, userData: gpointer?, userDataFreeFunc: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_list_box_bind_model(GTK_LIST_BOX(self.GOBJECT), model, createWidgetFunc, userData, userDataFreeFunc)
 	}
 
@@ -224,8 +224,8 @@ open class CGTKListBox : CGTKContainer {
 	/// Note that the selection cannot be modified from within this function.
 	/// - Parameters:
 	///	- function: @escaping GtkListBoxForeachFunc (GtkListBoxForeachFunc)
-	///	- data: gpointer (gpointer)
-	open func selectedForeach(function: @escaping GtkListBoxForeachFunc, data: gpointer) -> Swift.Void {
+	///	- data: gpointer? (gpointer)
+	open func selectedForeach(function: @escaping GtkListBoxForeachFunc, data: gpointer?) -> Swift.Void {
 		gtk_list_box_selected_foreach(GTK_LIST_BOX(self.GOBJECT), function, data)
 	}
 
@@ -260,9 +260,9 @@ open class CGTKListBox : CGTKContainer {
 	/// (see gtk_list_box_bind_model()).
 	/// - Parameters:
 	///	- filterFunc: @escaping GtkListBoxFilterFunc (GtkListBoxFilterFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setFilterFunc(_ filterFunc: @escaping GtkListBoxFilterFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setFilterFunc(_ filterFunc: @escaping GtkListBoxFilterFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_list_box_set_filter_func(GTK_LIST_BOX(self.GOBJECT), filterFunc, userData, destroy)
 	}
 
@@ -283,18 +283,18 @@ open class CGTKListBox : CGTKContainer {
 	/// gtk_list_box_invalidate_headers() is called.
 	/// - Parameters:
 	///	- updateHeader: @escaping GtkListBoxUpdateHeaderFunc (GtkListBoxUpdateHeaderFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setHeaderFunc(updateHeader: @escaping GtkListBoxUpdateHeaderFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setHeaderFunc(updateHeader: @escaping GtkListBoxUpdateHeaderFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_list_box_set_header_func(GTK_LIST_BOX(self.GOBJECT), updateHeader, userData, destroy)
 	}
 
 	/// Sets the placeholder widget that is shown in the list when
 	/// it doesn't display any visible children.
 	/// - Parameters:
-	///	- placeholder: CGTKWidget (GtkWidget*)
-	open func setPlaceholder(_ placeholder: CGTKWidget) -> Swift.Void {
-		gtk_list_box_set_placeholder(GTK_LIST_BOX(self.GOBJECT), placeholder.WIDGET)
+	///	- placeholder: CGTKWidget? (GtkWidget*)
+	open func setPlaceholder(_ placeholder: CGTKWidget?) -> Swift.Void {
+		gtk_list_box_set_placeholder(GTK_LIST_BOX(self.GOBJECT), placeholder?.WIDGET)
 	}
 
 	/// Sets how selection works in the listbox.
@@ -314,9 +314,9 @@ open class CGTKListBox : CGTKContainer {
 	/// (see gtk_list_box_bind_model()).
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkListBoxSortFunc (GtkListBoxSortFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSortFunc(_ sortFunc: @escaping GtkListBoxSortFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSortFunc(_ sortFunc: @escaping GtkListBoxSortFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_list_box_set_sort_func(GTK_LIST_BOX(self.GOBJECT), sortFunc, userData, destroy)
 	}
 

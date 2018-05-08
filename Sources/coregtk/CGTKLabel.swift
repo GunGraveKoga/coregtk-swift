@@ -180,9 +180,9 @@ open class CGTKLabel : CGTKMisc {
 	/// Creates a new label with the given text inside it. You can
 	/// pass %NULL to get an empty label widget.
 	/// - Parameters:
-	///	- str: String (const gchar*)
+	///	- str: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(str: String) {
+	public convenience init(str: String?) {
 		self.init(withGObject: gtk_label_new(str))!
 	}
 
@@ -199,9 +199,9 @@ open class CGTKLabel : CGTKMisc {
 	/// the button or menu item will automatically become the mnemonic widget
 	/// and be activated by the mnemonic.
 	/// - Parameters:
-	///	- str: String (const gchar*)
+	///	- str: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(withMnemonic str: String) {
+	public convenience init(withMnemonic str: String?) {
 		self.init(withGObject: gtk_label_new_with_mnemonic(str))!
 	}
 
@@ -558,9 +558,9 @@ open class CGTKLabel : CGTKMisc {
 	/// this signal will activate the widget if there are no mnemonic collisions
 	/// and toggle focus between the colliding widgets otherwise.
 	/// - Parameters:
-	///	- widget: CGTKWidget (GtkWidget*)
-	open func setMnemonicWidget(_ widget: CGTKWidget) -> Swift.Void {
-		gtk_label_set_mnemonic_widget(GTK_LABEL(self.GOBJECT), widget.WIDGET)
+	///	- widget: CGTKWidget? (GtkWidget*)
+	open func setMnemonicWidget(_ widget: CGTKWidget?) -> Swift.Void {
+		gtk_label_set_mnemonic_widget(GTK_LABEL(self.GOBJECT), widget?.WIDGET)
 	}
 
 	/// The pattern of underlines you want under the existing text within the

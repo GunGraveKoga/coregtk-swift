@@ -52,8 +52,8 @@ public protocol CGTKBuildable: class {
 	/// - Parameters:
 	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	///	- child: UnsafeMutablePointer<GObject>! (GObject*)
-	///	- type: String (const gchar*)
-	func addChild(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>!, type: String) -> Swift.Void
+	///	- type: String? (const gchar*)
+	func addChild(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>!, type: String?) -> Swift.Void
 
 	/// Constructs a child of @buildable with the name @name.
 	/// #GtkBuilder calls this function if a “constructor” has been
@@ -70,8 +70,8 @@ public protocol CGTKBuildable: class {
 	///	- builder: UnsafeMutablePointer<GtkBuilder>! (GtkBuilder*)
 	///	- child: UnsafeMutablePointer<GObject>? (GObject*)
 	///	- tagname: String (const gchar*)
-	///	- data: gpointer (gpointer)
-	func customFinished(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: gpointer) -> Swift.Void
+	///	- data: gpointer? (gpointer)
+	func customFinished(builder: UnsafeMutablePointer<GtkBuilder>!, child: UnsafeMutablePointer<GObject>?, tagname: String, data: gpointer?) -> Swift.Void
 
 	/// This is called at the end of each custom element handled by
 	/// the buildable.

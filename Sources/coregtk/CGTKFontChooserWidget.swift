@@ -71,7 +71,15 @@ open class CGTKFontChooserWidget : CGTKBox, CGTKFontChooser {
 	/// font descriptions.
 	/// - Returns: String? (gchar*)
 	open func getFont() -> String? {
-		return String(utf8String: gtk_font_chooser_get_font(GTK_FONT_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the currently-selected font.
@@ -112,7 +120,15 @@ open class CGTKFontChooserWidget : CGTKBox, CGTKFontChooser {
 	/// Gets the text displayed in the preview area.
 	/// - Returns: String? (gchar*)
 	open func getPreviewText() -> String? {
-		return String(utf8String: gtk_font_chooser_get_preview_text(GTK_FONT_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_font_chooser_get_preview_text(GTK_FONT_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Returns whether the preview entry is shown or not.
@@ -125,9 +141,9 @@ open class CGTKFontChooserWidget : CGTKBox, CGTKFontChooser {
 	/// in the font chooser.
 	/// - Parameters:
 	///	- filter: @escaping GtkFontFilterFunc (GtkFontFilterFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setFilterFunc(filter: @escaping GtkFontFilterFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setFilterFunc(filter: @escaping GtkFontFilterFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_font_chooser_set_filter_func(GTK_FONT_CHOOSER(self.GOBJECT), filter, userData, destroy)
 	}
 

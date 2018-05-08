@@ -190,8 +190,8 @@ public protocol CGTKCellLayout: class {
 	/// - Parameters:
 	///	- cell: UnsafeMutablePointer<GtkCellRenderer>! (GtkCellRenderer*)
 	///	- function: @escaping GtkCellLayoutDataFunc (GtkCellLayoutDataFunc)
-	///	- funcData: gpointer (gpointer)
+	///	- funcData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void
+	func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void
 
 }

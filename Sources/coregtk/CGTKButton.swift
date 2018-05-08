@@ -68,10 +68,10 @@ open class CGTKButton : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// This function is a convenience wrapper around gtk_button_new() and
 	/// gtk_button_set_image().
 	/// - Parameters:
-	///	- iconName: String (const gchar*)
+	///	- iconName: String? (const gchar*)
 	///	- size: GtkIconSize (GtkIconSize)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(fromIconName iconName: String, size: GtkIconSize) {
+	public convenience init(fromIconName iconName: String?, size: GtkIconSize) {
 		self.init(withGObject: gtk_button_new_from_icon_name(iconName, size))!
 	}
 
@@ -247,9 +247,9 @@ open class CGTKButton : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// #GtkButton:always-show-image is %TRUE. You don’t have to call
 	/// gtk_widget_show() on @image yourself.
 	/// - Parameters:
-	///	- image: CGTKWidget (GtkWidget*)
-	open func setImage(_ image: CGTKWidget) -> Swift.Void {
-		gtk_button_set_image(GTK_BUTTON(self.GOBJECT), image.WIDGET)
+	///	- image: CGTKWidget? (GtkWidget*)
+	open func setImage(_ image: CGTKWidget?) -> Swift.Void {
+		gtk_button_set_image(GTK_BUTTON(self.GOBJECT), image?.WIDGET)
 	}
 
 	/// Sets the position of the image relative to the text
@@ -321,8 +321,8 @@ open class CGTKButton : CGTKBin, CGTKActionable, CGTKActivatable {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	open func setActionName(_ actionName: String) -> Swift.Void {
+	///	- actionName: String? (const gchar*)
+	open func setActionName(_ actionName: String?) -> Swift.Void {
 		gtk_actionable_set_action_name(GTK_ACTIONABLE(self.GOBJECT), actionName)
 	}
 

@@ -106,9 +106,9 @@ public let GTK_TYPE_EXPANDER: GType = gtk_expander_get_type()
 open class CGTKExpander : CGTKBin {
 	/// Creates a new expander using @label as the text of the label.
 	/// - Parameters:
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(label: String) {
+	public convenience init(label: String?) {
 		self.init(withGObject: gtk_expander_new(label))!
 	}
 
@@ -119,9 +119,9 @@ open class CGTKExpander : CGTKBin {
 	/// accelerator called a mnemonic.
 	/// Pressing Alt and that key activates the button.
 	/// - Parameters:
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(withMnemonic label: String) {
+	public convenience init(withMnemonic label: String?) {
 		self.init(withGObject: gtk_expander_new_with_mnemonic(label))!
 	}
 
@@ -208,8 +208,8 @@ open class CGTKExpander : CGTKBin {
 	/// Sets the text of the label of the expander to @label.
 	/// This will also clear any previously set labels.
 	/// - Parameters:
-	///	- label: String (const gchar*)
-	open func setLabel(_ label: String) -> Swift.Void {
+	///	- label: String? (const gchar*)
+	open func setLabel(_ label: String?) -> Swift.Void {
 		gtk_expander_set_label(GTK_EXPANDER(self.GOBJECT), label)
 	}
 
@@ -224,9 +224,9 @@ open class CGTKExpander : CGTKBin {
 	/// Set the label widget for the expander. This is the widget
 	/// that will appear embedded alongside the expander arrow.
 	/// - Parameters:
-	///	- labelWidget: CGTKWidget (GtkWidget*)
-	open func setLabelWidget(_ labelWidget: CGTKWidget) -> Swift.Void {
-		gtk_expander_set_label_widget(GTK_EXPANDER(self.GOBJECT), labelWidget.WIDGET)
+	///	- labelWidget: CGTKWidget? (GtkWidget*)
+	open func setLabelWidget(_ labelWidget: CGTKWidget?) -> Swift.Void {
+		gtk_expander_set_label_widget(GTK_EXPANDER(self.GOBJECT), labelWidget?.WIDGET)
 	}
 
 	/// Sets whether the expander will resize the toplevel widget

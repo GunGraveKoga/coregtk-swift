@@ -95,20 +95,20 @@ public let GTK_TYPE_INFO_BAR: GType = gtk_info_bar_get_type()
 
 
 open class CGTKInfoBar : CGTKBox {
-	public convenience init(withButtons buttons: [(buttonText: String, responseId: gint)]?) {
+	open func addButtons(_ buttons: [(buttonText: String, responseId: GtkResponseType)]) {
+		for button in buttons {
+			_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
+		}
+	}
+
+	public convenience init(withButtons buttons: [(buttonText: String, responseId: GtkResponseType)]?) {
 
 		self.init(withGObject:gtk_info_bar_new())!
 
 		if let buttons = buttons {
 			for button in buttons {
-				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
+				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
 			}
-		}
-	}
-
-	open func addButtons(_ buttons: [(buttonText: String, responseId: gint)]) {
-		for button in buttons {
-			_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
 		}
 	}
 

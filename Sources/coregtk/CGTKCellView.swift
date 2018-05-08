@@ -280,9 +280,9 @@ open class CGTKCellView : CGTKWidget, CGTKCellLayout, CGTKOrientable {
 	/// - Parameters:
 	///	- cell: UnsafeMutablePointer<GtkCellRenderer>! (GtkCellRenderer*)
 	///	- function: @escaping GtkCellLayoutDataFunc (GtkCellLayoutDataFunc)
-	///	- funcData: gpointer (gpointer)
+	///	- funcData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_cell_layout_set_cell_data_func(GTK_CELL_LAYOUT(self.GOBJECT), cell, function, funcData, destroy)
 	}
 

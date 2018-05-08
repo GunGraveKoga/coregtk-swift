@@ -156,9 +156,9 @@ open class CGTKNativeDialog : CGTKBase {
 	/// main window.
 	/// Passing %NULL for @parent unsets the current transient window.
 	/// - Parameters:
-	///	- parent: CGTKWindow (GtkWindow*)
-	open func setTransientFor(parent: CGTKWindow) -> Swift.Void {
-		gtk_native_dialog_set_transient_for(GTK_NATIVE_DIALOG(self.GOBJECT), parent.WINDOW)
+	///	- parent: CGTKWindow? (GtkWindow*)
+	open func setTransientFor(parent: CGTKWindow?) -> Swift.Void {
+		gtk_native_dialog_set_transient_for(GTK_NATIVE_DIALOG(self.GOBJECT), parent?.WINDOW)
 	}
 
 	/// Shows the dialog on the display, allowing the user to interact with

@@ -198,9 +198,9 @@ public protocol CGTKRecentChooser: class {
 	/// a negative integer if the first item comes after the second.
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkRecentSortFunc (GtkRecentSortFunc)
-	///	- sortData: gpointer (gpointer)
+	///	- sortData: gpointer? (gpointer)
 	///	- dataDestroy: @escaping GDestroyNotify (GDestroyNotify)
-	func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer, dataDestroy: @escaping GDestroyNotify) -> Swift.Void
+	func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer?, dataDestroy: @escaping GDestroyNotify) -> Swift.Void
 
 	/// Changes the sorting order of the recently used resources list displayed by
 	/// @chooser.

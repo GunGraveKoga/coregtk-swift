@@ -57,11 +57,11 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// Creates a new #GtkToolButton using @icon_widget as contents and @label as
 	/// label.
 	/// - Parameters:
-	///	- iconWidget: CGTKWidget (GtkWidget*)
-	///	- label: String (const gchar*)
+	///	- iconWidget: CGTKWidget? (GtkWidget*)
+	///	- label: String? (const gchar*)
 	/// - Returns: UnsafeMutablePointer<GtkToolItem>! (GtkToolItem*)
-	public convenience init(iconWidget: CGTKWidget, label: String) {
-		self.init(withGObject: gtk_tool_button_new(iconWidget.WIDGET, label))!
+	public convenience init(iconWidget: CGTKWidget?, label: String?) {
+		self.init(withGObject: gtk_tool_button_new(iconWidget?.WIDGET, label))!
 	}
 
 	/// Creates a new #GtkToolButton containing the image and text from a
@@ -130,8 +130,8 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// overridden by non-%NULL #GtkToolButton:label-widget,
 	/// #GtkToolButton:icon-widget and #GtkToolButton:stock-id properties.
 	/// - Parameters:
-	///	- iconName: String (const gchar*)
-	open func setIconName(_ iconName: String) -> Swift.Void {
+	///	- iconName: String? (const gchar*)
+	open func setIconName(_ iconName: String?) -> Swift.Void {
 		gtk_tool_button_set_icon_name(GTK_TOOL_BUTTON(self.GOBJECT), iconName)
 	}
 
@@ -139,9 +139,9 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// %NULL the icon is determined by the #GtkToolButton:stock-id property. If the
 	/// #GtkToolButton:stock-id property is also %NULL, @button will not have an icon.
 	/// - Parameters:
-	///	- iconWidget: CGTKWidget (GtkWidget*)
-	open func setIconWidget(_ iconWidget: CGTKWidget) -> Swift.Void {
-		gtk_tool_button_set_icon_widget(GTK_TOOL_BUTTON(self.GOBJECT), iconWidget.WIDGET)
+	///	- iconWidget: CGTKWidget? (GtkWidget*)
+	open func setIconWidget(_ iconWidget: CGTKWidget?) -> Swift.Void {
+		gtk_tool_button_set_icon_widget(GTK_TOOL_BUTTON(self.GOBJECT), iconWidget?.WIDGET)
 	}
 
 	/// Sets @label as the label used for the tool button. The #GtkToolButton:label
@@ -151,8 +151,8 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// #GtkToolButton:stock-id property. If the #GtkToolButton:stock-id property is
 	/// also %NULL, @button will not have a label.
 	/// - Parameters:
-	///	- label: String (const gchar*)
-	open func setLabel(_ label: String) -> Swift.Void {
+	///	- label: String? (const gchar*)
+	open func setLabel(_ label: String?) -> Swift.Void {
 		gtk_tool_button_set_label(GTK_TOOL_BUTTON(self.GOBJECT), label)
 	}
 
@@ -162,17 +162,17 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// determined by the #GtkToolButton:stock-id property is used as label. If
 	/// #GtkToolButton:stock-id is also %NULL, @button does not have a label.
 	/// - Parameters:
-	///	- labelWidget: CGTKWidget (GtkWidget*)
-	open func setLabelWidget(_ labelWidget: CGTKWidget) -> Swift.Void {
-		gtk_tool_button_set_label_widget(GTK_TOOL_BUTTON(self.GOBJECT), labelWidget.WIDGET)
+	///	- labelWidget: CGTKWidget? (GtkWidget*)
+	open func setLabelWidget(_ labelWidget: CGTKWidget?) -> Swift.Void {
+		gtk_tool_button_set_label_widget(GTK_TOOL_BUTTON(self.GOBJECT), labelWidget?.WIDGET)
 	}
 
 	/// Sets the name of the stock item. See gtk_tool_button_new_from_stock().
 	/// The stock_id property only has an effect if not overridden by non-%NULL
 	/// #GtkToolButton:label-widget and #GtkToolButton:icon-widget properties.
 	/// - Parameters:
-	///	- stockId: String (const gchar*)
-	open func setStockId(_ stockId: String) -> Swift.Void {
+	///	- stockId: String? (const gchar*)
+	open func setStockId(_ stockId: String?) -> Swift.Void {
 		gtk_tool_button_set_stock_id(GTK_TOOL_BUTTON(self.GOBJECT), stockId)
 	}
 
@@ -213,8 +213,8 @@ open class CGTKToolButton : CGTKToolItem, CGTKActionable {
 	/// respectively.  This is the same form used for actions in the #GMenu
 	/// associated with the window.
 	/// - Parameters:
-	///	- actionName: String (const gchar*)
-	open func setActionName(_ actionName: String) -> Swift.Void {
+	///	- actionName: String? (const gchar*)
+	open func setActionName(_ actionName: String?) -> Swift.Void {
 		gtk_actionable_set_action_name(GTK_ACTIONABLE(self.GOBJECT), actionName)
 	}
 

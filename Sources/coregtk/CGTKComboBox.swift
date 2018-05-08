@@ -299,9 +299,9 @@ open class CGTKComboBox : CGTKBin, CGTKCellEditable, CGTKCellLayout {
 	/// If the #GtkComboBox:id-column property of @combo_box is unset or if no
 	/// row has the given ID then the function does nothing and returns %FALSE.
 	/// - Parameters:
-	///	- activeId: String (const gchar*)
+	///	- activeId: String? (const gchar*)
 	/// - Returns: Bool (gboolean)
-	open func setActiveId(_ activeId: String) -> Bool {
+	open func setActiveId(_ activeId: String?) -> Bool {
 		return gtk_combo_box_set_active_id(GTK_COMBO_BOX(self.GOBJECT), activeId) != 0 ? true : false
 	}
 
@@ -393,9 +393,9 @@ open class CGTKComboBox : CGTKBin, CGTKCellEditable, CGTKCellLayout {
 	/// function is %NULL, no separators are drawn. This is the default value.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeViewRowSeparatorFunc (GtkTreeViewRowSeparatorFunc)
-	///	- data: gpointer (gpointer)
+	///	- data: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setRowSeparatorFunc(_ function: @escaping GtkTreeViewRowSeparatorFunc, data: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setRowSeparatorFunc(_ function: @escaping GtkTreeViewRowSeparatorFunc, data: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_combo_box_set_row_separator_func(GTK_COMBO_BOX(self.GOBJECT), function, data, destroy)
 	}
 
@@ -524,9 +524,9 @@ open class CGTKComboBox : CGTKBin, CGTKCellEditable, CGTKCellLayout {
 	/// - Parameters:
 	///	- cell: UnsafeMutablePointer<GtkCellRenderer>! (GtkCellRenderer*)
 	///	- function: @escaping GtkCellLayoutDataFunc (GtkCellLayoutDataFunc)
-	///	- funcData: gpointer (gpointer)
+	///	- funcData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_cell_layout_set_cell_data_func(GTK_CELL_LAYOUT(self.GOBJECT), cell, function, funcData, destroy)
 	}
 

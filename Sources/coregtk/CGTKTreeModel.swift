@@ -213,8 +213,8 @@ public protocol CGTKTreeModel: class {
 	/// and gtk_tree_model_foreach() returns.
 	/// - Parameters:
 	///	- function: @escaping GtkTreeModelForeachFunc (GtkTreeModelForeachFunc)
-	///	- userData: gpointer (gpointer)
-	func foreach(function: @escaping GtkTreeModelForeachFunc, userData: gpointer) -> Swift.Void
+	///	- userData: gpointer? (gpointer)
+	func foreach(function: @escaping GtkTreeModelForeachFunc, userData: gpointer?) -> Swift.Void
 
 	/// Returns the type of the column.
 	/// - Parameters:

@@ -159,10 +159,10 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// If no cell currently has focus, then *@cell will be %NULL.
 	/// The returned #GtkTreePath must be freed with gtk_tree_path_free().
 	/// - Parameters:
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>! (GtkCellRenderer**)
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>? = nil (GtkCellRenderer**)
 	/// - Returns: Bool (gboolean)
-	open func getCursor(path: UnsafeMutablePointer<OpaquePointer?>, cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>!) -> Bool {
+	open func getCursor(path: UnsafeMutablePointer<OpaquePointer?>? = nil, cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>? = nil) -> Bool {
 		return gtk_icon_view_get_cursor(GTK_ICON_VIEW(self.GOBJECT), path, cell) != 0 ? true : false
 	}
 
@@ -170,18 +170,18 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// - Parameters:
 	///	- dragX: gint (gint)
 	///	- dragY: gint (gint)
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- pos: UnsafeMutablePointer<GtkIconViewDropPosition>! (GtkIconViewDropPosition*)
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- pos: UnsafeMutablePointer<GtkIconViewDropPosition>? = nil (GtkIconViewDropPosition*)
 	/// - Returns: Bool (gboolean)
-	open func getDestItemAtPos(dragX: gint, dragY: gint, path: UnsafeMutablePointer<OpaquePointer?>, pos: UnsafeMutablePointer<GtkIconViewDropPosition>!) -> Bool {
+	open func getDestItemAtPos(dragX: gint, dragY: gint, path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkIconViewDropPosition>? = nil) -> Bool {
 		return gtk_icon_view_get_dest_item_at_pos(GTK_ICON_VIEW(self.GOBJECT), dragX, dragY, path, pos) != 0 ? true : false
 	}
 
 	/// Gets information about the item that is highlighted for feedback.
 	/// - Parameters:
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- pos: UnsafeMutablePointer<GtkIconViewDropPosition>! (GtkIconViewDropPosition*)
-	open func getDragDestItem(path: UnsafeMutablePointer<OpaquePointer?>, pos: UnsafeMutablePointer<GtkIconViewDropPosition>!) -> Swift.Void {
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- pos: UnsafeMutablePointer<GtkIconViewDropPosition>? = nil (GtkIconViewDropPosition*)
+	open func getDragDestItem(path: UnsafeMutablePointer<OpaquePointer?>? = nil, pos: UnsafeMutablePointer<GtkIconViewDropPosition>? = nil) -> Swift.Void {
 		gtk_icon_view_get_drag_dest_item(GTK_ICON_VIEW(self.GOBJECT), path, pos)
 	}
 
@@ -194,10 +194,10 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// - Parameters:
 	///	- x: gint (gint)
 	///	- y: gint (gint)
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>! (GtkCellRenderer**)
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>? = nil (GtkCellRenderer**)
 	/// - Returns: Bool (gboolean)
-	open func getItemAtPos(x: gint, y: gint, path: UnsafeMutablePointer<OpaquePointer?>, cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>!) -> Bool {
+	open func getItemAtPos(x: gint, y: gint, path: UnsafeMutablePointer<OpaquePointer?>? = nil, cell: UnsafeMutablePointer<UnsafeMutablePointer<GtkCellRenderer>?>? = nil) -> Bool {
 		return gtk_icon_view_get_item_at_pos(GTK_ICON_VIEW(self.GOBJECT), x, y, path, cell) != 0 ? true : false
 	}
 
@@ -341,11 +341,11 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	///	- x: UnsafeMutablePointer<Int32>! (gint*)
 	///	- y: UnsafeMutablePointer<Int32>! (gint*)
 	///	- keyboardTip: Bool (gboolean)
-	///	- model: UnsafeMutablePointer<OpaquePointer?> (GtkTreeModel**)
-	///	- path: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- iter: UnsafeMutablePointer<GtkTreeIter>! (GtkTreeIter*)
+	///	- model: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreeModel**)
+	///	- path: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- iter: UnsafeMutablePointer<GtkTreeIter>? = nil (GtkTreeIter*)
 	/// - Returns: Bool (gboolean)
-	open func getTooltipContext(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!, keyboardTip: Bool, model: UnsafeMutablePointer<OpaquePointer?>, path: UnsafeMutablePointer<OpaquePointer?>, iter: UnsafeMutablePointer<GtkTreeIter>!) -> Bool {
+	open func getTooltipContext(x: UnsafeMutablePointer<Int32>!, y: UnsafeMutablePointer<Int32>!, keyboardTip: Bool, model: UnsafeMutablePointer<OpaquePointer?>? = nil, path: UnsafeMutablePointer<OpaquePointer?>? = nil, iter: UnsafeMutablePointer<GtkTreeIter>? = nil) -> Bool {
 		return gtk_icon_view_get_tooltip_context(GTK_ICON_VIEW(self.GOBJECT), x, y, keyboardTip ? 1 : 0, model, path, iter) != 0 ? true : false
 	}
 
@@ -353,10 +353,10 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// Note that there may be invisible paths in between.
 	/// Both paths should be freed with gtk_tree_path_free() after use.
 	/// - Parameters:
-	///	- startPath: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
-	///	- endPath: UnsafeMutablePointer<OpaquePointer?> (GtkTreePath**)
+	///	- startPath: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
+	///	- endPath: UnsafeMutablePointer<OpaquePointer?>? = nil (GtkTreePath**)
 	/// - Returns: Bool (gboolean)
-	open func getVisibleRange(startPath: UnsafeMutablePointer<OpaquePointer?>, endPath: UnsafeMutablePointer<OpaquePointer?>) -> Bool {
+	open func getVisibleRange(startPath: UnsafeMutablePointer<OpaquePointer?>? = nil, endPath: UnsafeMutablePointer<OpaquePointer?>? = nil) -> Bool {
 		return gtk_icon_view_get_visible_range(GTK_ICON_VIEW(self.GOBJECT), startPath, endPath) != 0 ? true : false
 	}
 
@@ -414,8 +414,8 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// selection cannot be modified from within this function.
 	/// - Parameters:
 	///	- function: @escaping GtkIconViewForeachFunc (GtkIconViewForeachFunc)
-	///	- data: gpointer (gpointer)
-	open func selectedForeach(function: @escaping GtkIconViewForeachFunc, data: gpointer) -> Swift.Void {
+	///	- data: gpointer? (gpointer)
+	open func selectedForeach(function: @escaping GtkIconViewForeachFunc, data: gpointer?) -> Swift.Void {
 		gtk_icon_view_selected_foreach(GTK_ICON_VIEW(self.GOBJECT), function, data)
 	}
 
@@ -720,9 +720,9 @@ open class CGTKIconView : CGTKContainer, CGTKCellLayout, CGTKScrollable {
 	/// - Parameters:
 	///	- cell: UnsafeMutablePointer<GtkCellRenderer>! (GtkCellRenderer*)
 	///	- function: @escaping GtkCellLayoutDataFunc (GtkCellLayoutDataFunc)
-	///	- funcData: gpointer (gpointer)
+	///	- funcData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setCellDataFunc(cell: UnsafeMutablePointer<GtkCellRenderer>!, function: @escaping GtkCellLayoutDataFunc, funcData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_cell_layout_set_cell_data_func(GTK_CELL_LAYOUT(self.GOBJECT), cell, function, funcData, destroy)
 	}
 

@@ -80,20 +80,20 @@ public let GTK_TYPE_MESSAGE_DIALOG: GType = gtk_message_dialog_get_type()
 
 
 open class CGTKMessageDialog : CGTKDialog {
-	public convenience init(withParent parent: CGTKWindow, flags: GtkDialogFlags, type: GtkMessageType, buttons: GtkButtonsType, message: String) {
-		self.init(withGObject:swift_gtk_message_dialog_new(parent.WINDOW, flags, type, buttons, message))!
-	}
-
-	open func formatSecondaryMarkup(_ markup: String) {
-		swift_gtk_message_dialog_format_secondary_markup(self.MESSAGEDIALOG, markup)
+	public convenience init(withParent parent: CGTKWindow?, flags: GtkDialogFlags, type: GtkMessageType, buttons: GtkButtonsType, markup: String) {
+		self.init(withGObject:swift_gtk_message_dialog_new_with_markup(parent?.WINDOW, flags, type, buttons, markup))!
 	}
 
 	open func formatSecondaryText(_ message: String) {
 		swift_gtk_message_dialog_format_secondary_text(self.MESSAGEDIALOG, message)
 	}
 
-	public convenience init(withParent parent: CGTKWindow, flags: GtkDialogFlags, type: GtkMessageType, buttons: GtkButtonsType, markup: String) {
-		self.init(withGObject:swift_gtk_message_dialog_new_with_markup(parent.WINDOW, flags, type, buttons, markup))!
+	open func formatSecondaryMarkup(_ markup: String) {
+		swift_gtk_message_dialog_format_secondary_markup(self.MESSAGEDIALOG, markup)
+	}
+
+	public convenience init(withParent parent: CGTKWindow?, flags: GtkDialogFlags, type: GtkMessageType, buttons: GtkButtonsType, message: String) {
+		self.init(withGObject:swift_gtk_message_dialog_new(parent?.WINDOW, flags, type, buttons, message))!
 	}
 
 	open var MESSAGEDIALOG: UnsafeMutablePointer<GtkMessageDialog>! {

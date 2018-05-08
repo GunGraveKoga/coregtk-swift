@@ -91,10 +91,10 @@ public let GTK_TYPE_POPOVER: GType = gtk_popover_get_type()
 open class CGTKPopover : CGTKBin {
 	/// Creates a new popover to point to @relative_to
 	/// - Parameters:
-	///	- relativeTo: CGTKWidget (GtkWidget*)
+	///	- relativeTo: CGTKWidget? (GtkWidget*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(relativeTo: CGTKWidget) {
-		self.init(withGObject: gtk_popover_new(relativeTo.WIDGET))!
+	public convenience init(relativeTo: CGTKWidget?) {
+		self.init(withGObject: gtk_popover_new(relativeTo?.WIDGET))!
 	}
 
 	/// Creates a #GtkPopover and populates it according to
@@ -106,11 +106,11 @@ open class CGTKPopover : CGTKBin {
 	/// Actions can also be added using gtk_widget_insert_action_group()
 	/// on the menus attach widget or on any of its parent widgets.
 	/// - Parameters:
-	///	- relativeTo: CGTKWidget (GtkWidget*)
+	///	- relativeTo: CGTKWidget? (GtkWidget*)
 	///	- model: UnsafeMutablePointer<GMenuModel>! (GMenuModel*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(fromModel relativeTo: CGTKWidget, model: UnsafeMutablePointer<GMenuModel>!) {
-		self.init(withGObject: gtk_popover_new_from_model(relativeTo.WIDGET, model))!
+	public convenience init(fromModel relativeTo: CGTKWidget?, model: UnsafeMutablePointer<GMenuModel>!) {
+		self.init(withGObject: gtk_popover_new_from_model(relativeTo?.WIDGET, model))!
 	}
 
 	open var POPOVER: UnsafeMutablePointer<GtkPopover>! {
@@ -142,8 +142,8 @@ open class CGTKPopover : CGTKBin {
 	/// #GMenuModel.
 	/// - Parameters:
 	///	- model: UnsafeMutablePointer<GMenuModel>? (GMenuModel*)
-	///	- actionNamespace: String (const gchar*)
-	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String) -> Swift.Void {
+	///	- actionNamespace: String? (const gchar*)
+	open func bindModel(_ model: UnsafeMutablePointer<GMenuModel>?, actionNamespace: String?) -> Swift.Void {
 		gtk_popover_bind_model(GTK_POPOVER(self.GOBJECT), model, actionNamespace)
 	}
 
@@ -225,9 +225,9 @@ open class CGTKPopover : CGTKBin {
 	/// remembers the previous default widget and reestablishes it
 	/// when the popover is dismissed.
 	/// - Parameters:
-	///	- widget: CGTKWidget (GtkWidget*)
-	open func setDefaultWidget(_ widget: CGTKWidget) -> Swift.Void {
-		gtk_popover_set_default_widget(GTK_POPOVER(self.GOBJECT), widget.WIDGET)
+	///	- widget: CGTKWidget? (GtkWidget*)
+	open func setDefaultWidget(_ widget: CGTKWidget?) -> Swift.Void {
+		gtk_popover_set_default_widget(GTK_POPOVER(self.GOBJECT), widget?.WIDGET)
 	}
 
 	/// Sets whether @popover is modal, a modal popover will grab all input
@@ -267,9 +267,9 @@ open class CGTKPopover : CGTKBin {
 	/// will be detached from its previous widget, and consequently destroyed
 	/// unless extra references are kept.
 	/// - Parameters:
-	///	- relativeTo: CGTKWidget (GtkWidget*)
-	open func setRelativeTo(_ relativeTo: CGTKWidget) -> Swift.Void {
-		gtk_popover_set_relative_to(GTK_POPOVER(self.GOBJECT), relativeTo.WIDGET)
+	///	- relativeTo: CGTKWidget? (GtkWidget*)
+	open func setRelativeTo(_ relativeTo: CGTKWidget?) -> Swift.Void {
+		gtk_popover_set_relative_to(GTK_POPOVER(self.GOBJECT), relativeTo?.WIDGET)
 	}
 
 	/// Sets whether show/hide transitions are enabled on this popover

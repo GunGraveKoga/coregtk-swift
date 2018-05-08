@@ -66,9 +66,9 @@ public protocol CGTKTreeSortable: class {
 	/// is %GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID, the model will be unsorted.
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkTreeIterCompareFunc (GtkTreeIterCompareFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	func setDefaultSortFunc(_ sortFunc: @escaping GtkTreeIterCompareFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void
+	func setDefaultSortFunc(_ sortFunc: @escaping GtkTreeIterCompareFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void
 
 	/// Sets the current sort column to be @sort_column_id. The @sortable will
 	/// resort itself to reflect this change, after emitting a
@@ -88,9 +88,9 @@ public protocol CGTKTreeSortable: class {
 	/// - Parameters:
 	///	- sortColumnId: gint (gint)
 	///	- sortFunc: @escaping GtkTreeIterCompareFunc (GtkTreeIterCompareFunc)
-	///	- userData: gpointer (gpointer)
+	///	- userData: gpointer? (gpointer)
 	///	- destroy: @escaping GDestroyNotify (GDestroyNotify)
-	func setSortFunc(sortColumnId: gint, sortFunc: @escaping GtkTreeIterCompareFunc, userData: gpointer, destroy: @escaping GDestroyNotify) -> Swift.Void
+	func setSortFunc(sortColumnId: gint, sortFunc: @escaping GtkTreeIterCompareFunc, userData: gpointer?, destroy: @escaping GDestroyNotify) -> Swift.Void
 
 	/// Emits a #GtkTreeSortable::sort-column-changed signal on @sortable.
 	func sortColumnChanged() -> Swift.Void

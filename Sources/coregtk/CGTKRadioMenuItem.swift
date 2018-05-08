@@ -93,9 +93,9 @@ open class CGTKRadioMenuItem : CGTKCheckMenuItem {
 	/// The new #GtkRadioMenuItem is added to the same group as @group.
 	/// - Parameters:
 	///	- group: UnsafeMutablePointer<GtkRadioMenuItem>? (GtkRadioMenuItem*)
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(withLabelFromWidget group: UnsafeMutablePointer<GtkRadioMenuItem>?, label: String) {
+	public convenience init(withLabelFromWidget group: UnsafeMutablePointer<GtkRadioMenuItem>?, label: String?) {
 		self.init(withGObject: gtk_radio_menu_item_new_with_label_from_widget(group, label))!
 	}
 
@@ -116,9 +116,9 @@ open class CGTKRadioMenuItem : CGTKCheckMenuItem {
 	/// The new #GtkRadioMenuItem is added to the same group as @group.
 	/// - Parameters:
 	///	- group: UnsafeMutablePointer<GtkRadioMenuItem>? (GtkRadioMenuItem*)
-	///	- label: String (const gchar*)
+	///	- label: String? (const gchar*)
 	/// - Returns: CGTKWidget (GtkWidget*)
-	public convenience init(withMnemonicFromWidget group: UnsafeMutablePointer<GtkRadioMenuItem>?, label: String) {
+	public convenience init(withMnemonicFromWidget group: UnsafeMutablePointer<GtkRadioMenuItem>?, label: String?) {
 		self.init(withGObject: gtk_radio_menu_item_new_with_mnemonic_from_widget(group, label))!
 	}
 

@@ -83,7 +83,15 @@ open class CGTKFontSelection : CGTKBox {
 	/// if you want to compare two font descriptions.
 	/// - Returns: String? (gchar*)
 	open func getFontName() -> String? {
-		return String(utf8String: gtk_font_selection_get_font_name(GTK_FONT_SELECTION(self.GOBJECT)))
+		return {
+			let ptr = gtk_font_selection_get_font_name(GTK_FONT_SELECTION(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// This returns the #GtkEntry used to display the font as a preview.

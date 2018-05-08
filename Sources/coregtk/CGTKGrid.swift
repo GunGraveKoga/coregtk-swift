@@ -86,12 +86,12 @@ open class CGTKGrid : CGTKContainer, CGTKOrientable {
 	/// @side == %GTK_POS_LEFT yields a layout of [3][2][1].
 	/// - Parameters:
 	///	- child: CGTKWidget (GtkWidget*)
-	///	- sibling: CGTKWidget (GtkWidget*)
+	///	- sibling: CGTKWidget? (GtkWidget*)
 	///	- side: GtkPositionType (GtkPositionType)
 	///	- width: gint (gint)
 	///	- height: gint (gint)
-	open func attachNextTo(child: CGTKWidget, sibling: CGTKWidget, side: GtkPositionType, width: gint, height: gint) -> Swift.Void {
-		gtk_grid_attach_next_to(GTK_GRID(self.GOBJECT), child.WIDGET, sibling.WIDGET, side, width, height)
+	open func attachNextTo(child: CGTKWidget, sibling: CGTKWidget?, side: GtkPositionType, width: gint, height: gint) -> Swift.Void {
+		gtk_grid_attach_next_to(GTK_GRID(self.GOBJECT), child.WIDGET, sibling?.WIDGET, side, width, height)
 	}
 
 	/// Returns which row defines the global baseline of @grid.

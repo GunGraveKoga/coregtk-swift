@@ -69,24 +69,24 @@ public let GTK_TYPE_RECENT_CHOOSER_DIALOG: GType = gtk_recent_chooser_dialog_get
 
 
 open class CGTKRecentChooserDialog : CGTKDialog, CGTKRecentChooser {
-	public convenience init(withTitle title: String, parent: CGTKWindow, _ buttons: [(buttonText: String, responseId: gint)]?) {
+	public convenience init(forManagerWithTitle title: String, parent: CGTKWindow?, manager: UnsafeMutablePointer<GtkRecentManager>!, _ buttons: [(buttonText: String, responseId: GtkResponseType)]?) {
 
-		self.init(withGObject:swift_gtk_recent_chooser_dialog_new(title, parent.WINDOW))!
+		self.init(withGObject:swift_gtk_recent_chooser_dialog_new_for_manager(title, parent?.WINDOW, manager))!
 
 		if let buttons = buttons {
 			for button in buttons {
-				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
+				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
 			}
 		}
 	}
 
-	public convenience init(forManagerWithTitle title: String, parent: CGTKWindow, manager: UnsafeMutablePointer<GtkRecentManager>!, _ buttons: [(buttonText: String, responseId: gint)]?) {
+	public convenience init(withTitle title: String, parent: CGTKWindow?, _ buttons: [(buttonText: String, responseId: GtkResponseType)]?) {
 
-		self.init(withGObject:swift_gtk_recent_chooser_dialog_new_for_manager(title, parent.WINDOW, manager))!
+		self.init(withGObject:swift_gtk_recent_chooser_dialog_new(title, parent?.WINDOW))!
 
 		if let buttons = buttons {
 			for button in buttons {
-				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId)
+				_ = self.addButton(buttonText: button.buttonText, responseId: button.responseId.rawValue)
 			}
 		}
 	}
@@ -115,7 +115,15 @@ open class CGTKRecentChooserDialog : CGTKDialog, CGTKRecentChooser {
 	/// Gets the URI currently selected by @chooser.
 	/// - Returns: String? (gchar*)
 	open func getCurrentUri() -> String? {
-		return String(utf8String: gtk_recent_chooser_get_current_uri(GTK_RECENT_CHOOSER(self.GOBJECT)))
+		return {
+			let ptr = gtk_recent_chooser_get_current_uri(GTK_RECENT_CHOOSER(self.GOBJECT))
+			defer {
+				if ptr != nil {
+					g_free(ptr)
+				}
+			}
+			return ptr != nil ? String(utf8String: ptr!) : nil
+		}()
 	}
 
 	/// Gets the #GtkRecentFilter object currently used by @chooser to affect
@@ -307,9 +315,9 @@ open class CGTKRecentChooserDialog : CGTKDialog, CGTKRecentChooser {
 	/// a negative integer if the first item comes after the second.
 	/// - Parameters:
 	///	- sortFunc: @escaping GtkRecentSortFunc (GtkRecentSortFunc)
-	///	- sortData: gpointer (gpointer)
+	///	- sortData: gpointer? (gpointer)
 	///	- dataDestroy: @escaping GDestroyNotify (GDestroyNotify)
-	open func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer, dataDestroy: @escaping GDestroyNotify) -> Swift.Void {
+	open func setSortFunc(_ sortFunc: @escaping GtkRecentSortFunc, sortData: gpointer?, dataDestroy: @escaping GDestroyNotify) -> Swift.Void {
 		gtk_recent_chooser_set_sort_func(GTK_RECENT_CHOOSER(self.GOBJECT), sortFunc, sortData, dataDestroy)
 	}
 

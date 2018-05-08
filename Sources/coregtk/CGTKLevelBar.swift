@@ -173,10 +173,10 @@ open class CGTKLevelBar : CGTKWidget, CGTKOrientable {
 	/// Fetches the value specified for the offset marker @name in @self,
 	/// returning %TRUE in case an offset named @name was found.
 	/// - Parameters:
-	///	- name: String (const gchar*)
+	///	- name: String? (const gchar*)
 	///	- value: UnsafeMutablePointer<Double>! (gdouble*)
 	/// - Returns: Bool (gboolean)
-	open func getOffsetValue(name: String, value: UnsafeMutablePointer<Double>!) -> Bool {
+	open func getOffsetValue(name: String?, value: UnsafeMutablePointer<Double>!) -> Bool {
 		return gtk_level_bar_get_offset_value(GTK_LEVEL_BAR(self.GOBJECT), name, value) != 0 ? true : false
 	}
 
@@ -189,8 +189,8 @@ open class CGTKLevelBar : CGTKWidget, CGTKOrientable {
 	/// Removes an offset marker previously added with
 	/// gtk_level_bar_add_offset_value().
 	/// - Parameters:
-	///	- name: String (const gchar*)
-	open func removeOffsetValue(name: String) -> Swift.Void {
+	///	- name: String? (const gchar*)
+	open func removeOffsetValue(name: String?) -> Swift.Void {
 		gtk_level_bar_remove_offset_value(GTK_LEVEL_BAR(self.GOBJECT), name)
 	}
 
